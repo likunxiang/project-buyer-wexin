@@ -1,0 +1,100 @@
+<!--pages/groupBuy/groupBuy.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page">
+	<include src="/components/goods/specifications_model.wxml" />
+	<view class="header" style="background: url({{groupImage}});background-size: 100% 100%; background-repeat: no-repeat">
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view></view>
+			<view></view>
+		</view>
+		<view style="height: 250rpx;position: relative;">
+			<view class="tips flex color-fff padding-left padding-right align-center" wx:if="{{groupNotice}}">
+				<view class="iconfont icon-tongzhi1 fs-40"></view>
+				<view class="fs-24 ml-20">{{groupNotice}}</view>
+			</view>
+			<view class="roll-tips flex align-center color-fff" style="bottom: 165rpx;">
+				<view class="fs-24 mr-16">距结束还剩 </view>
+				<view class="flex ns-align-items-flex-center fs-20">
+					<view class="time-box">{{ed?ed:'12'}}</view>
+					<view>:</view>
+					<view class="time-box">{{eh?eh:'36'}}</view>
+					<view>:</view>
+					<view class="time-box">{{em?em:'48'}}</view>
+				</view>
+			</view>
+			<view class="roll-tips flex align-center">
+				<swiper autoplay="true" interval="5000" duration="300" vertical="true" circular="true" style="width: 268rpx;height: 52rpx;">
+					<swiper-item wx:for="{{scrollList}}" wx:key="key">
+						<view class="flex-x-center align-center" style="width: 268rpx;height: 52rpx;">
+							<view class="roll-tips-img">
+								<image class="roll-tips-img bg-blue" mode="aspectFill" src="{{item.avatar_url}}"></image>
+							</view>
+							<view class="ml-10 fs-20 color-fff">
+								恭喜 {{item.name}} {{item.msg}}
+							</view>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+			<view class="text-center" style="width: 50rpx;height: 50rpx;position: absolute;right: 20rpx;bottom: 95rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+			 bindtap="showShareModal">
+				<view class="iconfont icon-fenxiang"></view>
+				<view class="fs-20 color-fff" style="margin-top: -10rpx;">分享</view>
+			</view>
+		</view>
+	</view>
+	<view class="flex justify-between align-center address-box">
+		<view class="flex align-center ns-text-limit" style="width: 70%;">
+			<view class="iconfont icon-dingwei fs-30 color-333333"></view>
+			<view class="ml-20 fs-24 color-333333 ns-text-limit">{{pickAddress?pickAddress.address:'请选择地址'}}</view>
+		</view>
+		<navigator url="/member/groupPickUp/groupPickUp?id={{groupId}}" class="flex align-center color-489A19 ns-flex-shrink-no">
+			<view class="ml-20 fs-20 color-999999">请选择自提点</view>
+			<view class="iconfont icon-jinru"></view>
+		</navigator>
+	</view>
+	<scroll-view scroll-y="true" style="height: calc(100vh - 430rpx)" bindscrolltolower="getMore">
+		<view class="main p-24 flex justify-between ns-wrap">
+			<navigator url="/pages/goods/goods?id={{item.id}}&from={{item.from}}" hover-class="none" class="goods bg-white mb-20" wx:for="{{groupList}}"
+			 wx:key="id">
+				<view>
+					<image style="width: 340rpx;height: 340rpx;background-color: #ccc;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+				</view>
+				<view class="goods-msg">
+					<view class="fs-28 color-333333 ns-text-limit">{{item.name}}</view>
+					<view class="ziti flex align-center text-center fs-20 mb-16" style="color: #FFC330;" wx:if="{{item.delivery_type == 2}}">
+						<view style="border-right: 1rpx dashed #FFC330;width: 64rpx;">自提</view>
+						<view class="flex1">{{item.delivery_str}}</view>
+					</view>
+					<!-- <view class="mt-30">
+						<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24" wx:if="{{item.delivery_type == 1}}">{{item.delivery_str}}</view>
+						<view class="type-box2 flex-x-center flex-y-center color-489A19 fs-24" wx:else>{{item.delivery_str}}</view>
+					</view> -->
+					<view class="flex justify-between">
+						<view class="flex color-FF0200">
+							<view class="fs-28">¥ <text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+						</view>
+						<view class="iconfont add-cart-icon icon-gouwuche_weixuanzhong fs-30 color-fff" catchtap="openCart" data-id="{{item.id}}"
+						 data-index="{{index}}"></view>
+					</view>
+				</view>
+			</navigator>
+		</view>
+	</scroll-view>
+	<view class="cart flex ns-align-items-flex-center ns-justify-content-space-between color-fff">
+		<navigator url="/pages/index/index" class="ns-text-center flex1">
+			<view class="iconfont icon-shouye fs-40"></view>
+			<view class="fs-20">首页</view>
+		</navigator>
+		<navigator url="/pages/cart/cart" class="pr ns-text-center flex1">
+			<view class="iconfont icon-show_goumai mr-10 fs-40"></view>
+			<view class="fs-20">购物车</view>
+			<view class="pa" wx:if="{{cartNum>0}}" style="width: 30rpx;height: 30rpx;line-height:30rpx;overflow: hidden;text-align: center;top: 0rpx;right: 10rpx;background: #c10000;border-radius: 50%;font-size: 10px;">{{cartNum}}</view>
+		</navigator>
+	</view>
+
+	<include src='/components/share/share.wxml'></include>
+</view>

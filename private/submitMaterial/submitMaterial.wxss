@@ -1,0 +1,29 @@
+/* pages/submitMaterial/submitMaterial.wxss */
+page {
+	height: 100%;
+	background-color: #fff;
+}
+.page {
+	min-height: 100%;
+}
+.black-block {
+	width: 13rpx;
+	height: 37rpx;
+	background-color: #2C2C2C;
+	margin-right: 20rpx;
+}
+.no-pic {
+	width: 320rpx;
+	height: 220rpx;
+}
+.footer {
+	position: absolute;
+	bottom: 50rpx;
+	left: 40rpx;
+	right: 40rpx;
+	height: 78rpx;
+	background: #F49E3A;
+	line-height: 78rpx;
+	color: #fff;
+	text-align: center;
+}

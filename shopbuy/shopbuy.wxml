@@ -1,0 +1,50 @@
+  <!-- 购物车 -->
+  <navigator url="/pages/cart/cart" hover-class="none" wx:if="{{carShow}}">
+    <view class="shopCar clear">
+      <view class="pull-left pr">
+        <text class="iconfont icon-show_goumai"></text>
+        <view class="pa number" wx:if="{{cartNum>0}}">{{cartNum}}</view>
+      </view>
+      <view class="pull-left">购物车</view>
+    </view>
+  </navigator>
+  <!-- 购买弹窗 -->
+  <view class='flex' style='width:{{x}}px;height:{{y}}px' wx:if="{{goodBuy}}" bindtap='closeShop' catchtouchmove="ture">
+    <view class='goodBox' catchtap="nulldo">
+      <view class="clear goodheader pr">
+        <image src="{{goodsCover}}" class="pull-left goodImg" bindtap="previewImage" data-url='{{goodsCover}}' mode="aspectFill"></image>
+        <view class="pull-left" style="width:480rpx">
+          <view class="clear">
+            <view class="red pull-left">￥{{goodList.price}}</view>
+            <view class="pull-left oldMoney" wx:if="{{goodList.price<goodList.original_price}}">￥{{goodList.original_price}}</view>
+            <view class="pull-left goodnum">库存：{{goodList.num}}</view>
+          </view>
+          <view class="goodRule" wx:if="{{goodList.attr_group_list&&goodList.attr_group_list.length!=0}}"><text wx:for="{{goodList.attr_group_list}}" wx:key="{{index}}">{{item.attr_group_name}}:{{item.attr_list[active[index]].attr_name}}</text></view>
+        </view>
+        <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/close.png" bindtap='closeShop' class="pull-right close"></image>
+      </view>
+      <view class="ruleChange">
+        <!-- 规格 -->
+        <view wx:if="{{goodList.attr_group_list&&goodList.attr_group_list.length!=0}}">
+          <view wx:for="{{goodList.attr_group_list}}" wx:key="{{index}}">
+            <view class="ruleTitle">{{item.attr_group_name}}</view>
+            <view class="clear">
+              <view class="pull-left {{active[index]==idx?'active':''}}" data-index="{{idx}}" data-pindex="{{index}}" bindtap="changeNav" data-attrid="{{nav.attr_id}}" wx:for="{{item.attr_list}}" wx:for-item="nav" wx:for-index="idx" wx:key="{{idx}}">{{nav.attr_name}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="clear buyNumber">
+          <view class="ruleTitle" style="margin-bottom:0">数量</view>
+          <view class="clear pull-right buyNum">
+            <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/reduction.png" class="pull-left" bindtap="reduction"></image>
+            <input class="number pull-left" type="number" maxlength="4" value="{{buyNum}}" bindblur="setNum" bindconfirm="setNum"></input>
+            <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/addActive.png" class="pull-left" bindtap="add"></image>
+          </view>
+        </view>
+      </view>
+      <view class="clear buyBtn">
+        <view class="{{showBuy?'pull-left':'marginAuto'}} addCard" bindtap="addCard">加入购物车</view>
+        <view class="pull-left buy" bindtap="toOrder" wx:if="{{showBuy}}">立即购买</view>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,53 @@
+<!--pages//private/privateNotice/privateNotice.wxml-->
+<view class="page">
+	<view class="p-20">
+		<view class="private-notice bg-white mb-20">
+			<view class="p-20 border-bottom fs-28 color-2C2C2C ns-text-bold">
+				<view>店铺公告</view>
+			</view>
+			<view class="p-20 fs-24">
+				<textarea bindblur="getShopAd" value="{{shopAd}}" placeholder-style="color: #C8C7C7;" placeholder="这里是我的自营好货，感兴趣的亲亲，直接下订单哦～我会在第一时间安排送货"></textarea>
+			</view>
+		</view>
+
+		<view class="plr-20 bg-white mb-20">
+			<view class="flex justify-between align-center {{picList.length>0?'border-bottom':''}}">
+				<view class="fs-28 color-2C2C2C ns-text-bold" style="line-height: 79rpx;">图片展示</view>
+				<button class="cu-btn bg-FF9100 sm fs-24 color-fff" bindtap="upPic">添加</button>
+			</view>
+			<view class="ptb-20" style="flex-wrap:wrap" wx:if="{{picList.length>0}}">
+				<scroll-view scroll-x="true" enable-flex="true" style="height: 150rpx;">
+					<view class="flex">
+						<view class="notice-pic pr" wx:for="{{picList}}" >
+							<image class="notice-pic" mode="aspectFill" src="{{item}}" bindtap="viewPic" data-url="{{item}}" ></image>
+							<view class="iconfont icon-guanbi1 pa bg-white" style="top: 0rpx;right: 0rpx;border-radius: 50%;overflow: hidden;" bindtap="delPic" data-index="{{index}}"></view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		
+		<view class="msg plr-20 bg-white">
+			<view class="ptb-20 flex fs-28 border-bottom">
+				<view class="color-2C2C2C ns-text-bold" style="width: 140rpx;">地址</view>
+				<view class="flex1">
+					<input value="{{shopAddress}}" bindblur="getShopAddress" type="text" style="width: 100%;" placeholder="无" />
+				</view>
+			</view>
+			<view class="ptb-20 flex fs-28 border-bottom">
+				<view class="color-2C2C2C ns-text-bold" style="width: 140rpx;">电话</view>
+				<view class="flex1">
+					<input value="{{shopMobile}}" bindblur="getShopMobile" type="number" maxlength="11" style="width: 100%;" placeholder="无" />
+				</view>
+			</view>
+			<view class="ptb-20 flex fs-28">
+				<view class="color-2C2C2C ns-text-bold" style="width: 140rpx;">联系人</view>
+				<view class="flex1">
+					<input value="{{shopBoss}}" bindblur="getShopBoss" type="text" style="width: 100%;" placeholder="无" />
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="footer" bindtap="editShop">保存</view>
+</view>

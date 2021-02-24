@@ -1,0 +1,15 @@
+@import "/app.wxss";
+.flow-box {
+		padding: 0 58rpx;
+}
+.flow-step {
+	width: 130rpx;
+	height: 130rpx;
+	line-height: 130rpx;
+	text-align: center;
+	background: #3E3E3E;
+	border-radius: 50%;
+}
+.step-bg-gray {
+	background: #F4F4F4;
+}

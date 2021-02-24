@@ -1,0 +1,11 @@
+/* pages/setting/setting.wxss */
+.body-box {
+	background: #fff;
+	padding-left: 41rpx;
+}
+.setting-list {
+	padding: 26rpx 36rpx 26rpx 15rpx;
+}
+.border-bottom {
+	border-bottom: 1rpx solid #D6D6D6;
+}

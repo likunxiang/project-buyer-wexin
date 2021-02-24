@@ -1,0 +1,133 @@
+<view class="VipListPage pr bg-white" wx:if="{{list}}">
+	<!-- 专属导购遮罩层 -->
+	<!-- <view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_modal}}">
+		<view class="get-card-modal-main pr">
+			<view class="flex-x-center pr" style="margin-bottom: 92rpx;">
+				<image class="vip-img" src="{{shopList.avatar_url}}"></image>
+			</view>
+			<view class="text-center get-card-modal-text">
+				<view class="uShopper">您的专属导购</view>
+				<view class="sName">{{shopList.wechat_name}}</view>
+			</view>
+			<view class="userImg" wx:if="{{shopList.wechat_qr_pic != null}}">
+				<image style="width: 264rpx;height: 264rpx;" src="{{shopList.wechat_qr_pic}}" />
+			</view>
+			<view class="get-card-modal-btn" bindtap="saveImg" wx:if="{{shopList.wechat_qr_pic != null}}">保存图片</view>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;" bindtap="closeModal"></view>
+	</view> -->
+	<view class="public-box flex">
+		<view class="flex flex1">
+			<view class="text-center {{status == 1 ? 'fansPublic' : 'vipPublic'}}" bindtap="changeVip" data-status="1">
+				<view>付费会员(人)</view>
+				<view class="{{status == 1 ? 'fansNum' : 'fSize'}}">{{vipList.member}}</view>
+			</view>
+			<view class="text-center {{status == 0 ? 'fansPublic' : 'vipPublic'}}" bindtap="changeFans" data-status="0" style="margin-left: 69rpx;">
+				<view>分享会员(人)</view>
+				<view class="{{status == 0 ? 'fansNum' : 'fSize'}}">{{vipList.fans}}</view>
+			</view>
+		</view>
+		<view class="flex ns-justify-content-end">
+			<view class="bjShop">
+				<!-- <view class="shopPub mb-24" wx:if="{{can_shopkeeper == 1}}">
+					<view class="shoppers" bindtap="becomeOwner">成为小亲</view>
+				</view> -->
+				
+				<view class="shopPub">
+					<navigator hover-class="none" url="/member/homePage/homePage" class="shopOwner">专属导购</navigator>
+				</view>
+				<view class="shopPub mt-24">
+					<navigator hover-class="none" url="/member/memberQrcode/memberQrcode" class="shopOwner" style="color: #F1CF81;background: #212953;">会员海报</navigator>
+				</view>
+				
+				<!-- <view class="shopPub" wx:if="{{can_shopkeeper == 1}}">
+                    <view class="shopOwner" bindtap="becomeOwner">成为大亲</view>
+                </view> -->
+				
+			</view>
+		</view>
+	</view>
+	<view style="height: 24rpx;background: #F4F4F4;"></view>
+	<view class="vipList" wx:if="{{status == 0}}">
+		<block wx:if="{{list.length>0}}">
+			<view wx:for="{{list}}" class="mb-20" wx:key="index" style="padding-top:32rpx;border-bottom:1rpx solid #EBEBEB;padding-bottom:11rpx">
+				<navigator class="flex">
+					<view class="flex flex1">
+						<view>
+							<image class="pic" src="{{item.user.avatar_url}}" />
+						</view>
+						<view class="txt">
+							<view class="name">{{item.user.nickname}}</view>
+							<view class="date">{{item.addTimeStr}}</view>
+						</view>
+					</view>
+					<view>
+						<view>
+							<view class="cumulativeNum">累计消费 {{item.xf}}笔</view>
+						</view>
+						<view>
+							<view class="TMembers">{{item.role}}</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="flow-box" style="margin: 71rpx auto 0;color: #F0D0A5;padding: 0;">
+				<view class="fs-30 color-333333">1.分享好友步骤</view>
+				<view class="flex align-center justify-between" style="background: url({{share_step}}) no-repeat;background-size: 750rpx 204rpx;width: 750rpx;height: 204rpx;margin-left: -24rpx;margin-top: 28rpx;margin-bottom: 53rpx;">
+				</view>
+				<view class="fs-30 color-333333">2.邀请好友的好处</view>
+				<view class="fs-24 color-999999" style="padding: 21rpx 60rpx;">
+					当有好友领取了会员卡即可成为您的粉丝，当好友购买了永久会员，您可获得10元津贴
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="vipList" wx-if="{{status == 1}}">
+		<block wx:if="{{list.length>0}}">
+			<view wx:for="{{list}}" class="mb-20" wx:key="index" style="padding-top:32rpx;border-bottom:1rpx solid #EBEBEB;padding-bottom:11rpx">
+				<navigator class="flex">
+					<view class="flex flex1">
+						<view>
+							<image class="pic" src="{{item.user.avatar_url}}" />
+						</view>
+						<view class="txt">
+							<view class="name">{{item.user.nickname}}</view>
+							<view class="date">{{item.addTimeStr}}</view>
+						</view>
+					</view>
+					<view>
+						<view>
+							<view class="cumulativeNum">累计消费 {{item.xf}}笔</view>
+						</view>
+						
+						<view>
+							<view class="flex justify-end" wx:if="{{item.source == 1}}">
+								<view class="TMembers1 " >{{item.sourceStr}}</view>
+							</view>
+							<view class="flex justify-end" wx:if="{{item.source == 2}}">
+								<view class="TMembers2" >{{item.sourceStr}}</view>
+							</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="flow-box" style="margin: 71rpx auto 0;color: #F0D0A5;padding: 0;">
+				<view class="fs-30 color-333333">1.分享好友步骤</view>
+				<view class="flex align-center justify-between" style="background: url({{share_step}}) no-repeat;background-size: 750rpx 204rpx;width: 750rpx;height: 204rpx;margin-left: -24rpx;margin-top: 28rpx;margin-bottom: 53rpx;">
+				</view>
+				<view class="fs-30 color-333333">2.邀请好友的好处</view>
+				<view class="fs-24 color-999999" style="padding: 21rpx 60rpx;">
+					当有好友领取了会员卡即可成为您的粉丝，当好友购买了永久会员，您可获得10元津贴
+				</view>
+			</view>
+		</block>
+
+	</view>
+	<view class="vipBtn">
+		<button open-type="share" class="Viptxt">继续邀请</button>
+	</view>
+</view>

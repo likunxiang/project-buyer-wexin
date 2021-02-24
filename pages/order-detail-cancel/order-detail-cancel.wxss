@@ -1,0 +1,31 @@
+/* pages/order-detail-cancel/order-detail-cancel.wxss */
+page {
+	background: #F7F7F7;
+}
+.cancel-content {
+	padding: 42rpx 53rpx;
+	background: #fff;
+	font-size: 28rpx;
+	color: #595959;
+	
+}
+.cancel-btn-content {
+	position: absolute;
+	bottom: 42rpx;
+	left: 0;
+	right: 0;
+	padding: 0 40rpx;
+	width: 100%;
+}
+.cancel-btn {
+	width: 670rpx;
+	height: 78rpx;
+	background: #F39E3B;
+	text-align: center;
+	line-height: 78rpx;
+	color: #fff;
+}
+.tips-box {
+	padding: 25rpx 30rpx;
+	
+}

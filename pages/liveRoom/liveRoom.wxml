@@ -1,0 +1,25 @@
+<!--pages/liveRoom/liveRoom.wxml-->
+<include src="/components/common/common" />
+<view class="page" style="{{__device=='device_iphone_x'?'padding-bottom: 180rpx;':'padding-bottom: 120rpx;'}}">
+	<block wx:if="{{roomList.length <= 0}}">
+		<image style="width: 100%;height: 1334rpx;" mode="aspectFill" src="{{live_empty}}"></image>
+	</block>
+	<block wx:else>
+		<view class="p-24">
+			<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.roomid}}&custom_params={{customParams}}"
+			 class="public-box p-24 mb-24" wx:for="{{roomList}}" wx:key="id">
+				<view class="img-box pr">
+					<image src="{{item.cover_img}}" mode="aspectFill" style="width: 670rpx;height: 292rpx;border-radius: 8rpx;background: #0081FF;"></image>
+					<view class="fs-24 color-fff text-box" style="font-weight: 500;">直播时间：{{item.start_time_str}} ～ {{item.end_time_str}}</view>
+				</view>
+				<view class="flex align-center justify-between" style="margin-top: 19rpx;">
+					<view class="flex align-center">
+						<view class="iconfont icon-zhibobofangshexiangjiguankanmianxing fs-40 {{item.status == 103?'color-9B9B9B':'color-489A19'}}"></view>
+						<view class="fs-30 color-2C2C2C ns-text-bold ml-20">{{item.name}}</view>
+					</view>
+					<view class="cu-btn fs-24 round color-fff" style="background: linear-gradient(153deg, #FAD961 0%, #F76B1C 100%);width: 140rpx;height: 45rpx;padding: 0;">{{item.status == 101?'进入直播':(item.status == 102?'暂未开始':'进入回看')}}</view>
+				</view>
+			</navigator>
+		</view>
+	</block>
+</view>

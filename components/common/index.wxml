@@ -1,0 +1,602 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+
+
+<template name="banner">
+	<!-- Banner 开始 -->
+	<view class="" wx:if="{{banner_list && banner_list.length>0}}">
+		<view class="swiper-box">
+			<swiper class="screen-swiper" indicator-active-color="#FFC330" class="square-dot" style="height: 100%;width: 100%;border-radius: 20rpx;overflow: hidden;"
+			 indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+				<swiper-item wx:for="{{banner_list}}" key="index">
+					<navigator style="width: 100%;height: 100%;" url="{{item.page_url}}">
+						<image style="width: 100%;height: 100%;border-radius: 20rpx;" src="{{item.pic_url}}" mode="aspectFill"></image>
+					</navigator>
+				</swiper-item>
+			</swiper>
+		</view>
+	</view>
+	<!-- Banner 结束 -->
+</template>
+
+
+<template name="groupBuy">
+	<view class="user-block" style="margin-top: 0rpx;" wx:if="{{groupList.length>0}}">
+		<view class="flex-row miaosha-header justify-between align-center">
+			<view class="flex align-center">
+				<view class="tab-tips"></view>
+				<view class="tab-title">今日团购</view>
+			</view>
+			<navigator url="/pages/QPgroupBuy/QPgroupBuy?id={{groupId}}" class="flex-grow-0 flex-row flex-y-center" hover-class="none">
+				<view style="margin-right: 12rpx;color:#999999;font-size:24rpx">更多<text class="iconfont icon-jinru " style="font-size: 28rpx;text-align: center;"></text></view>
+			</navigator>
+		</view>
+	</view>
+	<view class="">
+		<navigator url="/pages/goods/goods?id={{item.id}}&from={{item.from}}" hover-class="none" class="flex mb-20 bg-white"
+		 wx:for="{{groupList}}" wx:key="id" style="border-radius: 20rpx;padding: 16rpx;">
+			<view class="pr" style="width: 248rpx;height: 248rpx;margin-right: 16rpx;">
+				<image lazy-load="true" style="width: 100%;height: 100%;background-color: #CCCCCC;border-radius: 12rpx;" mode="aspectFill"
+				 src="{{item.first_cover_pic}}"></image>
+				<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+			</view>
+			<view class="flex1 flex ns-column justify-between">
+				<view>
+					<view class="fs-28 color-333333 ns-text-limit2">{{item.name}}</view>
+					<view class="fs-20 color-999999 ns-text-limit2" style="height: 77rpx;padding-top: 15rpx;">{{item.desc}}</view>
+				</view>
+				<view class="ziti flex align-center text-center fs-20 mb-16" style="color: #FFC330;" wx:if="{{item.delivery_type == 2}}">
+					<view style="border-right: 1rpx dashed #FFC330;width: 64rpx;">自提</view>
+					<view class="flex1">{{item.delivery_str}}</view>
+				</view>
+				<!-- <view class="mt-30">
+					<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24" wx:if="{{item.delivery_type == 1}}">{{item.delivery_str}}</view>
+					<view class="type-box2 flex-x-center flex-y-center color-489A19 fs-24" wx:else>{{item.delivery_str}}</view>
+				</view> -->
+				<view class="flex justify-between">
+					<view class="flex">
+						<view class="flex price-box color-fff ">
+							<view class="price-tips fs-24 text-bold">团购价</view>
+							<view class="fs-24" style="margin-top: 14rpx;margin-right: 10rpx;margin-left: 15rpx;">¥ </view>
+							<view class="fs-28 ns-text-bold"><text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+						</view>
+					</view>
+					<view class="iconfont add-cart-icon icon-gouwuche_weixuanzhong fs-30 color-fff" catchtap="openCart" data-id="{{item.id}}"
+					 data-list="{{item}}"></view>
+				</view>
+			</view>
+		</navigator>
+	</view>
+</template>
+<template name="privateList">
+	<view class="user-block" style="background:#F0EDF1;margin-top: 0rpx;" wx:if="{{privateList.length>0}}">
+		<view class="flex-row miaosha-header">
+			<view class="flex-grow-1 flex-row flex-y-center">
+				<view style="font-size: 32rpx;color: #2c2c2c;margin-right: 30rpx;font-weight:600;margin-left:11rpx;">店主自营</view>
+				<view class="bottomLine"></view>
+			</view>
+			<navigator url="/private/home/home?type=1" class="flex-grow-0 flex-row flex-y-center" hover-class="none">
+				<view style="margin-right: 12rpx;color:#595959;font-size:28rpx">进入看看 <text class="iconfont icon-gengduo" style="font-size: 12px;"></text></view>
+
+			</navigator>
+		</view>
+		<view class="">
+			<view style="background: #fff;padding: 0;" wx:if="{{privateList.length>0}}">
+				<view class="ns-padding-horizontal-sm" style="padding-left: 50rpx;padding-right: 20rpx;">
+					<view class="ns-flex ns-justify-content-space-between miaosha-goods-list" style="flex-wrap:wrap">
+						<view class="flex" style="flex-wrap:wrap">
+							<navigator wx:for="{{privateList}}" wx:key="id" wx:for-item="nav" class=" miaosha-goods" style="background: #fff;margin-right: 25rpx;"
+							 url="/private/privateGoods/privateGoods?id={{nav.id}}">
+								<form report-submit="true" bindsubmit="_formIdSubmit">
+									<button formType="submit" id="_formIdSubmit">
+										<view class="pr ns-flex ns-justify-content-center">
+											<image lazy-load="true" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+											<!-- <view class="pa shopTab" wx:if="{{filters.parseInt(nav.price)!==filters.parseInt(nav.original_price)&&filters.parseInt(nav.price)<filters.parseInt(nav.original_price)}}">{{filters.toFix((nav.price/nav.original_price)*10,1)}}折</view> -->
+											<view wx:if="{{nav.num==0}}" class="nonum-tip">已抢光</view>
+										</view>
+										<view class='text-more-1'>{{nav.name}}</view>
+										<view class="clear miaosha_price flex ns-align-items-flex-center" style="font-size:30rpx;">
+											<view class="" style="color:#c10000;margin-right:21rpx;font-weight:600">
+												￥{{filters.toFix1(nav.min_price)}}
+											</view>
+											<!-- <view class="flex ns-align-items-flex-center" wx:if="{{role=='shoper' && nav.commission_price>0}}">
+													<view class="yongjin">赚</view>
+													<view class="fs-28 color-2C2C2C">￥{{nav.commission_price}}</view>
+												</view> -->
+											<!-- <view class="pull-left" style="text-decoration:line-through">
+						                        ￥{{nav.original_price}}
+						                      </view> -->
+										</view>
+									</button>
+								</form>
+							</navigator>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<template name="material">
+	<view class="user-block" wx:if="{{newActsList.length>0}}">
+		<!-- v1.12素材推荐 -->
+		<view style="" wx:if="{{newActsList.length>0}}" wx:for="{{newActsList}}"
+		 wx:for-item="value">
+			<view class="flex align-center justify-between mb-24">
+				<view class="flex align-center">
+					<view class="tab-tips"></view>
+					<view class="tab-title">{{value.name}} {{value.list[0].show_style}}</view>
+				</view>
+				<view class="">
+					<!-- <navigator style="width: 130rpx;height: 50rpx;background: linear-gradient(-90deg, #FF3750, #FF7006);border-radius: 25rpx;text-align:center;font-size:20rpx;color:#fff;line-height:50rpx;display:flex;align-item:center;justify-content: center;">进入会场<text
+					 class="iconfont icon-jinru color-fff" style="line-height:50rpx;display:inline-block;width:15rpx;"></text></navigator> -->
+				</view>
+			</view>
+			<block wx:if="{{value.list.length>0}}">
+				<view wx:for="{{value.list}}" wx:key="id">
+					<!-- 一行 -->
+					<view class="bg-white mb-24" style="border-radius: 20rpx;" wx:if="{{item.out_type == 2}}">
+						<!-- 单品牌内容 -->
+						<!-- 品牌名字 -->
+						<view style="padding: 25rpx 24rpx;">
+							<navigator url="/pages/activity/activity?aid={{item.out_id}}" class="flex ns-justify-content-space-between"
+							 hover-class="none">
+								<view class="flex" style="width: 70%;">
+									<image class="flex-grow-0" lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 20rpx;border: 2rpx solid #F4F4F4;"
+									 mode="aspectFit" src="{{item.activity_banner}}"></image>
+									<view class="ml-30 ns-text-limit" style="width: 340rpx;">
+										<view class="fs-30 color-333333 ns-text-limit">{{item.activity_name}}</view>
+										<view class="fs-24 color-999999 ns-text-limit flex mt-10">共{{item.activity_data.goods_sum}}款，全场¥<text class="color-FF0200">{{item.activity_data.min_price}}</text>起</view>
+									</view>
+								</view>
+								<view class="">
+									<view class="flex justify-end" style="">
+										<navigator url="/member/recommendMaterial/recommendMaterial?id={{item.id}}" class="iconfont icon-fatusucaiku material-icon mr-20"
+										 wx:if="{{item.if_sc == 1}}"></navigator>
+										<view class="flex align-center" style="width: 100rpx;height: 50rpx;background: linear-gradient(-90deg, #FF3750, #FF7006);border-radius: 25rpx;text-align:center;font-size:20rpx;color:#fff;line-height:50rpx;display:flex;align-item:center;justify-content: center;">
+											<view class="">进入</view>
+											<view class="iconfont icon-jinru color-fff text-center fs-28" style="line-height:24rpx;width: 24rpx;height: 24rpx;background: #fff;border-radius: 50%;color: #FF7006;margin-left: 6rpx;"></view>
+										</view>
+									</view>
+									<!-- <view class="fs-24" wx:if="{{item.activity_end_date_str}}">
+										<text>距离结束剩</text>
+										<text style="text-decoration: underline;">{{item.activity_end_date_str}}</text>
+										<text>天</text>
+									</view> -->
+								</view>
+								
+							</navigator>
+						</view>
+						<!-- 品牌商品 -->
+						<view class="flex " style="padding: 0rpx 24rpx 20rpx; ">
+							<scroll-view scroll-x="true">
+								<view class="flex">
+									<navigator url="/pages/goods/goods?id={{goods.good_id}}" class="miaosha-goods" style="width: 180rpx;margin-right: 60rpx;" wx:for="{{item.activity_data.goods}}"
+									 wx:for-index="index" wx:key="id" data-id="{{goods.good_id}}" wx:for-item="goods">
+										<view style="position: relative;width: 180rpx;height: 180rpx;">
+											<image lazy-load="true" mode="aspectFill" src="" style="background: #ccc;width: 180rpx;height: 180rpx;position: relative;border-radius: 20rpx;"
+											 src="{{goods.cover_pic}}"></image>
+											<view class="sell-up " wx:if="{{goods.goods_num==0}}">
+												<view>已抢光</view>
+												<view class="line"></view>
+												<view style="font-size: 17rpx;">sold out</view>
+											</view>
+										</view>
+
+										<view class="clear miaosha_price mt-20 flex align-center" style="font-size:26rpx;">
+											<view class="qiang-tips">抢</view>
+											<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-28">{{filters.priceStr(goods.price)[0]}}.</text><text>{{filters.priceStr(goods.price)[1]}}</text></view>
+										</view>
+										<view class='text-more-1 fs-24 color-333333 mt-16'>{{goods.name}}</view>
+									</navigator>
+
+								</view>
+							</scroll-view>
+
+						</view>
+					</view>
+					<!-- 单商品 -->
+					<view wx:if="{{item.out_type == 1}}">
+						<view>
+							<navigator url="/pages/goods/goods?id={{item.out_id}}" class="goods-box mb-24 bg-white" >
+								<view class="goods-img pr">
+									<!-- <image style="width: 100%;height: 100%;" mode="aspectFill" src="{{item.first_cover_pic}}"></image> -->
+									<image style="width: 100%;height: 100%;" mode="aspectFill" src="{{item.cover_pic}}"></image>
+									<view class="tips" wx:if="{{item.is_show_icon == 1}}">{{item.icon_label}}</view>
+									<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+								</view>
+								<view class="" style="padding: 18rpx 26rpx 25rpx 16rpx;">
+									<view>
+										<view class="fs-30 color-333333 ns-text-limit2" style="line-height: 42rpx;">{{item.goods_name}}</view>
+										<view class="fs-24 color-9B9B9B ns-text-limit2" style="margin-top: 6rpx;" wx:if="{{item.content}}">
+											<rich-text nodes="{{item.content}}"></rich-text>
+										</view>
+									</view>
+									<view class="flex justify-between align-center" style="margin-top: 21rpx;">
+										<view class="flex align-center">
+											<view class="color-FF343B ns-text-bold">
+												<text class="fs-24">¥ </text><text style="font-size: 48rpx;">{{filters.priceStr(item.goods_price)[0]}}.</text><text
+												 class="fs-24">{{filters.priceStr(item.goods_price)[1]}}</text>
+											</view>
+											<view class="fs-24 color-9B9B9B ml-10 ns-text-through" style="margin-top: 15rpx;" wx:if="{{item.goods_original_price}}">¥
+												{{item.goods_original_price}}</view>
+										</view>
+										<!-- <view class="add-cart-icon fs-30 iconfont icon-gouwuche_weixuanzhong color-fff" catchtap="openCart" data-id="{{item.id}}"
+										 data-index="{{index}}"></view> -->
+										<view class="flex align-center">
+											<!-- <view class="iconfont icon-fatusucaiku material-icon mr-20"></view> -->
+											<navigator url="/member/recommendMaterial/recommendMaterial?id={{item.id}}" class="iconfont icon-fatusucaiku material-icon mr-20"
+											 wx:if="{{item.if_sc == 1}}" catchtap="stop"></navigator>
+											<navigator url="/pages/goods/goods?id={{item.out_id}}" class="add-cart-btn color-fff flex align-center">
+												<!-- <view class="pl-20 pr-24 fs-20" style="border-right: 1rpx solid #fff;">仅剩 {{item.goods_num}} 件</view> -->
+												<view class="plr-20 fs-24">立即抢</view>
+											</navigator>
+										</view>
+									</view>
+								</view>
+							</navigator>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+</template>
+<template name="qingcang">
+	<!-- 清仓板块 开始 -->
+	<!-- 总部活动可以自己取名字比如清仓 -->
+	<!-- <view class="user-block" wx:if="{{qingcang[0].length>0}}">
+		<view wx:for="{{activityList}}" wx:key="key" class=" mb-24" style="border-radius: 20rpx;overflow: hidden;">
+			<view wx:if="{{item.show_style == 1}}">
+				<view class="bg-white  " style="padding: 20rpx 30rpx ;" wx:if="{{item.banner!=null}}">
+					<navigator url="/pages/activity/activity?aid={{item.id}}" class="flex ns-justify-content-space-between"
+					 hover-class="none">
+						<view class="flex align-center">
+							<image lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 12rpx;border: 2rpx solid #F4F4F4;" mode="aspectFit"
+							 src="{{item.banner}}"></image>
+							<view class="ml-24">
+								<view class="fs-30 color-333333">{{item.name}}</view>
+								<view class="fs-24 color-999999 ns-text-limit flex" style="width: 460rpx;overflow: hidden;">
+									<view class="flex" wx:for="{{item.cats}}" wx:for-item="value" wx:for-index="index" wx:key="id">
+										<view style="padding-right: 16rpx;{{index<item.cats.length-1?'border-right: 1rpx solid #999999;margin-right: 16rpx;':''}}">{{value.catsName}}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="flex-grow-0 flex-row">
+							<view style="margin-right: 12rpx;color:#999999;font-size:20rpx">更多<text class="iconfont icon-jinru color-fff ml-10"
+								 style="border-radius: 50%;background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;"></text></view>
+		
+						</view>
+					</navigator>
+		
+				</view>
+				<view style="background: #fff;padding: 0;" wx:if="{{item.goods.length>0}}">
+					<view class="ns-padding-horizontal-sm">
+						<view class="ns-flex ns-justify-content-space-between miaosha-goods-list" style="flex-wrap:wrap">
+							<scroll-view scroll-x="true" enable-flex="true">
+								<view class="flex">
+									<navigator class=" miaosha-goods" style="background: #fff;" wx:for="{{item.goods}}" wx:for-item="nav"
+									 wx:for-index="idx" wx:key="key" url="/pages/goods/goods?id={{nav.id}}">
+										<form report-submit="true" bindsubmit="_formIdSubmit">
+											<button formType="submit" id="_formIdSubmit">
+												<view class="pr ns-flex ns-justify-content-center">
+													<image lazy-load="true" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+													<view wx:if="{{nav.goods_num==0}}" class="nonum-tip">已抢光</view>
+												</view>
+												<view class="clear miaosha_price mt-20 flex align-center" style="font-size:26rpx;">
+													<view class="qiang-tips">抢购价</view>
+													<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-28">{{filters.priceStr(nav.price)[0]}}.</text><text>{{filters.priceStr(nav.price)[1]}}</text></view>
+												</view>
+												<view class='text-more-1 fs-24 color-333333 mt-15'>{{nav.name}}</view>
+											</button>
+										</form>
+									</navigator>
+								</view>
+		
+							</scroll-view>
+		
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view> -->
+	<view class="user-block" wx:if="{{qingcang[0].length>0}}">
+		<!-- <view class="flex-row miaosha-header">
+			<view class="flex-grow-1 flex-row flex-y-center">
+				<view style="font-size: 32rpx;color: #2c2c2c;margin-right: 30rpx;font-weight:600;margin-left:11rpx;">品牌专场</view>
+				<view class="bottomLine"></view>
+			</view> -->
+		<!-- <navigator url="/pages/activity/activity?activity_id={{item.id}}" class="flex-grow-0 flex-row flex-y-center" wx:if="{{item.banner==null}}" hover-class="none">
+				<view style="margin-right: 12rpx;color:#595959;font-size:12px">更多 <text class="iconfont icon-gengduo" style="font-size: 12px;"></text></view>
+				
+			</navigator> -->
+		<!-- </view> -->
+		<view wx:for="{{activityList}}" wx:key="key" class=" mb-24" style="border-radius: 20rpx;overflow: hidden;">
+			<view wx:if="{{item.show_style == 1}}">
+				<view class="bg-white  " style="padding: 20rpx 30rpx ;" wx:if="{{item.banner!=null}}">
+					<navigator url="/pages/activity/activity?aid={{item.id}}" class="flex ns-justify-content-space-between"
+					 hover-class="none">
+						<view class="flex align-center">
+							<image lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 12rpx;border: 2rpx solid #F4F4F4;"
+							 mode="aspectFit" src="{{item.banner}}"></image>
+							<view class="ml-24">
+								<view class="fs-30 color-333333">{{item.name}}</view>
+								<view class="fs-24 color-999999 ns-text-limit flex" style="width: 460rpx;overflow: hidden;">
+									<view class="flex" wx:for="{{item.cats}}" wx:for-item="value" wx:for-index="index" wx:key="id">
+										<view style="padding-right: 16rpx;{{index<item.cats.length-1?'border-right: 1rpx solid #999999;margin-right: 16rpx;':''}}">{{value.catsName}}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="flex-grow-0 flex-row">
+							<view style="margin-right: 12rpx;color:#999999;font-size:24rpx">更多<text class="iconfont icon-jinru " style="font-size: 28rpx;text-align: center;"></text></view>
+						</view>
+					</navigator>
+
+				</view>
+				<view style="background: #fff;padding: 0;" wx:if="{{item.goods.length>0}}">
+					<view class="ns-padding-horizontal-sm">
+						<view class="ns-flex ns-justify-content-space-between miaosha-goods-list" style="flex-wrap:wrap">
+							<scroll-view scroll-x="true" enable-flex="true">
+								<view class="flex">
+									<navigator class=" miaosha-goods" style="background: #fff;" wx:for="{{item.goods}}" wx:for-item="nav"
+									 wx:for-index="idx" wx:key="key" url="/pages/goods/goods?id={{nav.id}}">
+										<form report-submit="true" bindsubmit="_formIdSubmit">
+											<button formType="submit" id="_formIdSubmit">
+												<view class="pr ns-flex ns-justify-content-center">
+													<image lazy-load="true" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+													<!-- <view class="pa shopTab" wx:if="{{filters.parseInt(nav.price)!==filters.parseInt(nav.original_price)&&filters.parseInt(nav.price)<filters.parseInt(nav.original_price)}}">{{filters.toFix((nav.price/nav.original_price)*10,1)}}折</view> -->
+													<view wx:if="{{nav.goods_num==0}}" class="nonum-tip">已抢光</view>
+												</view>
+												<view class="clear miaosha_price mt-20 flex align-center" style="font-size:26rpx;">
+													<view class="qiang-tips">抢购价</view>
+													<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-28">{{filters.priceStr(nav.price)[0]}}.</text><text>{{filters.priceStr(nav.price)[1]}}</text></view>
+												</view>
+												<view class='text-more-1 fs-24 color-333333 mt-15'>{{nav.name}}</view>
+											</button>
+										</form>
+									</navigator>
+								</view>
+
+							</scroll-view>
+
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view wx:for="{{qingcang}}" wx:for-item="activityList" wx:key="key">
+			<view wx:for="{{activityList}}" wx:key="key" class=" mb-24" style="border-radius: 20rpx;overflow: hidden;">
+				<view wx:if="{{item.show_style == 1}}">
+					<view class="bg-white  " style="padding: 20rpx 30rpx ;" wx:if="{{item.banner!=null}}">
+						<navigator url="/pages/activity/activity?aid={{item.id}}" class="flex ns-justify-content-space-between"
+						 hover-class="none">
+							<view class="flex align-center">
+								<image lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 12rpx;border: 2rpx solid #F4F4F4;"
+								 mode="aspectFit" src="{{item.banner}}"></image>
+								<view class="ml-24">
+									<view class="fs-30 color-333333">{{item.name}}</view>
+									<view class="fs-24 color-999999 ns-text-limit flex" style="width: 460rpx;overflow: hidden;">
+										<view class="flex" wx:for="{{item.cats}}" wx:for-item="value" wx:for-index="index" wx:key="id">
+											<view style="padding-right: 16rpx;{{index<item.cats.length-1?'border-right: 1rpx solid #999999;margin-right: 16rpx;':''}}">{{value.catsName}}</view>
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="flex-grow-0 flex-row">
+								<view style="margin-right: 12rpx;color:#999999;font-size:24rpx">更多<text class="iconfont icon-jinru " style="font-size: 28rpx;text-align: center;"></text></view>
+							</view>
+						</navigator>
+
+					</view>
+					<view style="background: #fff;padding: 0;" wx:if="{{item.goods.length>0}}">
+						<view class="ns-padding-horizontal-sm">
+							<view class="ns-flex ns-justify-content-space-between miaosha-goods-list" style="flex-wrap:wrap">
+								<scroll-view scroll-x="true" enable-flex="true">
+									<view class="flex">
+										<navigator class=" miaosha-goods" style="background: #fff;" wx:for="{{item.goods}}" wx:for-item="nav"
+										 wx:for-index="idx" wx:key="key" url="/pages/goods/goods?id={{nav.id}}">
+											<form report-submit="true" bindsubmit="_formIdSubmit">
+												<button formType="submit" id="_formIdSubmit">
+													<view class="pr ns-flex ns-justify-content-center">
+														<image lazy-load="true" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+														<!-- <view class="pa shopTab" wx:if="{{filters.parseInt(nav.price)!==filters.parseInt(nav.original_price)&&filters.parseInt(nav.price)<filters.parseInt(nav.original_price)}}">{{filters.toFix((nav.price/nav.original_price)*10,1)}}折</view> -->
+														<view wx:if="{{nav.goods_num==0}}" class="nonum-tip">已抢光</view>
+													</view>
+													<view class="clear miaosha_price mt-20 flex align-center" style="font-size:26rpx;">
+														<view class="qiang-tips">抢购价</view>
+														<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-28">{{filters.priceStr(nav.price)[0]}}.</text><text>{{filters.priceStr(nav.price)[1]}}</text></view>
+													</view>
+													<view class='text-more-1 fs-24 color-333333 mt-15'>{{nav.name}}</view>
+												</button>
+											</form>
+										</navigator>
+									</view>
+
+								</scroll-view>
+
+							</view>
+						</view>
+					</view>
+				</view>
+				<view wx:if="{{item.show_style == 2 }}">
+					<view class="flex align-center justify-between mb-24">
+						<view class="flex align-center">
+							<view class="tab-tips"></view>
+							<view class="tab-title">{{item.name}}</view>
+						</view>
+						<view class="">
+							<navigator url="/pages/activity/activity?aid={{item.id}}" style="margin-right: 12rpx;color:#999999;font-size:24rpx">更多<text
+								 class="iconfont icon-jinru" style="font-size: 28rpx;text-align: center;"></text></navigator>
+						</view>
+					</view>
+					<view>
+						<navigator url="/pages/goods/goods?id={{item.id}}" class="goods-box mb-24 bg-white" wx:for="{{item.goods}}"
+						 wx:key='key'>
+							<view class="goods-img pr">
+								<!-- <image style="width: 100%;height: 100%;" mode="aspectFill" src="{{item.first_cover_pic}}"></image> -->
+								<image style="width: 100%;height: 100%;" mode="aspectFill" src="{{item.recommend_thumb}}"></image>
+								<view class="tips" wx:if="{{item.is_show_icon == 1}}">{{item.icon_label}}</view>
+								<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+							</view>
+							<view class="" style="padding: 18rpx 26rpx 25rpx 16rpx;">
+								<view>
+									<view class="fs-30 color-333333 ns-text-limit2" style="line-height: 42rpx;">{{item.name}}</view>
+									<view class="fs-24 color-9B9B9B ns-text-limit2" style="margin-top: 6rpx;" wx:if="{{item.desc}}">{{item.desc}}</view>
+								</view>
+								<view class="flex justify-between align-center" style="margin-top: 21rpx;">
+									<view class="flex align-center">
+										<view class="color-FF343B ns-text-bold">
+											<text class="fs-24">¥ </text><text style="font-size: 48rpx;">{{filters.priceStr(item.price)[0]}}.</text><text
+											 class="fs-24">{{filters.priceStr(item.price)[1]}}</text>
+										</view>
+										<view class="fs-24 color-9B9B9B ml-10 ns-text-through" style="margin-top: 15rpx;" wx:if="{{item.original_price}}">¥
+											{{item.original_price}}</view>
+									</view>
+									<!-- <view class="add-cart-icon fs-30 iconfont icon-gouwuche_weixuanzhong color-fff" catchtap="openCart" data-id="{{item.id}}"
+									 data-index="{{index}}"></view> -->
+									<view class="flex align-center">
+										<!-- <view class="iconfont icon-fatusucaiku material-icon mr-20"></view> -->
+										<navigator url="/pages/goods/goods?id={{item.id}}" class="add-cart-btn color-fff flex align-center">
+											<!-- <view class="pl-20 pr-24 fs-20" style="border-right: 1rpx solid #fff;">仅剩 {{item.goods_num}} 件</view> -->
+											<view class="plr-20 fs-24">立即抢</view>
+										</navigator>
+									</view>
+								</view>
+							</view>
+						</navigator>
+					</view>
+				</view>
+				<!-- 图片 -->
+				<navigator hover-class="none" url="/pages/activity/activity?aid={{item.id}}" class="gyg-act-img" wx:if="{{item.show_style == 3}}">
+					<image mode="aspectFill" style="width: 702rpx;height: 237rpx;border-radius:20rpx;" src="{{item.banner}}"></image>
+				</navigator>
+				<!-- <view class="noneGoods bg-white p-20" wx:else>
+					暂无活动商品
+				</view> -->
+			</view>
+		</view>
+	</view>
+	<!-- 清仓板块 结束 -->
+</template>
+<!-- 商品分组 -->
+<!-- <template name="goods">
+	<view class="flex-row miaosha-header justify-between align-center">
+		<view class="flex align-center">
+			<view class="tab-tips"></view>
+			<view class="tab-title">商品分组</view>
+		</view>
+		<navigator url="/pages/groupBuy/groupBuy?id={{groupId}}" class="flex-grow-0 flex-row flex-y-center" hover-class="none">
+			<view style="margin-right: 12rpx;color:#999999;font-size:20rpx">更多<text class="iconfont icon-jinru color-fff ml-10"
+				 style="border-radius: 50%;background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;"></text></view>
+		</navigator>
+	</view>
+	<view class="flex ns-wrap justify-between" wx:for="{{qingcang[0]}}">
+		<navigator class=" miaosha-goods mb-20" style="background: #fff;border-radius: 20rpx;width: 340rpx;overflow: hidden;"
+		 wx:for="{{item.goods}}" wx:for-item="nav" wx:for-index="idx" wx:key="key" url="/pages/goods/goods?id={{nav.id}}">
+			<view class="pr ns-flex ns-justify-content-center">
+				<image lazy-load="true" style="width: 340rpx;height: 340rpx;border-radius: 20rpx 20rpx 0 0;" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+				<view wx:if="{{nav.goods_num==0}}" class="nonum-tip">已抢光</view>
+			</view>
+			<view class="bg-white" style="padding: 0 16rpx 16rpx;">
+				<view class='ns-text-limit fs-28 color-333333'>{{nav.name}}</view>
+				<view class="clear miaosha_price flex ns-align-items-flex-center" style="font-size:36rpx;">
+					<view class="color-FF0200" style="margin-right:21rpx;font-weight:600">
+						<text class="fs-28">￥</text><text>{{filters.priceStr(nav.price)[0]}}</text>.<text class="fs-28">{{filters.priceStr(nav.price)[1]}}</text>
+					</view>
+				</view>
+			</view>
+
+		</navigator>
+	</view>
+</template> -->
+<template name="miaosha">
+	<!-- 秒杀板块 开始 -->
+	<view wx:if="{{miaosha.length>0}}" class="user-block" wx:key="key" style="margin-top: 0;padding: 0rpx;">
+		<view class="msHeader pr flex align-end">
+			<view class="msHeader-while">
+				<view class="flex align-center">
+					<view class="tab-title">限时秒杀</view>
+				</view>
+			</view>
+			<view class="msHeader-red">
+				<navigator url="/pages/acitivityPage/acitivityPage" class="flex-grow-0 flex-row flex-y-center" hover-class="none">
+					<view style="margin-right: 12rpx;color:#fff;font-size:22rpx">更多秒杀<text class="iconfont icon-jinru ml-10" style="border-radius: 50%;background:#fff;width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;color: #ff4341;"></text></view>
+				</navigator>
+			</view>
+			<view class="san-while"></view>
+		</view>
+		<view class="ms-main">
+			<scroll-view scroll-x="true" wx:if="{{miaosha.length>0}}">
+				<view class="flex">
+					<navigator class="flex-grow-0 miaosha-goods" style="background: #fff;margin-right: 16rpx;width: 200rpx;" wx:for="{{miaosha}}"
+					 wx:key="key" url="/pages/miaosha/details/details?id={{item.id}}">
+						<view class="pr">
+							<image mode="aspectFill" style="width: 200rpx;height: 200rpx;border-radius: 20rpx;" src="{{item.first_cover_pic}}"></image>
+							<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+						</view>
+						<view class="miaosha_price flex ns-align-items-flex-center" style="font-size:26rpx;">
+							<view class="ms-price-tips">秒杀价</view>
+							<view class="color-FF0200" style="margin-right:10rpx;font-weight:600">
+								<text class="fs-20">￥</text><text>{{filters.priceStr(item.price)[0]}}</text>.<text class="fs-20">{{filters.priceStr(item.price)[1]}}</text>
+							</view>
+						</view>
+						<view class='ns-text-limit fs-24 color-333333' style="margin-bottom: 14rpx;">{{item.name}}</view>
+						<view class="ms-btn fs-24">立即抢购</view>
+					</navigator>
+				</view>
+			</scroll-view>
+			<view class="noneGoods" wx:else>
+				暂无秒杀商品
+			</view>
+		</view>
+	</view>
+	<!-- 秒杀板块 结束 -->
+</template>
+
+<template name="pintuan">
+	<!-- 拼团板块 开始 -->
+	<view wx:if="{{pintuan.length>0}}" class="user-block" style="margin-top: 24rpx;;padding: 0rpx;">
+		<view class="msHeader pr flex align-end">
+			<view class="msHeader-while">
+				<view class="flex align-center">
+					<view class="tab-title">实力拼团</view>
+				</view>
+			</view>
+			<view class="msHeader-red">
+				<navigator url="/pages/ptNew/ptNew" class="flex-grow-0 flex-row flex-y-center" hover-class="none">
+					<view style="margin-right: 12rpx;color:#fff;font-size:22rpx">更多拼团<text class="iconfont icon-jinru ml-10" style="border-radius: 50%;background:#fff;width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;color: #ff4341;"></text></view>
+				</navigator>
+			</view>
+			<view class="san-while"></view>
+		</view>
+		<scroll-view scroll-x="true" style="background: #fff;;padding-left:30rpx;padding-top: 30rpx;" wx:if="{{pintuan.length>0}}">
+			<view class="flex-row miaosha-goods-list">
+				<navigator class="flex-grow-0 miaosha-goods" style="background: #fff;" wx:for="{{pintuan}}" wx:key="key" url="/pages/pt/details/details?id={{item.goods_id}}">
+					<form report-submit="true" bindsubmit="_formIdSubmit">
+						<button formType="submit" id="_formIdSubmit">
+							<view class="pr">
+								<image lazy-load="true" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+								<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+							</view>
+							<view class="miaosha_price flex ns-align-items-flex-center" style="font-size:28rpx;">
+								<view class="ms-price-tips">拼团价</view>
+								<view class="color-FF0200" style="margin-right:10rpx;font-weight:600">
+									<text class="fs-20">￥</text><text>{{filters.priceStr(item.price)[0]}}</text>.<text class="fs-20">{{filters.priceStr(item.price)[1]}}</text>
+								</view>
+							</view>
+							<view class='ns-text-limit fs-24 color-333333' style="margin-bottom: 14rpx;">{{item.name}}</view>
+							<view class="ms-btn fs-24">立即抢购</view>
+						</button>
+					</form>
+				</navigator>
+			</view>
+		</scroll-view>
+		<view class="noneGoods" wx:else>
+			暂无拼团商品
+		</view>
+	</view>
+	<!-- </scroll-view> -->
+	<!-- 拼团板块 结束 -->
+</template>

@@ -1,0 +1,57 @@
+<!--pages//private/privateDistribution/privateDistribution.wxml-->
+<view class="page">
+	<view class="goods-classify-model flex-x-center flex-y-center" bindtap="closetips" wx:if="{{is_tips}}">
+		<view class="goods-classify-content" catchtap="stop">
+			<view class="goods-classify-content-top fs-28 color-2C2C2C border-bottom">请扫描或者录入物流单号</view>
+			<view class="goods-classify-content-btn fs-28 color-2C2C2C" bindtap="closeTips">确定</view>
+		</view>
+	</view>
+	<view class="bg-white mb-20">
+		<view class="flex justify-between align-center border-bottom padding-lr" style="height: 82rpx;">
+			<view class="flex align-center" bindtap="changeTyep" data-type='2'>
+				<view class="iconfont {{expandIns==2?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40"></view>
+				<view class="fs-30 color-2C2C2C ml-20 ns-text-bold">物流配送</view>
+			</view>
+			<view class="flex align-center " bindtap="scan">
+				<view class="iconfont icon-saomiao fs-36"></view>
+				<view class="fs-24 color-2C2C2C ml-20">扫描物流单号</view>
+			</view>
+		</view>
+		<view class="fs-30 color-2C2C2C" style="padding-left: 90rpx;">
+			<view class="flex align-center " style="height: 90rpx;line-height: 90rpx;">
+				<view>物流单号</view>
+				<input class="ml-30" type="text" placeholder="无" value="{{express_no}}" bindinput="expressInput" />
+			</view>
+			<view class="flex align-center" style="height: 90rpx;line-height: 90rpx;">
+				<view>物流公司</view>
+				<view class="ml-30 flex1">
+					<picker name="express" bindchange="bindExpressPickerChange" value="{{express_index}}" range="{{express_list}}"
+					 range-key="name" style="padding: 24rpx 0">
+						<view class="flex flex-row">
+							<view class="flex-grow-1">
+								<view wx:if="{{express_index!=null}}">
+									{{express_list[express_index].name}}
+								</view>
+								<view wx:else style="color: #888">{{scanText}}</view>
+							</view>
+						</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="bg-white">
+		<view class="flex justify-between align-center padding-lr" style="height: 82rpx;">
+			<view class="flex align-center" bindtap="changeType" data-type='3'>
+				<view class="iconfont {{expandIns==3?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40"></view>
+				<view class="fs-30 color-2C2C2C ml-20 ns-text-bold">非物流配送</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="footer flex justify-between">
+		<view class="btn-box btn-box-white">取消</view>
+		<view class="btn-box" bindtap="sureBtn">确定</view>
+	</view>
+</view>

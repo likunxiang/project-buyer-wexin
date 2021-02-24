@@ -1,0 +1,48 @@
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<view class="body after-navber">
+
+		<!-- <view class="bottom-bar" style="display: none">
+            <navigator url="/pages/address-edit/address-edit">添加新地址</navigator>
+        </view> -->
+		<view class="address-list">
+			<view style="margin-bottom: 32rpx;padding-top: 20rpx;">
+				<view wx:if="{{address_list.length==0}}" style="color: #888;text-align: center;padding: 32rpx 0;">暂无收货地址</view>
+				<block wx:else>
+					<view bindtap="pickAddress" data-index="{{index}}" class="address-item mb-20" wx:for="{{address_list}}" wx:key="{{index}}">
+
+						<view class="fs-28">
+							<view class="userinfo flex-row fs-30 color-333333 ns-text-bold">
+								<view class="">{{item.name}}</view>
+								<view style="margin-left: 37rpx;">{{item.mobile}}</view>
+							</view>
+							<view class="address-detail fs-24 color-666666">收货地址：{{item.address}}</view>
+						</view>
+						<view class="flex ns-justify-content-space-between" catchtap="no" style="padding-top: 20rpx;border-top: 1rpx solid #ccc;margin-top: 20rpx;">
+							<!-- <view class="ns-text-bold"> {{item.id<0?'店主代收':''}}</view> -->
+							<view class="color-FF0200">{{item.is_check==0?'该地址不完整，点击「编辑」进行修改':''}}</view>
+							<view wx:if="{{item.id>0}}" class="flex ns-align-items-flex-end">
+								<navigator class="address-option " url="/pages/address-edit/address-edit?id={{item.id}}">
+									<text>编辑</text>
+								</navigator>
+								<view class="address-option" bindtap="deleteAddress" data-index="{{index}}" data-id="{{item.id}}">
+									<text>删除</text>
+								</view>
+							</view>
+
+						</view>
+					</view>
+
+				</block>
+			</view>
+			<view class="flex-row btn-box flex-x-center">
+				<view class="px-24">
+					<navigator class="btn btn-red" url="/pages/address-edit/address-edit">添加新的地址</navigator>
+				</view>
+			</view>
+		</view>
+
+	</view>
+	<include src="/components/footer/footer" />
+</view>

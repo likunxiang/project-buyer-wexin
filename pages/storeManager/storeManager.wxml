@@ -1,0 +1,59 @@
+<view class="pr" style="height: 2490rpx;">
+	<view class="managerBox pr" style="background-image: url({{to_mch_img}});">
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view></view>
+			<view></view>
+		</view>
+		<!-- <view class="privilege">
+			<view class="privilege-main" style="margin-bottom: 44rpx;">
+				<view class="fs-36 ns-text-bold" style="color: #BC3534;">拥有一家自己的专属品牌店铺</view>
+				<view class="fs-24 ns-text-bold" style="color: #BC3534;margin-top: 10rpx;">自定义店铺名称/描述，多品类经营</view>
+			</view>
+			<view class="privilege-main" style="margin-bottom: 44rpx;">
+				<view class="fs-36 ns-text-bold" style="color: #BC3534;">开店即卖货，多品类经营赚收益</view>
+				<view class="fs-24 ns-text-bold" style="color: #BC3534;margin-top: 10rpx;">品牌正品、源头直采、单品25%左右收益</view>
+			</view>
+			<view class="privilege-main">
+				<view class="fs-36 ns-text-bold" style="color: #BC3534;">开启邀请奖励，津贴拿到手软</view>
+				<view class="fs-24 ns-text-bold" style="color: #BC3534;margin-top: 10rpx;">每成功邀请一个新店主，立即到账500元津贴</view>
+			</view>
+		</view> -->
+		<view class="user-msg-box">
+			<view class="flex-x-center" style="font-size: 30rpx;font-weight: bold; color: #BC3534;">您的开店助手【{{nickname}}】</view>
+			<view class="tutor-pic-box" style="margin: 30rpx auto 22rpx;">
+				<image wx:if="{{wechat_qr_pic}}" style="width: 270rpx;height: 270rpx;border-radius: 12rpx;" mode="aspectFill" src="{{wechat_qr_pic}}"></image>
+				<view wx:else class="fs-30 rel" wx:else style="color:#333; line-height:270rpx; text-align:center;">
+					<view class="zindex">【暂无二维码】</view>
+					<image class="no_img" src="{{code_img}}"></image>
+				</view>
+			</view>
+			<!-- <view class="fs-30 color-000000 ns-text-bold text-center">您的专属导购【{{nickname}}】</view> -->
+			<view wx:if="{{wechat_qr_pic}}" style="width:100%; text-align:center; margin-bottom:30rpx;" bindtap="saveImg">
+				<view class="saveCode">保存二维码</view>
+			</view>
+			<view wx:else style="width:100%; text-align:center; margin-bottom:30rpx; ">
+				<view class="saveCode" style="color:#999; background-color:#f4f4f4;">保存二维码</view>
+			</view>
+			<view class="qq-flex justify-between">
+		
+				<view class="tutor-pic-box" style="width:90rpx;height:90rpx;border-radius: 50%;align-items: center; ">
+					<image style="width: 90rpx;height: 90rpx;border-radius: 50%;border: 4rpx solid #C51F29;  " mode="aspectFill" src="{{avatar_url}}"></image>
+				</view>
+				<view class="wx-box align-center align-items: center;">
+					<text>微信号：<text class="ns-text-bold">{{wechat_name}}</text></text>
+				</view>
+				<view class="text-right fs-30 ns-text-bold">
+					<text style="color: #C51F29;" bindtap='copy' data-text="{{wechat_name}}">复制</text>
+				</view>
+		
+			</view>
+		
+		</view>
+	</view>
+	<view class="btn-box flex-x-center flex-y-center">
+		<button open-type="share" class="shopBtn-empty">邀请好友，积累会员</button>
+	</view>
+</view>

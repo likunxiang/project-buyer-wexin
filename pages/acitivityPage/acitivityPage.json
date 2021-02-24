@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+  	"slide-icon": "/components/slideIcon/slideIcon"
+  },
+   "navigationStyle": "custom"
+}

@@ -1,0 +1,40 @@
+<!--pages/serviceCenter/serviceCenter.wxml-->
+<view class="page flex ns-column">
+	<view class="p-24">
+		<view class="public-box flex justify-between align-center" style="padding: 28rpx 24rpx;">
+			<view class=" flex align-center  ">
+				<view class="iconfont icon-sousuo  color-999999 fs-30" style="margin-right: 4rpx;"></view>
+				<input type="text" class="fs-30 color-595959" style="width: 100%;" placeholder="请输入搜索内容" placeholder-style="color: #999999;"
+				 value="{{searchValue}}" bindinput="seachInput" />
+			</view>
+			<view class="iconfont icon-guanbi1" style="color: #AAAAAA;" bindtap="clearSearch" wx:if="{{!is_search}}"></view>
+		</view>
+		<view class="flex1" wx:if="{{is_search}}">
+			<view class="search-box fs-30 color-999999" wx:for="{{searchList}}" wx:key="id">{{item.name}}</view>
+		</view>
+		<view class="public-box flex align-center mt-24" style="padding: 24rpx;" wx:if="{{!is_search}}">
+			<image style="width: 120rpx;height: 120rpx;border-radius: 50%;background: #CCCCCC;" mode="aspectFill"></image>
+			<view class="ml-24 flex1">
+				<view class="fs-30">
+					<text class="color-999999">您的专属导购：</text>
+					<text class="color-333333">小明</text>
+				</view>
+				<view class="mt-24 flex justify-between align-center">
+					<view>
+						<text class="color-999999">微信号：</text>
+						<text class="color-333333">1234567abc</text>
+					</view>
+					<view class="copy-btn fs-24 color-999999">复制</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="flex flex1" wx:if="{{!is_search}}">
+		<view class="nav-silde">
+			<view class="nav-box {{navIns == index?'nav-box-active':''}}" wx:for="{{navList}}" wx:key="id" bindtap="changeNav" data-index="{{index}}">{{item.name}}</view>
+		</view>
+		<view class="question-silde flex1">
+			<view class="question-box" wx:for="{{questionList}}" wx:key="id">{{item.name}}</view>
+		</view>
+	</view>
+</view>

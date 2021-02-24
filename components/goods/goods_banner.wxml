@@ -1,0 +1,39 @@
+<view class='con flex justify-between align-center pf' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+	<view class="backBtn flex1 flex align-center" bindtap="goBack">
+		<view class="iconfont icon-zuojiantoubeifen nav-icon-box" style="height:{{(customBar - statusBar)/2}}px;width: {{(customBar - statusBar)/2}}px;;"></view>
+	</view>
+	<view></view>
+	<!-- <view class="fs-24 flex align-center flex-x-center flex-grow-1" wx:if="{{goods.show_txt && goods.m_price}}">
+		<view class="text-center color-333333" style="margin-right: 13rpx;">{{goods.start_buy==0?'开始时间':'结束时间'}}</view>
+		<view class="activity-time color-fff" style="{{goods.start_buy==0?'background:linear-gradient(-90deg,rgba(0,197,132,1),rgba(29,192,100,1));':''}}">{{goods.show_txt}}</view>
+	</view> -->
+	<view wx:if="{{goods.m_price && goods.show_txt}}">
+		<!-- <view class="time-title color-fff {{goods.start_buy==0?'time-title-green':'time-title-red'}}">
+			<view class="text-center fs-20">{{goods.start_buy==0?'开始时间':'结束时间'}}</view>
+			<view class="fs-20" >{{goods.show_txt}}</view>
+		</view> -->
+	</view>
+	<view class="flex1"></view>
+</view>
+
+<swiper class="goods-image-swiper pr" autoplay="{{autoplay}}" interval="5000" duration="300" circular="true" bindchange="hide"
+ indicator-color="rgba(159,159,159,0.3)" indicator-active-color="rgba(159,159,159,1)">
+	<block wx:for="{{goods.cover_pic}}" wx:key="key">
+		<swiper-item>
+			<image bindtap="onGoodsImageClick" data-index="{{index}}" class="goods-image" src="{{item}}" mode="aspectFill" />
+			<block wx:if="{{goods.video_url}}">
+				<image class="play {{img_hide}}" src="{{__wxapp_img.store.video_play.url}}" data-url="{{goods.video_url}}" bindtap="play"></image>
+			</block>
+			<view wx:if='{{__user_info.is_distributor == 1 && __is_share_price && goods.max_share_price > 0 && goods.is_negotiable != 1 && goods.is_share}}'
+			 class='flex-row flex-y-center share_commission'>
+				<image class='img' src='{{__wxapp_img.store.share_commission.url}}' mode="aspectFill"></image>
+				<view class='flex-col text_box'>
+					<text class='text1'>分销最高可赚</text>
+					<text class='text2'>￥{{goods.max_share_price}}</text>
+				</view>
+			</view>
+			<view class="pa banner-num color-fff fs-24">{{index+1}}/{{goods.cover_pic.length}}</view>
+		</swiper-item>
+
+	</block>
+</swiper>

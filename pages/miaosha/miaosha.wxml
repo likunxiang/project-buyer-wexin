@@ -1,0 +1,120 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page">
+    <include src="/components/common/common" />
+    <include src="/components/header/header" />
+    <shopbuy></shopbuy>
+    <view class="body">
+        <view class="after-navber">
+            <view class="top-bar">
+                <scroll-view scroll-x="true" scroll-into-view="miaosha_{{top_bar_scroll}}" scroll-with-animation="true">
+                    <view class="flex-row start-time-list">
+                        <view id="miaosha_{{index}}" wx:if="{{item.status!=0}}" class="flex-grow-0 flex-y-center start-time-item {{item.active?'active':''}}" wx:for="{{time_list}}" wx:key="id" data-index="{{index}}" bindtap="topBarItemClick">
+                            <view>
+                                <view class="start-time">{{item.title}}</view>
+                                <view class="start-status">{{item.status_text}}</view>
+                            </view>
+                            <!-- <view wx:if="{{item.active}}" class="start-time-item-icon"></view> -->
+                        </view>
+
+                        <view wx:if="{{next_list.length>0}}" class="flex-grow-0 flex-y-center start-time-item {{ms_active?'active':''}}" bindtap="miaosha_next">
+                            <view class="start-time">预告</view>
+                            <!-- <view wx:if="{{ms_active}}" class="start-time-item-icon"></view> -->
+                        </view>
+                        <view class="flex-grow-1" style="background:#30353c"></view>
+                    </view>
+                </scroll-view>
+                <view wx:if="{{ms_active}}" class="flex-row" style="margin-top:-20rpx;background:#fff">
+                    <view class="flex-y-center" style="margin:40rpx 40rpx 40rpx 70rpx">
+                        <image src="/images/miaosha-next.png" style="width:100rpx;height:100rpx" />
+                    </view>
+                    <view class="flex-col flex-x-center">
+                        <text style="color:#3f3f3f">今天已无更多场次</text>
+                        <text style="height:10rpx"></text>
+                        <text style="color:#999999">下一场于 <text style="color:#c10000;">{{next_time}}</text> 开始</text>
+                    </view>
+                </view>
+                <view wx:if="{{ms_active}}" style="background:#f7f7f7;height:12rpx"></view>
+
+                <view wx:if="{{time_list && !ms_active}}" class="flex-row time-over-bar">
+                    <view class="flex-grow-1 flex-y-center" style="color: #c10000">限时秒杀，抢完为止</view>
+                    <view wx:for="{{time_list}}" wx:key="id" wx:if="{{item.active}}" class="flex-grow-0 flex-y-center" style="color: #888">
+                        <block wx:if="{{item.status==0}}">
+                            <text>本场秒杀已结束</text>
+                        </block>
+                        <block wx:if="{{item.status==1}}">
+                            <text class="ns-text-smblack">距离本场结束</text>
+                            <text style="color: #c10000;margin-left: 10rpx">{{item.end_time_over}}</text>
+                        </block>
+                        <block wx:if="{{item.status==2}}">
+                            <text class="ns-text-smblack">距离本场开始</text>
+                            <text style="color:#c10000;margin-left: 10rpx">{{item.begin_time_over}}</text>
+                        </block>
+                    </view>
+                </view>
+            </view>
+
+            <view wx:if="{{goods_list===null}}" class="goods-loading flex-x-center" style="padding-top: 320rpx;text-align: center">
+                <image src="{{__wxapp_img.system.loading2.url}}" style="width: 120rpx;height: 120rpx"></image>
+            </view>
+            <view wx:else class="goods-list ns-padding-horizontal-sm" style="{{ms_active?'padding-top:309rpx':''}}">
+                <block wx:for="{{goods_list}}" wx:key="id">
+                    <form bindtap="goMiaosha" data-url="/pages/miaosha/details/details?id={{item.id}}">
+                        <view>
+                            <view class="item flex-row">
+                                <view class="flex-grow-0">
+                                    <view class="ns-parent-box">
+                                      <image class="cover-pic" src="{{item.first_cover_pic}}" mode="aspectFill"></image>
+                                      <view class="count-tip" wx:if="{{filters.parseInt(item.miaosha_price)!==filters.parseInt(item.price)}}">{{filters.toFix((item.miaosha_price/item.price)*10,1)}}折</view>
+                                    </view>
+                                </view>
+                                <view class="flex-grow-1" style="padding: 10rpx 24rpx">
+                                    <view class="goods-name ns-text-sm">{{item.name}}</view>
+                                    <view class="ns-flex ns-justify-content-space-between ns-padding-vertical-xs">
+                                      <view class="progress-bar">
+                                          <view class="progress" style="width: {{item.sell_num*100/item.miaosha_num}}%"></view>
+                                      </view>
+                                      <view class="ns-text-xs" wx:if="{{item.sell_num < item.miaosha_num}}">剩余{{item.miaosha_num-item.sell_num}}件</view>
+                                      <view wx:else class="ns-text-xs ns-text-gray">{{item.miaosha_num}}已抢完</view>
+                                    </view>
+                                    
+                                    <view class="flex-row">
+                                        <view class="flex-grow-1 ns-flex">
+                                            <view class="miaosha-price">￥{{item.miaosha_price}}</view>
+                                            <view class="price">￥{{item.price}}</view>
+                                        </view>
+                                        <view class="flex-grow-0 flex-y-bottom">
+                                            <block wx:if="{{item.status==0}}">
+                                                 <view catchtap="doNotice" class="btn tip">提醒我</view>
+                                            </block>
+                                            <block wx:if="{{item.status==1}}">
+                                                <block wx:if="{{item.sell_num < item.miaosha_num}}">
+                                                    <view class="btn btn-buy">抢购</view>
+                                                </block>
+                                                <block wx:else>
+                                                    <view class="btn">查看商品</view>
+                                                </block>
+                                            </block>
+                                            <block wx:if="{{item.status==2}}">
+                                                <view catchtap="doNotice" class="btn tip">提醒我</view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </form>
+                </block>
+            </view>
+            <view class="load-more-bar {{loading_more?'active':''}}">
+                <image src="{{__wxapp_img.system.loading.url}}"></image>
+            </view>
+        </view>
+    </view>
+    <!-- <include src="/components/quick-navigation/quick-navigation.wxml" /> -->
+    <include src="/components/footer/footer" />
+</view>
+<!-- 上拉触底 -->
+<!-- <view class="pullBottom" wx:if="{{onUp}}">
+  <view>不过瘾？更多好货逛一逛</view>
+    <navigator url="/pages/guanyiguan/guanyiguan"><view>立即前往</view></navigator>
+</view> -->

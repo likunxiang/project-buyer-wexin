@@ -1,0 +1,289 @@
+<!--pages//private/home/home.wxml-->
+
+<view class="page pr">
+	<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+	<block wx:if="{{is_login}}">
+		<view class="ns-column flex-y-center" style="padding-top: 400rpx;">
+			<view class="mb-20">您尚未登录，无法体验该功能，请先登录</view>
+			<button style='border:1px solid #04be01;width:500rpx;height:80rpx;line-height:80rpx;border-radius:80rpx;color:#04be01;margin-bottom:40rpx;'
+			 bindtap="myLogin" class="btn new-modal-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">立即登录</button>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="header fixed">
+			<view class="tips plr-25 fs-24 color-fff" wx:if="{{nowStatus.code == 1 && type == 2}}">
+				 {{nowStatus.time}} 
+			</view>
+			<view style="padding-top: 20rpx;">
+				<view class="cu-bar bg-white search ">
+					<navigator hover-class="none" url="/private/privateSearch/privateSearch" class="search-form round">
+						<view class="cuIcon-search fs-30"></view>
+						<view style="color: #AAAAAA;">搜索商品名称</view>
+					</navigator>
+				</view>
+			</view>
+			<view wx:if="{{type == 1}}" class="padding-lr bg-white fs-24 color-636363 padding-bottom pr mt-20">
+				<view class="" style="line-height: 40rpx;">{{showgg}}</view>
+				<block wx:if="{{is_moreAD}}">
+					<view class="mt-20">
+						<view class="mb-10">
+							<scroll-view scroll-x="true">
+								<view class="flex">
+									<view class="ad-img" wx:for="{{ad_img}}" wx:key="key">
+										<image class="ad-img" mode="aspectFill" src="{{item}}"></image>
+									</view>
+								</view>
+							</scroll-view>
+						</view>
+						<view class="flex mb-10">
+							<view class="fs-24 ns-text-bold" style="width: 100rpx;color: #636363;">地址</view>
+							<view>{{ad_address}}</view>
+						</view>
+						<view class="flex mb-10">
+							<view class="fs-24 ns-text-bold" style="width: 100rpx;color: #636363;">电话</view>
+							<view>{{ad_mobile}}</view>
+						</view>
+						<view class="flex mb-10">
+							<view class="fs-24 ns-text-bold" style="width: 100rpx;color: #636363;">联系人</view>
+							<view>{{ad_name}}</view>
+						</view>
+					</view>
+				</block>
+				<view class="ns-align-content-flex-end open" bindtap="moreAD">{{is_moreAD?'收起':'展开'}}</view>
+			</view>
+
+			<view wx:else class="padding-lr bg-white fs-24 color-636363 pb-20 pr mt-20">
+				<navigator url="/private/privateNotice/privateNotice" class="color-9B9B9B fs-24 ns-text-limit3" style="height: 120rpx;line-height: 40rpx;">{{ad}}</navigator>
+				<view class="flex ns-row-reverse">
+					<navigator hover-class="none" url="/private/privateSetting/privateSetting" class="edit-btn fs-24 color-fff">自营设置</navigator>
+				</view>
+			</view>
+		</view>
+		<view class="zhezhao" wx:if="{{is_moreAD}}" bindtap="moreAD"></view>
+		<block wx:if="{{type==1}}">
+			<include src="/components/goods/specifications_model.wxml" />
+			<!-- 重要通知 -->
+			<view class='earnings-rule-zhezhao flex flex-y-center' wx:if="{{isInvite}}" style='width:{{x}}px;height:{{y}}px'
+			 bindtap='closeInvite' catchtouchmove="{{true}}">
+				<view class="invite-dear" catchtap="stop">
+					<view class="invite-title fs-30 ns-text-bold color-fff">重要提示</view>
+					<view class="invite-body border-bottom" style="padding-bottom: 30rpx;">
+						<!-- <rich-text nodes="{{listData.big_message}}"></rich-text> -->
+						<view>
+							<rich-text nodes="{{importanceTips}}"></rich-text>
+						</view>
+						<navigator url="/pages/article-detail/article-detail?id={{fwxy_id}}" class="" style="text-decoration: underline">查看服务协议</navigator>
+						<!-- <view class="mt-30">
+							<rich-text nodes="{{listData.big_message_two}}"></rich-text>
+						</view> -->
+						<view class="mt-30 flex ns-align-items-flex-center" catchtap="agreeInvite">
+							<view class="iconfont {{isAgreeInvite?'icon-xuanzhong color-252E3E fs-40':'icon-weixuanzhong fs-40'}}"></view>
+
+							<view class="ml-20">我同意以上约定</view>
+						</view>
+					</view>
+					<view class="invite-btn flex">
+						<navigator open-type="navigateBack" class="flex1 ns-text-center" style="border-right: 2rpx solid #D6D6D6;"
+						 catchtap="closeInvite">取消</navigator>
+						<view class="flex1 ns-text-center" catchtap="agreeJoin">确定</view>
+					</view>
+				</view>
+			</view>
+			<view style="padding-top: 210rpx;">
+				<view class="VerticalBox">
+					<scroll-view class="VerticalNav nav1" style="height:calc(100vh - 210rpx);" scroll-y scroll-with-animation
+					 scroll-top="{{verticalNavTop}}">
+						<view style="padding-bottom: 130rpx;">
+							<block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+
+								<view class="{{['cu-item',index==tabCur?'text-green cur':'']}} fs-28" data-id="{{index}}" data-cid="{{item.id}}"
+								 data-event-opts="{{[['tap',[['TabSelect',['$event']]]]]}}" bindtap="TabSelect">{{item.name}}</view>
+							</block>
+						</view>
+
+					</scroll-view>
+					<scroll-view class="VerticalMain" style="height:calc(100vh - 210rpx);" scroll-y bindscrolltolower="getMore">
+						<view style="padding-bottom: 130rpx;">
+							<block wx:if="{{goodsList.length>0}}">
+								<view id="{{'main-'+index}}">
+									<!-- <view class="cu-bar solid-bottom bg-white">
+										<view class="action"><text class="cuIcon-title text-green"></text>{{item.name}}</view>
+									</view> -->
+									<view class="cu-list menu-avatar">
+										<navigator hover-class="none" url="/private/privateGoods/privateGoods?id={{item.id}}" wx:for="{{goodsList}}"
+										 wx:for-item="item" wx:for-index="index" wx:key="index" class="goods flex mb-20">
+											<view style="width: 160rpx;height: 160rpx;margin-right: 18rpx;">
+												<image style="width: 160rpx;height: 160rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+											</view>
+											<view class="flex1" style="padding-top: 5rpx;">
+												<view class="fs-30 ns-text-limit" style="height: 70rpx;">{{item.name}}</view>
+												<view class="color-489A19 flex fs-24 mt-5">
+													<view class="mr-10"><text wx:for="{{item.tags}}" wx:for-item="tag" class="mr-10">{{tag}}</text></view>
+												</view>
+												<view class="flex ns-align-items-flex-center justify-between">
+													<view class="flex ns-align-items-flex-center ">
+														<view class="color-FF9100 fs-28 ns-text-bold mr-10">¥ {{item.min_price}}</view>
+														<!-- <view class="color-9B9B9B fs-20 ns-text-through">¥ 520</view> -->
+													</view>
+													<view class="flex align-center">
+														<block wx:if="{{item.cart_num>0}}">
+															<view class="iconfont icon-jianshao1 fs-40 color-2C2C2C" catchtap="reduceNum" data-index="{{index}}"
+															 data-id="{{item.id}}" data-price="{{item.min_price}}"></view>
+															<view style="width: 50rpx;text-align: center;">{{item.cart_num}}</view>
+														</block>
+														<block wx:if="{{filters.parseInt(item.cart_num)>=item.num}}">
+															<view class="iconfont icon-add-fill fs-50" style="color: #C8C7C7;" catchtap></view>
+														</block>
+														<block wx:else>
+															<view class="iconfont icon-add-fill fs-50 color-FF9100" catchtap="addNum" data-index="{{index}}" data-id="{{item.id}}"
+															 data-price="{{item.min_price}}"></view>
+														</block>
+													</view>
+												</view>
+											</view>
+										</navigator>
+									</view>
+								</view>
+							</block>
+							<block wx:else>
+								<view class="flex-x-center flex-y-center">
+									<view>
+										<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+										<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+											<view>这里没有商品呢</view>
+											<view>去其他分类看看吧～</view>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+					</scroll-view>
+				</view>
+			</view>
+
+			<view class="footer">
+				<view class="footer-content flex ns-align-items-flex-center color-fff fs-28">
+					<block wx:if="{{role == 'shoper'}}">
+						<navigator hover-class="none" url="/private/home/home?type=2" class="flex1 flex-x-center ns-align-items-flex-center"
+						 style="border-right: 2rpx solid #FFFFFF;">
+							<text class="iconfont icon-iconset0156 fs-40 mr-10"></text>
+							<text>整理商品</text>
+						</navigator>
+					</block>
+					<block wx:else>
+						<view class="flex1 flex-x-center ns-align-items-flex-center" style="border-right: 2rpx solid #FFFFFF;" bindtap="copyText">
+							<text class="iconfont icon-weixin fs-40 mr-10"></text>
+							<text>联系店主</text>
+						</view>
+					</block>
+					<navigator hover-class="none" url="/private/privateCart/privateCart" class="flex1 flex-x-center ns-align-items-flex-center pr">
+						<view class="iconfont icon-cailanzi- fs-36 mr-10"></view>
+						<view>我的篮子</view>
+						<view class="num-box" wx:if="{{cartNum>0}}">{{cartNum}}</view>
+					</navigator>
+					<navigator hover-class="none" url="/private/privateOrder/privateOrder" class="flex1 flex-x-center ns-align-items-flex-center">
+						<view class="iconfont icon-icon- fs-40 mr-10"></view>
+						<view>自营订单</view>
+					</navigator>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<block wx:if="{{list.length == 0}}">
+				<view class="flex-x-center flex-y-center" style="height: 100%;">
+					<view class="fs-30 color-9B9B9B text-center" style="line-height: 40rpx;">
+						<view>还没有商品哦～</view>
+						<view>点击底部的「商品管理」</view>
+						<view>开始添加你的第一款自营商品吧</view>
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view style="{{nowStatus.code == 1?'padding-top: 360rpx':'padding-top: 280rpx;'}};">
+					<view class="VerticalBox">
+						<scroll-view class="VerticalNav nav1" style="{{nowStatus.code == 1?'height:calc(100vh - 360rpx)':'height:calc(100vh - 280rpx)'}};"
+						 scroll-y scroll-with-animation scroll-top="{{verticalNavTop}}">
+							<view style="padding-bottom: 130rpx;">
+								<block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+
+									<view class="{{['cu-item',index==tabCur?'text-green cur':'']}} fs-28" data-id="{{index}}" data-cid="{{item.id}}"
+									 data-event-opts="{{[['tap',[['TabSelect',['$event']]]]]}}" bindtap="TabSelect">{{item.name}}</view>
+								</block>
+								<navigator hover-class="none" url="/private/privateGoodsClassify/privateGoodsClassify" class="{{['cu-item',index==tabCur?'text-green cur':'']}} fs-28 color-FF9100">添加分类</navigator>
+							</view>
+
+						</scroll-view>
+						<scroll-view class="VerticalMain" style="{{nowStatus.code == 1?'height:calc(100vh - 360rpx)':'height:calc(100vh - 280rpx)'}};"
+						 scroll-y bindscrolltolower="getMore">
+							<view style="padding-bottom: 130rpx;">
+								<block wx:if="{{goodsList.length>0}}">
+									<view class=" fs-24" id="{{'main-'+index}}" wx:for="{{goodsList}}" wx:for-item="item" wx:for-index="index"
+									 wx:key="id">
+										<view class="cu-list menu-avatar">
+											<navigator url="/private/privateGoods/privateGoods?id={{item.id}}" hover-class="none" class="goods flex  mb-20">
+												<view style="width: 160rpx;height: 160rpx;margin-right: 18rpx;">
+													<image style="width: 160rpx;height: 160rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+												</view>
+												<view class="flex1" style="padding-top: 5rpx;">
+													<view class="fs-30 ns-text-limit" style="height: 70rpx;">{{item.name}}</view>
+													<view class="color-489A19 flex fs-24 mt-10">
+														<view class="mr-10">
+															<text wx:for="{{item.tags}}" wx:for-item="tag" class="mr-10">{{tag}}</text>
+														</view>
+													</view>
+													<view class="flex ns-align-items-flex-center justify-between mt-10">
+														<view class="flex ns-align-items-flex-center ">
+															<view class="color-FF9100 fs-28 ns-text-bold mr-10">¥ {{item.min_price}}</view>
+															<!-- <view class="color-9B9B9B fs-20">¥ 520</view> -->
+														</view>
+														<view class="flex color-9B9B9B align-center" catchtap="setTop" data-id="{{item.id}}">
+															<view class="iconfont icon-zhiding1 fs-26 mr-10"></view>
+															<view class="fs-20">移至最前</view>
+														</view>
+													</view>
+												</view>
+											</navigator>
+										</view>
+									</view>
+								</block>
+								<block wx:else>
+									<view class="flex-x-center flex-y-center">
+										<view>
+											<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+											<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+												<view>这里没有商品呢</view>
+												<view>去其他分类看看吧～</view>
+											</view>
+										</view>
+									</view>
+								</block>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</block>
+
+			<view class="footer">
+				<view class="footer-content flex ns-align-items-flex-center color-fff fs-28">
+					<view class="flex1 flex-x-center ns-align-items-flex-center" style="border-right: 2rpx solid #FFFFFF;" bindtap="showShareModal">
+						<text class="iconfont icon-weixin fs-40 mr-10"></text>
+						<text>分享店铺</text>
+					</view>
+					<navigator url="/private/privateGoodsList/privateGoodsList" class="flex1 flex-x-center ns-align-items-flex-center">
+						<view class="iconfont icon-tianjiashangpin- fs-36 mr-10"></view>
+						<view>商品管理</view>
+					</navigator>
+					<navigator url="/private/privateShopOrder/privateShopOrder" class="flex1 flex-x-center ns-align-items-flex-center">
+						<view class="iconfont icon-icon- fs-40 mr-10"></view>
+						<view>处理订单</view>
+					</navigator>
+				</view>
+			</view>
+
+		</block>
+
+		<include src='/components/share/share.wxml'></include>
+
+	</block>
+
+</view>

@@ -1,0 +1,276 @@
+/* pages/groupBuy/groupBuy.wxss */
+@import "/components/goods/specifications_model.wxss";
+@import "../../components/share/share.wxss";
+page {
+	background-color: #F8F8F8;
+	height: 100%;
+}
+.page {
+	height: 100%;
+}
+.header {
+	width: 100%;
+	height: 240rpx;
+	background-color: #ccc;
+}
+.tips {
+	position: absolute;
+	bottom: 0rpx;
+	height: 72rpx;
+	line-height: 72rpx;
+	width:100%;
+	height:72rpx;
+	background:rgba(0,0,0,0.5);
+	z-index: 1;
+}
+.share-btn1 {
+	position: absolute;
+	top: 25rpx;
+	right: 30rpx;
+	width: 64rpx;
+	height: 64rpx;
+	border-radius: 50%;
+	background-color: #489A19;
+	z-index: 1;
+}
+.roll-tips {
+	
+	position: absolute;
+	width: 268rpx;
+	height: 52rpx;
+	top: 25rpx;
+	left: 30rpx;
+	background:rgba(0,0,0,0.5);
+	border-radius:32rpx;
+}
+.roll-tips-img {
+	width: 40rpx;
+	height: 40rpx;
+	border-radius: 50%;
+}
+.goods {
+	width: 330rpx;
+}
+.goods-msg {
+	margin-top: 15rpx;
+	padding-left: 10rpx;
+	padding-bottom: 10rpx;
+}
+.cart {
+	position: fixed;
+	bottom: 90rpx;
+	width: 228rpx;
+	height: 80rpx;
+	padding: 5rpx 30rpx;
+	background:rgba(46,46,46,0.7);
+	border-radius: 0 6rpx 6rpx 0;
+}
+
+.share-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.0);
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: background 250ms;
+}
+
+.share-modal .share-modal-body {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding-top: 90rpx;
+    transform: translateY(100%);
+    transition: transform 250ms;
+    text-align: center;
+}
+.share-modal-body text.close{
+  width: 28rpx;height: 28rpx;right: 34rpx;top: 34rpx;
+}
+.share-modal-body .shareGet{
+  color: #2c2c2c;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20rpx;
+}
+.share-modal-body .tips{color:#D6D6D6;font-size: 12px;margin-bottom:90rpx;}
+.shareGet span{color:#c10000;margin-left: 10rpx;}
+.share-modal.active {
+    transform: translateY(0);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.share-modal.active .share-modal-body {
+    transform: translateY(0);
+}
+
+.share-modal .share-bottom {
+    text-align: center;
+    font-size: 9pt;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 70rpx;
+    line-height: inherit;
+    border: none;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    display: inline-block;
+}
+
+.share-modal .share-bottom:after {
+    display: none;
+}
+
+.share-modal .share-bottom text {
+	display: block;
+    width: 100rpx;
+    height: 100rpx;
+	margin: 0 auto;
+    margin-bottom: 30rpx;
+	border-radius: 50%;
+	line-height: 100rpx;
+	text-align: center;
+	background: #4CB202;
+}
+
+.share-modal .share-bottom:active image {
+    opacity: 0.7;
+}
+
+.share-modal .share-modal-close {
+    background: #fff;
+    height: 100rpx;
+    border-top: 1rpx solid #eee;
+}
+
+/* 生成二维码 */
+.goods-qrcode-modal{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,.5);
+    padding: 40rpx;
+    transform: translateY(100%);
+    opacity: .5;
+    transition: opacity 250ms;
+    visibility: hidden;
+}
+
+.goods-qrcode-modal.active{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.goods-qrcode-body{
+    background: #fff;
+    height: 100%;
+    border-radius: 10rpx;
+    z-index: 99999;
+}
+
+.goods-qrcode-modal .goods-qrcode-box{
+    height: 100%;
+    position: relative;
+    box-shadow: 0 0 15rpx rgba(0,0,0,.15);
+}
+
+.goods-qrcode-modal .goods-qrcode-loading{
+    top:0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.goods-qrcode-modal .goods-qrcode{
+    top:0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: none;
+}
+
+.goods-qrcode-modal .goods-qrcode.active{
+    display: block;
+}
+
+.goods-qrcode-modal .goods-qrcode-close{
+    position: absolute;
+    top:40rpx;
+    right: 40rpx;
+    padding: 15rpx;
+}
+.shareShop {
+	width: 508rpx;
+	height: 616rpx;
+	background: #fff;
+	margin: 0 auto;
+	border-radius: 13rpx 13rpx 0 0;
+	transform: translateY(-100rpx)
+}
+
+.appcode-img {
+	width: 250rpx;
+	height: 250rpx;
+	display: block;
+	margin: 0 auto;
+	transform: translateY(60rpx)
+}
+
+.shopHead {
+	height: 246rpx;
+	background: #1A4C4B;
+	padding: 20rpx 0;
+	color: #fff;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 13rpx 13rpx 0 0;
+}
+
+.shopHead image {
+	width: 111rpx;
+	height: 111rpx;
+	border: 10rpx solid #f5f5f5;
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+.shopHead .font_blod {
+	font-weight: 600;
+	margin-top: 20rpx;
+}
+
+.shopBottom {
+	text-align: center;
+	font-size: 14px;
+	color: #595959;
+	letter-spacing: 0;
+	height: 76rpx;
+	background: #fff;
+	border-radius: 0 0 13rpx 13rpx;
+	position: relative;
+	overflow: hidden;
+}
+
+.shopBottom>view:nth-child(2) {
+	color: #c11111;
+}
+.shop-close {
+	position: absolute;
+	bottom: -52px;
+	left: 50%;
+	transform: translateX(-50%)
+}

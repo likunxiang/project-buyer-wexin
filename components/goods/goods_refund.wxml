@@ -1,0 +1,257 @@
+<view style="padding-bottom: 128rpx;min-height: 100%;">
+	<view class="mb-20 public-box">
+		<view class="fs-24 color-333333 ns-text-bold mb-30">商品清单</view>
+		<view class="flex">
+			<view class="mr-20">
+				<image style="width: 200rpx;height: 200rpx;border-radius: 14rpx;" mode="aspectFill" src="{{goods.goods_pic}}"></image>
+			</view>
+			<view class="flex ns-column justify-between">
+				<view>
+					<view class="fs-30 color-333333">{{goods.name}}</view>
+					<view class="flex">
+						<view class="fs-24 color-999999">
+							<view style="margin-right: 40rpx;" wx:for="{{goods.attr}}" wx:key="{{item.id}}">
+								{{item.attr_group_name}}:{{item.attr_name}}
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="fs-24 flex">
+					<view class="color-999999">申请数量：<text class="color-333333">{{goods.num}}</text></view>
+					<view style="margin-left: 33rpx;">退款金额：
+						<text class="fs-20">￥<text class="fs-26">{{filters.priceStr(goods.total_price)[0]}}.</text><text>{{filters.priceStr(goods.total_price)[1]}}</text></text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="flex-row bg-white switch-tab mb-20">
+        <view wx:if="{{refund_status!=3}}" class="flex-grow-1 flex-x-center" bindtap="switchTab" data-id="1">
+            <text class="flex-y-center {{switch_tab_1}}">退货退款</text>
+        </view>
+        <view wx:if="{{refund_status!=4}}" class="flex-grow-1 flex-x-center" bindtap="switchTab" data-id="2">
+            <text class="flex-y-center {{switch_tab_2}}">退款</text>
+        </view>
+    </view> -->
+	<!-- v1.10 申请售后改版 -->
+	<block wx:if="{{!refund_type_id}}">
+		<view wx:for="{{refundType}}" wx:key='id' data-id="{{item.id}}" bindtap="bindRefundType">
+			<view class="public-box mb-20 flex justify-between align-center" wx:if="{{item.id == 3}}">
+				<view class="flex align-center">
+					<view class="iconfont icon-tuikuan1 fs-50" style="color: #FF3F19;"></view>
+					<view class="ml-24">
+						<view class="color-000000 fs-30 ns-text-bold">我要退款（无需退货）</view>
+						<view class="mt-15 fs-24 color-999999">没收到货：或者已通过协商同意不用退货只退款</view>
+					</view>
+				</view>
+				<view class="iconfont icon-jinru fs-30"></view>
+			</view>
+			<view class="public-box mb-20 flex justify-between align-center" wx:if="{{item.id == 1}}">
+				<view class="flex align-center">
+					<view class="iconfont icon-tuihuo fs-50" style="color: #FF851A;"></view>
+					<view class="ml-24">
+						<view class="color-000000 fs-30 ns-text-bold">我要退货退款</view>
+						<view class="mt-15 fs-24 color-999999">已收到货，需要退还已收到的商品</view>
+					</view>
+				</view>
+				<view class="iconfont icon-jinru fs-30"></view>
+			</view>
+		</view>
+	</block>
+	<!-- <view class="flex-row bg-white form-row ns-justify-content-space-between">
+		<view>
+			<text class="form-label">申请类型</text>
+		</view>
+		<picker mode="selector" bindchange="bindRefundChange" value="{{refundIndex}}" range="{{refundType}}" range-key="name">
+			<view class="picker fs-24 color-999999">
+				{{defaultRefundIndex==0?'请选择退款类型':refundType[refundIndex].name}}
+			</view>
+		</picker>
+
+	</view>
+ -->
+	<!-- 退货退款 -->
+	<block wx:else>
+		<view class="public-box mb-20">
+			<!-- <view class="flex-row bg-white form-row ns-justify-content-space-between">
+				<view>
+					<text class="form-label">申请类型</text>
+				</view>
+				<picker mode="selector" bindchange="bindRefundChange" value="{{refundIndex}}" range="{{refundType}}" range-key="name">
+					<view class="picker fs-24 color-999999">
+						{{defaultRefundIndex==0?'请选择退款类型':refundType[refundIndex].name}}
+					</view>
+				</picker>
+		
+			</view> -->
+			<block wx:if="{{sup_id == 16 && type == 3}}">
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view>
+						<text class="form-label">收货状态</text>
+					</view>
+					<picker mode="selector" bindchange="bindPickStatus" value="{{pickIndex}}" range="{{pickStatus}}" range-key="name">
+						<view class="picker fs-24 color-999999">
+							{{defaultPickIndex==0?'请选择退款类型':pickStatus[pickIndex].name}}
+						</view>
+					</picker>
+		
+				</view>
+			</block>
+			<block wx:if="{{sup_id == 13 && refundId != 3 && show_jd}}">
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view class="">
+						<text class="form-label">包装情况</text>
+					</view>
+					<view class="fs-24 color-999999 flex ">
+						<view class="flex justify-between ml-24" wx:for="{{packagingStatus}}" wx:key="key" bindtap="changePackaging"
+						 data-index="{{item.type}}">
+							<view class="iconfont {{packagingIns==item.type?'icon-xuanzhong color-FFC330':'icon-weixuanzhong'}} mr-10"></view>
+							<view>{{item.name}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view class="">
+						<text class="form-label">是否有包装</text>
+					</view>
+					<view class="fs-24 color-999999 flex">
+						<view class="flex justify-between ml-24" wx:for="{{is_package}}" wx:key="key" bindtap="changePackage" data-index="{{item.type}}">
+							<view class="iconfont {{packageIns==item.type?'icon-xuanzhong color-FFC330':'icon-weixuanzhong'}} mr-10"></view>
+							<view>{{item.name}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view class="">
+						<text class="form-label">是否检测报表</text>
+					</view>
+					<view class="fs-24 color-999999 flex">
+						<view class="flex justify-between ml-24" wx:for="{{is_check}}" wx:key="key" bindtap="changeCheck" data-index="{{item.type}}">
+							<view class="iconfont {{checkIns==item.type?'icon-xuanzhong color-FFC330':'icon-weixuanzhong'}} mr-10"></view>
+							<view>{{item.name}}</view>
+						</view>
+					</view>
+				</view>
+				<!-- <view class="flex-row bg-white form-row ns-justify-content-space-between">
+				    <view class="">
+				        <text class="form-label">取件方式</text>
+				    </view>
+				    <view class="fs-24 color-999999 flex">
+				        <view class="flex justify-between ml-24" wx:for="{{sendWay}}" wx:key="key" bindtap="changeSendWay" data-index="{{item.type}}">
+							<view class="iconfont {{sendWayIns==item.type?'icon-xuanzhong color-FFC330':'icon-weixuanzhong'}} mr-10"></view>
+							<view>{{item.name}}</view>
+						</view>
+				    </view>
+				</view> -->
+				<view class="flex-row bg-white form-row ns-justify-content-space-between" wx:if="{{false}}">
+					<view class="">
+						<text class="form-label">到货方式</text>
+					</view>
+					<view class="fs-24 color-999999 flex">
+						<view class="flex justify-between ml-24" wx:for="{{aog}}" wx:key="key" bindtap="changeAog" data-index="{{item.type}}">
+							<view class="iconfont {{aogWayIns==item.type?'icon-xuanzhong color-FFC330':'icon-weixuanzhong'}} mr-10"></view>
+							<view>{{item.name}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view class="flex align-center">
+						<text class="form-label">退款数量：</text>
+						<block wx:if="{{is_edit_num}}">
+							<input type="text" value="{{refund_num}}" bindblur="inputNum" focus="{{is_edit_num}}" />
+						</block>
+						<block wx:else>
+							<text class="fs-26 color-333333">{{refund_num}}</text>
+						</block>
+					</view>
+					<view class="fs-24 color-999999" bindtap="editNum">
+						修改
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="flex-row bg-white form-row ns-justify-content-space-between">
+					<view>
+						<text class="form-label">退款原因</text>
+					</view>
+					<picker bindchange="bindTuiKuangChange" value="{{returnIndex}}" range="{{tuikuangCause}}" range-key="name">
+						<view class="picker fs-24 color-999999">
+							{{defaultTuiKuangIndex==0?'请选择退款原因':tuikuangCause[tuikuangIndex].name}}
+						</view>
+					</picker>
+		
+				</view>
+			</block>
+		
+			<!-- <view class="flex-row bg-white form-row ns-justify-content-space-between">
+			    <view >
+			        <text class="form-label">退货原因</text>
+			    </view>
+			    <picker mode="selector" bindchange="bindReturnChange" value="{{returnIndex}}" range="{{returnCause}}" range-key="name">
+			       <view class="picker fs-24 color-999999">
+			         {{defaultReturnIndex==0?'请选择退款原因':returnCause[returnIndex].name}}
+			       </view>
+			     </picker>
+				 
+			</view> -->
+		
+			<view class="flex-row bg-white form-row ns-justify-content-space-between">
+				<view class="flex align-center">
+					<text class="form-label">退款金额：</text>
+					<block wx:if="{{is_edit_price}}">
+						<input type="text" value="{{refund_price}}" bindblur="inputPrice" focus="{{is_edit_price}}" />
+					</block>
+					<block wx:else>
+						<text class="fs-26 color-FF0200">￥{{refund_price}}</text>
+					</block>
+				</view>
+				<view class="fs-24 color-999999" bindtap="editPrice">
+					修改
+				</view>
+			</view>
+			<view class="bg-white form-row flex">
+				<view class="mb-20">
+					<text class="form-label">申请说明：</text>
+				</view>
+				<input type="text" bindinput="descInput" placeholder="选填" />
+				<!-- <view class="">
+			        <textarea style="width: 600rpx;padding: 20rpx;background: #F8F6F7;height: 180rpx;" rows="2" bindinput="descInput" data-type="1" placeholder="点击这里开始填写"></textarea>
+			    </view> -->
+			</view>
+		</view>
+		
+		<view class="mb-20 public-box">
+			<view class="mb-20">
+				<text class="form-label">上传凭证（必填）</text>
+			</view>
+			<view class="image-list flex ns-wrap">
+				<view class="image-preview" wx:for="{{refund_data.pic_list}}" data-index="{{index}}" wx:key="{{item.id}}">
+					<text class="flex-x-center flex-y-center image-del" bindtap="deleteImage" data-type="1" data-index="{{index}}">×
+					</text>
+					<image src="{{item}}" style="width: 160rpx;height: 160rpx" mode="aspectFill"></image>
+				</view>
+				<view wx:if="{{!refund_data.pic_list||refund_data.pic_list.length<3}}" class="image-picker" bindtap="chooseImage"
+				 data-type="1">
+					<view style="width: 160rpx;height: 160rpx;background: #F0EEEF; text-align: center;line-height: 160rpx;">
+						<text class="iconfont icon-jiahao fs-40 color-fff"></text>
+					</view>
+				</view>
+			</view>
+			<view>{{warn}}</view>
+		</view>
+	</block>
+
+</view>
+
+<block wx:if="{{refund_type_id}}">
+	<form report-submit="true" bindsubmit="refundSubmit">
+		<view class="flex">
+			<navigator open-type="navigateBack" class='cancel-btn'>
+				<text>取消</text>
+			</navigator>
+			<button class='submit-btn' formType="submit">
+				<text>提交</text>
+			</button>
+		</view>
+	</form>
+</block>

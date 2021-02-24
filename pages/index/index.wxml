@@ -1,0 +1,336 @@
+<view class="page {{__page_classes}}">
+	<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<include src="/components/goods/specifications_model.wxml" />
+	<view class="cu-custom-index" id="header" style="position: fixed;z-index: 10;background:url({{header_bg}}) no-repeat;background-size: 100% 100%;">
+
+		<view class="pr" style="width: 100%;height: 100%;padding: 0 25rpx 24rpx;background:rgba(0,0,0,0.5);">
+
+			<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding: 0 24rpx;padding-top:{{statusBar}}px;">
+				<view></view>
+				<view class="fs-36 text-bold color-fff">{{bar_title}}</view>
+				<view></view>
+			</view>
+			<view class="flex ns-text-center align-center" style="position: absolute;right: 25rpx;bottom: 30rpx;">
+				<!-- <view style="margin-right: 25rpx;color: #fff;padding-top: 10rpx;" bindtap="toSeller" wx:if="{{(role=='seller'||role=='shoper') && is_shoper}}">
+					<view class="iconfont icon-UI_icon2_houtaiguanli1 fs-30 header-icon"></view>
+					<view class=" fs-20">后台</view>
+				</view>
+				<button wx:if="{{role!='shoper'}}" open-type="share" style="padding: 0;line-height: 1;color: #fff;background-color: rgba(0,0,0,0);padding-top: 2rpx;border-radius: 0rpx;"
+				 data-id='-1'>
+					<view class="iconfont icon-fenxiang fs-30 header-icon"></view>
+					<view class="fs-20" style="margin-top: 5rpx;">分享</view>
+				</button>
+				<button wx:if="{{role=='shoper'}}" bindtap="showShareModal" style="padding: 0;line-height: 1;color: #fff;background-color: rgba(0,0,0,0);padding-top: 2rpx;border-radius: 0rpx;">
+					<view class="iconfont icon-fenxiang fs-30 header-icon"></view>
+					<view class="fs-20" style="margin-top: 5rpx;">分享</view>
+				</button> -->
+				<navigator url="/member/homePage/homePage" class="call-shoper flex align-center ml-16">
+					<view class="iconfont icon-weixin call-shoper-bg fs-20"></view>
+					<view class="fs-24 color-fff">联系我</view>
+				</navigator>
+			</view>
+			<view class="headerShop flex align-center">
+				<image wx:if="{{mch.logo}}" src="{{mch.logo}}" class="slide-image pull-left" />
+				<image wx:elif="{{mch.user.avatar_url}}" src="{{mch.user.avatar_url?mch.user.avatar_url:user.avatar_url}}" class="slide-image pull-left" />
+				<block wx:if="{{mch.desc && mch.desc!=''}}">
+					<view class='headInfo' style="margin-top: 4rpx;">
+						<view wx:if="{{mch.name}}" class='font_blod fs-36'>{{filters.substring(mch.name,11)}}</view>
+						<view class="describe fs-24 mt-10">{{mch.desc}}</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class='headInfo mt-20'>
+						<view wx:if="{{mch.name}}" class='font_blod fs-32'>{{filters.substring(mch.name,11)}}</view>
+						<view class="describe fs-24 mt-15 flex">
+							同样的钱 更好的货 同样的货 更低的钱
+							<!-- <view class="desc-box">品牌正品</view>
+							<view class="desc-box">官方客服</view>
+							<view class="desc-box">超低折扣</view> -->
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+	<view class="cu-custom-index" style="width: 100%;height:{{headerHeigh}}px;">
+	</view>
+	<!-- <view class="header-footer">—— 同样的钱\r\t更好的货\r\t\r\t同样的货\r\t更好的钱 ——</view> -->
+	<!-- <include src="/components/goods/specifications_model.wxml" /> -->
+	<!-- 到顶部按钮 -->
+	<include src="/components/toTop/toTop"></include>
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{member_show_Menmodal && congratulations_img}}" bindtap="reject">
+		<!-- <view wx:if="{{memberCode == 1}}" class="get-card-modal-main pr" style="background:url({{congratulations_img}}) no-repeat;background-size: 750rpx 1334rpx;height: 1334rpx;margin-top: 5rpx;"> -->
+		<view wx:if="{{memberCode == 1}}" class="get-card-modal-main pr" style="background:url({{congratulations_img}}) no-repeat;background-size: 750rpx 1334rpx;height: 1334rpx;margin-top: 5rpx;width: 750rpx;">
+			<view class="text-center get-card-modal-text">
+				<view>你的人脉关系真好</view>
+				<view>请收下{{Memberlist.userCount}}位会员帮你赚到的</view>
+				<view>
+					{{Memberlist.subsidy}}元购物津贴
+				</view>
+			</view>
+			<view class="flex-x-center" style="margin-top:39rpx;margin-bottom:67rpx;height: 92rpx;">
+				<view class="imgList" wx:for="{{list}}"
+				 wx:key="key" wx:if="{{index < 5}}" style="{{index==0?'':'margin-left: -30rpx;'}}">
+					<image class="imgIndex bg-white" src="{{item.user.avatar_url}}" wx:if="{{index < 4}}"  />
+					<view class="imgIndex pr" style="color: #AF3324;font-size: 50rpx;line-height: 82rpx;text-align: center;z-index: 10;background-color: #fff;" wx:if="{{index > 3}}">···</view>
+				</view>
+			</view>
+			<view class="text-center txtPublic">
+				<view>津贴可以当钱花</view>
+				<view>成为会员立即领取</view>
+			</view>
+			<view class="flex-x-center">
+				<view class="reject" bindtap="reject">残忍拒绝</view>
+				<navigator url="/member/vipFirst/vipFirst?type=1" class="member">成为会员</navigator>
+			</view>
+		</view>
+		<view wx:if="{{memberCode == 2}}" class="get-card-modal-main pr" style="background:url({{sorry_img}}) no-repeat;background-size: 750rpx 1334rpx;height: 1334rpx;margin-top: 5rpx;width: 750rpx;">
+			<view class="text-center get-card-modal-text">
+				<view>在你离开的这些日子</view>
+				<view>错失了{{Memberlist.userCount}}位会员帮你赚到的</view>
+				<view>
+					{{Memberlist.subsidy}}元购物津贴
+				</view>
+			</view>
+			<view class="flex-x-center" style="margin-top:39rpx;margin-bottom:67rpx;height: 92rpx;">
+				<view class="imgList" wx:for="{{list}}"
+				 wx:key="key" wx:if="{{index < 5}}" style="{{index==0?'':'margin-left: -30rpx;'}}">
+					<image class="imgIndex" src="{{item.user.avatar_url}}" wx:if="{{index < 4}}"  />
+					<view class="imgIndex" style="color: #AF3324;font-size: 50rpx;line-height: 82rpx;text-align: center;" wx:if="{{index > 3}}">···</view>
+				</view>
+			</view>
+			<view class="text-center txtPublic">
+				<view>津贴可以当钱花</view>
+				<view>成为会员立即领取</view>
+			</view>
+			<view class="flex-x-center">
+				<view class="reject" bindtap="reject">残忍拒绝</view>
+				<navigator url="/member/vipFirst/vipFirst?type=1" class="member">成为会员</navigator>
+			</view>
+		</view>
+		<view wx:if="{{memberCode == 3}}" class="get-card-modal-main pr" style="background:url({{congratulations_img}}) no-repeat;background-size: 750rpx 1334rpx;height: 1334rpx;margin-top: 5rpx;width: 750rpx;">
+			<view class="text-center get-card-modal-text">
+				<view>你的人脉关系真好</view>
+				<view>请收下{{Memberlist.userCount}}位会员帮你赚到的</view>
+				<view>
+					{{Memberlist.subsidy}}元购物津贴
+				</view>
+			</view>
+			<view class="flex-x-center" style="margin-top:39rpx;margin-bottom:67rpx;height: 92rpx;">
+				<view class="imgList {{(index == 0 || index == 3) ? 'mt-10' : ''}} {{(index) ? 'ml-10' : ''}}" wx:for="{{list}}"
+				 wx:key="key">
+					<image class="imgIndex" src="{{list[index].user.avatar_url}}" />
+				</view>
+			</view>
+			<view class="text-center txtPublic">
+				<view>津贴可以当钱花</view>
+				<view>成为会员立即领取</view>
+			</view>
+		</view>
+	</view>
+	<!-- 领取会员卡遮罩 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_model && card_bg}}">
+		<view class="get-card-modal-main pr" style="background: url({{card_bg}}) no-repeat;background-size: 100% 100%;">
+			<view class="color-fff flex-x-center" style="font-size: 45rpx;">赚取津贴</view>
+			<view class="time-top-text fs-24 color-fff" style="margin-top: 75rpx;">
+				<view>免费送给好友一张三天会员卡，让好友享受到亲卡的会员价</view>
+				<view style="margin-top: 49rpx;">好友成功办理永久会员之后，您将获得10元津贴</view>
+			</view>
+			<button class="get-card-modal-btn" open-type="share" data-type="share_vip" bindtap="closeModalVip">立即分享</button>
+		</view>
+		<view
+		 class="iconfont icon-guanbi color-999999"
+		 style="font-size: 60rpx;margin-top: 70rpx;"
+		 bindtap="closeModalVip"
+		></view>
+	</view>
+	<view class="index-body after-navber" style="padding-bottom: 120rpx;">
+		<!-- 直播 -->
+		<!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{roomId}}&custom_params={{customParams}}" class="live-box">
+			<image style="width: 185rpx;height: 188rpx;" src="image/icon-live.png"></image>
+		</navigator> -->
+		<!-- 会员入口 -->
+		<block >
+		<!-- <block wx:if="{{true}}"> -->
+			<block wx:if="{{change_xq}}">
+				<button bindtap="showModalVip" class="vip-box color-fff text-center fs-20" style="background: url({{bg_pic}}) no-repeat;background-size: 216rpx 168rpx;width: 216rpx;height: 168rpx;">
+				</button>
+			</block>
+			<block wx:else>
+				<navigator url="{{vipUrl}}" class="vip-box color-fff text-center fs-20" style="background: url({{bg_pic}}) no-repeat;background-size: 180rpx 169rpx;width: 180rpx;height: 169rpx;">
+					{{vip_text}}
+				</navigator>
+			</block>
+		</block>
+		<view class="share-modal {{share_modal_active}} {{__device}}" catchtouchmove="{{true}}" bindtap="shareModalClose">
+			<view class="share-modal-body {{__device}}" catchtap="shop">
+				<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+				<view class="flex-row">
+					<view class="flex-grow-1 flex-x-center">
+						<button open-type="share" class="share-bottom" style='height:100%;' data-id='-1'>
+							<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+							<view>分享给好友</view>
+						</button>
+					</view>
+					<view class="flex-grow-1 flex-x-center">
+						<view bindtap="shareShop" class="share-bottom">
+							<text class="iconfont icon-dianpuma color-fff" style="font-size: 50rpx;"></text>
+							<view>生成店铺码</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 生成店铺码 -->
+		<view class='flex-y-center' style='width:{{x}}px;height:{{y}}px;position: fixed;top: 0;background: rgba(0, 0, 0, 0.4);z-index: 999;'
+		 wx:if="{{shopShow}}" bindtap='closeShop' catchtouchmove="{{true}}">
+			<view class='shareShop'>
+				<view>
+					<view class='shopHead'>
+						<image src="{{mch.user.avatar_url}}" class="shopHeadImg" />
+						<view class='font_blod'>{{mch.name?mch.name:mch.user.nickname}}</view>
+						<view class="tips">邀请您来这里逛逛呀～</view>
+					</view>
+					<!-- 小程序码 -->
+					<view class='shopCode' style='height:370rpx'>
+						<image class="appcode-img" src="{{codeImg.qrcode_pic}}" />
+					</view>
+				</view>
+				<view class='flex shopBottom flex-x-center'>
+					<view class="flex1" style="color: #c11111" catchtap="downImg">保存图片</view>
+					<icon type="clear" size="40" color="#fff" class="shop-close" bindtap='closeShop' />
+				</view>
+			</view>
+		</view>
+		<!-- 新订单提示 -->
+		<import src="/components/common/index" />
+		<!-- <template is="buy-data" data="{{buy: buy}}" /> -->
+		<!-- 活动弹窗 -->
+		<!-- <view class="act-modal {{boxShow?'show':''}}" catchtouchmove="ture" wx:if="{{boxShow}}">
+			<view class="act-modal-pic flex-y-center flex-x-center">
+				<view class="act-modal-bg" bindtap="closeActModal"></view>
+				<view style="z-index:9">
+				</view>
+			</view>
+		</view> -->
+		<!-- 头部 -->
+		<view>
+			<!-- <view class="friends clear">
+				<view class="pull-left">有<span>{{module_list.login_num?module_list.login_num:''}}</span>位好友逛过</view>
+				<view class="pull-left flex-row goods-type">
+					<scroll-view scroll-x="true" style="width:100%;">
+						<view class="flex-grow-1" wx:for="{{module_list.loginer}}" wx:key="key">
+							<image src="{{item.avatar_url}}" wx:key="{{item.id}}"></image>
+						</view>
+					</scroll-view>
+				</view>
+			</view> -->
+			<view class="ns-text-xs " style="padding-bottom: 10rpx;padding-top: 10rpx;">
+				<view style="height: 36rpx;">
+					<swiper autoplay="true" interval="3000" duration="1000" style="height: 36rpx !important;" vertical="true"
+					 easing-function="linear" circular="true">
+						<swiper-item wx:for="{{module_list.msg}}" wx:key="key" catchtouchmove="stopTouchMove">
+							<view class="flex align-center" wx:if="{{module_list.msg.length>0}}">
+								<view>
+									<view style="width:36rpx;height:36rpx;color: #FFC901;background-color: #fff;" class="iconfont icon-laba round text-center"></view>
+								</view>
+								<view class="color-999999 ns-padding-horizontal-xs">{{item.title}}</view>
+								<rich-text class="color-999999" nodes="{{item.content}}"></rich-text>
+							</view>
+						</swiper-item>
+					</swiper>
+				</view>
+			</view>
+
+			<!-- 轮播图 -->
+			<block wx:for="{{module_list}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+				<block wx:if="{{index == 'banner'}}">
+					<template is="banner" data="{{banner_list:module_list.banner,item:item}}" />
+				</block>
+			</block>
+
+			<!-- 搜索 -->
+			<view class="cu-bar search mb-24" style="margin-top: 23rpx;">
+				<navigator url="/pages/newSearch/newSearch" class="search-form round flex justify-between" style="border-radius: 28rpx;height: 56rpx;background: #fff;line-height: 56rpx; margin: 0;border: 2rpx solid #FFC330;">
+					<view class="flex">
+						<text class="cuIcon-search fs-30" style="color: #FFC330;"></text>
+						<text style="color:#999;font-size:26rpx">请输入搜索关键字</text>
+					</view>
+					<view class="sousuo-btn fs-26 color-fff">搜索</view>
+				</navigator>
+			</view>
+			<!-- 获取手机号 -->
+			<!-- <button class="cu-btn bg-blue round" open-type="getPhoneNumber" bindgetphonenumber="getTel">授权手机号</button> -->
+			<view class="flex text-center ns-wrap" wx:if="{{jxNavList.length>0}}" style="padding: 48rpx 0;">
+				<navigator url="{{item.page_url}}" style="width: 25%;" wx:for="{{jxNavList}}" wx:key='id'>
+					<view style="width: 80rpx;height: 80rpx;margin: auto;">
+						<image style="width: 100%;height: 100%;background-color: #fff;" mode="aspectFill" src="{{item.pic_url}}"></image>
+					</view>
+					<view class="fs-26 color-333333 mt-10">{{item.name}}</view>
+				</navigator>
+			</view>
+			<!-- <view class="address-box">
+				<navigator url="/pages/groupPickUp/groupPickUp?id={{groupId}}" hover-class="none" class="flex align-center justify-between" wx:if="{{groupList.length>0}}">
+					<view class="flex align-center">
+						<view class="iconfont icon-f-location fs-40 color-489A19"></view>
+						<view class="ml-20 ns-text-limit fs-30 color-666666">{{pickAddress?pickAddress.address:'请选择收获地址'}}</view>
+					</view>
+					<view class="iconfont icon-jinru"></view>
+				</navigator>
+				<view class="flex align-center" wx:if="{{groupNotice}}">
+					<view class="iconfont icon-f-location fs-40 color-489A19"></view>
+					<view class="fs-30 color-666666 ml-20 ns-text-limit">{{groupNotice}}</view>
+				</view>
+			</view> -->
+			<block>
+				<template is="groupBuy" data="{{groupList:groupList,groupId:groupId}}"></template>
+			</block>
+			<block>
+				<template is="privateList" data="{{privateList:privateList}}"></template>
+			</block>
+			<block wx:if="{{newActsList.length > 0}}">
+				<template is="material" data="{{newActsList:newActsList}}" />
+				<!-- <template is="goods" data="{{__wxapp_img:__wxapp_img,qingcang:module_list.huodongs,item:item,role:role}}" /> -->
+				<!-- 店长推荐 -->
+			</block>
+		</view>
+		<block wx:for="{{module_list}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+			<!-- <block>
+				<template is="pinpai" data="{{role:role}}"></template>
+			</block> -->
+			<!-- 清仓 -->
+			<block wx:if="{{index == 'huodongs'}}">
+				<template is="qingcang" data="{{__wxapp_img:__wxapp_img,qingcang:module_list.huodongs,item:item,role:role}}" />
+				<!-- <template is="goods" data="{{__wxapp_img:__wxapp_img,qingcang:module_list.huodongs,item:item,role:role}}" /> -->
+				<!-- 店长推荐 -->
+			</block>
+
+			<block wx:elif="{{index == 'miaosha'}}">
+				<template is="miaosha" data="{{__wxapp_img:__wxapp_img,miaosha:module_list.miaosha,item:item,role:role}}" />
+			</block>
+			<!-- <block wx:elif="{{index == 'pintuan'}}">
+				<template is="pintuan" data="{{__wxapp_img:__wxapp_img,pintuan:module_list.pintuan,item:item,role:role}}" />
+			</block> -->
+		</block>
+		<!-- 首页广告 -->
+		<!-- <block wx:if="{{act_modal_list && act_modal_list.length > 0}}">
+            <template is="act-modal" data="{{__wxapp_img:__wxapp_img,act_modal_list:act_modal_list}}" />
+        </block> -->
+		<!-- 逛一逛 -->
+		<!-- <navigator url="/pages/cat/cat"> -->
+		<!-- <navigator url="/pages/guanyiguan/guanyiguan">
+          <view class="seeMore">
+            <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/walk.png"></image>
+          </view>
+        </navigator> -->
+		<!-- 上拉触底 -->
+		<!-- <view class="pullBottom" wx:if="{{onUp}}">
+          <view>不过瘾？更多好货逛一逛</view>
+           <navigator url="/pages/guanyiguan/guanyiguan"><view>立即前往</view></navigator>
+        </view> -->
+		<view class="flex-x-center ns-padding-bottom-sm fs-24 color-999999 ns-padding-top-sm" wx:if="{{is_no_more}}">别拉啦～到底啦</view>
+	</view>
+	<include src="/components/footer/footer" />
+</view>

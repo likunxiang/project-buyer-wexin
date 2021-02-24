@@ -1,0 +1,44 @@
+.downLoadwx{
+  position: fixed;
+  width:100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9999;
+  color: #333;
+  top:0;
+  left:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.downLoadwx .bg{
+  width: 400rpx;
+height: 450rpx;
+background: #FFFFFF;
+border-radius: 40rpx;
+
+}
+.downLoadwx .bg image{
+  display: block;
+  width: 180rpx;
+  height:165rpx;
+  margin: -35rpx auto 35rpx auto;
+}
+.downLoadwx .bg .text{
+  color: #333;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 50rpx;
+}
+.downLoadwx .bg .btn{
+  text-align: center;
+  width: 240rpx;
+height: 88rpx;
+background: #FF5028;
+box-shadow: 0rpx 20rpx 30rpx 0rpx rgba(255, 79, 39, 0.2);
+border-radius: 44rpx;
+font-size: 32rpx;
+color: #FFFFFF;
+line-height: 88rpx;
+margin: 40rpx auto 0 auto;
+}

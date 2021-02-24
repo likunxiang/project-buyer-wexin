@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "自营商品",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}

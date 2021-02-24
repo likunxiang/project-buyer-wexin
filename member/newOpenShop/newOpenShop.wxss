@@ -1,0 +1,48 @@
+/* pages/newOpenShop/newOpenShop.wxss */
+page {
+	height: 100%;
+	background:rgba(207,207,207,0.33);
+}
+.header {
+	width: 100%;
+	height: 330rpx;
+	background-color: #ccc;
+}
+.page {
+	min-height: 100%;
+	padding-bottom: 226rpx;
+}
+.footer {
+	position: absolute;
+	padding-top: 32rpx;
+	padding-bottom: 51rpx;
+	bottom: 0rpx;
+	left: 40rpx;
+	right: 40rpx;
+}
+.footer-btn {
+	width: 670rpx;
+	height: 78rpx;
+	line-height: 78rpx;
+	background-color: #F49E3A;
+	font-size: 30rpx;
+	color: #FFFFFF;
+	text-align: center;
+}
+.mobile-btn {
+	width: 200rpx;
+	height: 50rpx;
+	line-height: 50rpx;
+	text-align: center;
+	border-radius: 31rpx;
+	background-color: #D8D8D8;
+}
+.yanzheng-btn {
+	width: 160rpx;
+	height: 50rpx;
+	line-height: 50rpx;
+	background:rgba(255,255,255,1);
+	border-radius:31rpx;
+	text-align: center;
+	border:2rpx solid rgba(151,151,151,1);
+}

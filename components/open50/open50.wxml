@@ -1,0 +1,8 @@
+<view wx:if="{{is_show_open50 == 0}}" class="open-50" bindtap="closeToastMch" catchtouchmove="preventTouchMove">
+	<view class="bg pr" hover-stop-propagation='true' catchtap="openToast" style="background: url({{openImg}}) no-repeat;background-size: 100% 100%;">
+		<view class="text-center" style="position: absolute;bottom: 50rpx;width: 750rpx;">
+			<view class="text">恭喜您，开店成功</view>
+			<view class="btn" catchtap="closeToastMch1">确定</view>
+		</view>
+	</view>
+</view>

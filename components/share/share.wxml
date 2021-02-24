@@ -1,0 +1,73 @@
+<view class="share-modal {{share_modal_active}} {{__device}}" catchtouchmove="{{true}}" bindtap="shareModalClose" wx:if="{{true}}">
+	<view class="share-modal-body {{__device}}" catchtap="shop">
+		<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+		<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+		        <view class="tips">收益仅自己可见</view> -->
+		<view class="flex-row">
+			<view class="flex-grow-1 flex-x-center">
+				<button open-type="share" class="share-bottom" style='height:100%;'>
+					<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+					<view>分享给好友</view>
+				</button>
+			</view>
+			<view class="flex-grow-1 flex-x-center">
+				<view bindtap="getGoodsQrcode" class="share-bottom">
+					<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+					<view>生成商品海报</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+	</view>
+</view>
+
+<!-- 生成海报 -->
+<view class="goods-qrcode-modal {{goods_qrcode_active}} flex-y-center" catchtouchmove="{{true}}" bindtap="goodsQrcodeClose" wx:if="{{share_type == 'code'}}">
+	<view class="goods-qrcode-body flex-col" catchtap="shop">
+		<view class="flex-grow-1" style="position: relative">
+			<view style="position: absolute;left: 0;top:0;width: 100%;height: 100%;">
+				<view class="goods-qrcode-box">
+					<view class="goods-qrcode-loading flex-x-center flex-y-center" wx:if="{{!goods_qrcode}}">
+						<view class="flex-x-center flex-col">
+							<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+							<view style="color: #888">海报生成中</view>
+						</view>
+					</view>
+					<image bindtap="goodsQrcodeClick" mode="aspectFill" class="goods-qrcode {{goods_qrcode?'active':''}}" data-src="{{goods_qrcode}}"
+					 src="{{goods_qrcode}}"></image>
+				</view>
+			</view>
+		</view>
+		<view class="flex-grow-0 flex-col flex-x-center" style="padding-top: 50rpx;">
+			<view>
+				<button wx:if="{{goods_qrcode}}" bindtap="saveGoodsQrcode" class="share-btn">
+					保存图片
+				</button>
+				<button wx:else style="opacity: .4">保存图片</button>
+			</view>
+		</view>
+		<view class="goods-qrcode-close" bindtap="goodsQrcodeClose">
+			<image src="{{__wxapp_img.store.close2.url}}" style="width: 40rpx;height: 40rpx;display: block"></image>
+		</view>
+	</view>
+</view>
+<!-- 生成店铺码 -->
+<view class="goods-qrcode-modal {{goods_qrcode_active}} flex-y-center" catchtouchmove="{{true}}" bindtap="goodsQrcodeClose"  wx:if="{{share_type == 'onlyCode'}}">
+	<view class='shareShop'>
+		<view>
+			<view class='shopHead'>
+				<image src="{{mch.user.avatar_url}}" class="shopHeadImg" />
+				<view class='font_blod'>{{mch.name?mch.name:mch.user.nickname}}</view>
+				<view class="tipss">邀请您来这里逛逛呀～</view>
+			</view>
+			<!-- 小程序码 -->
+			<view class='shopCode' style='height:370rpx'>
+				<image class="appcode-img" src="{{goods_qrcode}}" />
+			</view>
+		</view>
+		<view class='flex shopBottom flex-x-center'>
+			<view class="flex1" style="color: #c11111" catchtap="saveGoodsQrcode">保存图片</view>
+			<icon type="clear" size="40" color="#fff" class="shop-close" bindtap='closeShop' />
+		</view>
+	</view>
+</view>

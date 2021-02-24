@@ -1,0 +1,241 @@
+/* pages//private/privateGoods/privateGoods.wxss */
+.swiper {
+	width: 100%;
+	height: 725rpx;
+}
+.goodsHeader {
+	padding: 14rpx 30rpx;
+	padding-right: 18rpx;
+	width: 100%;
+	color: #fff;
+	background: #272D42;
+	font-size: 8pt;
+}
+.back {
+top: 50rpx;
+	left: 24rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 57rpx;
+  z-index: 999;
+  color: #000;
+}
+.goodsHeader .blod {
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 6rpx;
+}
+
+.goodsHeader .original_price {
+	margin-left: 6rpx;
+}
+
+.lable {
+	position: absolute;
+	left: 0rpx;
+	top: 128rpx;
+	width: 156rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	background: #FF9100;
+	border-radius: 0 44rpx 44rpx 0;
+}
+.share_btn_img {
+
+	top: 655rpx;
+	right: 30rpx;
+	width: 57rpx;
+	height: 57rpx;
+	background: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	line-height: 57rpx;
+	color: #fff;
+	z-index: 999;
+	border-radius: 50%;
+}
+.down_btn_img {
+
+	top: 580rpx;
+}
+
+
+.share-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.0);
+	z-index: 10000;
+	transform: translateY(100%);
+	transition: background 250ms;
+}
+
+.share-modal .share-modal-body {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	padding-top: 90rpx;
+	transform: translateY(100%);
+	transition: transform 250ms;
+	text-align: center;
+}
+
+.share-modal-body text.close {
+	width: 28rpx;
+	height: 28rpx;
+	right: 34rpx;
+	top: 34rpx;
+}
+
+.share-modal-body .shareGet {
+	color: #2c2c2c;
+	font-weight: 600;
+	font-size: 14px;
+	margin-bottom: 20rpx;
+}
+
+.share-modal-body .tips {
+	color: #D6D6D6;
+	font-size: 12px;
+	margin-bottom: 90rpx;
+}
+
+.shareGet span {
+	color: #c10000;
+	margin-left: 10rpx;
+}
+
+.share-modal.active {
+	transform: translateY(0);
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.share-modal.active .share-modal-body {
+	transform: translateY(0);
+}
+
+.share-modal .share-bottom {
+	text-align: center;
+	font-size: 9pt;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 70rpx;
+	line-height: inherit;
+	border: none;
+	background: none;
+	color: inherit;
+	font-family: inherit;
+	display: inline-block;
+}
+
+.share-modal .share-bottom:after {
+	display: none;
+}
+
+.share-modal .share-bottom text {
+	display: block;
+	width: 100rpx;
+	height: 100rpx;
+	margin: 0 auto;
+	margin-bottom: 30rpx;
+	border-radius: 50%;
+	line-height: 100rpx;
+	text-align: center;
+	background: #4CB202;
+}
+
+.share-modal .share-bottom:active image {
+	opacity: 0.7;
+}
+
+.share-modal .share-modal-close {
+	background: #fff;
+	height: 100rpx;
+	border-top: 1rpx solid #eee;
+}
+.goods-qrcode-modal {
+	position: fixed;
+  top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 0rpx 40rpx;
+  padding-top: 140rpx;
+	padding-bottom: 100rpx;
+	transform: translateY(100%);
+	opacity: 0.5;
+	transition: opacity 250ms;
+	visibility: hidden;
+}
+
+.goods-qrcode-body {
+	height: 1052rpx;
+  width: 608rpx;
+  margin: 0 auto;
+	border-radius: 10rpx;
+	position: relative;
+}
+
+.goods-qrcode-modal.active {
+	transform: translateY(0);
+	opacity: 1;
+	visibility: visible;
+}
+
+.goods-qrcode-modal .goods-qrcode-box {
+	height: 100%;
+	position: relative;
+	box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.15);
+}
+
+.goods-qrcode-modal .goods-qrcode-loading {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.goods-qrcode-modal .goods-qrcode {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 608rpx;
+	height: 924rpx;
+	background: #fff;
+	display: none;
+}
+
+.goods-qrcode-modal .goods-qrcode.active {
+	display: block;
+}
+
+.goods-qrcode-modal .goods-qrcode-close {
+	position: absolute;
+  right: 0rpx;
+	padding: 15rpx;
+}
+.footer {
+	position: fixed;
+	width: 100%;
+	left: 0rpx;
+	bottom: 0rpx;
+	background: #FFFFFF;
+	height: 100rpx;
+}
+.jump-box {
+	width: 290rpx;
+	padding-top: 20rpx;
+}
+.btn-box {
+	line-height: 100rpx;
+	color: #FFFFFF;
+	font-size: 30rpx;
+	font-weight: 500;
+}

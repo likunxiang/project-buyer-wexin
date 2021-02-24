@@ -1,0 +1,62 @@
+<view class="page pr">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<view class="body after-navber">
+
+
+		<view wx:if="{{show_no_data_tip}}" class="flex-x-center flex-y-center">
+			<view  style="padding-top: 185rpx;">
+				<view class="empty-address-icon text-center marginAuto ">
+					<view class="iconfont icon-dizhi1 color-fff" style="opacity: 0.5;font-size: 220rpx;"></view>
+				</view>
+				<view class="fs-30 color-999999" style="margin-top: 49rpx;">空空如也，您还没有收货地址哦～</view>
+			</view>
+			
+		</view>
+		<view class="address-list">
+			<view class="address-item" wx:for="{{address_list}}" wx:key="id">
+
+				<view class="userinfo flex-row fs-30 color-333333 ns-text-bold">
+					<view class="">{{item.name}}</view>
+					<view style="margin-left: 37rpx;">{{item.mobile}}</view>
+				</view>
+				<view class="address-detail fs-24 color-666666">收货地址：{{item.address}}</view>
+				<view class="flex-row">
+					<view class="flex-grow-1">
+						<view style="display: inline-block" wx:if="{{item.is_default==1}}">
+							<view class="default-address active flex-row flex-y-center">
+								<view style="width: 40rpx;height: 40rpx;margin-right: 12rpx;color: #FFC330;" class="iconfont icon-xuanzhong fs-40"></view>
+								<text class="color-2C2C2C">已设为默认</text>
+							</view>
+						</view>
+						<view style="display: inline-block" wx:else>
+							<view bindtap="setDefaultAddress" data-index="{{index}}" class="default-address flex-row flex-y-center align-center" wx:if="{{item.id>0}}">
+								<view style="height: 40rpx;">
+									<text class="iconfont icon-weixuanzhong fs-40 color-8D8D8D"></text>
+								</view>
+								<text class="color-2C2C2C">设为默认</text>
+							</view>
+							<view class="ns-text-bold" wx:if="{{item.id<0}}">店主代收</view>
+						</view>
+					</view>
+					<view class="flex-grow-0 flex-row" wx:if="{{item.id>0}}">
+						<navigator class="address-option fs-26 color-666666" url="/pages/address-edit/address-edit?id={{item.id}}">
+							编辑
+						</navigator>
+						<view bindtap="deleteAddress" class="address-option ns-align-items-flex-center fs-26 color-666666"
+						 data-index="{{index}}" data-id="{{item.id}}">
+							删除
+						</view>
+					</view>
+				</view>
+			</view>
+			
+		</view>
+
+	</view>
+	<view class="bottom-bar flex flex-x-center">
+		<!-- <view bindtap="getWechatAddress">使用微信地址</view> -->
+		<view class="add-btn" bindtap="toAddAdress">添加新地址</view>
+	</view>
+	<include src="/components/footer/footer" />
+</view>

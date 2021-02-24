@@ -1,0 +1,61 @@
+<!--添加品牌偏好-->
+<!--user/addLike/addLike.wxml-->
+<view class="addLike">
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view class="  go-back flex1" style="font-size:30rpx;color:#FFFFFF;" bindtap="returnPage">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">添加</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+	<view class="input-left">
+		<text class="iconfont icon-yonghu" style="color:#F76436;"></text>
+		顾客昵称
+	</view>
+	<view class="input-box">
+
+		<input class="input-right" disabled="{{true}}" bindtap="openChoose" data-type="{{1}}" class="input-right"
+		 placeholder="请选择顾客昵称" value="{{userValue}}" />
+	</view>
+	<view class="input-left">
+		<text class="iconfont icon-pinpai" style="color:#489A19;"></text>
+		品牌名称
+	</view>
+	<view class="input-box">
+
+		<input class="input-right" disabled="{{true}}" bindtap="openChoose" data-type="{{2}}" class="input-right"
+		 placeholder="请选择品牌名称" value="{{brandValue}}" />
+	</view>
+
+	<view class="bottom-box">
+		<navigator open-type="navigateBack" class="btn">取消</navigator>
+		<block wx:if="{{checkArrName1.length>0 || checkArrName2.length>0}}">
+			<view class="btn1" bindtap="addBrandUser" style="background-color: rgba(97, 97, 97, 1);">确定</view>
+		</block>
+		<block wx:else>
+			<view class="btn1" >确定</view>
+		</block>
+	</view>
+
+	<!-- 选择 -->
+	<Select
+	 wx:if="{{isShow}}"
+	 arrData="{{arrData}}"
+	 isShow="{{isShow}}"
+	 selectType="{{type}}"
+	 imgString="{{'image'}}"
+	 selectString="{{'name'}}"
+	 title="{{title}}"
+	 inputText="{{placeholder}}"
+	 checkArr="{{checkArr}}"
+	 checkArrName="{{checkArrName}}"
+	 bindquxiao="quxiao"
+	 bindbinddata="bindData"
+	 bindsearch="searchData"
+	 bindgetmore="getMore"
+	></Select>
+</view>

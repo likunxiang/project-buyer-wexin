@@ -1,0 +1,142 @@
+<!--pages/acitivity-order/acitivity-order.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page">
+	<view class="header bg-white">
+		<view class="big-nav-box">
+			<view class="big-nav flex">
+				<view class="flex1 big-nav-main {{bigNavIns==index?'big-nav-main-active':''}}" wx:for="{{bigNavList}}" wx:key="key"
+				 bindtap="changeBigNav" data-index="{{index}}">{{item}}</view>
+			</view>
+		</view>
+		<block wx:if="{{bigNavIns==0}}">
+			<view class="nav-box flex fs-30 color-999999 justify-between">
+				<view class=" ptb-24 {{kanNavIns==index?'color-333333 ns-text-bold pr':''}}" wx:for="{{kanNavList}}" wx:key="key"
+				 bindtap="changeKanNav" data-index="{{index}}">
+					<view>{{item}}</view>
+					<view wx:if="{{kanNavIns==index}}" class="under-line"></view>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="nav-box flex fs-30 color-999999 justify-between">
+				<view class=" ptb-24 {{pinNavIns==index?'color-333333 ns-text-bold pr':''}}" wx:for="{{pinNavList}}" wx:key="key"
+				 bindtap="changePinNav" data-index="{{index}}">
+					<view>{{item.name}}</view>
+					<view wx:if="{{pinNavIns==index}}" class="under-line"></view>
+				</view>
+			</view>
+		</block>
+	</view>
+	<scroll-view scroll-y="true" style="height: calc(100vh - 198rpx);">
+		<view class="p-24">
+			<view class='public-box mb-24' url='/pages/order-detail/order-detail?order_id={{item.order_id}}' wx:for='{{order_list}}'
+			 wx:key="index" bindtap='{{status==4?"goToRefundDetail":""}}' data-refund_id='{{item.order_refund_id}}'>
+				<view class='flex-row order-item-top flex-y-center mb-30' wx:if="{{status!=4}}">
+					<view class='flex-grow-1 order-status fs-24' style="color: #FF401A;">
+						{{item.status_name}}
+						<block wx:if="{{item.is_group==1 && item.status==1}}">，还差{{item.surplusGruopNum}}人成团</block>
+					</view>
+					<view class='flex-grow-1 order-time fs-24' style="color: #FF401A;" wx:if="{{(item.is_group==1 && item.status==1) || (item.status==1&&item.is_show_time)}}">
+						剩余{{item.limit_time.days}}天{{item.limit_time.hours}} ：{{item.limit_time.mins}}：{{item.limit_time.secs}}
+					</view>
+				</view>
+				<navigator url='/pages/order-detail/order-detail?order_id={{item.order_id}}' class='flex mb-30' wx:for='{{item.goods_list}}'
+				 wx:for-item="good" wx:key="id">
+					<view class='flex-grow-0 goods-image'>
+						<image style="width: 100%;height: 100%;border-radius: 14rpx;" src='{{good.goods_pic}}'></image>
+					</view>
+					<view class="flex-grow-1 flex justify-between">
+						<view style="width: 300rpx;">
+							<view class="good-name ns-text-limit2 fs-30 color-333333">{{good.goods_name}}</view>
+							<view class=" flex-row fs-24 color-999999 mt-16">
+								<block wx:for="{{good.attr_list}}" wx:for-item="attr" wx:key="id">
+									{{attr.attr_group_name}}:{{attr.attr_name}}
+								</block>
+							</view>
+						</view>
+
+						<view class="ns-text-right">
+							<view class="color-FF0200 fs-24">￥{{good.price}}</view>
+							<view class="fs-24 color-999999 mt-24">×{{good.num}}</view>
+							<!-- <view class="fs-24 color-F49E3A" wx:if="{{good.status_name}}">{{good.status_name}}</view> -->
+						</view>
+					</view>
+				</navigator>
+				<view class='flex justify-between'>
+					<view></view>
+					<view class='fs-24' wx:if="{{status != 4}}">合计：
+						<text class="fs-20">¥ <text class="fs-26">{{filters.priceStr(item.total_price)[0]}}.</text><text>{{filters.priceStr(item.total_price)[1]}}</text></text>
+					</view>
+				</view>
+				<view class="mt-30">
+					<block wx:if="{{status==4}}">
+						<view class='ns-padding-sm ns-flex ns-text-xs ns-justify-content-space-between'>
+							<view wx:if="{{item.refund_status==0}}">
+								<block wx:if="{{item.refund_type==1}}">
+									<block wx:if="{{item.is_agree==0}}">等待处理</block>
+									<block wx:else>
+										<block wx:if="{{item.is_user_send==0}}">待买家发货</block>
+										<block wx:else>等卖家待处理</block>
+									</block>
+								</block>
+								<block wx:else>等卖家待处理</block>
+							</view>
+							<view class='flex-grow-1' style='text-align:left;' wx:if="{{status==4&&item.refund_status==1}}">
+								同意已退款
+							</view>
+							<view class='flex-grow-1' style='text-align:left;' wx:if="{{status==4&&item.refund_status==2}}">
+								已同意换货
+							</view>
+							<view class='flex-grow-1' style='text-align:left;' wx:if="{{status==4&&item.refund_status==3}}">
+								已拒绝退换货
+							</view>
+							<view class='flex-grow-1 ns-text-right' wx:if="{{status==4 && item.refund_type==1}}">
+								退货退款：
+								<text>¥ {{item.refund_price}}</text>
+							</view>
+							<view class='flex-grow-1 ns-text-right' wx:if="{{status==4 && item.refund_type==2}}">
+								换货
+							</view>
+						</view>
+					</block>
+					<block wx:if="{{status!=4}}">
+						<view class='flex-row flex-y-center justify-end'>
+							<text wx:if="{{item.apply_delete==1&&status==0}}">取消申请中</text>
+							<view class=' frame-btn flex-gorw-0 flex-y-center fs-24' wx:if='{{item.apply_delete==0&&item.is_cancel==0 && item.status == 0&& item.status != 4&&item.is_send==0}}'
+							 bindtap="goToCancel" data-id="{{item.order_id}}">
+								取消
+							</view>
+							<!-- 到店自提核销二维码 -->
+							<!-- <view class=' red-btn flex-gorw-0 flex-y-center' wx:if='{{item.offline==2&&item.is_confirm==0&&item.status==3&&item.apply_delete==0}}' bindtap="getOfflineQrcode" data-id="{{item.order_no}}">
+			                    核销码
+			                </view> -->
+							<!--  待付款 start  -->
+							<view class=' red-btn flex-gorw-0 flex-y-center fs-24' wx:if='{{item.status==0&&item.is_cancel==0}}' bindtap="orderPay"
+							 data-id="{{item.order_id}}" data-index="{{index}}">
+								去支付
+							</view>
+							<!--  待付款 end  -->
+							<!-- <navigator class='flex-gorw-0 frame-btn fs-24' wx:if='{{item.status==1||item.status==2||item.status==3}}' url='/pages/order-detail/order-detail?order_id={{item.order_id}}' open-type='navigate'>
+			                    订单详情
+			                </navigator> -->
+							<view wx:if="{{item.express && item.is_send==1}}">
+								<navigator class="order-list-btn" url="/pages/express-detail/express-detail?id={{item.order_id}}">查看物流</navigator>
+							</view>
+							<view wx:if="{{item.is_send==1 && item.is_confirm==0 }}">
+								<view class="order-list-btn" bindtap="toConfirm" data-id="{{item.order_id}}">确认收货</view>
+							</view>
+							<!--  拼团中 start  -->
+							<view class='flex-gorw-0 red-btn fs-24' wx:if='{{(item.status==1||item.status==2||item.status==3)&&item.is_group==1}}'
+							 data-id='{{item.order_id}}' bindtap='goToGroup'>
+								拼团详情
+							</view>
+							<!--  拼团中 end  -->
+							<!-- <navigator class="order-option-btn frame-btn fs-24" url="/pages/pt/order-comment/order-comment?id={{item.order_id}}" wx:if="{{item.is_send==1&&item.is_confirm==1&&item.is_comment==0}}">评价
+			                </navigator> -->
+						</view>
+					</block>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>

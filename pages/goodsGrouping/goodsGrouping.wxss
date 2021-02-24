@@ -1,0 +1,40 @@
+/* pages/goodsGrouping/goodsGrouping.wxss */
+.page {
+	background-color: #F4F4F4;
+	padding-top: 158rpx;
+}
+.header {
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 25rpx 24rpx 0;
+}
+.add-cart-icon {
+	width: 50rpx;
+	height: 50rpx;
+	line-height: 50rpx;
+	text-align: center;
+	background-color: #FFC330;
+	border-radius: 50%;
+}
+.nav-tab {
+	padding: 25rpx 0;
+}
+.nav-active {
+	border-bottom: 8rpx solid #FFC901;
+}
+.under-line {
+	position: absolute;
+	left: 50%;
+	width: 44rpx;
+	height: 8rpx;
+	background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));
+	border-radius:4rpx;
+	margin-left: -22rpx;
+	bottom: -24rpx;
+}
+.main {
+	padding: 24rpx;
+}

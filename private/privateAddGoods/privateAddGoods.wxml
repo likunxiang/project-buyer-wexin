@@ -1,0 +1,173 @@
+<!--pages//private/privateAddGoods/privateAddGoods.wxml-->
+<view class="page pr">
+	<view class="p-20">
+		<view class="bg-white p-20 mb-20 fs-28 color-2C2C2C flex justify-between">
+			<view class=" flex">
+				<view class="ns-text-bold">商品名称</view>
+				<view class="color-9B9B9B">(必填)</view>
+			</view>
+			<view class="" style="min-width: 400rpx;">
+				<input class="ns-text-right" type="text" value="{{goodsName}}" maxlength="45" placeholder="请输入商品名称" bindblur="getGoodsName" />
+			</view>
+		</view>
+
+		<view class="plr-20 bg-white mb-20">
+			<view class="flex justify-between align-center {{picList.length>0?'border-bottom':''}}">
+				<view class=" flex fs-28 color-2C2C2C" style="line-height: 79rpx;">
+					<view class="ns-text-bold">商品主图</view>
+					<view class="color-9B9B9B">(必填)</view>
+				</view>
+				<button class="cu-btn bg-FF9100 sm fs-24 color-fff" bindtap="upPic">添加</button>
+			</view>
+			<view class="ptb-20" style="flex-wrap:wrap" wx:if="{{picList.length>0}}">
+				<scroll-view scroll-x="true" enable-flex="true" style="height: 150rpx;">
+					<view class="flex">
+						<view class="notice-pic pr" wx:for="{{picList}}">
+							<image class="notice-pic" mode="aspectFill" src="{{item}}" bindtap="viewPic" data-url="{{item}}"></image>
+							<view class="iconfont icon-guanbi1 pa bg-white" style="top: 0rpx;right: 0rpx;border-radius: 50%;overflow: hidden;"
+							 bindtap="delPic" data-index="{{index}}"></view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		
+		<view class="plr-20 bg-white mb-20">
+			<view class="flex justify-between align-center {{detailPicList.length>0?'border-bottom':''}}">
+				<view class=" flex fs-28 color-2C2C2C" style="line-height: 79rpx;">
+					<view class="ns-text-bold">详情图</view>
+					<view class="color-9B9B9B">(选填)</view>
+				</view>
+				<button class="cu-btn bg-FF9100 sm fs-24 color-fff" bindtap="upDetailPic">添加</button>
+			</view>
+			<view class="ptb-20" style="flex-wrap:wrap" wx:if="{{detailPicList.length>0}}">
+				<scroll-view scroll-x="true" enable-flex="true" style="height: 150rpx;">
+					<view class="flex">
+						<view class="notice-pic pr" wx:for="{{detailPicList}}">
+							<image class="notice-pic" mode="aspectFill" src="{{item}}" bindtap="viewPic" data-url="{{item}}"></image>
+							<view class="iconfont icon-guanbi1 pa bg-white" style="top: 0rpx;right: 0rpx;border-radius: 50%;overflow: hidden;"
+							 bindtap="delPic" data-index="{{index}}"></view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+
+		<view class="private-notice bg-white mb-20 plr-20">
+			<view class="ptb-20 border-bottom fs-28 color-2C2C2C flex">
+				<view class="ns-text-bold">简介描述</view>
+				<view class="color-9B9B9B">(选填)</view>
+			</view>
+			<block wx:if="{{!is_input}}">
+				<view class="ptb-20" bindtap="inputText" style="height: 120rpx;{{goodsDesc?'color: #2c2c2c;':'color: #C8C7C7;'}}">{{goodsDesc?goodsDesc:'添加商品的卖点,优势,规格等'}}</view>
+			</block>
+			<block wx:else>
+				<view class="ptb-20 fs-24">
+					<textarea focus="{{focus}}" bindblur="getGoodsDesc" value="{{goodsDesc}}" class="fs-28 color-2C2C2C" maxlength="300" placeholder-style="color: #C8C7C7;" placeholder="添加商品的卖点,优势,规格等"></textarea>
+				</view>
+			</block>
+		</view>
+
+		<view class="msg plr-20 bg-white">
+			<view class="ptb-20 flex fs-28 border-bottom align-center" bindtap="openClassify">
+				<view class="color-2C2C2C flex" style="width: 220rpx;">
+					<view class="ns-text-bold">商品分类</view>
+					<view class="color-9B9B9B">(必填)</view>
+				</view>
+				<block wx:if="{{showClassify.length>0}}">
+					<view class="flex1">
+						<text class="mr-10" wx:for="{{showClassify}}" wx:key="key">{{item}}</text>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="flex1">无</view>
+				</block>
+				<view class="iconfont icon-jinru fs-40" style="color: #C8C7C7;"></view>
+			</view>
+			<view class="ptb-20 flex fs-28 border-bottom">
+				<view class="color-2C2C2C flex" style="width: 220rpx;">
+					<view class="ns-text-bold">商品售价</view>
+					<view class="color-9B9B9B">(必填)</view>
+				</view>
+				<view class="flex1">
+					<input bindblur="getGoodsPrice" value="{{goodsPrice}}" type="text" style="width: 100%;" placeholder="无" />
+				</view>
+			</view>
+			<view class="ptb-20 flex fs-28 border-bottom">
+				<view class="color-2C2C2C flex" style="width: 220rpx;">
+					<view class="ns-text-bold">库存数量</view>
+					<view class="color-9B9B9B">(必填)</view>
+				</view>
+				<view class="flex1">
+					<input bindblur="getGoodsNum" type="text" value="{{goodsNum}}" style="width: 100%;" placeholder="无" />
+				</view>
+			</view>
+			<view class="ptb-20 flex fs-28" bindtap='opentips'>
+				<view class="color-2C2C2C flex" style="width: 220rpx;">
+					<view class="ns-text-bold">卖点标签</view>
+					<view class="color-9B9B9B">(选填)</view>
+				</view>
+				<block wx:if="{{showTips.length>0}}">
+					<view class="flex1">
+						<text class="mr-10" wx:for="{{showTips}}" wx:key="key">{{item}}</text>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="flex1">无</view>
+				</block>
+				<view class="iconfont icon-jinru fs-40" style="color: #C8C7C7;"></view>
+			</view>
+		</view>
+	</view>
+	<!-- 商品分类 -->
+	<view class="goods-classify-model" bindtap="closeClassify" wx:if="{{is_classify}}">
+		<view class="goods-classify-content" catchtap="stop">
+			<view class="flex-x-center fs-30 color-595959 ns-text-bold">商品分类</view>
+			<view class="" style="margin-top: 38rpx;height: 280rpx;">
+				<view class="flex ns-wrap">
+					<view class="classify-box fs-28 color-9B9B9B {{item.isChoose?'border-yellow':''}}" data-id="{{item.id}}" data-text="{{item.name}}" data-index="{{index}}" bindtap="chooseClassify" wx:for="{{classifyList}}"
+					 wx:key="key">{{item.name}}</view>
+				</view>
+			</view>
+			<view class="flex justify-between">
+				<navigator url="/private/privateGoodsClassify/privateGoodsClassify" class="fs-28 color-489A19">添加商品分类</navigator>
+				<view class="fs-28">最多选择3个</view>
+			</view>
+			<view class="mt-30 flex flex-x-center">
+				<!-- <view class="btn-box btn-box-white" bindtap="cancelClassify">取消</view> -->
+				<view class="btn-box" style="width: 670rpx;" bindtap="saveClassify">确定</view>
+			</view>
+		</view>
+	</view>
+	<!-- 卖点标签 -->
+	<view class="goods-classify-model" bindtap="closetips" wx:if="{{is_tips}}">
+		<view class="goods-classify-content" catchtap="stop">
+			<view class="flex-x-center fs-30 color-595959 ns-text-bold">卖点标签</view>
+			<view class="" style="margin-top: 18rpx;height: 340rpx;">
+				<view class="border-bottom p-20">
+					<input type="text" placeholder="请输入分类名称,最长10个字" maxlength="10" bindblur="inputTips" />
+				</view>
+				<view class=" plr-20">
+					<view class="flex" style="padding: 30rpx 0rpx;">
+						<view class="fs-30 color-2C2C2C " >常用标签</view>
+						<view class="mr-10 fs-30">(最多选择2个)</view>
+					</view>
+					
+					<view class="flex ns-wrap">
+						<view class="classify-box fs-28 color-9B9B9B {{item.isChoose?'border-yellow':''}}" data-text="{{item.name}}" data-index="{{index}}" bindtap="chooseTips" wx:for="{{tipsList}}"
+						 wx:key="key">{{item.name}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="mt-30 flex flex-x-center">
+				<!-- <view class="btn-box btn-box-white" bindtap="cancelTips">取消</view> -->
+				<view class="btn-box" style="width: 670rpx;" bindtap="saveTips">确定</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="footer flex justify-between">
+		<view class="btn-box btn-box-white" bindtap="submitGoods" data-status="0">暂不上架</view>
+		<view class="btn-box" bindtap="submitGoods" data-status="1">立即上架</view>
+	</view>
+</view>

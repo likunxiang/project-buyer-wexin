@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "品牌专场",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+  	"slide-icon": "/components/slideIcon/slideIcon"
+  },
+  "navigationStyle": "custom"
+}

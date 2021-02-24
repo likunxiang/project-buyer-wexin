@@ -1,0 +1,86 @@
+<!--pages//private/privateCart/privateCart.wxml-->
+
+<view class="page flex ns-column">
+	<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+	<view class="flex1">
+		<block wx:if="{{cartList.length<=0}}">
+			<view class="empty">
+				<view class="no-data-icon flex-y-center flex-x-center">
+					<image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/cart-bg.jpg"></image>
+				</view>
+				<view>购物车空空的</view>
+			</view>
+		</block>
+		<block wx:else>
+			<scroll-view scroll-y="true" style="height:calc(100vh - 100rpx);">
+				<view class="goods flex align-center" wx:for="{{cartList}}" wx:key="id">
+					<view class="iconfont {{item.is_sel==1?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40" data-index="{{index}}" data-id="{{item.cart_id}}"
+									 data-price="{{item.min_price}}" bindtap="chooseCart"></view>
+					<view style="width: 200rpx;height: 200rpx;margin-right: 27rpx;margin-left: 20rpx;">
+						<image style="width: 200rpx;height: 200rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+					</view>
+					<view class="flex1">
+						<view class="fs-24 color-595959" style="height: 90rpx;">{{item.goods_name}}</view>
+						
+						<block wx:if="{{item.goods_num>0}}">
+							<view class="flex justify-between align-center">
+								<view class="flex align-center">
+									<view class="fs-24 color-FF9100 mr-10">¥ {{item.goods_price}}</view>
+								</view>
+								<view class="flex align-center justify-between" style="height: 35rpx;background-color: #F2F2F2;">
+									<block wx:if="{{filters.parseInt(item.cart_num) > 0}}">
+										<view class="numbox flex-x-center flex-y-center" catchtap="reduceNum" data-index="{{index}}" data-id="{{item.goods_id}}" data-price="{{item.goods_price}}">
+											<view class="iconfont icon-jianshao fs-20"></view>
+										</view>
+									</block>
+									<block wx:else>
+										<view class="numbox flex-x-center flex-y-center numbox-no">
+											<view class="iconfont icon-jianshao fs-20"></view>
+										</view>
+									</block>
+									<view class="flex-x-center flex-y-center" style="width: 50rpx;text-align: center;">
+										<input style="width: 46rpx;text-align: center;" type="number" value="{{item.cart_num}}" bindblur="changeCartNum" data-index="{{index}}" data-id="{{item.goods_id}}"
+										 data-price="{{item.goods_price}}" />
+									</view>
+									<block wx:if="{{filters.parseInt(item.cart_num)>=item.goods_num}}">
+										<view class="numbox flex-x-center flex-y-center numbox-no" catchtap>
+											<view class="iconfont icon-tianjia fs-20  "></view>
+										</view>
+									</block>
+									<block wx:else>
+										<view class="numbox flex-x-center flex-y-center " catchtap="addNum" data-index="{{index}}" data-id="{{item.goods_id}}"
+										 data-price="{{item.goods_price}}">
+											<view class="iconfont icon-tianjia fs-20  "></view>
+										</view>
+									</block>
+								</view>
+								
+							</view>
+						</block>
+						<block wx:else>
+							<view class="flex justify-between align-center fs-24 color-FF9100">抱歉，这款商品库存不足</view>
+						</block>
+					</view>
+				</view>
+			</scroll-view>
+		</block>
+		
+	</view>
+	<view class="footer flex align-center">
+		<view class="flex align-center" style="padding-left: 30rpx;" bindtap="chooseAll">
+			<view class="iconfont {{is_all?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40 mr-10"></view>
+			<view>全选</view>
+		</view>
+		
+		<view class="flex1 fs-28" style="padding-left: 30rpx;">
+			<text class="color-595959">合计：</text>
+			<text class="color-FF9100">¥ {{total_price}}</text>
+		</view>
+		<block wx:if="{{total_price == 0}}">
+			<view class="cu-btn pay-btn bg-9B9B9B">下一步</view>
+		</block>
+		<block wx:else>
+			<view class="cu-btn pay-btn bg-FF9100" bindtap="toBasket">下一步</view>
+		</block>
+	</view>
+</view>

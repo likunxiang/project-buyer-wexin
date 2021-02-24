@@ -1,0 +1,4 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page p-24" wx:if="{{isPageShow}}">
+	<include src="/components/goods/goods_refund.wxml" />
+</view>

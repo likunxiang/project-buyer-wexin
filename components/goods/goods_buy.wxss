@@ -1,0 +1,131 @@
+.bar-bottom {
+
+	height: 110rpx;
+	width: 100%;
+
+
+}
+.service-tips {
+	position: absolute;
+	top: -180rpx;
+	left: -50rpx;
+	width:540rpx;
+	background:rgba(0,0,0,1);
+	opacity:0.8;
+	padding: 24rpx 32rpx;
+	border-radius: 20rpx;
+}
+.service-tips:after {
+	position: absolute;
+	bottom: -19rpx;
+	left: 70rpx;
+	content: '';
+	width: 0;
+	height: 0;
+	border-left: 20rpx solid transparent;
+	border-right: 20rpx solid transparent;
+	border-top: 20rpx solid rgba(0, 0, 0, 1);
+}
+
+.bar-bottom1 {
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	box-shadow: 0 0 3rpx rgba(0, 0, 0, 0.2);
+
+}
+
+.back {
+	top: 80rpx;
+	left: 24rpx;
+	width: 80rpx;
+	height: 80rpx;
+	line-height: 57rpx;
+	z-index: 999;
+	color: #000;
+}
+
+.bar-bottom-btn {
+	border: none;
+	background: #fff;
+	font-size: 0;
+	line-height: normal;
+	padding: 0;
+	margin: 0;
+	box-shadow: none;
+	border-radius: 0;
+	position: inherit;
+	/* border-left: 1rpx solid #e3e3e3; */
+	width: 110rpx;
+}
+
+.bar-bottom-btn:after {
+	display: none;
+}
+
+.bar-bottom-btn:first-child {
+	border-left: none;
+}
+
+.bar-bottom-btn.button-hover {
+	background: rgba(255, 255, 255, 0.85);
+}
+
+.bar-bottom-btn view {
+	text-align: center;
+	width: 100%;
+}
+
+.bar-bottom-btn image {
+	width: 56rpx;
+	height: 56rpx;
+	margin-bottom: 0rpx;
+}
+
+.bar-bottom-btn text {
+	font-size: 8pt;
+	color: #888;
+	display: block;
+}
+
+.bar-bottom .add-cart {
+	width: 180rpx;
+	height: 72rpx;
+	background: linear-gradient(-90deg, rgba(255, 55, 80, 1), rgba(255, 112, 6, 1));
+	border-radius: 36rpx;
+	color: #fff;
+}
+
+.bar-bottom .buy-now {
+	width: 180rpx;
+	height: 72rpx;
+	background: linear-gradient(-90deg, rgba(255, 197, 0, 1), rgba(255, 153, 2, 1));
+	border-radius: 36rpx;
+	color: #fff;
+}
+
+._negotiable {
+	height: 100%;
+	width: 100%;
+	background: none !important;
+	border: none !important;
+	border-radius: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: inherit !important;
+	font-family: inherit !important;
+	color: inherit !important;
+}
+
+._negotiable:before,
+._negotiable:after {
+	border-radius: 0 !important;
+	border: none !important;
+}
+
+button::after {
+	border: none
+}

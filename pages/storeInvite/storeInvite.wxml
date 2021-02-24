@@ -1,0 +1,21 @@
+<include src="/components/common/common" />
+<view class="managerBox pr" style="background-image: url({{to_mch_img}});">
+	<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+		<view class="backBtn" bindtap="goBack">
+			<text class="iconfont icon-zuojiantoubeifen"></text>
+		</view>
+		<view></view>
+		<view></view>
+	</view>
+	<!-- <view class="progress-box flex align-center">
+		<view class="cu-progress round flex-grow-1" style="background: #BC3534;border: 2rpx solid #FCE8C9;border-radius: 20rpx;height: 40rpx;width: 529rpx;">
+			<view class="fs-24" style="width:{{loading?member + '%':''}};background: #FCE8C9;color: #BC3534;border-radius: 20rpx;">{{member + '%'}}</view>
+		</view>
+		<view class="flex-grow-1 ml-16 fs-30 ns-text-bold" style="color: #FCE8C9;">{{member}}/50</view>
+	</view> -->
+	<view class="btn-box flex align-center justify-between">
+		<!-- <button open-type="share" class="shopBtn-empty">立即邀请会员</button> -->
+		<navigator url="/pages/index/index" open-type="redirect" class="shopBtn-empty shopBtn iconfont icon-shouye color-FFC330" style="width: 100rpx;margin-right: 20rpx;"></navigator>
+		<view class="shopBtn-empty shopBtn" bindtap="buyVipOrder">490元升级店主</view>
+	</view>
+</view>

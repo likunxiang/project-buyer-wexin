@@ -1,0 +1,35 @@
+<view wx:if="{{showToast}}" class="downLoadwx" bindtap="closeToast" catchtouchmove="preventTouchMove">
+  <view class="bg" hover-stop-propagation='true' catchtap="openToast">
+    <image src="{{showImg}}" ></image>
+    <view class="text">请上传微信</view>
+    <view class="text">方便顾客联系您</view>
+    <view class="btn" catchtap="toGo">马上去</view>
+  </view>
+</view>
+<!-- <block wx:if="{{show_get_tel}}"> -->
+<block wx:if="{{show_get_tel}}">
+    <view class='new-modal'>
+        <view class='new-modal-content'>
+            <view class='new-modal-header' style='padding:30rpx 0;line-height:60rpx;font-size:11pt;border-bottom: 1rpx solid #eee;'>上传微信需先绑定手机号</view>
+            <view class='new-modal-body' style='min-height:0;margin-bottom:0;'>
+                <view style="padding:32rpx 0 40rpx 0;text-align: center">
+                    <image wx:if="{{__platform == 'wx'}}" src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/login.jpg" style="width: 88rpx;height: 88rpx;"></image>
+                    <image wx:else src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/login.jpg" style="width: 88rpx;height: 88rpx;"></image>
+                </view>
+                <view style='padding:0 41rpx;'>
+                    <view class='flex-x-center' style='margin-bottom:40rpx;'>申请获取您微信绑定的手机号</view>
+                </view>
+                <view class='flex-x-center'>
+                    <view>
+                        <button style='background-color:#04be01;width:500rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;'  open-type="getPhoneNumber" bindgetphonenumber="getTel" class="btn new-modal-btn" hover-class="none">确认</button>
+                    </view>
+                </view>
+				<view class='flex-x-center'>
+				    <view>
+				        <button style='border:1px solid #ccc;width:500rpx;height:80rpx;line-height:80rpx;border-radius:80rpx;color:#ccc;margin-bottom:40rpx;' bindtap="closeTel" class="btn new-modal-btn"  >取消</button>
+				    </view>
+				</view>
+            </view>
+        </view>
+    </view>
+</block>

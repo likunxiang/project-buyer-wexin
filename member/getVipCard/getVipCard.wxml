@@ -1,0 +1,198 @@
+<!--pages/getVipCard/getVipCard.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<include src="/components/common/common" />
+<include src="/components/goods/specifications_model.wxml" />
+<view class="page">
+
+	<view class='nav' style="height:{{customBar}}px">
+		<view class='con' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+		</view>
+	</view>
+	<!-- 规则 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_model && card_bg}}">
+		<view class="get-card-modal-main pr" style="background: url({{card_bg}}) no-repeat;background-size: 100% 100%;">
+			<view class="color-fff flex-x-center" style="font-size: 45rpx;">活动规则</view>
+			<view class="time-top-text fs-24 color-fff" style="margin-top: 75rpx;">
+				<view>点击开始分享，参与「分享赚亲卡」分享越多，赚取亲卡天数越多，最多不超过21天</view>
+				<view style="margin-top: 50rpx;">活动期仅限3天，加油分享吧～</view>
+			</view>
+			<button class="get-card-modal-btn" bindtap="closeModal">确定</button>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;margin-top: 70rpx;" bindtap="closeModal"></view>
+	</view>
+	<!-- 领取会员卡遮罩 -->
+	<!-- <view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_modal}}">
+		<view class="get-card-modal-main pr" style="background: url(bg.png) no-repeat;background-size: 568rpx 760rpx;">
+			<view class="flex-x-center" style="">
+				<image class="vip-img"></image>
+			</view>
+			<view class="text-center get-card-modal-text">
+				<view>陈挽 送你一张会员卡</view>
+				<view>一起享超值商品</view>
+			</view>
+			<button class="get-card-modal-btn">立即领取</button>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;" bindtap="closeModal"></view>
+	</view> -->
+	<block wx:if="{{type == 1}}">
+		<view class="header text-center pr" style="padding-bottom: {{headerHeight}};">
+			<view>领取亲卡</view>
+			<view class="fs-24 color-fff text-center marginAuto" style="margin-top: 44rpx;width: 502rpx;">您的好友{{shareInfo.user.nickname}}向您传送一张会员卡，点击领取，您将获得三天会员资格，享受商城里丰富优质的会员商品</view>
+			<navigator hover-class="none" url="/pages/index/index">
+				<view class="to-gyg-icon iconfont icon--dianpu ns-text-bold" style="color: #2C2419;font-size: 50rpx;"></view>
+				<view class="fs-20 mt-16" style="color: #F3D9A8;">进店逛一逛</view>
+			</navigator>
+			<view class="flex justify-between" style="margin: 50rpx auto 0;">
+				<view bindtap="buyVipOrder" class="receive-btn buy-vip-btn">9.9元购亲卡</view>
+				<view class="receive-btn" bindtap="receiveVip">领取</view>
+			</view>
+			<view class="title fs-40 color-333333 ns-text-bold" wx:if="{{type==1 || share_type==0}}">会员专享商品 </view>
+		</view>
+	</block>
+	<block wx:else>
+		<block wx:if="{{share_type == 1 && shareList.length!=0}}">
+			<view class="header text-center pr" style="padding-bottom: {{headerHeight}};">
+				<view class="pr">
+					<view>分享赚亲卡</view>
+					<view class="rule-btn" bindtap="showModel">规则</view>
+				</view>
+				<view class="fs-30 color-fff text-center day-num flex-x-center align-center" style="margin-top: 43rpx;">
+					<view>累计赚</view>
+					<view class="day-num-box">{{vipDay}}</view>
+					<view>天</view>
+				</view>
+				<view class="fs-24 color-fff text-center" wx:if="{{daojishi}}">活动倒计时：{{sd}}天{{sh}}时{{sm}}分</view>
+				<view class="flex justify-between" style="margin: 50rpx auto 0;">
+					<view bindtap="buyVipOrder" class="receive-btn buy-vip-btn">9.9元购亲卡</view>
+					<button class="receive-btn" open-type="share" style="margin: 0;">继续分享</button>
+				</view>
+			</view>
+			<view class="title fs-40 color-333333 ns-text-bold" wx:if="{{type==1}}">会员专享商品</view>
+		</block>
+		<block wx:else>
+			<view class="header pr" style="padding-bottom: {{headerHeight}};height: calc(100vh - {{customBar}}px) ;">
+				<view class="pr text-center">
+					<view>分享赚亲卡</view>
+				</view>
+				<view class="rule-box fs-24 color-fff" style="margin: 47rpx auto 0;">
+					<view>1.免费送给好友一张三天会员卡，让好友享受到亲铺的会员价</view>
+					<view style="margin-top: 40rpx;">2.每个在分享活动期间成功领取会员的好友，您将获得三天会员资格</view>
+					<view style="margin-top: 40rpx;">3.点击“立即分享”即可马上参与活动</view>
+					<view style="margin-top: 40rpx;">4.三天内转发好友将获得最高21天会员资格，赶快分享吧～</view>
+				</view>
+				<view class=" flex align-center justify-between" style="background: url({{share_step}}) no-repeat;background-size: 750rpx 204rpx;width: 750rpx;height: 204rpx;margin: 51rpx 0rpx 51rpx -24rpx;">
+				</view>
+				<view class="flex justify-between" style="margin: auto;">
+					<view bindtap="buyVipOrder" class="receive-btn buy-vip-btn">9.9元购亲卡</view>
+					<button class="receive-btn" open-type="share" style="margin: 0;">立即分享</button>
+				</view>
+			</view>
+		</block>
+	</block>
+
+	<!-- <block wx:else>
+		<view class="header text-center pr" style="padding-bottom: {{headerHeight}};">
+
+			<block wx:if="{{type==1}}">
+				<view>领取亲卡</view>
+				<view class="fs-24 color-fff text-center marginAuto" style="margin-top: 44rpx;width: 502rpx;">您的好友{{shareInfo.user.nickname}}向您传送一张会员卡，点击领取，您将获得三天会员资格，享受亲铺商城里丰富优质的会员商品</view>
+				<view>
+					<view class="to-gyg-icon iconfont icon--dianpu ns-text-bold" style="color: #2C2419;font-size: 50rpx;"></view>
+					<view class="fs-20 mt-16" style="color: #F3D9A8;">进店逛一逛</view>
+				</view>
+				<view class="flex justify-between" style="margin: 50rpx auto 0;">
+					<navigator url="/member/vipFirst/vipFirst?type=1" class="receive-btn buy-vip-btn">9.9元购会员</navigator>
+					<view class="receive-btn" bindtap="receiveVip">领取</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="pr">
+					<view>分享赚亲卡</view>
+					<view class="rule-btn" bindtap="showModel">规则</view>
+				</view>
+				<block wx:if="{{share_type==0}}">
+					<view class="fs-24 color-fff text-left" style="margin-top: 43rpx;">点击开始分享，即可参与「分享赚亲卡」活动。三天内转发好友，将获得最高21天会员资格，赶快分享吧~</view>
+					<button open-type="share" class="invite-btn">开始分享</button>
+					<button bindtap="goGYG" class="invite-btn invite-btn-empty">去逛一逛</button>
+				</block>
+				<block wx:else>
+					<view class="fs-30 color-fff text-center day-num flex-x-center align-center" style="margin-top: 43rpx;">
+						<view>累计赚</view>
+						<view class="day-num-box">{{vipDay}}</view>
+						<view>天</view>
+					</view>
+					<view class="flex align-center justify-between" style="padding: 0 56rpx;">
+						<view class="fs-24 color-fff text-center" wx:if="{{daojishi}}">活动倒计时：{{sd}}天{{sh}}时{{sm}}分</view>
+						<navigator url="/member/vipFirst/vipFirst?type=1" hover-class="none" class="fs-24 color-fff text-center" style="text-decoration: underline;color: #F4DAA9;">支付9.9元，成为永久会员</navigator>
+					</view>
+					<view class="flex justify-between" style="margin: 50rpx auto 0;">
+						<navigator url="/member/vipFirst/vipFirst?type=1" class="receive-btn buy-vip-btn">9.9元购会员</navigator>
+						<button class="receive-btn" open-type="share">继续分享</button>
+					</view>
+					<button class="invite-btn" open-type="share">距离成功仅剩一步，继续邀请</button>
+				</block>
+
+			</block>
+			<view class="title fs-40 color-333333 ns-text-bold" wx:if="{{type==1 || share_type==0}}">会员专享商品</view>
+		</view> -->
+	<block wx:if="{{type==1}}">
+		<view class="bg-white pr">
+			<view class="under-line"></view>
+			<view class=" flex ns-wrap justify-between p-24">
+				<navigator url="/pages/goods/goods?id={{goods.id}}&from={{goods.from}}" hover-class="none" class="fs-24 pb-20 {{(index+1)%3==0?'':'mr-15'}}"
+				 style="width: 224rpx;" wx:for="{{vipGoodsList}}" wx:for-item="goods" wx:key="id">
+					<view style="width: 224rpx;height: 224rpx;position: relative;">
+						<image style="width: 224rpx;height: 224rpx;border-radius: 20rpx;border: 6rpx solid #F4DAA9;" src="{{goods.first_cover_pic}}"></image>
+						<view class="discounts">省{{goods.m_sub_price}}元</view>
+					</view>
+					<view class="pt-20 ns-text-limit  fs-24 color-333333">
+						{{goods.name}}
+					</view>
+					<view class="ns-flex ns-justify-content-space-between align-center">
+						<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-26">{{filters.priceStr(goods.m_price)[0]}}.</text><text>{{filters.priceStr(goods.m_price)[1]}}</text></view>
+						<view class="add-cart-icon fs-30 iconfont color-fff icon-gouwuche_weixuanzhong" style="width: 40rpx;height: 40rpx;line-height: 40rpx;"
+						 catchtap="openCart" data-id="{{goods.id}}" data-index="{{index}}"></view>
+					</view>
+				</navigator>
+			</view>
+		</view>
+		<view style="background: url({{share_member}}) no-repeat;background-size: 750rpx 1928rpx;width: 750rpx;height: 1928rpx;"></view>
+	</block>
+	<block wx:else>
+		<view class="bg-white pr {{shareList.length>0?'':'flex-x-center flex-y-center'}}" style="padding: 32rpx 24rpx;">
+			<block wx:if="{{shareList.length>0}}">
+				<view class="share-success flex align-center justify-between" wx:for="{{shareList}}" wx:key="key">
+					<view class="flex align-center">
+						<image style="width: 106rpx;height: 106rpx;border-radius: 50%;" mode="aspectFill" src="{{item.user.avatar_url}}"></image>
+						<view class="ml-16">
+							<view class="fs-32 color-333333">{{item.user.nickname}}</view>
+							<view class="mt-20 fs-24 color-666666">谢谢您的分享，他免费享有三天会员资格</view>
+						</view>
+					</view>
+					<view class="fs-40 ns-text-bold color-333333">+ 3天</view>
+				</view>
+			</block>
+			<block wx:if="{{type != 1 && shareList.length == 0}}">
+				<view class="" style="padding-top: 80rpx;">
+					<view class="icon-box text-center marginAuto ">
+						<view class="iconfont icon-ren color-fff" style="opacity: 0.5;font-size: 240rpx;"></view>
+					</view>
+					<view class="fs-30 color-999999" style="margin-top: 49rpx;">目前还没有人帮你赚亲卡</view>
+				</view>
+			</block>
+
+		</view>
+	</block>
+	<!-- </block> -->
+
+	<!-- 已领取过显示这个 -->
+	<view class="received" wx:if="{{received}}" catchtap="closeReceived" catchtouchmove="preventTouchMove">
+		<view class="received-content" catchtap="showReceived">
+			<view class="received-text">您已经成为我们的会员</view>
+			<view catchtap="toIndex" class="received-btn">进店逛一逛</view>
+		</view>
+	</view>
+</view>

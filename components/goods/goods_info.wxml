@@ -1,0 +1,584 @@
+
+<view class="goods_info_box clear pr" style="border-bottom: 1rpx solid #F4F4F4;">
+	<navigator wx:if="{{goods.mrtj_sc}}" url="/member/recommendMaterial/recommendMaterial?id={{goods.mrtj_sc}}" class="pa share_btn_img tohome-btn-material text-center " >
+		<view class="iconfont icon-fatusucaiku color-fff fs-30"></view>
+	</navigator>
+	<view bindtap="downMaterial" class='pa share_btn_img down_btn_img'>
+		<text class="iconfont icon-xiazai" style="font-size: 30rpx;"></text>
+	</view>
+	<view bindtap="showShareModal" class='pa share_btn_img'>
+		<text class="iconfont icon-show_fenxiang" style="font-size: 30rpx;"></text>
+	</view>
+	<!-- 直播相关 -->
+	<block wx:if="{{roomId}}">
+		<view class="live-box" >
+			<view class="live-icon-box iconfont icon-shangpin"></view>
+			<view class="fs-18 ns-text-bold color-fff text-center mt-16" style="{{liveStatus == 102?'opacity: 0.5;':''}}">LIVE</view>
+			<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{roomId}}&custom_params={{customParams}}" class="live-btn" style="{{liveStatus == 102?'opacity: 0.5;':''}}">{{live_room_status_desc}}</navigator>
+		</view>
+	</block>
+	<!-- 	<view wx:if="{{role=='shoper' && goods.c1>0 && is_commission}}" class="pa commission">赚 {{goods.c1}}</view> -->
+	<!-- <view wx:if="{{isReturn}}" bindtap="back" class='pf back'>
+		<view class="iconfont icon-zuojiantoubeifen color-fff" style="width: 46rpx;height: 46rpx;line-height: 46rpx;text-align: center;border-radius: 50%;background:rgba(2,2,2,0.3);"></view>
+	</view>
+	<view wx:else bindtap="toHome" class='pf back'>
+		<view class="iconfont icon-zuojiantoubeifen color-fff" style="width: 46rpx;height: 46rpx;line-height: 46rpx;text-align: center;border-radius: 50%;background:rgba(2,2,2,0.3);"></view>
+	</view> -->
+	<view wx:if="{{!goods.is_normal_member && goods.m_price}}" class="vip-card">
+		<view class="vip-card-main flex justify-between align-center" style="background: url({{goods.banberImg.c}}) no-repeat;background-size: 702rpx 80rpx;">
+			<view class="fs-30 ns-text-bold" style="color: #F0D0A5;">领亲卡，享受会员价格</view>
+			<navigator hover-class="none" url="{{goods.member_status == 1?'/member/vipFirst/vipFirst':(goods.member_status == 2?'/member/getVipCard/getVipCard':'/member/vipFirst/vipFirst?type=1')}}"
+			 class="vip-card-btn text-center">立即领取</navigator>
+		</view>
+	</view>
+	<view class="flex ns-justify-content-space-between ns-align-items-flex-center">
+		<view style="width: 100%;">
+			<view class='goods_name fs-30 ns-text-limit2 mb-24' wx:if="{{goods.name}}"><text data-text="{{goods.name}}" bindlongtap='copy'>{{goods.name}}</text></view>
+			<view class="color-666666 fs-26">{{goods.desc}}</view>
+
+		</view>
+		<!-- <view bindtap="goodAdd" wx:if="{{role == 'shoper' && pageType == 'STORE'}}">
+			<view class="iconfont icon-shangchuan color-F76436" style="font-size: 45rpx;margin-left: 5rpx;"></view>
+			<view class="color-F76436 fs-24 ns-text-bold">推荐</view>
+		</view> -->
+	</view>
+	<!-- 拼团 -->
+	<!-- <view wx:if="{{pageType ==='PINTUAN'}}" class="flex-row flex-y-center" style="margin-top:14rpx;height:60rpx;">
+          
+          <view class='flex-grow-0 flex-row original-price'>
+              <view wx:if="{{__user_info.level > -1 || !goods.min_member_price || goods.is_level === false}}" style='text-decoration: line-through;' class='flex-grow-0'>¥ {{goods.original_price}}</view>
+              <view class='member_price_box' wx:else="{{goods.min_member_price}}">  -->
+	<!-- 商城全局会员价显示开关 -->
+	<!-- <block wx:if="{{__is_member_price === 1}}">
+                      <text class='member_price_title'>会员价</text>
+                      <text>￥{{goods.min_member_price > 0 ? goods.min_member_price : goods.price}}</text>
+                  </block>
+                  <block wx:else>
+                      <text class='original_price'>￥{{goods.price}}</text>
+                  </block>
+              </view>
+          </view> -->
+	<!-- <view class='flex-row flex-grow-0 group-descount' style="margin-left:16rpx">
+              <view class='flex-grow-0 group-descount-one'>
+                  {{goods.group_num}}人拼团
+              </view>
+              <view class='flex-grow-0 group-descount-center'>
+              </view>
+              <view class='flex-grow-0 group-descount-tow'>
+                  拼团立省¥{{reduce_price}}
+              </view>
+          </view>
+      </view>
+    <!-- 快速购买模块 -->
+	<block wx:if="{{quick == 1}}">
+		<view class="quick_goods_info">
+			<view class='view1'>
+				<view wx:if='{{__is_member_price && goods.min_member_price > 0 && goods.is_negotiable != 1 && __user_info.level > -1}}'
+				 class="flex-grow-0 flex-y-center">
+					<text class='renminbi is_member'>￥</text>
+					<text class='goods_price is_member'>{{goods.min_member_price}}</text>
+					<image wx:if='{{goods.is_level === true}}' class='img' src='{{__wxapp_img.store.member_price.url}}'></image>
+				</view>
+				<view wx:else class="flex-grow-0 flex-y-center">
+					<text class='renminbi {{__user_info.level != -1 || goods.is_level === false ? "is_member" : ""}}'>￥</text>
+					<text class='goods_price {{__user_info.level != -1 || goods.is_level === false ? "is_member" : ""}}'>{{goods.min_price > 0 ? goods.min_price : goods.price}}</text>
+				</view>
+
+				<view style='margin-top:14rpx;' class="flex-row flex-y-center">
+					<view class="flex-grow-0 view2">
+						<text class='original_price' wx:if="{{__user_info.level > -1 || !goods.min_member_price || goods.is_level === false}}">￥{{goods.original_price}}</text>
+						<view class='member_price_box' wx:else="{{goods.min_member_price}}">
+							<!-- 商城全局会员价显示开关 -->
+							<block wx:if="{{__is_member_price === 1}}">
+								<text class='member_price_title'>会员价</text>
+								<text>￥{{goods.min_member_price > 0 ? goods.min_member_price : goods.price}}</text>
+							</block>
+							<block wx:else>
+								<text class='original_price'>￥{{goods.price}}</text>
+							</block>
+						</view>
+					</view>
+
+					<view wx:if='{{__is_sales}}' class="flex-grow-0 view3">
+						<text class='sales_title'>销量:</text>
+						<text class='sales'>{{goods.sales}} {{goods.unit}}</text>
+					</view>
+				</view>
+			</view>
+			<block wx:if="{{goods.use_attr == 1}}">
+				<view class="add xuanguige " data-id='{{goods.id}}' bindtap='showDialogBtn'>
+					选规格
+					<view wx:if="{{goods_num > 0}}" class="guigenum">{{goods_num}}</view>
+				</view>
+			</block>
+			<block wx:if="{{goods.use_attr == 0}}">
+				<block wx:if="{{goods_num > 0}}">
+					<view class='btn_car_num'>
+						<image class='carStandard' src="{{__wxapp_img.store.jian.url}}" bindtap="jian" data-id="{{goods.id}}"></image>
+						<input bindinput='goodNumChange' type='number' class="carStandard good_num" id="num" data-id="{{goods.id}}"
+						 maxlength='999' value='{{goods_num}}'></input>
+						<image class='carStandard' src="{{__wxapp_img.store.jia.url}}" bindtap="jia" data-id="{{goods.id}}"></image>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="add add_cart" bindtap="jia" data-id="{{goods.id}}">加入购物车</view>
+				</block>
+			</block>
+		</view>
+	</block>
+
+	<!-- 商城模块 -->
+	<!-- <block wx:else>
+        <view class="flex-row flex-y-center store_goods_info" wx:if="{{pageType !=='MIAOSHA'&&pageType !=='PINTUAN'&&pageType!=='STORE'}}">
+            <view class="flex-grow-1 flex-col">
+          <view wx:if='{{__is_member_price && goods.min_member_price > 0 && goods.is_negotiable != 1 && __user_info.level > -1}}' class="flex-grow-0 flex-y-center view1">
+            <block wx:if="{{pageType === 'INTEGRAL'}}">
+                <text style='font-size:16pt;color:red;'>{{goods.integral}}积分 + </text>
+            </block>
+            <text wx:if="{{!goods.is_negotiable}}" class='renminbi is_member'>￥</text>
+            <block wx:if='{{goods.mch}}'>
+                <text class='min_price is_member'>{{goods.min_price}}</text>
+            </block>
+            <block wx:else>
+                <text class='min_price is_member'>{{goods.min_member_price}}</text>
+                <image wx:if='{{goods.is_level === true}}' class='img' src='{{__wxapp_img.store.member_price.url}}'></image>
+            </block>
+          </view> -->
+	<!-- 原价区域 -->
+	<!-- <view wx:else class="flex-grow-0 flex-y-center view1">
+              <block wx:if="{{pageType === 'INTEGRAL'}}">
+                  <text style='font-size:16pt;color:red;'>{{goods.integral}}积分 + </text>
+              </block>
+              <block wx:if="{{pageType === 'STEP'}}">
+                  <image class='step-icon' src='../../images/detail-price.png'></image>
+                  <text style='font-size:16pt;color:#ff9d1e;font-family:DIN' class='{{__user_info.level != -1 || goods.is_level === false ? "is_member" : ""}}'>{{goods.price}}</text>
+                  <text style='font-size:11pt;color:#666666;margin-left:24rpx'>原价：</text>
+                  <text style='font-size:11pt;color:#666666;text-decoration:line-through'>{{goods.original_price}}</text>
+              </block>
+              <block wx:if="{{!goods.is_negotiable && pageType !== 'STEP'}}">
+                  <text class='renminbi {{__user_info.level != -1 || goods.is_level === false ? "is_member" : ""}}'>￥</text>
+                  <text class='min_price {{__user_info.level != -1 || goods.is_level === false ? "is_member" : ""}}'>{{goods.min_price > 0 ? goods.min_price : goods.price}}</text>
+              </block>
+              <block wx:else>
+                  <text class='min_price'>{{goods.min_price}}</text>
+              </block>
+          </view> -->
+	<!-- 商品价格 -->
+	<!-- <view style='margin-top:14rpx;' wx:if='{{pageType !=="PINTUAN"}}' class="flex-row flex-y-center">
+              <view wx:if="{{!goods.is_negotiable && pageType !== 'STEP'}}" class="flex-grow-0 view2">
+                  <text class='original_price' wx:if="{{__user_info.level > -1 || !goods.min_member_price || goods.is_level === false}}">￥{{goods.original_price}}</text>
+                  <view class='member_price_box' wx:else> -->
+	<!-- 多商户 -->
+	<!-- <block wx:if="{{goods.mch}}">
+                          <text>￥{{goods.price}}</text>
+                      </block>
+                      <block wx:else> -->
+	<!-- 商城全局会员价显示开关 -->
+	<!-- <block wx:if="{{__is_member_price === 1}}">
+                              <text class='member_price_title'>会员价</text>
+                              <text>￥{{goods.min_member_price > 0 ? goods.min_member_price : goods.price}}</text>
+                          </block>
+                          <block wx:else>
+                              <text class='original_price'>￥{{goods.price}}</text>
+                          </block>
+                      </block>
+                  </view>
+              </view>
+              <view wx:if='{{(__is_sales) && (pageType !=="INTEGRAL") && (goods.is_negotiable !=1) && (pageType !== "STEP")}}' class="flex-grow-0 view2">
+                  <text class='sales' wx:if="{{pageType ==='MIAOSHA'}}">已抢：</text>
+                  <text class='sales' wx:else>销量：</text>
+                  <text class='sales'>{{goods.sales}} {{goods.unit}}</text>
+              </view>
+          </view>
+        </view>
+        <view wx:if="{{pageType !=='INTEGRAL' && pageType !== 'STEP'}}" class="flex-grow-0">
+            <button bindtap="showShareModal" class="share_btn" plain="true">
+                <image class='img' src="{{__wxapp_img.share.share.url}}" />
+                <view class='share'>分享</view>
+            </button>
+        </view>
+        </view>
+    </block> -->
+</view>
+<!-- <view class="commission-box">
+	<view class="flex-x-center">
+		<view class="show-btn" bindtap="commisionBtn">{{is_commission?'不显示佣金':'显示佣金'}}</view>
+	</view>
+	<view wx:if="{{is_commission}}" class="flex justify-between" style="margin-top: 18rpx;">
+		<view class="text-center" wx:if="{{goods.c1}}">
+			<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr(goods.c1)[0]}}.</text><text>{{filters.priceStr(goods.c1)[1]}}</text></view>
+			<view class="fs-22" style="color: #65482C;">黄金(赚)</view>
+		</view>
+		<view class="text-center">
+			<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr('10.00')[0]}}.</text><text>{{filters.priceStr('10.00')[1]}}</text></view>
+			<view class="fs-22" style="color: #65482C;">钻石(赚)</view>
+		</view>
+		<view class="text-center">
+			<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr('10.00')[0]}}.</text><text>{{filters.priceStr('10.00')[1]}}</text></view>
+			<view class="fs-22" style="color: #65482C;">皇冠(赚)</view>
+		</view>
+	</view>
+</view> -->
+
+<!-- 满减优惠 -->
+<!-- <block wx:if="{{preferential}}">
+  <navigator url="/pages/fullReduction/fullReduction?youhui_id={{goods.youhui.id?goods.youhui.id:goods.youhui['0'].id}}" hover-class="none">
+    <view class="preferential" data-id="{{goods.id}}">
+      <view class="flex-row flex-y-center select_attrs" style="margin-bottom:0">
+        <view class="flex-grow-1 flex-row flex-y-center">
+          <text style="color:#2c2c2c;" class="fs-28 ns-text-bold">满减优惠</text>
+          <text class='attrs'>{{goods.youhui['0'].desc}}</text>
+        </view>
+        <view class="flex-grow-0">
+          <image class='img' src="{{__wxapp_img.store.jiantou_r.url}}" />
+        </view>
+      </view>
+    </view>
+  </navigator>
+</block> -->
+<!-- 价格是面议、快速购买、则不显示 -->
+<block wx:if="{{quick != 1 && !goods.is_negotiable && __user_info.blacklist !== 1}}">
+	<!-- <view bindtap="showAttrPicker" class="flex-row flex-y-center select_attrs">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<text style="color:#333333;" class='fs-30'>赠品</text>
+			<text class='attrs fs-24 color-999999'>
+				<text style="margin-right:10rpx" wx:key="key">随单赠送，不用添加购物车</text>
+			</text>
+		</view>
+		<view class="flex-grow-0">
+			<text class="iconfont icon-jinru fs-34 color-8D8D8D"></text>
+		</view>
+	</view> -->
+	<view class="flex-row flex-y-center select_attrs" wx:if="{{ role=='shoper' }}">
+
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<block wx:if="{{is_commission}}">
+				<view style="color:#333333;" class='fs-30'>佣金</view>
+				<view class='attrs flex align-center'>
+					<view class="text-center flex align-center" wx:if="{{goods.c1>0}}">
+						<view class="fs-22" style="color: #65482C;">小亲(赚)</view>
+						<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr(goods.c1)[0]}}.</text><text>{{filters.priceStr(goods.c1)[1]}}</text></view>
+					</view>
+					<view class="text-center ml-24 flex align-center" wx:if="{{goods.c19>0}}">
+						<view class="fs-22" style="color: #65482C;">大亲(赚)</view>
+						<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr(goods.c19)[0]}}.</text><text>{{filters.priceStr(goods.c19)[1]}}</text></view>
+
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<text style="color:#333333;" class='fs-30'>提示</text>
+				<text class='attrs'>
+					<text style="margin-right:10rpx">绑定微信号，选货，比价，推荐</text>
+					<!-- <view class="text-center">
+					<view class="fs-30 color-FF0200 ns-text-bold">￥ <text class="fs-40">{{filters.priceStr('10.00')[0]}}.</text><text>{{filters.priceStr('10.00')[1]}}</text></view>
+					<view class="fs-22" style="color: #65482C;">钻石(赚)</view>
+				</view> -->
+				</text>
+			</block>
+		</view>
+		<view class="flex-grow-0">
+			<text class="iconfont {{is_commission?'icon-yanjing':'icon-yanjing1'}} fs-34 color-8D8D8D" bindtap="commisionBtn"></text>
+		</view>
+	</view>
+	<view class="flex-row flex-y-center select_attrs" wx:if="{{goods.service_list.length > 0}}">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<view style="color:#333333;" class='fs-30 flex-grow-0'>服务</view>
+			<view class="attrs flex-grow-1 ns-text-limit2">
+				<text class="fs-24" style="padding-right: 16rpx;margin-right: 16rpx;{{index<goods.service_list.length - 1?'border-right: 1rpx solid #888;':''}}"
+				 wx:for="{{goods.service_list}}" wx:key="key">{{item}}</text>
+			</view>
+		</view>
+	</view>
+	<view bindtap="showAttrPicker" class="flex-row flex-y-center select_attrs">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<text style="color:#333333;" class='fs-30'>规格</text>
+			<text class='attrs'>
+				<text wx:for="{{attr_group_list}}" style="margin-right:10rpx" wx:key="key">{{item.attr_list.length}}种{{item.attr_group_name}}</text>
+			</text>
+		</view>
+		<view class="flex-grow-0">
+			<text class="iconfont icon-jinru fs-34 color-8D8D8D"></text>
+		</view>
+	</view>
+	<!-- <view bindtap="showAttrPicker" class="flex-row flex-y-center select_attrs">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<text style="color:#333333;" class='fs-30'>评价</text>
+			<text class='attrs fs-24 color-999999'>
+				<text style="margin-right:10rpx" wx:key="key">官网好评度 91.2%</text>
+			</text>
+		</view>
+		<view class="flex-grow-0 flex align-center">
+			<view class="flex mr-16" style="color: #999999;">
+				<view wx:for="{{spendList}}" wx:key="key" class="iconfont {{item}} fs-40"></view>
+			</view>
+			<view class="fs-24 color-999999">推荐</view>
+		</view>
+	</view> -->
+	<view class="flex-row select_attrs" wx:if="{{goods.supplier_role == 1 || goods.supplier_role == 2}}">
+		<view class="flex-grow-1 flex-row">
+			<view class="flex-grow-0 fs-30" style="color:#333333;">送至</view>
+			<view class="flex-grow-1" style="margin-left: 30rpx;">
+				<view bindtap='goToAddress' class="ns-text-limit" style="width: 570rpx;">
+					<text class="iconfont icon-location fs-30" style="color: #FF401A;margin-right: 13rpx;"></text>
+					<text class="fs-24 color-999999">{{jd_send.address?jd_send.address:'请选择收货地址'}}</text>
+				</view>
+				<view class="mt-24 fs-24 ns-text-limit2" wx:if="{{jd_send.promiseTips}}">
+					<text style="color: #FF401A;margin-right: 12rpx;">现货</text>
+					<text class="fs-24">{{jd_send.promiseTips}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="flex-grow-0">
+			<text class="iconfont icon-jinru fs-34 color-8D8D8D"></text>
+		</view>
+	</view>
+	<view bindtap="openParameter" class="flex-row flex-y-center select_attrs" wx:if="{{goods.param_json.length>0}}">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<text style="color:#333333;" class='fs-30'>参数</text>
+			<text class='attrs'>
+				<text style="margin-right:10rpx">类型，包装等参数</text>
+			</text>
+		</view>
+		<view class="flex-grow-0">
+			<text class="iconfont icon-jinru fs-34 color-8D8D8D"></text>
+		</view>
+	</view>
+	<view class="flex-row flex-y-center select_attrs" wx:if="{{goods.delivery_type==1}}">
+		<view class="flex-grow-1 flex-row flex-y-center">
+			<view style="color:#333333;" class='fs-30'>发货</view>
+			<view class='attrs flex align-center'>
+				<!-- <view class="ziti fs-24" wx:if="{{goods.delivery_type==2}}">自提</view> -->
+				<view class="kuaidi fs-24">快递到家</view>
+				<!-- <view class="fs-24 color-999999 ml-16" wx:if="{{goods.delivery_type==2}}">{{goods.deliveryPick.data.pick_start_time_str}}</view> -->
+			</view>
+		</view>
+	</view>
+</block>
+<block wx:if="{{pageType ==='PINTUAN'}}">
+	<view class="ns-padding-sm ns-bdb-default ns-bg-white mt-20">
+		<view class="ns-flex ns-margin-bottom-sm ns-text-xs">
+			<view>拼团须知</view>
+			<view class="ns-text-gray ns-padding-left-sm">简单4步，一起拼好货</view>
+		</view>
+		<view>
+			<image class="ptt-box" src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/pingtuanguize.jpg "></image>
+		</view>
+	</view>
+	<view wx:if="{{group_num > 0}}" class="friend-group">
+		<view class="flex-y-center">
+			<view class='ns-padding-vertical-sm ns-text-sm flex-row  flex-grow-1'>
+				小伙伴在拼团，可直接参与
+			</view>
+			<!-- <view bindtap="more" class='pt-rule-right flex-grow-0 flex-y-center'>
+	            更多
+	        </view> -->
+			<!-- <view class='pt-rule-more flex-grow-0 flex-y-center'>
+	            <image src='{{__wxapp_img.share.right.url}}'></image>
+	        </view> -->
+		</view>
+		<view class='friend-group-item ns-bdb-default flex-row flex-y-center' wx:for="{{group_list}}" wx:key="key" wx:if="{{index<3}}">
+			<view class='friend-corver-pic flex-grow-0 flex-y-center'>
+				<image src='{{item.avatar_url}}'></image>
+			</view>
+			<view class='friend-name flex-grow-1 flex-y-center'>
+				{{item.nickname}}
+			</view>
+			<view class='flex-grow-0 flex-col'>
+				<view class='flex-grow-0 group-short' style="text-align:right">
+					还差<text class="ns-text-red">{{item.surplus}}</text>人成团
+				</view>
+				<view class='flex-grow-0 group-short-time'>
+					还剩 {{item.limit_time.days}}:{{item.limit_time.hours}}:{{item.limit_time.mins}}:{{item.limit_time.secs}}
+				</view>
+			</view>
+			<view class='flex-grow-0 go-offered flex-y-center flex-x-center' bindtap='goToGroup' data-id='{{item.id}}'>
+				去参团
+			</view>
+		</view>
+	</view>
+</block>
+<!-- <block wx:if="{{pageType ==='PINTUAN'}}">
+  <view class='goods-comment-title flex-row flex-y-center ns-bg-white ns-padding-horizontal-sm ns-bdb-default' bindtap='goToComment'>
+      <view style='line-height:100rpx;' class='ns-text-sm flex-grow-1 flex-y-center ns-flex '>
+        <view class='ns-text-sm ns-text-black'>用户评论</view>
+        <view class='ns-text-xs ns-text-gray ns-padding-left-sm'> {{comment_num}}个评价</view>   -->
+<!-- <text wx:if='{{__is_sales}}' style='margin-left:10rpx;'>| 销量 {{goods.virtual_sales}}</text> -->
+<!-- </view>
+      <view class='comment-more flex-grow-0 flex-y-center'>
+          <image src='{{__wxapp_img.share.right.url}}'></image>
+      </view>
+  </view>
+</block> -->
+<!-- 商品服务 -->
+<!-- <view wx:if="{{goods.service_list&&goods.service_list.length>0}}" class="bg-white mb-20 flex-row check-list">
+	<view class="check-item flex-y-center" wx:for="{{goods.service_list}}">
+		<view class="flex flex-y-center" bindlongtap="copyText" data-text="{{goods.service_list}}">
+			<view class="iconfont icon-zhengque fs-30" style="color: #48C183;"></view>
+			<view class="ml-10">{{item}}</view>
+		</view>
+	</view>
+</view>
+<view wx:else class="mb-20"></view> -->
+<!-- 品牌推荐 -->
+<view class="mb-16 ns-bg-white" wx:if="{{goods.brand}}">
+	<view bindtap="goBrand" data-brandid="{{goods.brand.id}}" class="ns-padding-sm ns-flex ns-justify-content-space-between">
+		<view class="ns-flex">
+			<view>
+				<image style="width:100rpx;height:100rpx;border-radius: 12rpx;box-shadow: 0rpx 8rpx 10rpx #F4F4F4;" src="{{goods.brand.img}}"
+				 mode="aspectFit" />
+			</view>
+			<view class="" style="margin-left: 25rpx;">
+				<view class="fs-36 color-333333">{{goods.brand.name}}</view>
+				<view class="ns-text-smblack ns-text-xs ns-margin-top-sm ns-text-limit fs-24 color-999999" style="width: 500rpx;margin-top: 21rpx;">{{goods.brand.desc}}</view>
+			</view>
+		</view>
+		<view class="flex ">
+			<view style="margin-right: 12rpx;color:#999999;font-size:18rpx">更多<text class="iconfont icon-jinru color-fff ml-10"
+				 style="border-radius: 50%;background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));;width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;"></text></view>
+		</view>
+	</view>
+	<view style="padding: 0 24rpx;" wx:if="{{goods.link_goods.length!=0||goods.hot_goods.length!=0}}">
+		<!-- <view class="ns-flex ns-text-center">
+      <view class="ns-w50 ns-text-sm ns-text-bold ns-text-smgray nav-item {{brandIndex==0?'active':''}}" data-index="0" bindtap="brandNav" wx:if="{{goods.link_goods.length!=0}}">
+        <text>相关推荐</text>
+      </view>
+      <view class="ns-w50 ns-text-sm ns-text-bold ns-text-smgray nav-item {{brandIndex==1?'active':''}}" data-index="1" catchtap="brandNav" wx:if="{{goods.hot_goods.length!=0}}">
+        <text>热销商品</text>
+      </view>
+    </view> -->
+		<view wx:if="{{linkGoods.length>0}}">
+			<scroll-view class="scroll-view" scroll-x="true">
+				<view class="order fs-24" wx:for="{{linkGoods}}" wx:key="key" bindtap="goGoods" data-id="{{item.id}}">
+					<image class="order-img" src="{{item.cover_pic}}"></image>
+					<view class=" pt-20 ns-text-limit  fs-24 color-333333">
+						{{item.name}}
+					</view>
+					<view class="ns-flex ns-justify-content-space-between align-center">
+						<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-26">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+						<!-- 	<view class="add-cart-icon"></view> -->
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+</view>
+<!-- 同类推荐 -->
+<view class="bg-white p-24" wx:if="{{sameGoods}}">
+	<view class="flex-x-center pr" style="margin-bottom: 38rpx;">
+		<view class=" fs-30 color-333333 ns-text-bold">同类推荐</view>
+		<view class="under-line"></view>
+	</view>
+	<view class="" style="height: 650rpx;">
+		<swiper circular="true" duration="500" style="height: 650rpx;">
+			<swiper-item class="flex ns-wrap" wx:for="{{sameList}}" wx:key="key" style="height: 650rpx;">
+				<view class="same fs-24 {{(index+1)%3==0?'':'mr-15'}}" wx:for="{{sameList}}" wx:for-item="goods" wx:key="key"
+				 bindtap="goGoods" data-id="{{goods.id}}">
+					<image class="same-img" src="{{goods.first_cover_pic}}"></image>
+					<view class=" pt-20 ns-text-limit  fs-24 color-333333">
+						{{goods.name}}
+					</view>
+					<view class="ns-flex ns-justify-content-space-between align-center">
+						<view class="fs-20 color-FF0200 ns-text-bold">￥<text class="fs-26">{{filters.priceStr(goods.price)[0]}}.</text><text>{{filters.priceStr(goods.price)[1]}}</text></view>
+						<!-- <view class="add-cart-icon"></view> -->
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
+	</view>
+</view>
+<view class="tab-group">
+	<view class="flex-row tab-group-header">
+	</view>
+	<view class="tab-group-body">
+		<view class="tab-group-item {{tab_detail}}">
+			<view class="goods-detail">
+				<import src="../../wxParse/wxParse.wxml" />
+				<template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+			</view>
+		</view>
+	</view>
+</view>
+<!-- 相关推荐 -->
+<view class="p-24" wx:if="{{linkGoods.length>0}}">
+	<view class="flex-x-center pr" style="margin-bottom: 38rpx;">
+		<view class=" fs-30 color-333333 ns-text-bold">大家都在看</view>
+		<view class="under-line"></view>
+	</view>
+	<view class=" flex ns-wrap justify-between">
+		<view class="fs-24 pb-20" style="width: 340rpx;" wx:for="{{linkGoods}}" wx:key="key" bindtap="goGoods" data-id="{{item.id}}">
+			<image style="width: 340rpx;height: 340rpx;border-radius: 20rpx;" src="{{item.cover_pic}}"></image>
+			<view class=" pt-20 ns-text-limit  fs-28 color-333333">
+				{{item.name}}
+			</view>
+			<view class="ns-flex ns-justify-content-space-between align-center">
+				<view class="fs-28 color-FF0200 ns-text-bold">￥<text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+				<!-- <view class="add-cart-icon" style="width: 40rpx;height: 40rpx;"></view> -->
+			</view>
+		</view>
+	</view>
+</view>
+
+
+<!-- 分享 -->
+<view class="share-modal {{share_modal_active}} {{__device}}" catchtouchmove="{{true}}" bindtap="shareModalClose" wx:if="{{sharePic}}">
+	<view class="share-modal-body {{__device}}" catchtap="shop">
+		<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+		<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+        <view class="tips">收益仅自己可见</view> -->
+		<view class="flex-row">
+			<view class="flex-grow-1 flex-x-center">
+				<button open-type="share" class="share-bottom" style='height:100%;'>
+					<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+					<view>分享给好友</view>
+				</button>
+			</view>
+			<view class="flex-grow-1 flex-x-center">
+				<view bindtap="getGoodsQrcode" class="share-bottom">
+					<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+					<view>生成商品海报</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+	</view>
+</view>
+
+<!-- 分享给朋友 -->
+<view class='modal flex-row {{hide}}' bindtap='close'>
+	<view class='flex-y-center' style='width:100%;height:100%;position:relative;'>
+		<image src='{{__wxapp_img.store.close2.url}}' style='width:50rpx;height:50rpx;position:absolute;left:24rpx;top:60rpx'></image>
+		<video direction='' src='{{url}}' id="video" style='height:80%' autoplay="true"></video>
+	</view>
+</view>
+
+<!-- 生成海报 -->
+<view class="goods-qrcode-modal {{goods_qrcode_active}} flex-y-center" catchtouchmove="{{true}}" bindtap="goodsQrcodeClose">
+	<view class="goods-qrcode-body flex-col" catchtap="shop">
+		<view class="flex-grow-1" style="position: relative">
+			<view style="position: absolute;left: 0;top:0;width: 100%;height: 100%;">
+				<view class="goods-qrcode-box">
+					<view class="goods-qrcode-loading flex-x-center flex-y-center" wx:if="{{!goods_qrcode}}">
+						<view class="flex-x-center flex-col">
+							<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+							<view style="color: #888">海报生成中</view>
+						</view>
+					</view>
+					<image bindtap="goodsQrcodeClick" mode="aspectFit" class="goods-qrcode {{goods_qrcode?'active':''}}" data-src="{{goods_qrcode}}"
+					 src="{{goods_qrcode}}"></image>
+				</view>
+			</view>
+		</view>
+		<view class="flex-grow-0 flex-col flex-x-center" style="padding-top: 50rpx;">
+			<view>
+				<button wx:if="{{goods_qrcode}}" bindtap="saveGoodsQrcode" class="share-btn">
+					保存图片
+				</button>
+				<button wx:else style="opacity: .4">保存图片</button>
+			</view>
+		</view>
+		<view class="goods-qrcode-close" bindtap="goodsQrcodeClose">
+			<view class="iconfont icon-guanbi2 fs-30"></view>
+		</view>
+	</view>
+</view>

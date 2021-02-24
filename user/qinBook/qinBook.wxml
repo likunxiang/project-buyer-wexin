@@ -1,0 +1,103 @@
+<!--小亲本-->
+<view class="qinbook">
+	<!-- 导航开始 -->
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view
+			 class="  go-back flex1"
+			 style="font-size:30rpx;color:#FFFFFF;"
+			 bindtap="returnPage"
+			>
+				<text class="iconfont icon-zuojiantoubeifen;"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">小亲本</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+
+	<!-- 搜索框开始 -->
+	<view class="qinInput">
+		<view bindtap="toSeach" class="select-seach">
+			<view class="iconfont icon-sousuo icon"></view>
+			<input disabled="{{true}}" placeholder="搜索顾客昵称、品牌名称" />
+		</view>
+		<view class="input-right" bindtap="changeShow">
+			<view class="iconfont icon-qiehuan"></view>
+			<view class="icon-bottom1">{{showState?'看品牌':'看顾客'}}</view>
+		</view>
+	</view>
+	<!-- 搜索框结束 -->
+
+	<!-- 页面功能提示开始 -->
+	<view class="notice-title">
+		<text>【特别提醒】</text>
+		{{indexInfo.warning_label}}
+	</view>
+	<!-- 页面功能提示结束 -->
+
+	<!-- 显示顾客和品牌开始 -->
+	<view class="myuser flex-x-center">
+		<block wx:if="{{dataList.length == 0}}">
+			<image style="width: 690rpx;height: 669rpx;margin-top: 120rpx;" src="{{indexInfo.img}}" mode="aspectFill"></image>
+		</block>
+		<block wx:else>
+			<view wx:if="{{showState}}" class="yonghu">
+				<view
+				 wx:for="{{dataList}}"
+				 wx:key="index"
+				 class="yonghu-item"
+				 bindtap="toUser"
+				 hover-class="click"
+				 data-id="{{item.user_id}}"
+				>
+					<text class="yonghu-icon iconfont icon-yonghu "></text>
+					<text class="yonghu-name ns-text-limit">{{item.user_name}}</text>
+					<view class="yonghu-num">关注{{' '+ item.user_brand_sum +' '}}个品牌
+						<text class="iconfont icon-jinru"></text>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{!showState}}" class="yonghu">
+				<view
+				 wx:for="{{dataList}}"
+				 wx:key="index"
+				 class="yonghu-item"
+				 bindtap="toPinpaiLike"
+				 hover-class="click"
+				 data-id="{{item.brand_id}}"
+				 data-name="{{item.brand_name}}"
+				>
+					<text class="yonghu-icon iconfont icon-pinpai " style="color:#489A19;"></text>
+					<text class="yonghu-name">{{item.brand_name}}</text>
+					<view class="yonghu-num">{{item.user_brand_sum + ' '}}个顾客关注
+						<text  class="iconfont icon-jinru"></text>
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+	<!-- 显示顾客和品牌结束 -->
+
+	<!-- 右下角图标信息提示开始 -->
+	<view class="new-notice">
+		<view
+		 class="new-item"
+		 catchtap="toActiveAll"
+		 hover-class="click"
+		>
+			<text class="iconfont icon-tixing2 {{indexInfo.is_remind == 1?'active':''}}"></text>
+		</view>
+		<view
+		 class="new-item"
+		 catchtap="toAddLike"
+		 hover-class="click"
+		>
+			<text class="iconfont icon-jiahao"></text>
+		</view>
+	</view>
+	<!-- 右下角图标信息提示结束 -->
+
+</view>
+

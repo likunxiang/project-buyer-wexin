@@ -1,0 +1,115 @@
+/* pages/allowance/allowance.wxss */
+page {
+	height: 100%;
+	background: #F4F4F4;
+}
+
+.page {
+	min-height: 100%;
+}
+.header {
+	padding: 24rpx;
+}
+.get-card-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.7);
+	z-index: 10000;
+}
+.get-card-modal-main {
+	width: 441rpx;
+	height: 550rpx;
+	padding: 48rpx;
+	background: #0081FF;
+}
+.get-card-modal-text {
+	font-size: 38rpx;
+	color: #B86A24;
+	margin-top: 48rpx;
+}
+.get-card-modal-btn {
+	position: absolute;
+	bottom: 47rpx;
+	left: 50%;
+	margin-left: -145rpx;
+	width:289rpx;
+	height:68rpx;
+	background:linear-gradient(90deg,rgba(219,197,161,1),rgba(211,179,128,1));
+	border-radius:34rpx;
+	text-align: center;
+	line-height: 68rpx;
+	font-size: 27rpx;
+	color: #222222;
+}
+.total-box {
+	background: #fff;
+	border-radius: 20rpx;
+	padding: 32rpx 24rpx;
+}
+.use-rule {
+	width:145rpx;
+	padding: 14rpx 0;
+	text-align: center;
+	border:1rpx solid rgba(255,64,26,1);
+	border-radius:8rpx;
+	font-size: 24rpx;
+	color: #FF401A;
+}
+.model {
+	position: fixed;
+	top: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	bottom: 0rpx;
+	background: rgba(0,0,0,.5);
+	z-index: 10;
+}
+.model-box {
+	width:536rpx;
+	padding: 62rpx;
+	padding-top: 100rpx;
+	padding-bottom: 60rpx;
+	background:rgba(255,255,255,1);
+	border-radius:20px;
+}
+.model-bg {
+	width: 557rpx;
+	height: 321rpx;
+	position: absolute;
+	top: -210rpx;
+	left: 8rpx;
+}
+.model-btn {
+	width:315rpx;
+	height:68rpx;
+	line-height: 68rpx;
+	text-align: center;
+	font-size: 24rpx;
+	color: #fff;
+	background:rgba(255,64,26,1);
+	border-radius:34rpx;
+}
+
+.empty-order-icon {
+	width: 280rpx;
+	height: 280rpx;
+	line-height: 280rpx;
+	background: rgba(234, 234, 234, 1);
+	border-radius: 50%;
+}
+
+.to-home {
+	width: 359rpx;
+	height: 82rpx;
+	border: 2rpx solid rgba(255, 195, 48, 1);
+	border-radius: 40rpx;
+	margin: auto;
+	margin-top: 47rpx;
+	font-size: 30rpx;
+	color: #FFC330;
+	line-height: 78rpx;
+	text-align: center;
+}

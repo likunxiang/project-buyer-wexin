@@ -1,0 +1,113 @@
+/* pages//private/privateShopOrder/privateShopOrder.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+}
+.body-kong {
+	height: 100%;
+}
+.header {
+	position: fixed;
+	top: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	z-index: 1;
+}
+.search-box {
+	width: 580rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	background-color: #F2F2F2;
+	margin-right: 20rpx;
+}
+.sou-btn {
+	width: 100rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	color: #000000;
+}
+.tab-box {
+	padding: 0 108rpx;
+	width: 100%;
+}
+
+.tab {
+	width: 136rpx;
+	height: 68rpx;
+	line-height: 68rpx;
+	text-align: center;
+	font-size: 28rpx;
+	color: #595959;
+}
+
+.tab-active {
+	color: #FF9100;
+	border-bottom: 6rpx solid #FF9100;
+}
+.body {
+	padding: 0 25rpx;
+	padding-top: 190rpx;
+}
+.order-list-no-pay-body {
+	padding: 20rpx 8rpx;
+}
+.order-list-pay-body {
+	padding: 20rpx 25rpx ;
+	border-bottom: 1rpx solid #D6D6D6;
+}
+.order-list-no-pay-footer {
+	padding: 20rpx 8rpx;
+}
+.order-list-no-pay-btn {
+	padding: 0 8rpx 20rpx;
+}
+.order-list-btn {
+	margin-left: 20rpx;
+	width:136rpx;
+	height:45rpx;
+	background:rgba(255,255,255,1);
+	border-radius:20rpx;
+	text-align: center;
+	line-height: 41rpx;
+	font-size: 24rpx;
+	color: #FF9100;
+	border:2rpx solid #FF9100;
+}
+.order-list-btn-yellow {
+	background:rgba(244,158,58,1);
+	color: #fff;
+	border:2rpx solid rgba(244,158,58,1);
+}
+.type_tips {
+	width: 115rpx;
+	height: 44rpx;
+	line-height: 44rpx;
+	text-align: center;
+	border-radius: 8rpx 0 0 8rpx;
+	background-color: #489A19;
+	position: absolute;
+	right: 0rpx;
+	top: 28rpx;
+}
+
+.cancel-model {
+	position: absolute;
+	bottom: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	top: 0rpx;
+	background-color: rgba(0,0,0,.35);
+	z-index: 9;
+}
+.cancel-box {
+	padding: 0 20rpx;
+	width: 508rpx;
+	border-radius: 10rpx;
+}
+.cancel-box-top {
+	padding: 28rpx 34rpx 40rpx;
+}

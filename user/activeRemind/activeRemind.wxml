@@ -1,0 +1,113 @@
+<!--活动提醒-->
+<view class="active-remind">
+ 	<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+	<!-- 导航开始 -->
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view
+			 class="  go-back flex1"
+			 style="font-size:30rpx;color:#FFFFFF;"
+			 bindtap="returnPage"
+			>
+				<text class="iconfont icon-zuojiantoubeifen;"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">活动提醒</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+
+	<!-- 顾客列表开始 -->
+	<view class="user-list">
+		<view class="user-line1">这些顾客对活动感兴趣：</view>
+		<view class="user-line2">
+			<text wx:for="{{activityRemindList.users}}" wx:key="index">{{item}}</text>
+		</view>
+	</view>
+	<!-- 顾客列表结束 -->
+
+	<!-- 活动列表开始 -->
+	<view class="active-list">
+		<view class="active-item" wx:for="{{activityRemindList.activities}}" wx:key="{{item.id}}">
+
+			<!-- 商品详情 -->
+			<view class="line2 ns-justify-content-space-between">
+				<view class="flex">
+					<view class="line2-left">
+						<image src="{{item.banner}}"/>
+					</view>
+					<view class="line2-right">
+						<view class="line2-name ns-text-limit fs-28 ns-text-bold" style="width:280rpx;">{{item.name}}</view>
+						<view class="line2-price">
+							<view><text class="money">￥</text><text class="ns-text-bold">{{item.price?filters.priceStr(item.price)[0]:'0'}}.<text class="fs-24">{{item.price?filters.priceStr(item.price)[1]:'00'}}</text></text> 起</view>
+						</view>
+					</view>
+				</view>
+				<!-- 分享按钮 -->
+				<view class="line2-other">
+					<view bindtap="openshare" data-id="{{item.id}}" data-content="{{item.market_label}}" data-name="{{item.name}}" data-price="{{item.price}}" class="share iconfont icon-show_fenxiang"> <text class="fs-28">分享</text></view>
+					<view class="share iconfont icon-jinru2" bindtap="goActivityPage" data-id="{{item.id}}"></view>
+				</view>
+			</view>
+			<!-- 图片列表开始 -->
+			<view class="images">
+				<view
+				 wx:if="{{index<=3}}"
+				 wx:for="{{item.goods}}"
+				 wx:for-item="value"
+				 class="images-item"
+				>
+					<image src="{{value.cover_pic}}" data-pic="{{value.cover_pic}}" bindtap="browsePic" mode="aspectFill" />
+					<view class="{{item.goods.length-4 == 0 ? '' : 'number'}}">
+						+{{item.goods.length-4}}
+					</view>
+				</view>
+
+			</view>
+			<!-- 图片列表结束 -->
+			<!-- 文字部分开始 -->
+			<view class="remind-text">
+				<!-- <view class="remind-name" wx:for="{{activityRemindList.users}}">{{item}} </view> -->
+				<view class="remind-content">
+					{{item.market_label}}
+				</view>
+			</view>
+			<!-- 文字部分结束 -->
+			<!-- 日期开始 -->
+			<view class="remind-time">
+				活动时间
+				<text >{{item.start_date}} ~ {{item.end_date}}</text>
+			</view>
+			<!-- 日期结束 -->
+		</view>
+	</view>
+	<!-- 活动列表结束 -->
+
+	<!-- 分享开始 -->
+	<view
+	 class="my-share"
+	 catchtouchmove="stop"
+	 catchtap="quxiao"
+	 wx:if="{{showShare}}"
+	>
+		<view class="show-content" catchtap="stop">
+			<view class="share-item">
+				<button open-type="share" data-type="1">
+					<view class="icon iconfont icon-weixin"></view>
+					<view class="text">只分享活动链接</view>
+				</button>
+			</view>
+			<view class="share-item" data-type="2">
+				<button open-type="share">
+					<view class="icon iconfont icon-weixin1"></view>
+					<view class="text">复制文字后分享</view>
+				</button>
+			</view>
+			<!-- 关闭 -->
+			<view catchtap="quxiao" class="share-close iconfont icon-guanbi2"></view>
+		</view>
+	</view>
+	<!-- 分享结束 -->
+</view>
+

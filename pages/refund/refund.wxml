@@ -1,0 +1,246 @@
+<!--pages/remind/remind.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view style="padding-top: 80rpx;">
+	<view class='remind-top'>
+		<view class="pr box {{0 == currentIndex ? 'act' : ''}}" bindtap='titleClick' data-idx='0'>
+			<view>处理中</view>
+			<view wx:if="{{0 == currentIndex}}" class="under-line"></view>
+		</view>
+		<view class="pr box {{1 == currentIndex ? 'act' : ''}}" bindtap='titleClick' data-idx='1'>
+			<view>已处理</view>
+			<view wx:if="{{1 == currentIndex}}" class="under-line"></view>
+		</view>
+	</view>
+	<view wx:if="{{order_list.length>0}}" class="refund-content fs-20 color-595959">
+		<navigator url="{{status==4?'/pages/order-refund-detail/order-refund-detail?id='+order.order_refund_id:'/pages/order-detail/order-detail?id='+order.order_id}}" class="refund-order mb-20" wx:for="{{order_list}}" wx:for-item="order" wx:key="id" wx:for-index="index">
+			<view class="refund-order-header flex ns-justify-content-space-between ns-align-items-flex-center">
+				<view class="fs-24 color-999999">
+					<text>服务单号：</text>
+					<text>{{order.order_refund_no}}</text>
+				</view>
+				<!-- 退款 -->
+				<!-- TODO -->
+				<view class=" flex ns-align-items-flex-center" wx:if="{{order.refund_type==3}}">
+					<text class="iconfont icon-fukuan1 color-F49E3A fs-36"></text>
+					<text class="fs-24 color-333333 ml-10">退款</text>
+				</view>
+				<!-- 退货 -->
+				<view class=" flex ns-align-items-flex-center" wx:if="{{order.refund_type==1}}">
+					<text class="iconfont icon-tuihuozi color-F49E3A fs-36"></text>
+					<text class="fs-24 color-333333 ml-10">退货</text>
+				</view>
+			</view>
+			<view class="refund-order-main flex">
+				<view class="refund-order-pic">
+					<image style="width: 100%;height: 100%;border-radius: 14rpx;" mode="aspectFit" src="{{order.goods_list[0].goods_first_pic}}"></image>
+				</view>
+				<view class="refund-order-msg ml-20">
+					<view class="flex justify-between">
+						<view style="width: 300rpx;">
+							<view class="fs-30 color-333333 ns-text-limit2">{{order.goods_list[0].goods_name}}</view>
+							<view class="attr fs-24 color-999999 flex" wx:for="{{order.goods_list[0].attr_list}}" wx:for-item="attr" wx:key="id">
+								<view>
+									<text>{{attr.attr_group_name}}：</text>
+									<text>{{attr.attr_name}}</text>
+								</view>
+								<!-- <view class="ml-20">
+									<text>尺码：</text>
+									<text>L</text>
+								</view> -->
+							</view>
+						</view>
+						<view class="ns-text-right">
+							<view class="price fs-20 color-333333 text-bold">¥ <text class="fs-30">{{filters.priceStr(order.goods_list[0].price)[0]}}.</text><text>{{filters.priceStr(order.goods_list[0].price)[1]}}</text></view>
+							<view style="font-size: 24rpx;color: #999999;margin-top: 5rpx;">x {{order.goods_list[0].num}}</view>
+						</view>
+					</view>
+					<view class="refund-order-num fs-24 color-999999 flex mt-20">
+						<view>
+							<text>申请数量：</text>
+							<text class="color-333333">{{order.goods_list[0].num}}</text>
+						</view>
+						<view class="ml-30">
+							<text>退款金额：</text>
+							<text class="color-333333 fs-20">¥ <text class="fs-26">{{filters.priceStr(order.refund_price)[0]}}.</text><text>{{filters.priceStr(order.refund_price)[1]}}</text></text>
+						</view>
+					</view>
+				</view>
+
+			</view>
+			<view class="refund-order-footer">
+				<navigator catchtap url="{{status==4?'/pages/refund-progress/refund-progress?id='+order.order_refund_id:'/pages/order-detail/order-detail?id='+order.order_id}}">
+					<view class="flex ns-justify-content-space-between ns-align-items-flex-center plr-24" style="height: 88rpx;">
+						<view class="flex fs-24 color-333333 color-C10000">
+							<view class="ns-text-bold " >{{order.status_text}}</view>
+							<view class="color-999999" style="flex:1;margin-left: 20rpx;">{{order.refuse_desc}}</view>
+						</view>
+						<!-- <block wx:if="{{order.is_delete==1}}">
+							<view class="flex fs-24 color-333333 ">
+								<view class="ns-text-bold" >已取消</view>
+								<view class="color-999999" style="flex:1;margin-left: 20rpx;">买家取消了售后申请</view>
+							</view>
+						</block>
+						<block wx:else>
+							<block wx:if="{{order.refund_type==1}}">
+								<view class="flex fs-26 color-333333 color-C10000" wx:if="{{order.refund_status==3}}">
+									<view class="ns-text-bold " >已被拒绝</view>
+									<view class="ns-text-limit color-999999" style="flex:1;margin-left: 20rpx;">{{order.refuse_desc}}</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:elif="{{order.is_agree==1 && order.is_user_send==1 && order.refund_status==1}}">
+									<view class="ns-text-bold" >退款成功</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">已退款至你的微信钱包</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:elif="{{order.is_agree==1 && order.is_user_send==1}}">
+									<view class="ns-text-bold" >等待审核</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">您的商品已寄回，待售后审核</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:elif="{{order.is_agree==1 && order.is_user_send==0}}">
+									<view class="ns-text-bold" >寄回商品</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">审核订单已通过，请于5日内寄回商品</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:else>
+									<view class="ns-text-bold" >等待审核</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">您的申请已提交成功，待售后审核</view>
+								</view>
+							</block>
+							<block wx:else>
+								<view class="flex fs-24 color-333333 color-C10000" wx:if="{{order.refund_status==3}}">
+									<view class="ns-text-bold " >已被拒绝</view>
+									<view class="ns-text-limit color-999999" style="flex:1;margin-left: 20rpx;">{{order.refuse_desc}}</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:elif="{{order.is_agree==1 && order.refund_status==1}}">
+									<view class="ns-text-bold" >退款成功</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">已退款至你的微信钱包</view>
+								</view>
+								<view class="flex fs-24 color-333333 " wx:else>
+									<view class="ns-text-bold" >等待审核</view>
+									<view class="color-999999" style="flex:1;margin-left: 20rpx;">您的申请已提交成功，待售后审核</view>
+								</view>
+							</block> -->
+							<!-- <view class="flex fs-24 color-333333 " wx:if="{{order.is_agree==1 && order.is_user_send==1 && order.refund_status!=1}}">
+								<view class="ns-text-bold" >等待审核</view>
+								<view style="flex:1;margin-left: 20rpx;">您的申请已提交成功，待售后审核</view>
+							</view>
+							<view class="flex fs-24 color-333333 " wx:if="{{order.is_agree==0&&order.refund_status==0}}">
+								<view class="ns-text-bold" >等待审核</view>
+								<view style="flex:1;margin-left: 20rpx;">您的申请已提交成功，待售后审核</view>
+							</view>
+							
+							<view class="flex fs-24 color-333333 " wx:if="{{order.is_agree==1 && order.refund_type==1&& order.is_user_send==0 }}">
+								<view class="ns-text-bold" >寄回商品</view>
+								<view style="flex:1;margin-left: 20rpx;">审核订单已发货，请于5日内寄回商品</view>
+							</view>
+							<view class="flex fs-24 color-333333 " wx:if="{{order.is_agree==1 && order.refund_type==3 && order.refund_status!=3}}">
+								<view class="ns-text-bold" >退款成功</view>
+								<view style="flex:1;margin-left: 20rpx;">已退款至你的微信钱包</view>
+							</view>
+							<view class="flex fs-24 color-333333 color-C10000" wx:if="{{order.refund_status==3 }}">
+								<view class="ns-text-bold " >已被拒绝</view>
+								<view class="ns-text-limit" style="flex:1;margin-left: 20rpx;">{{order.refuse_desc}}</view>
+							</view> -->
+						<!-- </block> -->
+						<view>
+							<text class="iconfont icon-jinru" style="color: #ccc;"></text>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</navigator>
+	</view>
+	<!-- <view wx:for="{{order_list}}" wx:for-item="order" wx:key="id" wx:for-index="index" class="iist-item fs-20 color-333333">
+		<navigator url="{{status==4?'/pages/order-refund-detail/order-refund-detail?id='+order.order_refund_id:'/pages/order-detail/order-detail?id='+order.order_id}}"
+		 style="padding-right: 30rpx;">
+			<view class="flex time ns-justify-content-space-between">
+				<view>{{order.addtime}}</view>
+				<view class="flex">
+					<view>{{(order.is_pay==0?'待付款':(order.is_send==0?'待发货':(order.is_confirm==0?'待收货':'交易完成')))}}</view> -->
+					<!-- 删除订单功能 -->
+					<!-- <view class="ml-20" wx:if="{{order.is_confirm==1}}">
+									<text class="iconfont icon-shanchu"></text>
+								</view> -->
+				<!-- </view>
+
+
+			</view>
+			<view wx:if="{{order.goods_list.length>1}}" class="pic-list">
+				<scroll-view scroll-x="true" style="width: 100%; white-space: nowrap;">
+					<image wx:for="{{order.goods_list}}" wx:for-item="goods" wx:key="id" src="{{goods.goods_pic[0]}}"></image>
+
+				</scroll-view>
+			</view>
+			<view wx:else class="pic-list ns-flex">
+				<view>
+					<image src="{{order.goods_list[0].goods_pic[0]}}"></image>
+				</view>
+				<view class="ns-padding-left-sm">
+					<view class="flex ns-justify-content-space-between">
+						<view class='fs-24 color-333333 ns-text-limit2' style="width: 396rpx;">{{order.goods_list[0].goods_name}}</view>
+						<view class="ns-text-right">
+							<view class="fs-24 color-333333">¥ {{order.goods_list[0].price}}</view>
+							<view class="fs-20" style="color: #929292;">x {{order.goods_list[0].num}}</view>
+						</view>
+					</view>
+					<view class='ns-text-xs ns-text-gray ns-flex'>
+						<view class='ns-padding-right-xs' wx:for="{{order.goods_list[0].attr_list}}" wx:for-item="attr" wx:key="id">{{attr.attr_group_name}}：{{attr.attr_name}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="time flex ns-justify-content-space-between">
+				<view>
+					<view>订单编号：{{order.order_no}}</view>
+
+				</view>
+				<view class="flex">
+					<view>共 {{order.goods_list.length}} 件商品</view>
+					<view class="ml-10">合计 ¥ {{order.pay_price?order.pay_price:order.refund_price}}</view>
+				</view>
+			</view>
+		</navigator>
+		<block wx:if="{{status==4}}">
+			<view class="ns-text-right ns-lh-80 ns-bdt-default ns-padding-right-sm" wx:if="{{order.refund_status==0}}">
+				<block wx:if="{{order.refund_type==1}}">
+					<block wx:if="{{order.is_agree==0}}">等待处理</block>
+					<block wx:else>
+						<block wx:if="{{order.is_user_send==0}}">待买家发货</block>
+						<block wx:else>等卖家待处理</block>
+					</block>
+				</block>
+				<block wx:else>等卖家待处理</block>
+			</view>
+			<view class="ns-text-right ns-lh-80 ns-bdt-default ns-padding-right-sm" style="color: #36ba75" wx:if="{{order.refund_status==1}}">已同意并退款</view>
+			<view class="ns-text-right ns-lh-80 ns-bdt-default ns-padding-right-sm" style="color: #36ba75" wx:if="{{order.refund_status==2}}">已同意换货</view>
+			<block wx:if="{{order.refund_status==3}}">
+				<view class="ns-text-right ns-lh-80 ns-bdt-default ns-padding-right-sm" style="color: #c10000" wx:if="{{order.refund_type==1}}">已拒绝退货退款</view>
+				<view class="ns-text-right ns-lh-80 ns-bdt-default ns-padding-right-sm" style="color: #c10000" wx:if="{{order.refund_type==2}}">已拒绝换货</view>
+			</block>
+		</block>
+		<block wx:else>
+			<view class='ns-flex ns-justify-content-end btn'>
+				<block wx:if="{{order.is_send==0}}">
+					<text style="line-height:80rpx;" wx:if="{{order.apply_delete==1}}">退款申请中</text>
+					<view wx:else bindtap="orderRevoke" data-id="{{order.order_id}}">{{order.is_pay ? "退款" : "取消订单"}}</view>
+
+				</block>
+
+				<block wx:if="{{order.is_send==1&&order.is_confirm==0}}">
+					<view wx:if='{{order.express}}'>
+						<navigator url="/pages/express-detail/express-detail?id={{order.order_id}}">查看物流
+						</navigator>
+					</view>
+					<view class='go' bindtap="orderConfirm" data-id="{{order.order_id}}">确认收货</view>
+				</block>
+
+
+				<block wx:if="{{order.refund==1}}">
+					<view>
+						<navigator open-type='redirect' url="/pages/order/order?order_id={{order.order_id}}&status=4">售后详情
+						</navigator>
+					</view>
+				</block>
+			</view>
+		</block>
+	</view> -->
+	<view wx:if="{{order_list.length==0}}" class="no-data-tip">暂无相关订单</view>
+
+
+</view>

@@ -1,0 +1,57 @@
+/* pages//private/privateBasket/privateBasket.wxss */
+page {
+	height: 100%;
+	background: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+	position: relative;
+}
+.body {
+	padding: 20rpx;
+	padding-bottom: 120rpx;
+}
+.express-way {
+	background: #fff;
+	height: 80rpx;
+	width: 100%;
+	line-height: 80rpx;
+	padding: 0 20rpx;
+}
+.invite-btn {
+	height: 80rpx;
+	line-height: 80rpx;
+	background-color: #fff;
+}
+.line {
+	width: 539rpx;
+	height: 2rpx;
+	background: #D6D6D6;
+	margin:auto;
+}
+.footer {
+	position: fixed;
+	background: #fff;
+	height: 100rpx;
+	width: 100%;
+	bottom: 0rpx;
+}
+.pay-btn {
+	width: 202rpx;
+	height: 100%;
+	color: #fff;
+}
+.tips {
+	position: fixed;
+	top: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 999;
+}
+.tips-content {
+	width: 590rpx;
+	border-radius: 10rpx;
+	padding:30rpx 20rpx 0;
+	overflow: hidden;
+	margin: auto;
+	background-color: #fff;
+}

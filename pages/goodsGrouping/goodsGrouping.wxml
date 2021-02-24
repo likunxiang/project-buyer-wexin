@@ -1,0 +1,57 @@
+<!--pages/goodsGrouping/goodsGrouping.wxml-->
+<view class="page pr">
+	<slide-icon showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>
+	<view class="header">
+		<view class="cu-bar search" style="margin-top: 40rpx;">
+			<view class="search-form round" style="border-radius: 28rpx;height: 58rpx;line-height: 58rpx;margin: 0;">
+				<text class="cuIcon-search fs-30 color-616161"></text>
+				<input type="text" placeholder="请输入搜索关键字" placeholder-style="color:#999;font-size:26rpx" ></input>
+			</view>
+		</view>
+		<view class="nav-tab flex justify-between align-center">
+			<view class="flex">
+				<view class="fs-30 pr {{navIns==index?'color-333333':'color-999999'}}" data-index="{{index}}" bindtap="changeNav" wx:for="{{navList}}" wx:key='key' style="margin-right: 46rpx;">
+					<view>{{item}}</view>
+					<view class="under-line" wx:if="{{navIns==index}}"></view>
+				</view>
+			</view>
+			<view class="flex">
+				<view class="flex ml-20 ns-align-items-flex-center" bindtap="priceSort">
+					<view class="fs-28">价格</view>
+					<view class="ml-10 fs-34 color-D6D6D6">
+						<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+						<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="main flex justify-between">
+		<navigator class=" miaosha-goods mb-20" style="background: #fff;border-radius: 20rpx;width: 340rpx;overflow: hidden;"
+		 wx:for="{{item.goods}}" wx:for-item="nav" wx:for-index="idx" wx:key="key" url="/pages/goods/goods?id={{nav.id}}">
+			<view class="pr ns-flex ns-justify-content-center">
+				<image lazy-load="true" style="width: 340rpx;height: 340rpx;border-radius: 20rpx 20rpx 0 0;" mode="aspectFill" src="{{nav.first_cover_pic}}"></image>
+				<!-- <view class="pa shopTab" wx:if="{{filters.parseInt(nav.price)!==filters.parseInt(nav.original_price)&&filters.parseInt(nav.price)<filters.parseInt(nav.original_price)}}">{{filters.toFix((nav.price/nav.original_price)*10,1)}}折</view> -->
+				<view wx:if="{{nav.goods_num==0}}" class="nonum-tip">已抢光</view>
+			</view>
+			<view class="bg-white" style="padding: 0 16rpx 16rpx;">
+				<view class='ns-text-limit fs-28 color-333333'>{{nav.name}}</view>
+				<view class="clear miaosha_price flex ns-align-items-flex-center justify-between" style="font-size:36rpx;">
+					<view class="" style="color:#c10000;margin-right:21rpx;font-weight:600">
+						￥{{filters.toFix1(nav.price)}}
+					</view>
+					<view class="fs-30 iconfont icon-gouwuche_weixuanzhong add-cart-icon" catchtap="openCart" data-id="{{item.id}}"
+					 data-index="{{index}}"></view>
+					<!-- <view class="flex ns-align-items-flex-center" wx:if="{{role=='shoper' && nav.commission_price>0}}">
+								<view class="yongjin">赚</view>
+								<view class="fs-28 color-2C2C2C">￥{{nav.commission_price}}</view>
+							</view> -->
+					<!-- <view class="pull-left" style="text-decoration:line-through">
+				            ￥{{nav.original_price}}
+				          </view> -->
+				</view>
+			</view>
+		
+		</navigator>
+	</view>
+</view>

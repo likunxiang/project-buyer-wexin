@@ -1,0 +1,44 @@
+<!--pages/openshopStatus/openshopStatus.wxml-->
+
+	<view class="all">
+		<block wx:if="{{status==2}}">
+			<view style="height: 100%;">
+				<view class="flex-x-center ns-align-items-flex-center" style="margin-top: 180rpx;">
+					<text class="iconfont icon-guanbi1 " style="font-size: 50rpx;"></text>
+					<view class="fs-28 color-2C2C2C ml-24">很抱歉，您的申请失败</view>
+				</view>
+				<view class="error-btn"  bindtap="openShop">重新申请</view>
+				<view class="error-btn-yellow" bindtap="toIndex">返回首页</view>
+			</view>
+		</block>
+		
+		<block>
+			<block wx:if="{{status==0}}">
+				<view class="hu">
+					<view class="icon-box text-center" style="padding-top: 20rpx;">
+						<!-- <image style="width: 238rpx;height: 238rpx;" mode="aspectFill" src="image/icon-succeed.png"></image> -->
+						<view class="iconfont icon-gou color-fff ns-text-bold" style="font-size: 100rpx;"></view>
+						<view class="fs-28 color-fff">提交成功</view>
+					</view>
+				</view>
+				<view class="text-box">
+					<view class="flex flex-x-center fs-28 color-2C2C2C ns-text-bold">提交成功，请等待管理员审核</view>
+					<view class="flex flex-x-center fs-28 color-8D8D8D mt-24">（预计1～3个工作日内审核完毕）</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="hu">
+					<view class="icon-box text-center" style="padding-top: 20rpx;">
+						<view class="iconfont icon-gantanhao color-fff" style="font-size: 100rpx;"></view>
+						<view class="fs-28 color-fff">审核中…</view>
+					</view>
+				</view>
+				<view class="text-box">
+					<view class="flex flex-x-center fs-28 color-2C2C2C ns-text-bold">审核中，请耐心等待管理员审核</view>
+					<view class="flex flex-x-center fs-28 color-8D8D8D mt-24">（预计1～3个工作日内审核完毕）</view>
+				</view>
+			</block>
+			<view class="return-btn" bindtap="toIndex" wx:if="{{status!=2}}">返回首页</view>
+		</block>
+	</view>
+

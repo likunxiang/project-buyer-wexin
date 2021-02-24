@@ -1,0 +1,31 @@
+<!--pages/selfHelpService/selfHelpService.wxml-->
+<view class="page p-24">
+	<view class="answer public-box mb-24">
+		<view class="fs-30 color-333333 pb-32 mb-32" style="border-bottom: 1rpx solid #F4F4F4;">安全小提示</view>
+		<view class="fs-24 color-333333" style="padding-bottom: 8rpx;line-height: 38rpx;">
+			<!-- <rich-text node></rich-text> -->
+			
+			                                近期骗子异常活跃，现提供一点防骗小招，请大家在购物时谨防诈骗。
+			绝招1：拒绝向陌生人转账、汇款，不要在陌生链接中付款，不要接受陌生文件或随意扫描陌生二维码付款。
+			绝招2：不轻信“刷信用”“刷单”等骗子常用手段。
+			绝招3：收到中奖消息后请仔细辨认，当当没有“周年庆典”、“幸运用户抽奖”等活动，官网活动领奖不需要缴纳手续费、快递费。
+			绝招4：任何一个验证码都有可能和您的款项相关，请勿随意告知他人。
+			绝招5：任何涉及款项、个人信息等相关操作，请第一时间联系官方客服核实确认。
+			                            
+		</view>
+	</view>
+	<view class="public-box mb-24" style="padding-bottom: 16rpx;">
+		<view class="fs-30 color-333333 pb-32" style="border-bottom: 1rpx solid #F4F4F4;">以上是否解决了你的问题</view>
+		<view class="flex justify-between" style="padding: 16rpx 56rpx 0;">
+			<view class="btn fs-30 color-333333">有用</view>
+			<view class="btn fs-30 color-333333">没用</view>
+		</view>
+	</view>
+	<view class="public-box flex justify-between">
+		<view class="fs-30 color-333333 ns-text-bold">没有找到相关问题？</view>
+		<view class="fs-30 color-999999 flex align-center">
+			<text>联系客服</text>
+			<text class="iconfont icon-jinru fs-30" ></text>
+		</view>
+	</view>
+</view>

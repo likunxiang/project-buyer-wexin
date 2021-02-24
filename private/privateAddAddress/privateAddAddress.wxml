@@ -1,0 +1,86 @@
+<view class="page  pr">
+	<view class="body">
+
+		<view class="bottom-bar" bindtap="editAddress" wx:if="{{id}}">保存</view>
+		<view class="bottom-bar" bindtap="saveAddress" wx:else>保存</view>
+
+
+		<view>
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">联系人</view>
+					<view class="flex-grow-1">
+						<input placeholder="请输入联系人真实姓名" value="{{name}}" data-name="name" bindinput="inputBlur" />
+					</view>
+				</view>
+
+				<view class="flex-row flex-y-center edit-row">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">联系电话</view>
+					<view class="flex-grow-1">
+						<input placeholder="请输入联系人手机号码" value="{{mobile}}" data-name="mobile" type="number" bindinput="inputBlur" />
+					</view>
+				</view>
+
+			</view>
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">提货地址</view>
+					<view class="flex-grow-1 flex-row" bindtap="showAreaPicker">
+						<view class="flex-grow-1" style="padding-right: 24rpx">
+							<block wx:if="{{district==null}}">请选择</block>
+							<block wx:else>{{district.province.name}} {{district.city.name}} {{district.district.name}}</block>
+						</view>
+						<view class="flex-grow-0 flex-y-center">
+							<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+						</view>
+					</view>
+				</view>
+
+				<view class="flex-row flex-y-center edit-row">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">详细地址</view>
+					<view class="flex-grow-1">
+						<input placeholder="请输入到门牌号的详细地址" value="{{detail}}" data-name="detail" bindinput="inputBlur" />
+					</view>
+				</view>
+			</view>
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">提货点名称</view>
+					<view class="flex-grow-1">
+						<input placeholder="请输入提货点名称" value="{{pick_up_name}}" data-name="pick_up_name" bindinput="inputBlur" />
+					</view>
+				</view>
+			</view>
+
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom">
+					<view class="flex-grow-0 row-label fs-28 color-2C2C2C ns-text-bold">提货时间</view>
+					<view class="flex-grow-1 flex">
+						<view class="flex1">
+							<picker mode="time" value="{{startPickUpTime}}" bindchange="bindStartTimeChange">
+								<view class="picker ns-text-center">
+									{{startPickUpTime?startPickUpTime:'开始时间'}}
+								</view>
+							</picker>
+						</view>
+						<view class="flex1">
+							<picker mode="time" value="{{endPickUpTime}}" bindchange="bindEndTimeChange">
+								<view class="picker ns-text-center">
+									{{endPickUpTime?endPickUpTime:'结束时间'}}
+								</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- <view class="set-default mt-20 flex ns-align-items-flex-center ns-justify-content-space-between">
+				<view class="fs-28 color-2C2C2C ">设置为默认地址</view>
+				<switch color="#1A4C4B" bindchange="changeDefault" checked="{{is_default==1}}" ></switch>
+			</view> -->
+		</view>
+
+	</view>
+	<include src="/components/footer/footer" />
+	<include src="/components/area-picker/area-picker.wxml" />
+</view>

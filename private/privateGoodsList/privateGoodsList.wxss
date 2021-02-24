@@ -1,0 +1,68 @@
+/* pages//private/privateGoodsList/privateGoodsList.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+}
+.header {
+	position: fixed;
+	top: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	z-index: 1;
+}
+.search-box {
+	width: 580rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	background-color: #F2F2F2;
+	margin-right: 20rpx;
+}
+.sou-btn {
+	width: 100rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+}
+.tab-box {
+	padding: 0 163rpx;
+	width: 100%;
+}
+
+.tab {
+	width: 140rpx;
+	height: 68rpx;
+	line-height: 68rpx;
+	text-align: center;
+	font-size: 28rpx;
+	color: #595959;
+}
+
+.tab-active {
+	color: #FF9100;
+	border-bottom: 6rpx solid #FF9100;
+}
+.body {
+	padding: 0 25rpx;
+	height: 100%;
+	padding-top: 190rpx;
+}
+.edit {
+	position: absolute;
+	top: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	bottom: 0rpx;
+	background: rgba(0,0,0,0.4);
+	padding: 0 100rpx;
+}
+.edit-ball {
+	width: 120rpx;
+	height: 120rpx;
+	background-color: #fff;
+	border-radius: 50%;
+	padding-top: 10rpx;
+	padding-bottom: 12rpx;
+}

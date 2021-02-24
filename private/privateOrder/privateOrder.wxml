@@ -1,0 +1,73 @@
+<!--pages//private/privateOrder/privateOrder.wxml-->
+<view class="page">
+	<view class="tab-box flex ns-justify-content-space-between bg-white">
+		<view class="tab {{tabIns==index?'tab-active ns-text-bold':''}}" wx:for="{{tabList}}" data-index="{{index}}" bindtap="changeTab">{{item}}</view>
+	</view>
+	<block wx:if="{{orderList.length>0}}">
+		<view class="body">
+			<view wx:for="{{orderList}}" wx:for-item="order" wx:key="id" class="order bg-white mb-20 border-radius-8">
+				<view class="order-header flex justify-between align-center fs-24 border-bottom pr">
+					<view class="flex">
+						<view class="color-595959">{{order.addTime}}</view>
+					</view>
+					<view class="type_tips fs-24 color-fff {{tabIns==2?'bg-9B9B9B':''}}">
+						{{order.expressSet}}
+					</view>
+				</view>
+				<navigator url="/private/privateOrderdetail/privateOrderdetail?order_id={{order.id}}" class="border-bottom" hover-class="none">
+					<view  class="order-list-no-pay-body" wx:for="{{order.mchMyOrderDetail}}" wx:key="id" wx:for-item="goods">
+						<view class="flex">
+							<image style="width: 150rpx;height: 150rpx;" mode="aspectFill" src="{{goods.pic}}"></image>
+							<view class="flex1 flex ns-justify-content-space-between" style="margin-left: 18rpx;">
+								<view style="width: 400rpx;">
+									<view class="ns-text-limit2 fs-24 color-595959">{{goods.name}}</view>
+								</view>
+								<view class="ns-text-right">
+									<view class="price fs-24 color-595959">¥ {{goods.price}}</view>
+									<view style="font-size: 20rpx;color: #929292;margin-top: 5rpx;">x {{goods.num}}</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</navigator>
+				<view class="order-list-no-pay-footer flex ns-justify-content-space-between">
+					<view class="fs-20 color-595959">订单编号：{{order.order_no}}</view>
+					<view>
+						<view class="fs-20">共 {{order.goodsNum}} 款商品  应付总额 <text class="">¥ {{order.pay_price}}</text></view>
+					</view>
+				</view>
+				<view class="order-list-no-pay-btn flex justify-between">
+					<view>
+						<view class=" color-489A19 fs-24" wx:if="{{!order.is_cancel_show && !order.is_confirm_show && order.is_confirm==0 && order.is_cancel == 0}}" >等待店主确定是否可以取消</view>
+					</view>
+					<view class="flex">
+						<view class="sure-btn color-FF9100 fs-24" bindtap="payOrder" wx:if="{{order.is_pay_show}}" data-id="{{order.id}}" data-index='{{index}}'>立即付款</view>
+						<view class="sure-btn color-FF9100 fs-24" wx:if="{{order.is_confirm_show}}" bindtap="confirmOrder" data-id="{{order.id}}" data-index='{{index}}'>确认收货</view>
+						<navigator url="/pages/express-detail/express-detail?id={{order.id}}&type=private" class="sure-btn color-FF9100 fs-24" wx:if="{{order.is_expressNo_show}}">查看物流</navigator>
+						<view class="sure-btn color-FF9100 fs-24" wx:if="{{order.is_cancel_show}}" data-id="{{order.id}}" data-index='{{index}}' bindtap="orderRevoke">取消订单</view>
+					</view>
+					
+					<!-- <navigator url="/private/privateEvaluate/privateEvaluate?id={{order.id}}" class="sure-btn color-FF9100 fs-24" wx:if="{{order.is_confirm == 1 && order.is_cancel == 0}}" >评价</navigator> -->
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="body" style="height:calc(100vh - 88rpx);">
+			<view class="body-kong flex-x-center flex-y-center">
+					<view>
+						<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+						<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+							<view>暂无相关订单～</view>
+							<view>去逛逛吧</view>
+							<navigator url="/private/home/home?type=1" style="text-decoration: underline;">返回首页</navigator>
+						</view>
+					</view>
+			</view>
+		</view>
+	</block>
+	<view class="call-shoper flex-x-center flex-y-center color-fff" bindtap="copyText">
+		<view class="iconfont icon-weixin fs-40 mr-20"></view>
+		<view class="fs-24">联系店主</view>
+	</view>
+</view>

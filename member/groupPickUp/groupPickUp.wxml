@@ -1,0 +1,66 @@
+<!--pages/groupPickUp/groupPickUp.wxml-->
+<view class="page flex ns-column">
+	<view class="header">
+		<image style="width: 100%;height: 100%;" mode="aspectFill" src="{{pickBackground}}"></image>
+	</view>
+	<view class="now-address padding-lr ptb-20 bg-white">
+		<view class="flex justify-between">
+			<view class="fs-30 color-4A4A4A">当前位置</view>
+			<view class="color-489A19 fs-28 flex align-center" bindtap="editPickUp">
+				<text>修改</text>
+				<text class="iconfont icon-gengduo fs-20 ml-10"></text>
+			</view>
+		</view>
+		<view class="fs-30 ns-text-bold mt-10" style="color: #000000;">
+			{{address}}
+		</view>
+	</view>
+	<view class="flex1 pr p-20" style="padding-bottom: 200rpx;">
+		<block wx:if="{{!pickList}}">
+			<view style="padding-top: 180rpx;">
+				<view class="iconfont icon-kong ns-text-center color-D6D6D6" style="font-size: 160rpx;"></view>
+				<view class="ns-text-bold" style="font-size: 30rpx;color: #000000;text-align: center;margin-top: 40rpx;">
+					<view>周边暂无自提点呀</view>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="pick-up flex align-center mb-20" wx:for="{{pickList}}" wx:key="id">
+				<view class="pick-up-img mr-20">
+					<image style="width: 100%;height: 100%;" src="{{item.user[0].avatar_url}}"></image>
+				</view>
+				<view class="" style="width: 540rpx;">
+					<view class="flex justify-between align-center">
+						<view class="fs-34 color-4A4A4A ns-text-bold">{{item.people_name}}</view>
+						<view class="flex align-center">
+							<view class="color-FF9100 fs-24">距离 {{item.distanceActionKM}}</view>
+							<view class="choose-btn fs-28 color-fff ml-10" bindtap="choosePick" data-pick="{{pickList[index]}}">选择</view>
+						</view>
+					</view>
+					<view class="fs-28 color-000000 ns-text-limit ns-text-bold mt-10">自提点: {{item.address}}</view>
+				</view>
+			</view>
+		</block>
+		<view class="footer" wx:if="{{!pickList}}">
+			<view class="flex-x-center ptb-20">
+				<view class="flex color-9B9B9B fs-24">
+					<text class="iconfont icon-zhengque" style="margin-right: 13rpx;"></text>
+					<text class="">品牌正品</text>
+				</view>
+				<view class="flex color-9B9B9B fs-24 ml-20">
+					<text class="iconfont icon-zhengque" style="margin-right: 13rpx;"></text>
+					<text class="">官方客服</text>
+				</view>
+				<view class="flex color-9B9B9B fs-24 ml-20">
+					<text class="iconfont icon-zhengque" style="margin-right: 13rpx;"></text>
+					<text class="">超多爆款</text>
+				</view>
+				<view class="flex color-9B9B9B fs-24 ml-20">
+					<text class="iconfont icon-zhengque" style="margin-right: 13rpx;"></text>
+					<text class="">超低折扣</text>
+				</view>
+			</view>
+			<navigator url="/pages/index/index" open-type="redirect" hover-class="none" class="footer-btn ns-text-bold fs-30" bindtap="editShop">去逛逛快递到家的商品</navigator>
+		</view>
+	</view>
+</view>

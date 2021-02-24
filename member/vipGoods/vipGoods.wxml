@@ -1,0 +1,48 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<view class="body">
+		<include src="/components/specifications_model/specifications_model.wxml" />
+		<include src="/components/goods/specifications_model.wxml" />
+		<!-- <include src="/components/quick-navigation/quick-navigation" /> -->
+		<view class="{{(show_attr_picker||show||no_scroll)?'no-scroll':''}}">
+			<view style="padding-bottom: 120rpx">
+				<include src="/components/goods/goods_banner.wxml" />
+				<view class="goodsHeader flex ns-justify-content-space-between ns-align-items-flex-center" wx:if="{{goods_attr}}" style="background: url({{goods.banberImg.b}}) no-repeat;background-size: 100% 107rpx;">
+					<view class="flex">
+						<view class="fs-40">￥<text style="font-size: 60rpx;">{{filters.priceStr(goods.price)[0]}}.</text><text>{{filters.priceStr(goods.price)[1]}}</text></view>
+						<view class="ml-16">
+							<view class="price-tips">{{goods.start_buy==1?'结束时间':'开始时间'}}</view>
+							<view class="ns-text-through fs-30" style="opacity: 0.6;">￥{{goods.original_price}}</view>
+						</view>
+					</view>
+					<!-- 佣金 -->
+					<!-- <view class="flex ns-align-items-flex-center ml-20 mt-30" wx:if="{{role=='shoper' && goods.c1>0}}">
+						<view class="yongjin fs-28">赚</view>
+						<view class="fs-28 color-fff">￥{{goods.c1}}</view>
+					</view> -->
+					<view class="fs-28">
+						<view class="text-center fs-24 mb-10">结束时间</view>
+						<view class="activity-time">{{goods.show_txt}}</view>
+					</view>
+				</view>
+				<include src="/components/goods/goods_info.wxml" />
+				<!-- 特别提示 -->
+			</view>
+
+			<!-- 快速购买 购物车 -->
+			<block wx:if="{{quick == 1}}">
+				<include src="/components/shopping_cart/shopping_cart" />
+			</block>
+			<block wx:else>
+				<!-- <navigator url="/pages/cart/cart" class="cart-nav" open-type="redirect">
+                    <image src="{{__wxapp_img.nav.cart.url}}"></image>
+                </navigator> -->
+				<include src="/components/goods/goods_buy" />
+			</block>
+			<include src="/components/common/get-coupon.wxml" />
+		</view>
+	</view>
+	<include src="/components/footer/footer" />
+</view>

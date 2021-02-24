@@ -1,0 +1,66 @@
+.managerBox {
+	width: 750rpx;
+	height: 1600rpx;
+	background-size: 750rpx 1600rpx;
+	background-repeat: no-repeat;
+}
+
+.con {
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	padding: 0 24rpx;
+	position: fixed;
+}
+
+.progress-box {
+	position: absolute;
+	bottom: 870rpx;
+	padding: 0 56rpx;
+	width: 100%;
+}
+
+.backBtn {
+	font-size: 36rpx;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	max-width: 100%;
+	color: #FFFFFF;
+	opacity: 0.5;
+}
+
+.btn-box {
+	left: 0rpx;
+	width: 750rpx;
+	bottom: 62rpx;
+	position: fixed;
+	padding: 0 24rpx;
+	width: 100%;
+}
+
+.shopBtn-empty {
+	border: 2rpx solid #FCE8C9;
+	width: 702rpx;
+	height: 88rpx;
+	border-radius: 44rpx;
+	font-size: 36rpx;
+	font-family: PingFang SC;
+	font-weight: 500;
+	color: rgba(252, 232, 201, 1);
+	text-align: center;
+	line-height: 84rpx;
+}
+
+.shopBtn {
+	background: rgba(254, 91, 42, 1);
+	border: none;
+	line-height: 88rpx;
+}
+
+button {
+	background-color: #C31927;
+	margin: 0;
+}

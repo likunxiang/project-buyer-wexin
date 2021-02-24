@@ -1,0 +1,45 @@
+<!--pages/brandLike/brandLike.wxml-->
+<include src="/components/common/common" />
+<view class="page">
+	<view class="header p-24 flex align-center justify-between">
+		<view class="fs-30 ns-text-bold color-333333">我关注的品牌</view>
+		<view class="cu-btn round color-fff" data-type="{{2}}" style="background: linear-gradient(-90deg, #FF9701, #FFC901);border-radius: 30rpx;font-size: 24rpx;" bindtap="openChoose">添加品牌</view>
+	</view>
+	<block wx:if="{{brandList.length <= 0}}">
+		<view>
+			<image src="{{brandEmpty}}" mode="aspectFill" style="width: 750rpx;height: 830rpx;"></image>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="plr-24"> 
+			<view class="public-box" style="padding-top: 0rpx;padding-bottom: 0rpx;">
+				<view class=" flex justify-between align-center" style="padding-top: 52rpx;padding-bottom: 52rpx;" wx:for="{{brandList}}" wx:key='id'>
+					<view class="fs-30 color-333333 flex-grow-1 ns-text-limit" >{{item.brand_name}}</view>
+					<view class="flex align-center flex-grow-0">
+						<view class="fs-24" style="color: #FFC430;margin-right: 40rpx;margin-left: 20rpx;width:50rpx" ><text data-id="{{item.brand_id}}" bindtap="recoverSwitch" wx:if="{{item.is_show}}">显示</text></view>
+						<view class="flex align-center" style="margin-right: 51rpx;">
+							<view class="fs-24 color-999999">提醒</view>
+							<view class="iconfont {{item.is_remind == 1?'icon-xuanzhong':'icon-weixuanzhong'}} fs-40" style="color: #FFC32F;margin-left: 13rpx;" bindtap="changeRemind" data-index="{{index}}" data-id="{{item.id}}"></view>
+						</view>
+						<view class="iconfont icon-shanchu2 fs-40" style="color: #B9B9B9;" bindtap="delBrand" data-index="{{index}}" data-id="{{item.id}}"></view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	
+	<!-- 选择 -->
+	<Select
+	 wx:if="{{isShow}}"
+	 arrData="{{chooseBrandList}}"
+	 isShow="{{isShow}}"
+	 selectType="{{type}}"
+	 bindgetBrandList='getBrandList'
+	 title="品牌名称"
+	 inputText="请输入品牌名称"
+	 bindquxiao="quxiao"
+	 bindbinddata="bindData"
+	 bindsearch="searchData"
+	 bindgetmore="getMore"
+	></Select>
+</view>

@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="header clear">
+    <view class="clear seach pull-left">
+      <view class="pull-left">
+        <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/seach.png"></image>
+      </view>
+      <input placeholder="搜索商品名称、订单编号" maxlength="42" value="{{seachVal}}" class="pull-left" bindconfirm="sendSeach" bindinput="seachInput"></input>
+    </view>
+    <view class="pull-right cencle" bindtap="sendSeach">搜索</view>
+  </view>
+  <!-- 历史搜索 -->
+    <view class="history" wx:if="{{showHistor}}">
+      <view class="historyTitle">
+        历史搜索
+        <image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/bin.png" class="pa" bindtap="removeHistory"></image>  
+      </view>
+      <view class="clear tabs">
+        <view class="pull-left" bindtap="history" wx:for="{{historyList}}" wx:key="{{index}}">{{item}}</view>
+      </view>
+    </view>
+</view>

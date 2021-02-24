@@ -1,0 +1,36 @@
+<!--pages//private/privateService/privateService.wxml-->
+<view class="page pr">
+	<view class="p-24 flex align-center">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">店主自营业务介绍</view>
+	</view>
+	<view class="bg-white" style="padding: 25rpx 35rpx">
+		<view class="fs-24 color-595959" style="line-height: 47rpx;"><rich-text nodes="{{ywjs}}"></rich-text></view>
+	</view>
+	<view class="p-24 flex align-center">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C">
+			<text class="ns-text-bold">店主自营业务介绍</text>（详细内容请阅读完整协议）</view>
+	</view>
+	<view class="bg-white" style="padding: 25rpx 35rpx">
+		<view class="fs-24 color-595959" style="line-height: 47rpx;"><rich-text nodes="{{fwxyzd}}"></rich-text></view>
+	</view>
+
+	<view class="footer justify-between">
+		<view class="flex-x-center align-center mb-30">
+			<view class="iconfont {{is_ready?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40" bindtap="ready"></view>
+			<view class="fs-24 color-595959 ml-20 flex">
+				<text>我已阅读</text>
+				<navigator url="/pages/article-detail/article-detail?id={{fwxy_id}}" class="color-F49E3A">《亲铺店主自营服务协议》</navigator>
+				<text>和</text>
+				<navigator url="/pages/article-detail/article-detail?id={{ystk_id}}" class="color-F49E3A">《隐私条款》</navigator>
+			</view>
+		</view>
+		<!-- <view class="btn-box" bindtap="sureBtn">
+			确定开通
+		</view> -->
+		<button class="btn-box" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+			确定开通
+		</button>
+	</view>
+</view>

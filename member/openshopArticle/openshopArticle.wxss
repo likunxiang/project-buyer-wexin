@@ -1,0 +1,23 @@
+/* pages/openshopArticle/openshopArticle.wxss */
+@import "../../wxParse/wxParse.wxss";
+page {
+	background: #fff;
+}
+.open-shop-article {
+	padding: 20rpx 35rpx;
+}
+.article {
+	
+	height: 991rpx;
+	background: #D8D8D8;
+}
+.open-btn {
+	padding: 18rpx 0;
+	width: 670rpx;
+	text-align: center;
+	font-size: 30rpx;
+	background: #252E3E;
+  margin: 10rpx auto 0;
+	color: #fff;
+ 	/* bottom: 81rpx; */
+}

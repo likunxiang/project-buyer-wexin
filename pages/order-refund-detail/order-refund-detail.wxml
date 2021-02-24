@@ -1,0 +1,14 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page pr">
+    <include src="/components/common/common" />
+    <include src="/components/header/header" />
+    <view  class="body after-navber pr">
+        <include src="/components/goods/goods_send.wxml" />
+    </view>
+	<view class="footer flex justify-end">
+		<!-- <view class="btn">看相似</view> -->
+		<view class="btn btn-red-full" bindtap="cancelRefund" wx:if="{{order_refund.is_delete==0 && order_refund.refund_status==0}}">撤销申请</view>
+		<button class="btn btn-red" open-type="contact" session-from="refund_id={{order_refund_id}}|nickName={{nickName}}|avatarUrl={{avatarUrl}}|type={{type}}|userId={{userId}}|mchId={{mchId}}|storeId={{storeId}}"
+		 bindcontact="handleContact">联系客服</button>
+	</view>
+</view>

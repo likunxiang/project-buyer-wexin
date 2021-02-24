@@ -1,0 +1,136 @@
+<!--pages/activity/activity.wxml-->
+<include src="/components/goods/specifications_model.wxml" />
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="activity flex ns-column">
+	<view class='nav pr' style="height:286rpx;">
+		
+		<image style="width: 100%;height: 286rpx;position: absolute;z-index: -1;" mode="aspectFill" src="{{act_bg}}"></image>
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn flex1" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view class="flex1 text-center"></view>
+			<view class="flex1"></view>
+		</view>
+		<view style="position: absolute;right: 82rpx;bottom: 25rpx;">
+			<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+			 class="iconfont icon-sousuo" bindtap="toSearch"></view>
+			<view class="fs-20 text-center">搜索</view>
+		</view>
+		<view style="position: absolute;right: 24rpx;bottom: 25rpx;">
+			<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+			 class="iconfont icon-fenxiang" bindtap="showShareModal"></view>
+			<view class="fs-20 text-center">分享</view>
+		</view>
+	</view>
+	<view class="guang-nav-list flex"  wx:if="{{type != 3}}">
+		<view style="width: 100%;">
+			<scroll-view scroll-x="true" enable-flex="true" scroll-into-view="{{toview}}" style="padding-right: 24rpx;">
+				<view class="flex align-center" style="padding-left: 24rpx;">
+					<view class="nav-tab flex-grow-0 ns-flex-shrink-no pr {{value.id==chooseIns?'color-333333':''}}" bindtap="changeNav"
+					 wx:for="{{catalog}}" wx:for-item="value" wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}"
+					 data-text="{{value.name}}">
+						<view>{{value.name}}</view>
+						<view wx:if="{{value.id==chooseIns}}" class="nav-active"></view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+
+	</view>
+
+	<!-- 商品区 -->
+	<scroll-view scroll-y="true" class="goods-list flex ns-wrap ns-justify-content-space-between pr" style="height: calc(100vh - 376rpx);" bindscrolltolower='getMore' scroll-top="{{topNum}}" bindscroll="scrolltoupper" scroll-with-animation="true">
+		<include src="/components/toTop/toTop"></include>
+		<view class=" " wx:if="{{list.length > 0}}">
+			<view>
+				<view class="bg-white mb-24" style="border-radius: 20rpx;" wx:for="{{list}}" wx:key="id" wx:if="{{item.banner!=null}}">
+					<!-- 单品牌内容 -->
+					<!-- 品牌名字 -->
+					<view style="padding: 25rpx 24rpx;">
+						<navigator url="/pages/activity/activity?aid={{item.id}}" class="flex ns-justify-content-space-between"
+						 hover-class="none">
+							<view class="flex" style="width: 85%;">
+								<image lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 20rpx;border: 2rpx solid #F4F4F4;"
+								 mode="aspectFit" src="{{item.banner}}"></image>
+								<view class="ml-30 flex1">
+									<view class="fs-30 color-333333">{{item.name}}</view>
+									<view class="fs-24 color-999999 ns-text-limit flex mt-10" style="width: 400rpx;">共{{item.goods_sum}}款，全场¥<text class="color-FF0200">{{item.min_price}}</text>起</view>
+								</view>
+							</view>
+							<view class="flex ">
+								<view style="width: 130rpx;height: 50rpx;background: linear-gradient(-90deg, #FF3750, #FF7006);border-radius: 25rpx;text-align:center;font-size:20rpx;color:#fff;line-height:50rpx;display:flex;align-item:center;justify-content: center;">进入会场<text
+									 class="iconfont icon-jinru color-fff" style="line-height:50rpx;display:inline-block;width:15rpx;"></text></view>
+
+							</view>
+						</navigator>
+
+					</view>
+					<!-- 品牌商品 -->
+					<view class="flex " style="padding: 0rpx 24rpx 20rpx; ">
+						<scroll-view scroll-x="true">
+							<view class="flex">
+								<navigator url="/pages/goods/goods?id={{item.id}}" style="width: 200rpx;margin-right: 16rpx;" wx:for="{{item.goods}}"
+								 wx:for-index="index" wx:key="id" data-id="{{item.goods_id}}">
+									<view style="position: relative;width: 180rpx;height: 180rpx;">
+										<image lazy-load="true" mode="aspectFill" src="" style="background: #ccc;width: 180rpx;height: 180rpx;position: relative;border-radius: 20rpx;"
+										 src="{{item.first_cover_pic}}"></image>
+										<view class="sell-up " wx:if="{{item.num==0}}">
+											<view>已抢光</view>
+											<view class="line"></view>
+											<view style="font-size: 17rpx;">sold out</view>
+										</view>
+									</view>
+									<view class='ns-text-limit fs-24 color-333333 mt-15'>{{item.name}}</view>
+									<view class="miaosha_price m-10 flex align-center" style="font-size:20rpx;">
+										<view class=" color-FF0200 ns-text-bold">￥<text class="fs-26">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+									</view>
+
+								</navigator>
+
+							</view>
+						</scroll-view>
+
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="flex-x-center color-8D8D8D ns-padding-bottom-sm" wx:if="{{is_no_more}}">没有更多啦~</view>
+	</scroll-view>
+	
+	<view class="share-modal {{share_modal_active}}" catchtouchmove="{{true}}" bindtap="shareModalClose">
+		<view class="share-modal-body" catchtap="shop">
+			<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+			<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+	        <view class="tips">收益仅自己可见</view> -->
+			<view class="flex-row">
+				<view class="flex-grow-1 flex-x-center">
+					<button open-type="share" class="share-bottom" style='height:100%;'>
+						<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+						<view>分享给好友</view>
+					</button>
+				</view>
+				<view class="flex-grow-1 flex-x-center">
+					<view bindtap="showShare" class="share-bottom">
+						<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+						<view>生成商品海报</view>
+					</view>
+				</view>
+			</view>
+			<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+		</view>
+	</view>
+	<view class="share pa" wx:if="{{isShowShare}}" style="height: {{y}}px;" bindtap="closeShare" catchtouchmove="{{true}}">
+
+		<view style="width: 608rpx;height: 924rpx;background: #fff;margin-bottom: 50rpx;" class="pr">
+			<view class="pa" style="left: 240rpx;top: 300rpx;" wx:if="{{!qrcode_pic}}">
+				<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+				<view style="color: #888">海报生成中</view>
+			</view>
+			<image style="height: 924rpx;width: 608rpx;" mode="widthFix" class='share_image' src='{{qrcode_pic}}' />
+			<button class="share-btn" catchtap="savePhotoThrottle">
+				<view class="fs-24 color-fff">保存到相册</view>
+			</button>
+		</view>
+	</view>
+</view>

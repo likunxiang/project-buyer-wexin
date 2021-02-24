@@ -1,0 +1,40 @@
+<!--pages//private/privateSetting/privateSetting.wxml-->
+<view class="page">
+	<view class="p-24 flex align-center">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">配送设置</view>
+	</view>
+	<view class="bg-white" style="padding-left: 42rpx;">
+		<view class="flex align-center justify-between content-list {{expandList.length-1>index?'border-bottom':''}}" bindtap="toPickUp" data-index="{{index}}"  wx:for="{{expandList}}" wx:key="id">
+			<view class="flex align-center">
+				<view class="iconfont {{item.check?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40" catchtap="changeTyep" data-check="{{item.check}}" data-index="{{index}}"></view>
+				<view class="fs-30 color-2C2C2C ml-20 ">{{item.name}}</view>
+			</view>
+			<view class="iconfont icon-jinru color-D6D6D6 fs-40" wx:if="{{index == 1}}"></view>
+		</view>
+	</view>
+	
+	<view class="p-24 flex align-center">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">相关信息</view>
+	</view>
+	<view class="bg-white" style="padding-left: 42rpx;">
+		<view class="flex align-center justify-between content-list border-bottom" bindtap="toSubmit" >
+			<view class="flex align-center">
+				<view class="fs-30 color-2C2C2C ml-20 ">上传资质</view>
+			</view>
+			<view class="iconfont icon-jinru color-D6D6D6 fs-40"></view>
+		</view>
+		<navigator hover-class="none" url="/private/privateNotice/privateNotice" class="flex align-center justify-between content-list" >
+			<view class="flex align-center">
+				<view class="fs-30 color-2C2C2C ml-20 ">编辑公告</view>
+			</view>
+			<view class="iconfont icon-jinru color-D6D6D6 fs-40"></view>
+		</navigator>
+	</view>
+	
+	<view class="footer flex justify-between">
+		<navigator open-type='navigateBack' class="btn-box btn-box-white">取消</navigator>
+		<view class="btn-box" bindtap="sureBtn">确定</view>
+	</view>
+</view>

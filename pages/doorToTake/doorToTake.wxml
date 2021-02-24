@@ -1,0 +1,59 @@
+<!--pages/doorToTake/doorToTake.wxml-->
+<view class="page">
+	<view class="public-box">
+		<view class="fs-24 color-333333 mb-30 flex align-center">
+			<view class="input-title">联系人：</view>
+			<input class="ns-text-bold flex1" type="text" placeholder="超人" value="超人" />
+		</view>
+		<view class="fs-24 color-333333 mb-30 flex align-center">
+			<view class="input-title">联系方式：</view>
+			<input type="number flex1" placeholder="12345678978" />
+		</view>
+		<view class="fs-24 color-333333 mb-30 flex align-center">
+			<view class="input-title">所在地区：</view>
+			<view class="flex-grow-1 flex-row" bindtap="showAreaPicker">
+				<view class="flex-grow-1 ns-text-bold color-333333 align-center" style="padding-right: 24rpx ">
+					<block wx:if="{{district==null}}">请选择</block>
+					<block wx:else>{{district.province.name}} {{district.city.name}} {{district.district.name}}</block>
+				</view>
+				<view class="flex-grow-0 flex-y-center">
+					<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+				</view>
+			</view>
+		</view>
+		<view class="fs-24 color-333333 mb-30 flex align-center">
+			<view class="input-title">所在地区：</view>
+			<view class="flex-grow-1 flex-row">
+				<view class="flex-grow-1 ns-text-bold color-333333" style="padding-right: 24rpx ">
+					<picker bindchange="townAreaPick" value="{{town_index}}" range="{{town_list}}" range-key="name">
+						<view class="picker">
+							<block wx:if="{{town_list[town_index].name==null}}">请选择</block>
+							<block wx:else>{{town_list[town_index].name}}</block>
+						</view>
+					</picker>
+
+				</view>
+				<view class="flex-grow-0 flex-y-center">
+					<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+				</view>
+			</view>
+		</view>
+		<view class="fs-24 color-333333 mb-30 flex align-center">
+			<view class="input-title">详细地址：</view>
+			<input class="ns-text-bold flex1" type="text" placeholder="超人" value="超人" />
+		</view>
+		<view class="fs-24 color-333333 flex align-center">
+			<view class="input-title">上门时间：</view>
+			<input class="flex1" type="text" placeholder="期望上门时间,如 7.21 12:00-13:00" />
+		</view>
+	</view>
+	<view class="flex footer">
+		<navigator open-type="navigateBack" class='cancel-btn mr-24'>
+		    <text>取消</text>
+		</navigator>
+		<button class='submit-btn'>
+		    <text>确定</text>
+		</button>
+	</view>
+	<include src="/components/area-picker/area-picker.wxml"/>
+</view>

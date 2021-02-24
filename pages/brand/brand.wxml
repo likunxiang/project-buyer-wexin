@@ -1,0 +1,131 @@
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<include src="/components/goods/specifications_model.wxml" />
+<include src="/components/share/share.wxml" />
+<view class="page">
+	<block wx:if="{{brand}}">
+		<shopbuy cartNum="{{cartNum}}" goodBuy="{{goodBuy}}"></shopbuy>
+		<view class='nav pr'>
+			<image style="width: 100%;height: 470rpx;position: absolute;background: url({{brand.img}}) no-repeat;z-index: -1;background-size: 100% 100%;;" mode="aspectFill" src="{{brand.background}}"></image>
+			<!-- 头部内容 -->
+			<view class="activity-header">
+				<view class='con flex justify-between align-center color-fff' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+					<view class="backBtn flex1 flex align-center" bindtap="goBack">
+						<view class="iconfont icon-zuojiantoubeifen icon-box" style="height:{{(customBar - statusBar)/2}}px;width: {{(customBar - statusBar)/2}}px;;"></view>
+					</view>
+					<view class="flex1 text-center">品牌主页</view>
+					<view class="flex1"></view>
+				</view>
+				<view style="position: absolute;right: 157rpx;top: 154rpx;">
+					<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+					 class="iconfont icon-guanzhu" bindtap="brandAttention"></view>
+					<view class="fs-20 text-center">关注</view>
+				</view>
+				<navigator hover-class="none" url="/pages/newSearch/newSearch" style="position: absolute;right: 82rpx;top: 154rpx;">
+					<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+					 class="iconfont icon-sousuo" bindtap="toSearch"></view>
+					<view class="fs-20 text-center">搜索</view>
+				</navigator>
+				<view style="position: absolute;right: 20rpx;top: 154rpx;">
+					<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+					 class="iconfont icon-fenxiang" bindtap="showShareModal"></view>
+					<view class="fs-20 text-center">分享</view>
+				</view>
+				<view class="flex align-center">
+					<image style="width: 100rpx;height: 100rpx;border-radius: 12rpx;background: #fff;" mode="aspectFill" src="{{brand.img}}"></image>
+					<view class="ml-24 color-fff" style="width: 440rpx;">
+						<view class="fs-36 ns-text-bold" data-text="{{brand.name}}" bindlongtap="copy">{{brand.name}}</view>
+						<view class="fs-24 mt-20 ns-text-limit" style="width: 100%;">{{brand.desc}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="tuijian-box" wx:if="{{hotSaleList.length>0}}">
+				<view class="fs-30 color-333333 ns-text-bold">好评推荐</view>
+				<view style="margin-top: 32rpx;">
+					<scroll-view scroll-x="true" class="pr-24">
+						<view class="flex">
+							<navigator class="flex-grow-0 miaosha-goods" style="background: #fff;margin-right: 16rpx;width: 200rpx;" wx:for="{{hotSaleList}}"
+							 wx:key="key" url="/pages/goods/goods?id={{item.id}}">
+								<view class="pr">
+									<image mode="aspectFill" style="width: 200rpx;height: 200rpx;border-radius: 20rpx;" src="{{item.cover_pic}}"></image>
+								</view>
+								<view class="flex ns-align-items-flex-center" style="font-size:26rpx;">
+									<view class="ms-price-tips">会员价</view>
+									<view class="color-FF0200" style="margin-right:10rpx;font-weight:600">
+										<text class="fs-20">￥</text><text>{{filters.priceStr(item.price)[0]}}</text>.<text class="fs-20">{{filters.priceStr(item.price)[1]}}</text>
+									</view>
+								</view>
+								<view class='ns-text-limit fs-24 color-333333' style="margin-bottom: 14rpx;">{{item.name}}</view>
+							</navigator>
+						</view>
+					</scroll-view>
+				</view>
+			</view>
+		</view>
+		<include src="/components/toTop/toTop"></include>
+		<view style="background-color: #f4f4f4;">
+			<!-- <view class="guang-nav-list flex bg-white" style="padding:0rpx 0rpx 0 24rpx;">
+				<view class="" style="width: 83%;">
+					<scroll-view  scroll-x="true" enable-flex="true" >
+						<view class="flex align-center ">
+							<view class="pr nav-tab ns-flex-shrink-no {{chooseIns==0?'color-333333':''}}" catchtap="chooseAll">
+								<view>全部品类</view>
+								<view wx:if="{{chooseIns==0}}" class="nav-active"></view>
+							</view>
+							<view class="nav-tab pr ns-flex-shrink-no {{item.id==chooseIns?'color-333333':''}}" bindtap="changeNav" wx:for="{{cat}}"
+							 data-index="{{item.id}}" data-text="{{item.name}}" data-id="{{item.id}}">
+								<view>{{item.name}}</view>
+								<view wx:if="{{item.id==chooseIns}}" class="nav-active"></view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+				<view class="flex ml-20 ns-align-items-flex-center color-333333" bindtap="priceSort">
+					<view>价格</view>
+					<view class="ml-10 fs-40 color-D6D6D6">
+						<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+						<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+					</view>
+				</view>
+			
+			</view> -->
+			<block wx:if="{{goodList.length>0}}">
+				<view class="goods-list flex ns-wrap ns-justify-content-space-between pr" style="background: #F4F4F4;">
+					<navigator url="/pages/goods/goods?id={{item.id}}" class="goods mb-20" wx:for="{{goodList}}" wx:key="key">
+						<view style="width: 340rpx;height: 340rpx;position: relative;">
+							<image style="width: 340rpx;height: 340rpx;" mode="aspectFill" src="{{item.cover_pic}}"></image>
+							<view wx:if="{{item.goods_num==0}}" class="nonum-tip">
+								已抢光
+							</view>
+						</view>
+						<view class="goods-msg">
+							<view class="goods-msg-title">{{item.name}}</view>
+							<view class="fs-28 flex justify-between align-center">
+								<view class="flex align-center">
+									<view class="fs-28 color-FF0200 ns-text-bold">￥<text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text>{{filters.priceStr(item.price)[1]}}</text></view>
+									<!-- <view class="color-8D8D8D ns-text-through ml-16">¥ {{item.original_price}}</view> -->
+								</view>
+								<view class="add-cart-icon iconfont fs-24 color-fff icon-gouwuche_weixuanzhong" style="width: 40rpx;height: 40rpx;line-height: 40rpx;" catchtap="openCart" data-id="{{item.id}}"
+					 data-index="{{index}}"></view>
+								
+							</view>
+						</view>
+					</navigator>
+			
+				</view>
+			</block>
+			<block wx:else>
+				<view class="flex-x-center" style="{{hotSaleList.length>0?'padding-top: 212rpx;':'padding-top: 322rpx;'}}">
+					<view class="iconfont icon-kong color-B0B0B0" style="font-size: 200rpx;"></view>
+			
+				</view>
+				<view class="flex-x-center mt-30">
+					<view class="ns-text-center fs-24 color-B0B0B0" style="width: 336rpx;">哎呀，手慢了，品牌活动已结束
+						下次早点来哦～</view>
+				</view>
+			</block>
+		</view>
+		
+	</block>
+	<view class="flex-x-center color-8D8D8D ns-padding-bottom-sm" wx:if="{{is_no_more}}">没有更多啦~</view>
+	<slide-icon showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>
+</view>

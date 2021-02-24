@@ -1,0 +1,16 @@
+page{background: #fff;color: #595959;}
+.header{padding: 25rpx;font-size: 14px;text-align: left;margin-bottom: 5rpx;}
+.seach{width: 614rpx;background: #f8f8f8;border-radius: 6rpx;padding: 12rpx 0;}
+.seach image{width: 30rpx;height: 30rpx;margin: 0 25rpx;margin-top: 10rpx;}
+.seach input{width:530rpx;}
+.header .cencle{line-height: 76rpx;font-size: 14px;margin-right: 5rpx;}
+/* 历史 */
+.history,.hotSeach{padding: 0 40rpx;}
+.history{margin-bottom: 40rpx;}
+.historyTitle{font-size: 15px;font-weight: 600;margin-bottom: 20rpx;position: relative;}
+.historyTitle image{width: 30rpx;height: 32rpx;right:0;}
+.tabs{font-size: 11px;}
+.tabs > view{padding: 12rpx 30rpx;background: #f1f1f1;border-radius: 6rpx;margin-right: 20rpx;margin-bottom: 20rpx;}
+.hotSeach{font-size: 11px;color: #595959;}
+.hotSeach .hotList > view.clear{padding: 12rpx 20rpx;border-radius: 6rpx;background: #f1f1f1;margin-top: 20rpx;margin-right: 20rpx;text-align: center;}
+.hotList image{width: 14rpx;height: 17rpx;margin-top: 6rpx;margin-right: 10rpx;}

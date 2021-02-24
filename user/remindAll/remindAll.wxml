@@ -1,0 +1,70 @@
+<!--全部提醒-->
+<view class="remind">
+	<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+	<!-- 导航开始 -->
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view
+			 class="  go-back flex1"
+			 style="font-size:30rpx;color:#FFFFFF;"
+			 bindtap="returnPage"
+			>
+				<text class="iconfont icon-zuojiantoubeifen;"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">全部提醒</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+
+	<!-- 活动列表开始 -->
+	<block wx:if="{{allRemindList.length == 0}}">
+		<view class="flex-x-center flex-y-center" style="height: calc(100vh - {{customBar}}px);">
+			<view>
+				<view class="flex-x-center">
+					<image src="{{msg_empty}}" mode="aspectFill" style="width: 266rpx;height: 182rpx;margin: auto;"></image>
+				</view>
+				<view class="fs-30 color-999999 mt-30">暂时还没有接收到相关提醒</view>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="active-list">
+			<view
+			 class="active-item"
+			 wx:for="{{allRemindList}}"
+			 wx:key="{{item.id}}"
+			 hover-class="click"
+			 bindtap="toDetail"
+			 data-id="{{item.brand_id}}"
+			>
+				<!-- 时间 -->
+				<view class="line1">
+					<view class="line1-left">{{item.start_date}}</view>
+					<view class="line1-right">
+						<text>{{item.user_like_count}}</text>
+						个顾客感兴趣
+					</view>
+				</view>
+				<!-- 商品详情 -->
+				<view class="line2">
+					<view class="line2-left">
+						<image src="{{item.banner}}"/>
+					</view>
+					<view class="line2-right">
+						<view class="line2-name">{{item.name}}</view>
+						<view class="line2-price">
+						<view><text class="money">￥</text><text class="ns-text-bold">{{item.price?filters.priceStr(item.price)[0]:'0'}}.<text class="fs-24">{{item.price?filters.priceStr(item.price)[1]:'00'}}</text></text> 起</view>
+							<!-- <text class="money">￥</text>
+							235.
+							<text class="price">5</text> -->
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<!-- 活动列表结束 -->
+</view>
+

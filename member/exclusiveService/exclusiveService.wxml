@@ -1,0 +1,52 @@
+<!--pages/paySucceed/paySucceed.wxml-->
+<view>
+	<view class='nav pr' style="height:738rpx;">
+		<!-- 头部内容 -->
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view></view>
+			<view></view>
+		</view>
+		<view class="user-msg-box" style="margin-top: 40rpx;">
+			<view class="flex-x-center" style="font-size: 60rpx;font-weight: bold;">欢迎光临</view>
+			<view class="tutor-pic-box">
+				<image style="width: 126rpx;height: 126rpx;border-radius: 50%;border:6rpx solid #fff;" mode="aspectFill" src="{{avatar_url}}"></image>
+			</view>
+			<view class="fs-30 color-000000 ns-text-bold text-center">您的专属导购【{{nickname}}】</view>
+			<view class="wx-box flex justify-between align-center">
+				<text class="fs-24 color-000000">微信号：<text class="ns-text-bold">{{wechat_name}}</text></text>
+				<text class="fs-24 color-999999" bindtap='copy' data-text="{{wechat_name}}">复制</text>
+			</view>
+			<view class="text-center fs-24 color-666666">
+				<view>感谢来到我的店铺，并成为永久会员</view>
+				<view>请添加我的微信，让我为你提供专属服务吧～</view>
+			</view>
+		</view>
+	</view>
+	<view class="welfare-box">
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">选货</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">自己找货太麻烦？</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">帮你找货，想要啥呢，专属导购为你服务</view>
+			</view>
+		</view>
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">比价</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">买贵了真难受呀！</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">帮你比价，货比三家，专属导购为你服务</view>
+			</view>
+		</view>
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">推荐</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">不会挑太麻烦呢…</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">实用推荐，答疑解惑，专属导购为你服务</view>
+			</view>
+		</view>
+	</view>
+	<view class="fs-30 color-333333 text-center" style="margin-top: 100rpx;">更多专属福利，添加微信帮你解锁</view>
+</view>

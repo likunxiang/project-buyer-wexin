@@ -1,0 +1,13 @@
+<!--pages/setting/setting.wxml-->
+<view class="page">
+	<view class="body-box">
+		<!-- <view class="setting-list flex ns-justify-content-space-between ns-align-items-flex-center border-bottom">
+			<view>消息提醒</view>
+			<switch color="#1A4C4B" style='zoom:.8;' change=""></switch>
+		</view> -->
+		<view class="setting-list flex ns-justify-content-space-between ns-align-items-flex-center">
+			<view>逛店记录</view>
+			<switch color="#1A4C4B" style='zoom:.8;' bindchange="changeGuang" checked="{{guangSwitch}}"></switch>
+		</view>
+	</view>
+</view>

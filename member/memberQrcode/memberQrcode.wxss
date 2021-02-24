@@ -1,0 +1,13 @@
+/* member/memberQrcode/memberQrcode.wxss */
+.save-btn {
+	position: absolute;
+	bottom: 37rpx;
+	left: 24rpx;
+	width: 702rpx;
+	height: 88rpx;
+	line-height: 88rpx;
+	text-align: center;
+	background: #F1CF81;
+	border-radius: 44rpx;
+	color: #212954;
+}

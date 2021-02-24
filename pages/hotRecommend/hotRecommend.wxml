@@ -1,0 +1,156 @@
+<!--pages/hotRecommend/hotRecommend.wxml-->
+<view class="page flex ns-column">
+	<view class="header pr">
+		<view class="share-btn color-fff flex-x-center flex-y-center" bindtap='showShareModal'>
+			<view class="iconfont icon-weixin fs-40"></view>
+		</view>
+	</view>
+	<view class="ptb-20 padding-lr flex justify-between align-center bg-white">
+		<view class="choose-btn flex ns-align-items-flex-center" bindtap="openChoose">
+			<view class="ns-text-limit" style="width: 140rpx;">{{moren}}</view>
+			<view class="iconfont icon-xiangxia-copy {{chooseOpen?'change':''}} color-fff" style="margin-left: 7rpx;"></view>
+		</view>
+		<view class="flex">
+			<view class="flex ml-20 ns-align-items-flex-center" bindtap="priceSort">
+				<view>价格</view>
+				<view class="ml-10 fs-40 color-D6D6D6">
+					<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+					<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="flex1">
+		<view style="height: 100%;">
+			<scroll-view scroll-y="true" style="height: calc(100vh - 320rpx)">
+				<view class="main ptb-20 padding-lr flex justify-between ns-wrap">
+					<view class="goods bg-white">
+						<image style="width: 330rpx;height: 330rpx;background-color: #ccc;" mode="aspectFill"></image>
+						<view class="goods-msg">
+							<view class="fs-28 color-4A4A4A ns-text-bold">端午粽子米长糯米1000g</view>
+							<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24">快递到家</view>
+							<view class="flex justify-between">
+								<view class="flex">
+									<view class="flex">
+										<view class="fs-24" style="color: #F76436;margin-top: 14rpx;margin-right: 10rpx;">¥ </view>
+										<view style="font-size: 37rpx;color: #F76436;">69.90</view>
+									</view>
+									<view class="flex" style="margin-top: 14rpx;">
+										<view class="ns-text-through fs-24 color-BDBDBD" style="margin-left: 8rpx;">¥ 48.90</view>
+									</view>
+								</view>
+								<view class="iconfont icon-jia fs-40 color-252E3E"></view>
+							</view>
+						</view>
+					</view>
+					<view class="goods bg-white">
+						<image style="width: 330rpx;height: 330rpx;background-color: #ccc;" mode="aspectFill"></image>
+						<view class="goods-msg ">
+							<view class="fs-28 color-4A4A4A ns-text-bold">端午粽子米长糯米1000g</view>
+							<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24" wx:if="{{true}}">快递到家</view>
+							<view class="type-box2 flex-x-center flex-y-center color-489A19 fs-24" wx:else>自提 | 6月27日</view>
+							<view class="flex justify-between">
+								<view class="flex">
+									<view class="flex">
+										<view class="fs-24" style="color: #F76436;margin-top: 14rpx;margin-right: 10rpx;">¥ </view>
+										<view style="font-size: 37rpx;color: #F76436;">69.90</view>
+									</view>
+									<view class="flex" style="margin-top: 14rpx;">
+										<view class="ns-text-through fs-24 color-BDBDBD" style="margin-left: 8rpx;">¥ 48.90</view>
+									</view>
+								</view>
+								<view class="iconfont icon-jia fs-40 color-252E3E"></view>
+							</view>
+						</view>
+					</view>
+					<view class="goods bg-white">
+						<image style="width: 330rpx;height: 330rpx;background-color: #ccc;" mode="aspectFill"></image>
+						<view class="goods-msg ">
+							<view class="fs-28 color-4A4A4A ns-text-bold">端午粽子米长糯米1000g</view>
+							<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24" wx:if="{{false}}">快递到家</view>
+							<view class="type-box2 flex-x-center flex-y-center color-489A19 fs-24" wx:else>自提 | 6月27日</view>
+							<view class="flex justify-between">
+								<view class="flex">
+									<view class="flex">
+										<view class="fs-24" style="color: #F76436;margin-top: 14rpx;margin-right: 10rpx;">¥ </view>
+										<view style="font-size: 37rpx;color: #F76436;">69.90</view>
+									</view>
+									<view class="flex" style="margin-top: 14rpx;">
+										<view class="ns-text-through fs-24 color-BDBDBD" style="margin-left: 8rpx;">¥ 48.90</view>
+									</view>
+								</view>
+								<view class="iconfont icon-jia fs-40 color-252E3E"></view>
+							</view>
+						</view>
+					</view><view class="goods bg-white">
+						<image style="width: 330rpx;height: 330rpx;background-color: #ccc;" mode="aspectFill"></image>
+						<view class="goods-msg ">
+							<view class="fs-28 color-4A4A4A ns-text-bold">端午粽子米长糯米1000g</view>
+							<view class="type-box1 flex-x-center flex-y-center color-F49E3A fs-24">快递到家</view>
+							<view class="flex justify-between">
+								<view class="flex">
+									<view class="flex">
+										<view class="fs-24" style="color: #F76436;margin-top: 14rpx;margin-right: 10rpx;">¥ </view>
+										<view style="font-size: 37rpx;color: #F76436;">69.90</view>
+									</view>
+									<view class="flex" style="margin-top: 14rpx;">
+										<view class="ns-text-through fs-24 color-BDBDBD" style="margin-left: 8rpx;">¥ 48.90</view>
+									</view>
+								</view>
+								<view class="iconfont icon-jia fs-40 color-252E3E"></view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		
+	</view>
+	<view class="cart flex ns-align-items-flex-center ns-justify-content-space-between color-fff">
+		<navigator url="/pages/index/index" class="ns-text-center flex1">
+			<view class="iconfont icon-shouye fs-40"></view>
+			<view class="fs-20">首页</view>
+		</navigator>
+		<navigator url="/pages/cart/cart" class="pr ns-text-center flex1">
+			<view class="iconfont icon-show_goumai mr-10 fs-40"></view>
+			<view class="fs-20">购物车</view>
+			<view class="pa" wx:if="{{true}}" style="width: 30rpx;height: 30rpx;line-height:30rpx;overflow: hidden;text-align: center;top: 0rpx;right: 10rpx;background: #c10000;border-radius: 50%;font-size: 10px;">5</view>
+		</navigator>
+	</view>
+	
+	<view class="share-modal {{share_modal_active}}" catchtouchmove="{{true}}" bindtap="shareModalClose">
+		<view class="share-modal-body" catchtap="shop">
+			<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+			<view class="flex-row">
+				<view class="flex-grow-1 flex-x-center">
+					<button open-type="share" class="share-bottom" style='height:100%;'>
+						<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+						<view>分享给好友</view>
+					</button>
+				</view>
+				<view class="flex-grow-1 flex-x-center">
+					<view bindtap="showShare" class="share-bottom">
+						<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+						<view>生成商品海报</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="share pa" wx:if="{{isShowShare}}" style="height: {{y}}px;" bindtap="closeShare" catchtouchmove="{{true}}">
+	
+		<view style="width: 608rpx;height: 924rpx;background: #fff;margin-bottom: 50rpx;" class="pr">
+			<view class="pa" style="left: 240rpx;top: 300rpx;" wx:if="{{!qrcode_pic}}">
+				<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+				<view style="color: #888">海报生成中</view>
+			</view>
+			<image style="height: 924rpx;width: 608rpx;" mode="widthFix" class='share_image' src='{{qrcode_pic}}' />
+		</view>
+		<view class="flex flex-x-center">
+			<button class="share-btn" catchtap="savePhotoThrottle">
+				<view class="fs-24 color-fff">保存到相册</view>
+			</button>
+		</view>
+	</view>
+</view>
+

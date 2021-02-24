@@ -1,0 +1,5 @@
+/* pages//private/pickUp/pickUp.wxss */
+page {
+	background: #F7F7F7;
+	height: 100%;
+}

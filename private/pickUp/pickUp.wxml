@@ -1,0 +1,14 @@
+<!--pages//private/pickUp/pickUp.wxml-->
+<view class="page p-20">
+	<view class="p-20 bg-white flex mb-20 border-radius-8" wx:for="{{addressList}}" wx:key="id" bindtap="pickAddress" data-id="{{item.id}}">
+		<view class="iconfont icon-dizhi fs-36 "></view>
+		<view class="fs-24 color-2C2C2C ml-20">
+			<view class="fs-28 ns-text-bold">{{item.pick_up_name}}</view>
+			<view class="flex" style="margin-top: 15rpx;">
+				<view style="margin-right: 30rpx;">{{item.name}}</view>
+				<view>{{item.mobile}}</view>
+			</view>
+			<view  class="color-4A4A4A" style="margin-top: 15rpx;">{{item.province}}{{item.city}}{{item.district}}{{item.detail}}</view>
+		</view>
+	</view>
+</view>

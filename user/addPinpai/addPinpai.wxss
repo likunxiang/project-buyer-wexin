@@ -1,0 +1,96 @@
+/* user/addPinpai/addPinpai.wxss */
+
+
+/* user/addLike/addLike.wxss */
+
+page {
+    background: #f7f7f7;
+}
+
+.heardBanner {
+    width: 750rpx;
+    background: linear-gradient(134deg, rgba(48, 35, 174, 1) 0%, rgba(200, 109, 215, 1) 100%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+
+
+/* input内容 */
+
+.input-box {
+    width: 700rpx;
+    margin: 25rpx 0 0 25rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-radius: 8rpx;
+    background-color: #ffffff;
+    font-size: 30rpx;
+    color: #4a4a4a;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 35rpx;
+}
+
+.input-left {
+    font-weight: 500;
+    margin-right: 40rpx;
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #4A4A4A;
+    line-height: 42rpx;
+    padding-left: 60rpx;
+    margin-top: 30rpx;
+}
+
+.input-left text {
+    padding-right: 14rpx;
+}
+
+.input-right {
+    line-height: 100rpx;
+    height: 100rpx;
+    flex: 1;
+}
+
+.bottom-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 750rpx;
+    box-sizing: border-box;
+    padding: 35rpx;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.bottom-box .btn {
+    width: 325rpx;
+    height: 78rpx;
+    background: #ffffff;
+    border: 2rpx solid #616161;
+    line-height: 78rpx;
+}
+
+.bottom-box .btn1 {
+    width: 325rpx;
+    height: 78rpx;
+    background-color: rgba(97, 97, 97, 0.5);
+    color: #616161;
+    line-height: 78rpx;
+    color: #ffffff;
+}
+
+.bottom-box .active {
+    width: 325rpx;
+    height: 78rpx;
+    background: rgba(97, 97, 97, 1);
+}
+
+.click {
+    opacity: 0.8;
+    /* transition: all 0.1s; */
+    transform: scale(0.99);
+}

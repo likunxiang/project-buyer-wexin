@@ -1,0 +1,66 @@
+/* pages/address-edit/address-edit.wxss */
+page {
+	background:rgba(207,207,207,0.33);
+	height: 100%;
+}
+picker {
+	width: 100%;
+}
+.bottom-bar{
+    position: fixed;
+    bottom: 50rpx;
+    left: 40rpx;
+    width: 678rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+	background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));
+	font-size: 36rpx;
+    color: #fff;
+    border-radius: 44rpx;
+}
+.bottom-bar view{
+    background: #c10000;
+    text-align: center;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #fff;
+}
+
+.input-box {
+	padding-left: 24rpx;
+	background: #fff;
+	margin-top: 20rpx;
+}
+.edit-row{
+    background: #fff;
+    height: 100rpx;
+    padding-right: 24rpx;
+}
+
+.border-bottom{
+    border-bottom: 1rpx solid #eeeeee;
+}
+
+.edit-row .row-label{
+    margin-right: 24rpx;
+    min-width: 140rpx;
+}
+
+.get-wechat-address{
+    text-align: center;
+    background: #09BB07;
+    color: #fff;
+    padding: 18rpx 0;
+    margin: 32rpx 24rpx;
+    border-radius: 10rpx;
+    display: block;
+}
+
+.get-wechat-address:active{
+    opacity: .85;
+}
+.set-default {
+	padding: 25rpx 35rpx 26rpx 40rpx;
+	background: #fff;
+}

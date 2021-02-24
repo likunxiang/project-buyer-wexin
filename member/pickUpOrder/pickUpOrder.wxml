@@ -1,0 +1,79 @@
+<!--pages/pickUpOrder/pickUpOrder.wxml-->
+<view class="page">
+	<view class="header bg-white" style="{{type==3?'background-color: #F8F8F8;':''}}">
+		<view class=" ptb-20 plr-25 flex align-center">
+			<view class="search-box flex ns-align-items-flex-center plr-25">
+				<view class="cuIcon-search fs-30 color-AAAAAA"></view>
+				<input class="ml-20 mr-20 fs-26" style="width: 90%;" type="text" value="{{seachValue}}" placeholder="搜索顾客昵称/电话/地址/订单号"
+				 placeholder-class="fs-26 color-AAAAAA" bindblur="search" />
+				<view wx:if="{{is_search}}" class="iconfont icon-guanbi- fs-30" bindtap="clearSearch"></view>
+				
+			</view>
+		</view>
+		<view class="tab-box flex ns-justify-content-space-between bg-white">
+			<view class="tab {{tabIns==index?'tab-active ns-text-bold':''}}" wx:for="{{tabList}}" wx:key="key" data-index="{{index}}" bindtap="changeTab">{{item}}</view>
+		</view>
+	</view>
+	
+	<block wx:if="{{orderList.length==0}}">
+			<view class="body" style="height:calc(100vh - 88rpx);">
+				<view class="body-kong flex-x-center flex-y-center">
+						<view>
+							<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+							<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+								<view>暂无相关订单～</view>
+								<navigator url="/pages/index/index" style="text-decoration: underline;">返回首页</navigator>
+							</view>
+						</view>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="body">
+				<view class="order-box bg-white mb-20 border-radius-8" wx:for="{{orderList}}" wx:for-item="order" wx:key="id">
+				
+					<view class="order-header padding-lr ptb-20 flex border-bottom ns-align-items-flex-center ns-justify-content-space-between">
+						<view class="flex ns-align-items-flex-center">
+							<image style="width: 60rpx;height: 60rpx;border-radius: 50%;" mode="aspectFill" src="{{order.data.user_avatar_url}}"></image>
+							<view class="ml-20">
+								<view class="fs-24 ns-text-bold {{type==3?'color-9B9B9B':'color-4A4A4A'}}">{{order.data.name}}</view>
+								<view class="fs-20 {{type==3?'color-9B9B9B':'color-4A4A4A'}}">{{order.data.addtime}}</view>
+							</view>
+						</view>
+						<view class="fs-28 ns-text-bold {{type==3?'color-9B9B9B':'color-C10000'}}">
+							编号-{{order.data.order_id}}
+						</view>
+					</view>
+					<view class="order-list-no-pay-body ptb-20 padding-lr " >
+						<view class="flex mb-20 pl-20" >
+							<view class="goods-list ">
+								<view class="flex justify-end fs-28 ns-text-bold mb-10 {{type==3?'color-9B9B9B':'color-4A4A4A'}}" wx:for="{{order.detail}}" wx:for-item="goods" wx:key="key">
+									<view class="flex-grow-1 ns-text-limit ns-text-right">{{goods.goods_name}}</view>
+									<view class="ml-10 flex-grow-0">+{{goods.num}}</view>
+								</view>
+							</view>
+						</view>
+						<view class="fs-28 {{type==3?'color-9B9B9B':'color-4A4A4A'}} mb-20" style="line-height: 40rpx;">
+							<view>
+								<text>收货人：</text><text>{{order.data.name}}</text>
+							</view>
+							<view>
+								<text>联系电话：</text><text>{{order.data.mobile}}</text>
+							</view>
+							<view>
+								<text>收货地址：</text><text>{{order.data.address}}</text>
+							</view>
+						</view>
+						<view class="flex justify-between mb-10">
+							<view class="fs-30 {{type==3?'color-9B9B9B':'color-C10000'}} ns-text-bold  flex1 ns-text-limit">自提点：{{order.data.zt_address_data.dispatching_name}}</view>
+							<view class="flex justify-between ns-flex-shrink-no">
+								<view class="fs-30 {{type==3?'color-9B9B9B':'color-489A19'}} ns-text-bold" wx:if="{{order.data.mowType == 1}}">待提货</view>
+								<view class="fs-30 ns-text-bold {{type==1?'color-489A19':'color-4A4A4A'}}" wx:elif="{{order.data.mowType == 2}}">已提货</view>
+								<view class="fs-30 {{type==3?'color-9B9B9B':'color-489A19'}} ns-text-bold" wx:else>已取消</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+</view>

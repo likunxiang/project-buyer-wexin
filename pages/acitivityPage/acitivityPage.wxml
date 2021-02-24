@@ -1,0 +1,92 @@
+<!--pages/acitivityPage/acitivityPage.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<include src="/components/goods/specifications_model.wxml" />
+<include src="/components/share/share.wxml" />
+<view class="page ns-column">
+	<view class="header pr">
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view></view>
+			<view></view>
+		</view>
+		<image src="{{bg}}" style="height: 100%;width: 100%;background: #ccc;position: absolute;top: 0rpx;left: 0rpx;z-index: -1;"></image>
+		<view class="text-center" style="width: 50rpx;height: 50rpx;position: absolute;right: 24rpx;bottom: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+		 bindtap="showShareModal">
+			<view class="iconfont icon-fenxiang"></view>
+			<view class="fs-18 color-fff" style="margin-top: -10rpx;">分享</view>
+		</view>
+		<view class="roll-tips flex-x-center align-center">
+			<swiper autoplay="true" interval="5000" duration="300" vertical="true" circular="true" style="width: 300rpx;height: 52rpx;">
+				<swiper-item wx:for="{{scrollList}}" wx:key="key">
+					<view class="flex-x-center align-center" style="width: 300rpx;height: 52rpx;">
+						<view class="roll-tips-img">
+							<image class="roll-tips-img bg-blue" mode="aspectFill" src="{{item.avatar_url}}"></image>
+						</view>
+						<view class="ml-10 fs-20 color-fff">
+							恭喜 {{item.name}} {{item.msg}}
+						</view>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view>
+	</view>
+	<view class="nav-tab flex align-center bg-white justify-between">
+		<view class="fs-30 pr {{navIns==index?'color-333333':'color-999999'}}" data-index="{{index}}" bindtap="changeNav"
+		 wx:for="{{navList}}" wx:key='key' style="margin-right: 46rpx;">
+			<view>{{item}}</view>
+			<view class="under-line" wx:if="{{navIns==index}}"></view>
+		</view>
+	</view>
+	<scroll-view scroll-y="true" style="height: calc(100vh - 372rpx);background-color: #F4F4F4;padding: 24rpx;" bindscrolltolower="getMore">
+		<!-- 必抢 -->
+		<navigator url="/pages/miaosha/details/details?id={{item.goods_id}}" class="goods-box flex mb-24" wx:for="{{miaoshaList}}" wx:key="id" wx:if="{{navIns==0}}">
+			<view class="goods-img ns-flex-shrink-no">
+				<image style="width: 100%;height: 100%;background-color: #ccc;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+			</view>
+			<view class="flex ns-column justify-between">
+				<view>
+					<view class="fs-28 color-333333 ns-text-limit2" style="line-height: 42rpx;">{{item.name}}</view>
+					<view class="goods-desc color-FFA102 fs-22 ns-flex-shrink-no mt-16">{{item.desc}}</view>
+				</view>
+				<view class="cu-progress" style="border-radius: 12rpx;">
+					<view class="" style="{{ loading?'border-radius: 12rpx;width:61.8%;background:linear-gradient(-90deg,rgba(255,55,80,1),rgba(255,112,6,1));':''}}">61.8%</view>
+				</view>
+				<view class="flex justify-between">
+					<view class="flex align-center ns-text-bold">
+						<view class="color-FF0200">
+							<text class="fs-28">¥</text><text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text class="fs-28">{{filters.priceStr(item.price)[1]}}</text>
+						</view>
+						<!-- <view class="fs-28 color-999999 ml-16 ns-text-through">¥ {{item.original_price}}</view> -->
+					</view>
+					<view class="buy-btn fs-24 color-fff text-center" catchtap="openCart" data-id="{{item.id}}"
+					 data-index="{{index}}">马上抢</view>
+				</view>
+			</view>
+		</navigator>
+		<!-- 预告 -->
+		<navigator hover-class="none" class="goods-box flex mb-24"  wx:for="{{miaoshaList}}" wx:key="id" wx:if="{{navIns==1}}">
+			<view class="goods-img ns-flex-shrink-no">
+				<image style="width: 100%;height: 100%;background-color: #ccc;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+			</view>
+			<view class="flex ns-column justify-between">
+				<view>
+					<view class="fs-28 color-333333 ns-text-limit2" style="line-height: 42rpx;">{{item.name}}</view>
+					<view class="goods-desc color-FFA102 fs-22 ns-flex-shrink-no mt-16">{{item.desc}}</view>
+				</view>
+				<view class="flex justify-between">
+					<view class="flex align-center ns-text-bold">
+						<view class="color-3DBB12">
+							<text class="fs-28">¥</text><text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text><text class="fs-28">{{filters.priceStr(item.price)[1]}}</text>
+						</view>
+						<!-- <view class="fs-28 color-999999 ml-16 ns-text-through">¥ {{item.original_price}}</view> -->
+					</view>
+					<view class="buy-btn fs-24 color-fff text-center" style="background: #3DBB12;" catchtap="openCart" data-id="{{item.id}}"
+					 data-index="{{index}}">加入</view>
+				</view>
+			</view>
+		</navigator>
+	</scroll-view>
+	<slide-icon showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>>
+</view>

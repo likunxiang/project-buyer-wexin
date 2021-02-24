@@ -1,0 +1,73 @@
+/* pages//private/privateAddGoods/privateAddGoods.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+	padding-bottom: 178rpx;
+}
+
+.notice-pic {
+	width: 150rpx;
+	height: 150rpx;
+	background-color: #ccc;
+	margin-right: 15rpx;
+}
+
+textarea  {
+	width: 100%;
+	height: 80rpx;
+}
+.footer {
+	position: absolute;
+	bottom: 50rpx;
+	left: 40rpx;
+	right: 40rpx;
+	height: 78rpx;
+}
+.btn-box {
+	width: 325rpx;
+	height: 78rpx;
+	background: #F49E3A;
+	line-height: 78rpx;
+	color: #fff;
+	text-align: center;
+	border: 2rpx solid #F49E3A;
+}
+.btn-box-white {
+	background: #fff;
+	border: 2rpx solid #FF9100;
+	color: #FF9100;
+}
+.goods-classify-model {
+	position: absolute;
+	bottom: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	top: 0rpx;
+	z-index: 9;
+	background-color: rgba(0,0,0,.35);
+}
+.goods-classify-content {
+	position: fixed;
+	bottom: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	height: 586rpx;
+	border-radius: 8rpx 8rpx 0 0;
+	padding: 32rpx 40rpx 42rpx;
+	background-color: #fff;
+}
+.classify-box {
+	padding: 8rpx 20rpx;
+	border: 2rpx solid #9B9B9B;
+	height: 56rpx;
+	border-radius: 8rpx;
+	margin-right: 20rpx;
+	margin-bottom: 20rpx;
+}
+.border-yellow {
+	border: 2rpx solid #F49E3A;
+	color: #F49E3A;
+}

@@ -1,0 +1,105 @@
+/* pages//private/privateOrder/privateOrder.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+	background-color: #F7F7F7;
+	padding-top: 88rpx;
+}
+.tab-box {
+	padding: 0 108rpx;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.type_tips {
+	width: 115rpx;
+	height: 44rpx;
+	line-height: 44rpx;
+	text-align: center;
+	border-radius: 8rpx 0 0 8rpx;
+	background-color: #489A19;
+	position: absolute;
+	right: 0rpx;
+	top: 15rpx;
+}
+
+.tab {
+	width: 136rpx;
+	height: 68rpx;
+	line-height: 68rpx;
+	text-align: center;
+	font-size: 28rpx;
+	color: #636363;
+}
+
+.tab-active {
+	color: #252E3E;
+	border-bottom: 6rpx solid #252E3E;
+}
+.body {
+	height: 100%;
+	padding: 0 20rpx;
+}
+.body-kong {
+	height: 100%;
+	background: #fff;
+}
+.order-header {
+	height: 73rpx;
+	line-height: 73rpx;
+	padding: 0 25rpx;
+}
+.sure-btn {
+	width: 136rpx;
+	height: 45rpx;
+	text-align: center;
+	line-height: 41rpx;
+	border: 2rpx solid #FF9100;
+	border-radius: 20px;
+	margin-left: 20rpx;
+}
+.order-list-no-pay-body {
+	padding: 20rpx 25rpx;
+}
+.order-list-pay-body {
+	padding: 20rpx 25rpx ;
+	border-bottom: 1rpx solid #D6D6D6;
+}
+.order-list-no-pay-footer {
+	padding: 20rpx 25rpx;
+}
+.order-list-no-pay-btn {
+	padding: 0 25rpx 20rpx;
+}
+.order-list-btn {
+	
+	width:136rpx;
+	height:45rpx;
+	background:rgba(255,255,255,1);
+	border-radius:20rpx;
+	text-align: center;
+	line-height: 41rpx;
+	font-size: 24rpx;
+	color: #595959;
+	border:2rpx solid rgba(214,214,214,1);
+}
+.order-list-btn-yellow {
+	background:rgba(244,158,58,1);
+	color: #fff;
+	border:2rpx solid rgba(244,158,58,1);
+}
+.call-shoper {
+	position: fixed;
+	left: 16rpx;
+	bottom: 88rpx;
+	width:198rpx;
+	height:66rpx;
+	background:rgba(46,46,46,0.7);
+	border-radius:6rpx;
+}

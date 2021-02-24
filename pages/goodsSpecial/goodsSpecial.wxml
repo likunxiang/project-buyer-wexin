@@ -1,0 +1,44 @@
+<!--pages/goodsSpecial/goodsSpecial.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="guang-nav-detail">
+	<!-- <view class="activity-head">
+		<image style="width: 100%;height: 300rpx;position: absolute;background: #fff;z-index: -1;" mode="aspectFit" src="{{goodListMsg.background}}"></image>
+		<view style="width: 50rpx;height: 50rpx;position: absolute;right: 82rpx;top: 25rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+		 class="iconfont icon-sousuo" bindtap="toSearch"></view>
+		<button open-type="share" style="width: 50rpx;height: 50rpx;position: absolute;right: 20rpx;top: 25rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;padding: 0;"
+		 class="iconfont icon-fenxiang" ></button>
+	</view> -->
+	<block wx:if="{{goodsList.length>0}}">
+		<view class="goods-list flex ns-wrap ns-justify-content-space-between pr">
+			<navigator url="/pages/goods/goods?id={{item.id}}" class="bg-white goods mb-20 " style="padding-right: 20rpx;" wx:for="{{goodsList}}">
+				<view style="width: 336rpx;height: 336rpx;position: relative;">
+					<image style="width: 336rpx;height: 336rpx;background: #ccc;" mode="aspectFill" src="{{item.first_cover_pic }}"></image>
+					<view wx:if="{{item.goods_num==0}}" class="nonum-tip">
+						已抢光
+					</view>
+				</view>
+				
+				<view class="goods-msg bg-white">
+					<view class="goods-msg-title">{{item.name}}</view>
+					<view class="fs-28 color-C10000">
+						<text class="mr-20">¥ {{filters.toFix1(item.price)}}</text>
+						<text class="color-8D8D8D ns-text-through">¥ {{filters.toFix1(item.original_price)}}</text>
+					</view>
+				</view>
+			</navigator>
+		</view>
+	</block>
+	<block wx:if="{{goodsList.length==0}}">
+		<view class="flex-x-center flex-y-center goods-list">暂无相关商品</view>
+	</block>
+	<!-- <view class="cart flex ns-align-items-flex-center ns-justify-content-space-between color-fff" bindtap="toCart">
+		<view class="pr">
+			<text class="iconfont icon-show_goumai mr-10 fs-40"></text>
+			
+			<view class="pa" wx:if="{{cartNum>0}}" style="width: 30rpx;height: 30rpx;line-height:30rpx;overflow: hidden;text-align: center;top: -10rpx;right: -14rpx;background: #c10000;border-radius: 50%;font-size: 10px;">{{cartNum}}</view>
+		</view>
+		<view class="fs-24 ">购物车</view>
+		
+	</view> -->
+</view>
+

@@ -1,0 +1,82 @@
+<!--pages/pickUpOrderDetail/pickUpOrderDetail.wxml-->
+<view class="page pr">
+	<view class="pick-detail">
+		<view class="flex align-center mb-10">
+			<image style="width: 60rpx;height: 60rpx;border-radius: 50%;" mode="aspectFill" src="{{pickDetail.user.avatar_url}}"></image>
+			<view class="ml-20">
+				<view class="fs-28 color-4A4A4A ns-text-bold">{{pickDetail.user.username}}</view>
+				<view class="mt-5 fs-20 color-4A4A4A">{{pickDetail.addtime}}</view>
+			</view>
+		</view>
+
+		<scroll-view scroll-x="true" enable-flex="true" scroll-into-view="{{toview}}" scroll-with-animation="true">
+			<view class="flex">
+				<view class="order-tab mr-20 ns-flex-shrink-no {{orderIns==item?'order-tab-active':''}}" wx:for="{{orderNo}}" bindtap="changeOrder"
+				 data-text="{{item}}" id="date{{item}}">编号-{{item}}</view>
+			</view>
+		</scroll-view>
+
+		<view class="goods-list">
+			<view class="flex justify-between align-center" style="margin-bottom: 15rpx;" wx:for="{{goodsList}}" wx:key="id">
+				<view class="flex flex-grow-1 align-center" bindtap="chooseGoods" data-index="{{index}}">
+					<text class="iconfont {{item.checked?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40"></text>
+					<text class="fs-28 color-4A4A4A ns-text-bold ns-text-limit" style="margin-left: 15rpx;">{{item.goods_name}}</text>
+					<text class="fs-28 color-4A4A4A ns-text-bold ml-10">+{{item.num}}</text>
+				</view>
+				<view class="fs-30 color-4A4A4A ns-text-bold flex-grow-0 ml-20">¥ {{item.total_price}}</view>
+			</view>
+			<!-- <view class="flex justify-between align-center" style="margin-bottom: 15rpx;">
+				<view class="flex flex-grow-1 align-center ns-text-limit">
+					<text class="iconfont {{is_ready?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40"></text>
+					<text class="fs-28 color-4A4A4A ns-text-bold" style="margin-left: 15rpx;">砀山苹果香甜多汁500g（大果）+1</text>
+				</view>
+				<view class="fs-30 color-4A4A4A ns-text-bold flex-grow-0">¥ 5.80</view>
+			</view>
+			<view class="flex justify-between align-center">
+				<view class="flex flex-grow-1 align-center ns-text-limit">
+					<text class="iconfont {{is_ready?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40"></text>
+					<text class="fs-28 color-4A4A4A ns-text-bold" style="margin-left: 15rpx;">砀山苹果香甜多汁500g（大果）+1</text>
+				</view>
+				<view class="fs-30 color-4A4A4A ns-text-bold flex-grow-0">¥ 5.80</view>
+			</view> -->
+		</view>
+		<view class="fs-28 color-4A4A4A mb-20" style="line-height: 50rpx;margin-bottom: 40rpx;">
+			<view>
+				<text>收货人：</text><text>{{pickDetail.name}}</text>
+			</view>
+			<view class="flex justify-between">
+				<view>
+					<text>联系电话：</text><text>{{pickDetail.mobile}}</text>
+				</view>
+				<view class="color-F76436" bindtap="call">打电话</view>
+			</view>
+			<view>
+				<text>收货地址：</text><text>{{pickDetail.address}}</text>
+			</view>
+			<view>
+				<text>自提点：</text><text>{{pickDetail.zt_address_data.dispatching_name}}</text>
+			</view>
+		</view>
+		<view>
+			<view class="flex justify-between" style="margin-bottom: 15rpx;">
+				<view class="flex">
+					<view class="fs-28 color-4A4A4A ns-text-bold" style="margin-right: 28rpx;">订单编号</view>
+					<view class="fs-28 color-F76436">复制</view>
+				</view>
+				<view class="fs-28 color-4A4A4A ns-text-bold">{{pickDetail.order_no}}</view>
+			</view>
+			<view class="flex justify-between">
+				<view class="fs-28 color-4A4A4A ns-text-bold">下单时间</view>
+				<view class="fs-28 color-4A4A4A ns-text-bold">{{pickDetail.addtime}}</view>
+			</view>
+		</view>
+	</view>
+	<view style="height: 20rpx;background:rgba(207,207,207,0.33);"></view>
+	<view class="remark flex">
+		<view class="flex-grow-0 fs-28 color-4A4A4A ns-text-bold">备注：</view>
+		<view class="flex-grow-1">
+			<textarea style="height: 200rpx;" placeholder="请输入备注文字" value="{{remarkValue}}" bindblur="remarkInput"></textarea>
+		</view>
+	</view>
+	<view class="footer fs-30 ns-text-bold" bindtap="pickUpGoods">确认提货</view>
+</view>

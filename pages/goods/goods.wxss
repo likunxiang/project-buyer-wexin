@@ -1,0 +1,252 @@
+@import "../../wxParse/wxParse.wxss";
+@import "/components/shopping_cart/shopping_cart.wxss";
+@import "/components/specifications_model/specifications_model.wxss";
+@import "/components/goods/specifications_model.wxss";
+@import "/components/goods/goods_banner.wxss";
+@import "/components/goods/goods_info.wxss";
+@import "/components/goods/goods_buy.wxss";
+@import "/components/goods/goods_recommend.wxss";
+@import "/components/quick-navigation/quick-navigation.wxss";
+
+view {
+	overflow: visible;
+}
+
+.vip-price-box {
+	height: 60rpx;
+	background: #FFFFFF;
+	border-radius: 30px;
+	padding: 0 15rpx;
+	line-height: 60rpx;
+	text-align: center;
+	color: #FF5602;
+}
+
+/* .vip-price-btn {
+	width: 100rpx;
+	height: 30rpx;
+	background: rgba(243, 217, 168, 1);
+	border-radius: 15rpx;
+	line-height: 30rpx;
+	text-align: center;
+	color: #2C2419;
+	font-size: 22rpx;
+} */
+
+.no-scroll {
+	height: 100%;
+	overflow-y: hidden;
+}
+
+.share-tip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background: rgba(0, 0, 0, 0.65);
+}
+
+.goods-detail {
+	box-sizing: border-box;
+	padding: 24rpx 0;
+	background: #fff;
+}
+
+.price-tips {
+	width: 89rpx;
+	height: 34rpx;
+	line-height: 34rpx;
+	text-align: center;
+	background: linear-gradient(-90deg, rgba(84, 98, 255, 1), rgba(185, 83, 255, 1));
+	border-radius: 24rpx 0rpx 24rpx 0rpx;
+	font-size: 20rpx;
+	color: #fff;
+	margin-top: -36rpx;
+}
+
+.activity-time {
+	padding: 0rpx 25rpx;
+	background: linear-gradient(-90deg, rgba(255, 55, 80, 1), rgba(255, 112, 6, 1));
+	border-radius: 18rpx;
+}
+
+.goods-detail text,
+.goods-detail image,
+.goods-detail view {
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+.cart-nav {
+	position: fixed;
+	top: 180rpx;
+	right: 24rpx;
+	background: rgba(255, 255, 255, 0.5);
+	font-size: 0;
+	padding: 20rpx;
+	border-radius: 999rpx;
+	box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.2);
+	z-index: 100;
+}
+
+.cart-nav image {
+	width: 42rpx;
+	height: 42rpx;
+}
+
+.tab-group .tab-group-header {
+	background: #fff;
+	border-bottom: 1rpx solid #e3e3e3;
+}
+
+.tab-group .tab-group-header .tab-group-item text {
+	height: 100rpx;
+	border-bottom: 2rpx solid transparent;
+}
+
+.tab-group .tab-group-header .tab-group-item.active text {
+	color: #c10000;
+	border-bottom-color: #c10000;
+}
+
+.tab-group .tab-group-body .tab-group-item {
+	display: none;
+}
+
+.tab-group .tab-group-body .tab-group-item.active {
+	display: block;
+}
+
+.comment-count {
+	background: #fff;
+	margin-bottom: 20rpx;
+}
+
+.comment-count .comment-count-item {
+	text-align: center;
+	padding: 20rpx 0;
+	font-size: 9pt;
+}
+
+.comment-item {
+	background: #fff;
+	border-bottom: 1rpx solid #e3e3e3;
+	padding: 32rpx 24rpx;
+}
+
+.comment-item .nickname {
+	padding-left: 24rpx;
+	height: 70rpx;
+	font-weight: bolder;
+}
+
+.comment-item .addtime {
+	color: #888;
+}
+
+.comment-item .pic-list {
+	margin-left: -8rpx;
+	margin-top: -8rpx;
+}
+
+.comment-item .pic-item {
+	width: 200rpx;
+	height: 200rpx;
+	margin-left: 8rpx;
+	margin-top: 8rpx;
+	display: inline-block;
+}
+
+.reply {
+	margin: 20rpx 24rpx 20rpx 0rpx;
+	border-radius: 16rpx;
+	background: #f7f7f7;
+	font-size: 11pt;
+	padding: 22rpx 30rpx;
+	color: #c10000;
+}
+
+.reply-content {
+	display: inline;
+	color: #666;
+}
+
+.comment-item .score-tag {
+	display: inline-block;
+	background: #eee;
+	font-size: 9pt;
+	padding: 4rpx 12rpx;
+	border-radius: 5rpx;
+}
+
+
+.loading-more {
+	text-align: center;
+	opacity: 0;
+}
+
+.loading-more.active {
+	opacity: 1;
+}
+
+.loading-more image {
+	width: 160rpx;
+	height: 80rpx;
+}
+
+.pic-left {
+	margin-right: 5rpx;
+}
+
+.pic-right {
+	margin-left: 5rpx;
+}
+
+.contact {
+	background: #118eea;
+	color: #fff;
+}
+
+/* new code */
+.goodsHeader {
+	height: 107rpx;
+	width: 100%;
+	color: #fff;
+}
+
+.goodsHeader .blod {
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 6rpx;
+}
+
+.goodsHeader .original_price {
+	margin-left: 6rpx;
+}
+
+.miao-label {
+	margin-bottom: 5rpx;
+	width: 50rpx;
+	height: 25rpx;
+	line-height: 25rpx;
+	border-radius: 8rpx;
+	background: #FFFFFF;
+	font-size: 9px;
+	color: #C10000;
+	text-align: center
+}
+
+/* 特别提示 */
+.line {
+	width: 120rpx;
+	height: 2rpx;
+	background-color: #979797;
+}
+
+.especially-tip {
+	margin-bottom: 20rpx;
+	background-color: #fff;
+	padding: 29rpx 30rpx 20rpx;
+}

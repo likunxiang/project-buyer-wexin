@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "逛一逛",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "white"
+}

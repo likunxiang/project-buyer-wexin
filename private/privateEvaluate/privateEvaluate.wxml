@@ -1,0 +1,46 @@
+<!--pages//private/privateEvaluate/privateEvaluate.wxml-->
+<view class="page pr">
+	<view class="bg-white header mb-20">
+		<view class="flex align-center">
+			<view class="color-595959 fs-24 ns-text-bold">配送速度</view>
+			<view class="flex" style="margin-left: 54rpx;color: #979797;">
+				<view wx:for="{{spendList}}" wx:key="key" class="iconfont {{item}} fs-40"  bindtap="evaluateSpend" data-index="{{index}}"></view>
+			</view>
+		</view>
+		<view class="flex align-center">
+			<view class="color-595959 fs-24 ns-text-bold">服务态度</view>
+			<view class="flex" style="margin-left: 54rpx;color: #979797;">
+				<view wx:for="{{serveList}}" wx:key="key" class="iconfont {{item}} fs-40"  bindtap="evaluateServe" data-index="{{index}}"></view>
+			</view>
+		</view>
+	</view>
+	<view class="bg-white mb-20">
+		<view class="ptb-20 padding-lr flex border-bottom">
+			<view style="width: 160rpx;height: 160rpx;">
+				<image style="width: 160rpx;height: 160rpx;background-color: #ccc;" mode="aspectFill"></image>
+			</view>
+			<view class="ml-30">
+				<view class="ns-text-limit2 color-595959 fs-24">春季新款体恤复古港味韩范chic宽松纯棉短袖白色t恤春季新款体恤复古港味韩范chic宽松纯棉短袖白色t恤</view>
+				<view class="color-D6D6D6 fs-20">颜色：白色  尺码：L</view>
+			</view>
+		</view>
+		<view class="flex align-center" style="padding: 25rpx 40rpx;">
+			<view class="color-595959 fs-24 ns-text-bold">配送速度</view>
+			<view class="flex" style="margin-left: 54rpx;color: #979797;">
+				<view wx:for="{{spendList}}" wx:key="key" class="iconfont {{item}} fs-40"  bindtap="evaluateSpend" data-index="{{index}}"></view>
+			</view>
+		</view>
+	</view>
+	
+	
+	<view class="footer justify-between">
+		<view class="flex-x-center align-center mb-30">
+			<view class="fs-24 color-595959 ">
+				感谢你的热心评价，它可以帮助更多人了解店主的自营商品
+			</view>
+		</view>
+		<view class="btn-box">
+			提交
+		</view>
+	</view>
+</view>

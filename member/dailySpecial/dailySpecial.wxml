@@ -1,0 +1,217 @@
+<!--pages/dailySpecial/dailySpecial.wxml-->
+<view class="page">
+	<!-- 第一次进入 -->
+	<!-- <view class="classify-zhezhao flex-x-center flex-y-center" style="height: {{y}}px;" catchtouchmove="{{true}}" wx:if="{{is_classify && !dailyClassify}}" bindtap="closeClassify">
+		<view class="zhezhao-content" catchtap="stop">
+			<view class="flex-x-center fs-30 color-2C2C2C ns-text-bold mb-20">提示</view>
+			<view class="fs-28 color-2C2C2C mb-20">小亲，我们为你准备了三盘货，你可以根据需要灵活挑选推荐</view>
+			<view class="fs-28 color-2C2C2C mb-20">你想优先展示：</view>
+			<view style="margin-bottom: 67rpx;">
+				<view class="flex mb-20" wx:for="{{classifyList}}" wx:key="key" bindtap="changeClassify" data-index="{{index}}">
+					<view class="iconfont {{classifyIns==index?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-36 mr-10"></view>
+					<view>
+						<view class="color-2C2C2C fs-28">{{item.title}}</view>
+						<view class="color-9B9B9B fs-24">{{item.desc}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="flex-x-center color-252E3E ns-text-bold" bindtap="saveClassify">确定</view>
+		</view>
+	</view> -->
+	<!-- <view class="header flex ns-justify-content-space-between">
+		<view class="nav-tab fs-30 color-2C2C2C {{navIns==index?'nav-tab-active':''}}" wx:for="{{navTab}}" wx:key="id" bindtap="changeTab" data-id="{{item.id}}" data-index="{{index}}">{{item.name}}</view>
+	</view> -->
+	<view class="body">
+		<!-- <view class="daily-special-title flex ns-align-items-flex-center">
+			<view class="black-block"></view>
+			<view class="fs-30 color-252E3E ns-text-bold ml-20">5月11日 第一波</view>
+		</view> -->
+		<block wx:if="{{dailyList.length>0}}">
+			<view class="daily-special-content"  wx:for="{{dailyList}}" wx:key="id" wx:for-item="shareList">
+				<view class="content-box" wx:if="{{shareList.out_type==1}}">
+					<navigator url="/pages/goods/goods?id={{shareList.out_id}}" hover-class="none" class="content-header flex" style="width: 100%;">
+						<view style="width: 120rpx;height: 120rpx;margin-right: 15rpx;">
+							<image style="width: 120rpx;height: 120rpx;background: #fff;" mode="aspectFit" src="{{shareList.goods_first_cover_pic}}"></image>
+						</view>
+						<view style="width: 530rpx;">
+							<view class="fs-28 color-595959 ns-text-bold ns-text-limit">{{shareList.goods_name}}</view>
+							<view class="mt-30 flex ns-justify-content-space-between ns-align-items-flex-center">
+								<view class="flex ns-align-items-flex-center">
+									<view class="color-C10000 fs-30 ns-text-bold">¥ {{shareList.goods_price}}</view>
+									<view class="earn fs-28 color-fff ml-20">赚 {{shareList.goods_commission}}</view>
+								</view>
+								<view class="flex">
+									<!-- <view class="icon-box iconfont icon-show_fenxiang color-fff" bindtap="toRecommend" data-gid="{{shareList.out_id}}" data-id="{{shareList.id}}" data-gn="{{shareList.goods_name}}" data-go="{{shareList.goods_original_price}}" data-gp="{{shareList.goods_price}}" data-gpic="{{shareList.goods_first_cover_pic}}" data-index="{{index}}"></view> -->
+									<!-- <navigator url="/pages/goods/goods?id={{shareList.out_id}}" class="icon-box ml-30 iconfont icon-jinru2 color-fff"></navigator> -->
+								</view>
+							</view>
+						</view>
+					</navigator>
+					<view class="content-body">
+						<view class="fs-28 color-595959">
+							<rich-text nodes="{{shareList.content}}"></rich-text>
+						</view>
+						<view class="flex mt-15">
+							<view class="pr" style="width: 154rpx;height: 154rpx;margin-right: 15rpx;" wx:for="{{shareList.cover_pic}}" wx:key="key" wx:for-item="picList" bindtap="previewImage" data-url="{{picList}}" data-list="{{shareList.cover_pic}}">
+								<image style="width: 154rpx;height: 154rpx;background: #ccc;border-radius: 8rpx;" src="{{picList}}" wx:if="{{index<4}}"></image>
+								<view class="more-pic" wx:if="{{shareList.cover_pic.length>4 && index==3}}">+ {{shareList.cover_pic.length - 4}}</view>
+							</view>
+						</view>
+						<view class="mt-24 flex ns-justify-content-space-between">
+							<view class="flex ns-align-items-flex-center" wx:if="{{shareList.infoCircleShare!=null}}" >
+								<view class="iconfont icon-biaoji fs-30 color-489A19"></view>
+								<view class="" style="margin-left: 14rpx;">我已推</view>
+							</view>
+							<view class="flex ns-align-items-flex-center" wx:else>
+								<view class="iconfont icon-biaoji1 fs-30"></view>
+								<view class="" style="margin-left: 14rpx;">还没推</view>
+							</view>
+							<view class="flex">
+								<!-- <view class="footer-btn flex flex-x-center" style="color: #4A4A4A" bindtap="copyText" data-text="{{shareList.content}}">
+									<view class="iconfont icon-fuzhi"></view>
+									<view class="ml-10 fs-24">复制文字</view>
+								</view> -->
+								<!-- <view class="footer-btn flex flex-x-center" style="color: #4A4A4A" bindtap="savePicText" data-text="{{shareList.content}}" data-pic="{{shareList.cover_pic}}">
+									<view class="iconfont icon-fuzhi"></view>
+									<view class="ml-10 fs-24">下载图文</view>
+								</view> -->
+								<view class="footer-btn flex flex-x-center ml-20" style="color: #4A4A4A" bindtap="toRecommend" data-text="{{shareList.content}}" data-pic="{{shareList.cover_pic}}" data-gid="{{shareList.out_id}}" data-id="{{shareList.id}}" data-gn="{{shareList.goods_name}}" data-go="{{shareList.goods_original_price}}" data-gp="{{shareList.goods_price}}" data-gpic="{{shareList.goods_first_cover_pic}}" data-index="{{index}}">
+									<view class="iconfont icon-fuzhi icon-show_fenxiang"></view>
+									<view class="ml-10 fs-24">一键分享</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="content-box" wx:if="{{shareList.out_type==2}}">
+					<navigator url="/pages/activity/activity?aid={{shareList.out_id}}" hover-class="none" class="content-header flex" style="width: 100%;">
+						<view style="width: 120rpx;height: 120rpx;margin-right: 15rpx;">
+							<image style="width: 120rpx;height: 120rpx;background: #fff;" mode="aspectFit" src="{{shareList.activity_banner}}"></image>
+						</view>
+						<view style="width: 530rpx;">
+							<view class="fs-28 flex ns-justify-content-space-between">
+								<view class="color-595959 ns-text-bold ns-text-limit" style="width: 350rpx;">{{shareList.activity_name}}</view>
+								<view class="" style="color: #489A19;">{{shareList.activity_end_date}}</view>
+							</view>
+							<view class="mt-30 flex ns-justify-content-space-between ns-align-items-flex-center">
+								<view class="flex">
+									<view class="color-C10000 fs-30 ns-text-bold">¥ {{shareList.activity_low_price}} 起</view>
+								</view>
+								<view class="flex">
+									<!-- <view class="icon-box iconfont icon-show_fenxiang color-fff " bindtap="toRecommend1" data-aid="{{shareList.out_id}}" data-apic="{{shareList.activity_banner}}" data-an="{{shareList.activity_name}}" data-ap="{{shareList.activity_low_price}}" data-ae="{{shareList.activity_end_date}}" data-id="{{shareList.id}}" data-index="{{index}}"></view> -->
+									<!-- <navigator url="/pages/activity/activity?aid={{shareList.out_id}}" class="icon-box ml-30 iconfont icon-jinru2 color-fff"></navigator> -->
+								</view>
+							</view>
+						</view>
+					</navigator>
+					<view class="content-body">
+						<view class="fs-28 color-595959">
+							<rich-text nodes="{{shareList.content}}"></rich-text>
+						</view>
+						<view class="flex mt-15">
+							<view class="pr" style="width: 154rpx;height: 154rpx;margin-right: 15rpx;" wx:for="{{shareList.cover_pic}}" wx:key="key" wx:for-item="picList" bindtap="previewImage" data-url="{{picList}}" data-list="{{shareList.cover_pic}}">
+								<image style="width: 154rpx;height: 154rpx;background: #ccc;border-radius: 8rpx;" src="{{picList}}" wx:if="{{index<4}}"></image>
+								<view class="more-pic" wx:if="{{shareList.cover_pic.length>4 && index==3}}">+ {{shareList.cover_pic.length - 4}}</view>
+							</view>
+						</view>
+						<view class="mt-24 flex ns-justify-content-space-between">
+							<view class="flex ns-align-items-flex-center" wx:if="{{shareList.infoCircleShare!=null}}" >
+								<view class="iconfont icon-biaoji fs-30 color-489A19"></view>
+								<view class="" style="margin-left: 14rpx;">我已推</view>
+							</view>
+							<view class="flex ns-align-items-flex-center" wx:else>
+								<view class="iconfont icon-biaoji1 fs-30"></view>
+								<view class="" style="margin-left: 14rpx;">还没推</view>
+							</view>
+							<view class="flex">
+								<!-- <view class="footer-btn flex flex-x-center" style="color: #4A4A4A" bindtap="copyText" data-text="{{shareList.content}}">
+									<view class="iconfont icon-fuzhi"></view>
+									<view class="ml-10 fs-24">复制文字</view>
+								</view> -->
+							<!-- 	<view class="footer-btn flex flex-x-center" style="color: #4A4A4A" bindtap="savePicText" data-text="{{shareList.content}}" data-pic="{{shareList.cover_pic}}">
+									<view class="iconfont icon-fuzhi"></view>
+									<view class="ml-10 fs-24">下载图文</view>
+								</view> -->
+								<view class="footer-btn flex flex-x-center ml-20" style="color: #4A4A4A" bindtap="toRecommend1" data-text="{{shareList.content}}" data-pic="{{shareList.cover_pic}}" data-aid="{{shareList.out_id}}" data-apic="{{shareList.activity_background}}" data-an="{{shareList.activity_name}}" data-ap="{{shareList.activity_low_price}}" data-ae="{{shareList.activity_end_date}}" data-id="{{shareList.id}}" data-index="{{index}}">
+									<view class="iconfont icon-show_fenxiang"></view>
+									<view class="ml-10 fs-24">一键分享</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			
+			<!-- 品牌 -->
+			<!-- <view class="daily-special-content" wx:if="{{shareList.out_type==2}}" wx:for="{{dailyList}}" wx:key="id" wx:for-item="shareList">
+				
+			</view> -->
+			<view class="flex-x-center color-8D8D8D ns-padding-bottom-sm" wx:if="{{is_no_more}}">没有更多啦~</view>
+		</block>
+		<block wx:else>
+			<view class="flex-x-center" style="padding-top: 50rpx;">
+				暂时没有相关推荐
+			</view>
+		</block>
+	</view>
+	<!-- 分享 -->
+	<view class="share-modal {{share_modal_active}} {{__device}}" catchtouchmove="{{true}}" bindtap="shareModalClose" wx:if="{{sharePic}}">
+		<view class="share-modal-body {{__device}}" catchtap="shop">
+			<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+			<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+	        <view class="tips">收益仅自己可见</view> -->
+			<view class="flex-row">
+				<view class="flex-grow-1 flex-x-center">
+					<button open-type="share" class="share-bottom" style='height:100%;' data-type="1">
+						<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+						<view>分享给好友</view>
+					</button>
+				</view>
+				<!-- <view class="flex-grow-1 flex-x-center">
+					<button open-type="share" class="share-bottom" style='height:100%;' data-type="2">
+						<text class="iconfont icon-weixin1 color-fff" style="font-size: 50rpx;"></text>
+						<view>分享图文和商品</view>
+					</button>
+				</view> -->
+				<view class="flex-grow-1 flex-x-center">
+					<view bindtap="getGoodsQrcode" class="share-bottom">
+						<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+						<view>生成商品海报</view>
+					</view>
+				</view>
+			</view>
+			<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+		</view>
+	</view>	
+	<!-- 生成海报 -->
+	<view class="goods-qrcode-modal {{goods_qrcode_active}} flex-y-center" catchtouchmove="{{true}}"  bindtap="goodsQrcodeClose">
+		<view class="goods-qrcode-body flex-col" catchtap="shop">
+			<view class="flex-grow-1" style="position: relative">
+				<view style="position: absolute;left: 0;top:0;width: 100%;height: 100%;">
+					<view class="goods-qrcode-box">
+						<view class="goods-qrcode-loading flex-x-center flex-y-center" wx:if="{{!goods_qrcode}}">
+							<view class="flex-x-center flex-col">
+								<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+								<view style="color: #888">海报生成中</view>
+							</view>
+						</view>
+						<image bindtap="goodsQrcodeClick" mode="aspectFit" class="goods-qrcode {{goods_qrcode?'active':''}}" data-src="{{goods_qrcode}}"
+						 src="{{goods_qrcode}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class="flex-grow-0 flex-col flex-x-center" style="padding-top: 50rpx;">
+				<view>
+					<button wx:if="{{goods_qrcode}}" bindtap="saveGoodsQrcode" class="share-btn">
+						保存图片
+					</button>
+					<button wx:else style="opacity: .4">保存图片</button>
+				</view>
+			</view>
+			<view class="goods-qrcode-close" bindtap="goodsQrcodeClose">
+				<image src="{{__wxapp_img.store.close2.url}}" style="width: 40rpx;height: 40rpx;display: block"></image>
+			</view>
+		</view>
+	</view>
+	
+</view>

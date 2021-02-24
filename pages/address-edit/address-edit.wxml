@@ -1,0 +1,82 @@
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<view class="body pr">
+
+		<view class="bottom-bar" bindtap="editAddress" wx:if="{{id}}">保存</view>
+		<view class="bottom-bar" bindtap="saveAddress" wx:else>保存</view>
+
+
+		<view>
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom fs-24 color-666666">
+					<view class="flex-grow-0 row-label ">收货人</view>
+					<view class="flex-grow-1 ns-text-bold color-333333">
+						<input placeholder="请输入收货人真实姓名" placeholder-style="font-weight: 400;color: #999999;" value="{{name}}" data-name="name"
+						 bindinput="inputBlur" />
+					</view>
+				</view>
+
+				<view class="flex-row flex-y-center edit-row fs-24">
+					<view class="flex-grow-0 row-label color-666666">联系电话</view>
+					<view class="flex-grow-1 ns-text-bold color-333333">
+						<input placeholder="请输入收货人手机号码" placeholder-style="font-weight: 400;color: #999999;" value="{{mobile}}" data-name="mobile"
+						 type="number" bindinput="inputBlur" />
+					</view>
+				</view>
+
+			</view>
+			<view class="input-box">
+				<view class="flex-row flex-y-center edit-row border-bottom fs-24">
+					<view class="flex-grow-0 row-label  color-666666">所在地区</view>
+					<view class="flex-grow-1 flex" bindtap="showAreaPicker">
+						<view class="flex-grow-1 color-333333 flex align-center" style="padding-right: 24rpx ">
+							<view class="color-999999" wx:if="{{district==null}}">请选择</view>
+							<view class="ns-text-bold " wx:else>{{district.province.name}} {{district.city.name}} {{district.district.name}}</view>
+						</view>
+						<view class="flex-grow-0 flex-y-center">
+							<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+						</view>
+					</view>
+				</view>
+
+				<view class="flex-row flex-y-center edit-row border-bottom fs-24">
+					<view class="flex-grow-0 row-label  color-666666">所在区</view>
+					<view class="flex-grow-1 flex">
+						<view class="flex-grow-1 color-333333 flex align-center" bindtap="{{district==null?'disableTown':''}}">
+							<picker bindchange="townAreaPick" value="{{town_index}}" range="{{town_list}}" range-key="name" disabled="{{district==null?true:false}}">
+								<view class="flex align-center">
+									<view class="picker flex-grow-1">
+										<!-- 									<block wx:if="{{town_list[town_index].name==null}}">请选择</block>
+										<block wx:else>{{town_list[town_index].name}}</block> -->
+										<view class="color-999999" wx:if="{{district==null}}">请选择</view>
+										<view class="ns-text-bold " wx:else>{{district.town.name?district.town.name:'请选择'}}</view>
+									</view>
+									<view class="flex-grow-0">
+										<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+									</view>
+								</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+
+				<view class="flex-row flex-y-center edit-row fs-24">
+					<view class="flex-grow-0 row-label  color-666666">详细地址</view>
+					<view class="flex-grow-1 ns-text-bold color-333333">
+						<input placeholder="请输入到门牌号的详细地址" placeholder-style="font-weight: 400;color: #999999;" value="{{detail}}"
+						 data-name="detail" bindinput="inputBlur" />
+					</view>
+				</view>
+			</view>
+
+			<view class="set-default mt-20 flex ns-align-items-flex-center ns-justify-content-space-between fs-24">
+				<view class=" color-2C2C2C ">设置为默认地址</view>
+				<switch color='#FFC330' bindchange="changeDefault" checked="{{is_default==1}}"></switch>
+			</view>
+		</view>
+
+	</view>
+	<include src="/components/footer/footer" />
+	<include src="/components/area-picker/area-picker.wxml" />
+</view>

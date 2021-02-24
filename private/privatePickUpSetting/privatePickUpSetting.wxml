@@ -1,0 +1,33 @@
+<!--pages//private/privatePickUpSetting/privatePickUpSetting.wxml-->
+<view class="page pr">
+	<view class="p-24 flex align-center">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">提货点</view>
+	</view>
+	
+	<view class="picu-up-address flex mb-20" wx:for="{{addressList}}" wx:key="id">
+		<view class="iconfont {{item.is_sel==1?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40" bindtap='choosePickUp' data-index="{{index}}" data-id="{{item.id}}" data-issel="{{item.is_sel}}"></view>
+		<view class="ml-20 flex1">
+			<view class="border-bottom pb-20 pr-24">
+				<view class="flex justify-between align-center">
+					<view class="fs-28 color-2C2C2C ns-text-bold">{{item.name}}</view>
+					<view class="fs-24 color-595959 ">{{item.mobile}}</view>
+				</view>
+				<view class="fs-24 color-595959 mt-10">{{item.province}}{{item.city}}{{item.district}}{{item.detail}}</view>
+			</view>
+			<view class="address-footer flex justify-between align-center">
+				<view class="fs-24 color-2C2C2C ns-text-bold">{{item.pick_up_name}}</view>
+				<view class="flex align-center pr-24">
+					<view class="iconfont icon-shanchu1" style="margin-right: 40rpx;" bindtap="deleteAddress" data-index="{{index}}"
+						 data-id="{{item.id}}"></view>
+					<navigator hover-class="none" url="/private/privateAddAddress/privateAddAddress?id={{item.id}}" class="iconfont icon-icon6"></navigator>
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="footer flex flex-x-center">
+		
+		<navigator hover-class="none" url="/private/privateAddAddress/privateAddAddress" class="btn-box" >添加新的地址</navigator>
+	</view>
+</view>

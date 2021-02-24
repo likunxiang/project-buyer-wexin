@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="header">
+    <view class="clear">
+      <view class="pull-left">请等待</view>
+    </view>
+    <view wx:if="{{shopInfo.apply.review_status==0}}">你申请的小店正在审核中～</view>
+    <view wx:if="{{shopInfo.apply.review_status==2}}">你申请的小店正在未通过，请联系平台客服！</view>
+  </view>
+  <view class="content">
+    <view class="tips">{{shopInfo.entry_rules}}</view>
+  </view>
+  <!-- <navigator url="/pages/merchants/merchants" hover-class="none" open-type="redirect"><view class="inteBtn">进入店铺</view></navigator> -->
+</view>

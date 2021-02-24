@@ -1,0 +1,52 @@
+/* pages/openshop2/openshop2.wxss */
+page {
+	background-color: #fff;
+	min-height: 100%;
+}
+.page {
+	padding: 20rpx 30rpx;
+	min-height: 100%;
+	padding-bottom: 150rpx;
+}
+.textarea-box {
+	padding: 15rpx 20rpx;
+	background: #F7F7F7;
+	height: 141rpx;
+}
+.next-btn {
+	position: absolute;
+	bottom: 57rpx;
+	left: 30rpx;
+	right: 30rpx;
+	height:78rpx;
+	background:rgba(244,158,58,1);
+	text-align: center;
+	line-height: 78rpx;
+	font-size: 30rpx;
+	color: #fff;
+}
+.checkbox {
+	width: 210rpx;
+}
+.cb{
+  transform: scale(0.7);
+}
+checkbox .wx-checkbox-input{
+    border: 1rpx solid #252E3E;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  background-color: #252E3E;
+
+
+}
+

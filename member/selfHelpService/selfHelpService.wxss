@@ -1,0 +1,9 @@
+/* pages/selfHelpService/selfHelpService.wxss */
+.btn {
+	width:181rpx;
+	height:61rpx;
+	line-height: 59rpx;
+	text-align: center;
+	border:1rpx solid rgba(153,153,153,1);
+	border-radius:30rpx;
+}

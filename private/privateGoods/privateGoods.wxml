@@ -1,0 +1,157 @@
+<!--pages//private/privateGoods/privateGoods.wxml-->
+<view class="page">
+	<block wx:if="{{is_login}}">
+		<view class="ns-column flex-y-center" style="padding-top: 400rpx;">
+			<view class="mb-20">您尚未登录，无法体验该功能，请先登录</view>
+			 <button style='border:1px solid #04be01;width:500rpx;height:80rpx;line-height:80rpx;border-radius:80rpx;color:#04be01;margin-bottom:40rpx;' bindtap="myLogin" class="btn new-modal-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">立即登录</button>
+		</view>
+	</block>
+	<block wx:else>
+		<view style="padding-bottom: 120rpx">
+			<view class="swiper pr">
+				<swiper class="swiper" indicator-dots="true">
+					<swiper-item wx:for="{{cover_pic}}">
+						<image class="swiper" src="{{item}}" mode="aspectFill" ></image>
+					</swiper-item>
+				</swiper>
+				<view class="lable color-fff fs-30">店主自营</view>
+				<view bindtap="downMaterial" class='pa share_btn_img down_btn_img'>
+					<text class="iconfont icon-xiazai" style="font-size: 30rpx;"></text>
+				</view>
+				<view bindtap="showShareModal" class='pa share_btn_img'>
+					<text class="iconfont icon-show_fenxiang" style="font-size: 30rpx;"></text>
+				</view>
+				<view wx:if="{{isReturn}}" bindtap="back" class='pf back'>
+					<text class="iconfont icon-zuojiantoubeifen" ></text>
+				</view>
+				<view wx:else bindtap="toHome" class='pf back'>
+					<text class="iconfont icon-zuojiantoubeifen" ></text>
+				</view>
+			</view>
+			<view class="goodsHeader flex ns-justify-content-space-between ns-align-items-flex-center" wx:if="{{true}}">
+				<view class="flex ">
+					<view class="flex" >
+						<view style="padding-top: 56rpx;font-size: 24rpx;">￥</view>
+						<view style="font-size: 78rpx;">{{min_price}}</view>
+					</view>
+					<!-- <view class="ns-flex ns-align-items-flex-center ml-20">
+						<view> -->
+							<!-- <view class="miao-label">爆款</view> -->
+							<!-- <view wx:if="{{true}}" class="ns-flex ns-align-items-flex-center" style="margin-top: 40rpx;"> -->
+								<!-- <text class="ns-text-through ns-text-xxxs">零售价</text> -->
+								<!-- <text class='original_price ns-text-through fs-18' wx:if="{{true}}">￥{{goods.original_price}}</text>
+							</view>
+						</view>
+					</view> -->
+				</view>
+				<!-- 佣金 -->
+				<!-- <view class="flex ns-align-items-flex-center ml-20 mt-30" wx:if="{{role=='shoper' && goods.c1>0}}">
+					<view class="yongjin fs-28">赚</view>
+					<view class="fs-28 color-fff">￥{{goods.c1}}</view>
+				</view> -->
+				<view class="fs-28">{{goods.show_txt}}</view>
+			</view>
+			
+			<view class="bg-white padding-lr ptb-24 mb-20">
+				<view class="fs-28 color-2C2C2C ns-text-bold">{{name}}</view>
+				<view class="fs-24 color-489A19 mt-10"><text wx:for="{{tag}}" style="margin-right: 15rpx;">{{item}}</text></view>
+			</view>
+			
+			<view class="bg-white padding-lr mb-20">
+				<!-- <view class="flex justify-between align-center border-bottom" bindtap="showAttrPicker">
+					<view class="flex-grow-1 flex-row flex-y-center ptb-24">
+						<text style="color:#2c2c2c;" class='fs-28 ns-text-bold'>尺码规格</text>
+						<text class='attrs'>
+							<text wx:for="{{attr_group_list}}" style="margin-right:10rpx" wx:key="key">{{item.attr_list.length}}种{{item.attr_group_name}}</text>
+						</text>
+					</view>
+					<view class="flex-grow-0">
+						<text class="iconfont icon-gengduo1 fs-34 color-8D8D8D"></text>
+					</view>
+				</view> -->
+				<view class="ptb-24 fs-28 color-2C2C2C" wx:if="{{desc}}">
+					{{desc}}
+				</view>
+			</view>
+			
+			<view class="ptb-24 bg-white">
+				
+				<image wx:for="{{cover_pic_detail}}" class="swiper" src="{{item}}" mode="aspectFill" ></image>
+			</view>
+		</view>
+		
+		<view class="footer">
+			<view class="flex">
+				<view class="jump-box flex fs-20 color-8D8D8D">
+					<navigator class="text-center flex1" url="/private/home/home?type=1">
+						<view class="iconfont icon-icon- fs-40"></view>
+						<view >全部商品</view>
+					</navigator>
+					<navigator class="text-center flex1" url="/private/privateCart/privateCart">
+						<view class="iconfont icon-cailanzi- fs-40"></view>
+						<view >我的篮子</view>
+					</navigator>
+				</view>
+				<view class="flex1 flex text-center">
+					<view class="flex1 btn-box bg-F49E3A" bindtap="addCart">加入篮子</view>
+					<view class="flex1 btn-box bg-F76436" bindtap="buyNow">立即购买</view>
+				</view>
+			</view>
+		</view>
+		
+		<view class="share-modal {{share_modal_active}} {{__device}}" catchtouchmove="{{true}}" bindtap="shareModalClose" wx:if="{{true}}">
+			<view class="share-modal-body {{__device}}" catchtap="shop">
+				<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+				<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+		        <view class="tips">收益仅自己可见</view> -->
+				<view class="flex-row">
+					<view class="flex-grow-1 flex-x-center">
+						<button open-type="share" class="share-bottom" style='height:100%;'>
+							<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+							<view>分享给好友</view>
+						</button>
+					</view>
+					<view class="flex-grow-1 flex-x-center">
+						<view bindtap="getGoodsQrcode" class="share-bottom">
+							<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+							<view>生成商品海报</view>
+						</view>
+					</view>
+				</view>
+				<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+			</view>
+		</view>
+		
+		<!-- 生成海报 -->
+		<view class="goods-qrcode-modal {{goods_qrcode_active}} flex-y-center" catchtouchmove="{{true}}"  bindtap="goodsQrcodeClose">
+			<view class="goods-qrcode-body flex-col" catchtap="shop">
+				<view class="flex-grow-1" style="position: relative">
+					<view style="position: absolute;left: 0;top:0;width: 100%;height: 100%;">
+						<view class="goods-qrcode-box">
+							<view class="goods-qrcode-loading flex-x-center flex-y-center" wx:if="{{!goods_qrcode}}">
+								<view class="flex-x-center flex-col">
+									<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+									<view style="color: #888">海报生成中</view>
+								</view>
+							</view>
+							<image bindtap="goodsQrcodeClick" mode="aspectFill" class="goods-qrcode {{goods_qrcode?'active':''}}" data-src="{{goods_qrcode}}"
+							 src="{{goods_qrcode}}"></image>
+						</view>
+					</view>
+				</view>
+				<view class="flex-grow-0 flex-col flex-x-center" style="padding-top: 50rpx;">
+					<view>
+						<button wx:if="{{goods_qrcode}}" bindtap="saveGoodsQrcode" class="share-btn">
+							保存图片
+						</button>
+						<button wx:else style="opacity: .4">保存图片</button>
+					</view>
+				</view>
+				<view class="goods-qrcode-close" bindtap="goodsQrcodeClose">
+					<image src="{{__wxapp_img.store.close2.url}}" style="width: 40rpx;height: 40rpx;display: block"></image>
+				</view>
+			</view>
+		</view>
+	</block>
+	
+</view>

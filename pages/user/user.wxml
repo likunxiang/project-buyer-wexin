@@ -1,0 +1,346 @@
+<view class="page1 pr">
+	<view class='nav pr' style="min-height:480rpx;background: url({{bg}}) no-repeat;background-size: 100% 100%;">
+		<!-- 头部内容 -->
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view></view>
+			<view class="fs-36">我的</view>
+			<view></view>
+		</view>
+		<view class="user-msg-box">
+			<view class="flex align-center justify-between">
+				<view class="flex align-center">
+					<image style="width: 117rpx;height: 117rpx;border-radius: 50%;" mode="aspectFill" src="{{user_info.avatar_url}}"></image>
+					<view class="ml-24">
+						<view class="fs-36">{{user_info.nickname}}</view>
+						<view class="logout fs-20" bindtap="logout" wx:if="{{user_info}}">注销登录</view>
+						<button bindtap="myLogin" class="logout fs-20" open-type="getUserInfo" bindgetuserinfo="getUserInfo" wx:if="{{!user_info}}">立即登录</button>
+					</view>
+				</view>
+				<view class="text-center plr-25">
+					<view class="ns-text-bold color-fff" style="font-size: 60rpx;">{{subsidy}}</view>
+					<navigator url="/member/allowance/allowance" class="allowance-btn flex align-center justify-center marginAuto">
+						<view class="fs-30 color-fff ">津贴</view>
+						<view class="iconfont icon-jinru fs-40 color-fff" style="width: 18rpx;"></view>
+					</navigator>
+
+
+				</view>
+			</view>
+			<view class="vip-card flex justify-between align-center" style="background: url({{vipCardBg}}) no-repeat;background-size: 100% 100%;">
+				<view>
+					<text class="iconfont icon-ziyuan101 fs-30 mr-16" style="color: #F5DBAA;"></text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:if="{{vipCardStatus==0}}">永久会员</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==1}}">免费领亲卡，享会员价</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==2}}">亲卡有效期：{{vipCardTime}}</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==3}}">免费领亲卡，享会员价</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==4}}">亲卡有效期：{{vipCardTime}}</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==5}}">购买会员卡</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:elif="{{vipCardStatus==6}}">亲卡有效期：{{vipCardTime}}</text>
+					<text class="fs-28 ns-text-bold" style="color: #F0D0A5;" wx:else>购买会员卡</text>
+				</view>
+				<view class="vip-card-btn fs-20 ns-text-bold" style="color: #2C2419;">
+					<button class="vip-card-btn fs-20 ns-text-bold" style="padding: 0;" bindtap="showModal" wx:if="{{vipCardStatus==0}}">赚取津贴</button>
+					<navigator url="/member/vipFirst/vipFirst" wx:elif="{{vipCardStatus==1}}">申请会员</navigator>
+					<navigator url="/member/vipFirst/vipFirst" wx:elif="{{vipCardStatus==2}}">申请会员</navigator>
+					<navigator url="/member/vipFirst/vipFirst" wx:elif="{{vipCardStatus==3}}">申请会员</navigator>
+					<navigator url="/member/getVipCard/getVipCard" wx:elif="{{vipCardStatus==4}}">分享会员</navigator>
+					<navigator url="/member/getVipCard/getVipCard" wx:elif="{{vipCardStatus==5}}">分享会员</navigator>
+					<navigator url="/member/vipFirst/vipFirst?type=1" wx:elif="{{vipCardStatus==6}}">购买会员</navigator>
+					<navigator url="/member/vipFirst/vipFirst?type=1" wx:else>购买会员</navigator>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 领取会员卡遮罩 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_model && card_bg}}">
+		<view class="get-card-modal-main pr" style="background: url({{card_bg}}) no-repeat;background-size: 100% 100%;">
+			<view class="color-fff flex-x-center" style="font-size: 45rpx;">活动规则</view>
+			<view class="time-top-text fs-24 color-fff" style="margin-top: 75rpx;">
+				<view>免费送给好友一张三天会员卡，让好友享受到亲卡的会员价</view>
+				<view style="margin-top: 49rpx;">好友成功办理永久会员之后，您将获得10元津贴</view>
+			</view>
+			<button class="get-card-modal-btn" open-type="share">立即分享</button>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;margin-top: 70rpx;" bindtap="closeModal"></view>
+	</view>
+	<!-- 邀请店主 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{to_mch_show && tomch_invite_bg}}">
+		<view class="get-card-modal-main_mch pr" style="background: url({{tomch_invite_bg}}) no-repeat;background-size: 100% 100%;">
+			<button class="get-card-modal-btn_mch" open-type="share" data-type="tomch">立即邀请</button>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;margin-top: 40rpx;" bindtap="closeToMch"></view>
+	</view>
+	<!-- 客服不在线提示 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{kf_service == 0 && is_show_kf}}" catchtap="closeKf">
+		<view class="get-card-modal-main-kf pr ns-column flex-x-center text-center" style="">
+			<view>
+				<view class="fs-36 ns-text-bold mb-24" style="line-height: 54rpx;color: #111111;">
+					<view>【温馨提示】</view>
+				</view>
+				<view class="fs-30" style="line-height: 36rpx;color: #111111;margin-bottom: 27rpx;">
+					<rich-text nodes="{{kf_service_tips}}"></rich-text>
+				</view>
+			</view>
+			<button bindtap="toMchPage" class="get-card-modal-btn-kf">联系店主</button>
+		</view>
+		<!-- <view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;margin-top: 40rpx;" bindtap="closeToMch"></view> -->
+	</view>
+	<!-- 生成店铺码 -->
+	<view class='flex-y-center' style='width:{{x}}px;height:{{y}}px;position: fixed;top: 0;background: rgba(0, 0, 0, 0.4);z-index: 999;'
+	 wx:if="{{shopShow}}" bindtap='closeShop' catchtouchmove="{{true}}">
+		<view class='shareShop'>
+			<view>
+				<view class='shopHead'>
+					<image src="{{user_info.avatar_url}}" class="shopHeadImg" />
+					<view class='font_blod'>{{user_info.nickname}}</view>
+					<view class="tips">邀请您来这里逛逛呀～</view>
+				</view>
+				<!-- 小程序码 -->
+				<view class='shopCode' style='height:370rpx'>
+					<image class="appcode-img" src="{{codeImg.qrcode_pic}}" />
+				</view>
+			</view>
+			<view class='flex shopBottom flex-x-center'>
+				<view class="flex1" style="color: #c11111" catchtap="downImg">保存图片</view>
+				<view class="flex1" style="color: #333" catchtap="closeShop">关闭</view>
+			</view>
+		</view>
+	</view>
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<view class=" after-navber pr">
+		<view class="tomch-self" wx:if="{{role != 'shoper'}}" bindtap="toMch">
+			<image style="width: 750rpx;height: 213rpx;" mode="aspectFit" src="{{tomch_self_bg}}"></image>
+		</view>
+		<view class="page {{__page_classes}}" style="{{role != 'shoper'?'padding-top: 10rpx;':''}}">
+			<!-- <view style='position:relative;'> 
+					<view class="user-info flex-row flex-y-center {{dailySpecial.length>0?'':'border-bottom-20'}}">
+						<view class="flex-grow-1 flex-y-center flex-row userinfo-name">
+							<block wx:if="{{user_info}}">
+								<view class="flex-grow-0">
+									<image class="avatar" src="{{user_info.avatar_url}}" />
+								</view>
+								<view class="flex-grow-1">
+									<text class="user-name">{{user_info.nickname}}</text>
+								</view>
+							</block>
+							<block wx:else>
+								<view bindtap="login" class="flex">
+									<view class="flex-grow-0">
+										<image style="width: 140rpx;height: 140rpx;border-radius: 50%;margin: 0 45rpx 0 50rpx;background: #999;" src="{{user_info.avatar_url}}" />
+									</view>
+									<view class="flex-grow-1 flex-y-center">
+										<button bindtap="myLogin" class="btn new-modal-btn user-name" open-type="getUserInfo" bindgetuserinfo="getUserInfo">立即登录</button>
+									</view>
+								</view>
+							</block>
+						</view>
+					</view>
+				</view> -->
+			<!-- 未登录的遮罩层 -->
+			<view class="no-login-zhezhao" bindtap="noLoginTips" wx:if="{{!user_info}}">
+
+			</view>
+			<!-- <view class="daily-special" wx:if="{{dailySpecial.length>0}}">
+					<navigator url="{{item.page_url}}" hover-class="none" data-url="{{item.page_url}}" class="nav-er flex-grow-0 "
+					 wx:for="{{dailySpecial}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="id">
+						<view class="flex-x-center">
+							<image style="width: 690rpx;height: 204rpx;" mode="aspectFit" src="{{item.pic_url}}"></image>
+						</view>
+					</navigator>
+
+				</view> -->
+			<!-- <view class="order-block" wx:if="{{setting && setting.is_order == 1}}"> -->
+			<view class="order-block">
+				<navigator hover-class="none" class="my-order" url="/pages/order/order?status=-1">我的订单
+					<view class="allorder">全部订单</view>
+				</navigator>
+				<view class="flex-row">
+					<view class="flex-grow-1">
+						<navigator hover-class="none" class="nav-item" url="/pages/order/order?status=0&status_0={{order_count.status_0}}">
+							<view class="item">
+								<image src="{{icon_wait_pay}}" />
+							</view>
+							<view>{{orders.status_0.text?orders.status_0.text:'待付款'}}</view>
+							<view class="num-icon" wx:if="{{order_count.status_0 && order_count.status_0 > 0}}">
+								<text>{{order_count.status_0}}</text>
+							</view>
+						</navigator>
+					</view>
+					<view class="flex-grow-1">
+						<navigator hover-class="none" class="nav-item" url="/pages/order/order?status=1">
+							<view class="item">
+								<image src="{{icon_wait_send}}" />
+							</view>
+							<view>待发货</view>
+							<view class="num-icon" wx:if="{{order_count.status_1 && order_count.status_1 > 0}}">
+								<text>{{order_count.status_1}}</text>
+							</view>
+						</navigator>
+					</view>
+					<view class="flex-grow-1">
+						<navigator hover-class="none" class="nav-item" url="/pages/order/order?status=2">
+							<view class="item">
+								<image src="{{icon_car}}" />
+							</view>
+							<view>{{orders.status_2.text?orders.status_2.text:'待收货'}}</view>
+							<view class="num-icon" wx:if="{{order_count.status_2 && order_count.status_2 > 0}}">
+								<text>{{order_count.status_2}}</text>
+							</view>
+						</navigator>
+					</view>
+					<!-- <view class="flex-grow-1">
+                            <navigator class="nav-item" url="/pages/refund/refund">
+                                <view class="item">
+                                    <image src="{{resBaseUrl}}/statics/wxapp/images/toggle.png" />
+                                </view>
+                                <view>退货退款</view>
+                            </navigator>
+                        </view> -->
+					<view class="flex-grow-1">
+						<navigator hover-class="none" class="nav-item" url="/pages/refund/refund?status=4">
+							<view class="item">
+								<image src="{{icon_refund}}" />
+							</view>
+							<view>{{orders.status_4.text?orders.status_4.text:'退货退款'}}</view>
+							<view class="num-icon" wx:if="{{order_count.status_4 && order_count.status_4 > 0}}">
+								<text>{{order_count.status_4}}</text>
+							</view>
+						</navigator>
+					</view>
+				</view>
+				<!-- <view class="myPt clear">
+                      <image src="{{user_info.avatar_url}}" class="pull-left"/>
+                      <view class="pull-left ptText">拼团剩余 <span>00:29:45</span>, 还差一人</view>
+                      <view class="toPt pull-right">去拼团</view>
+                    </view> -->
+			</view>
+			<!-- <view class="order-block" wx:if="{{setting && setting.is_order == 1}}"> -->
+			<view class="order-block">
+				<view class="my-tool"> 工具与服务</view>
+				<view class="flex ns-wrap">
+					<navigator hover-class="none" url="/pages/pt/order/order?group_order_no_pay_num={{group_order_no_pay_num}}" class="tool-box">
+						<view class="tool-icon iconfont icon-xingzhuang9"></view>
+						<view>拼团订单</view>
+					</navigator>
+					<navigator hover-class="none" url="/pages/address/address" class="tool-box">
+						<view class="tool-icon iconfont icon-location"></view>
+						<view>地址管理</view>
+					</navigator>
+					<block wx:if="{{kf_service == 1}}">
+						<view class="tool-box">
+							<label>
+								<view class="tool-icon iconfont icon-kefu"></view>
+								<view>联系客服</view>
+								<button style="background:#fff;border:0;padding:0;margin:0;width:100%;line-height: 1;" open-type="contact"
+								 session-from="nickName={{nickName}}|avatarUrl={{avatarUrl}}|type={{type}}|userId={{userId}}|mchId={{mchId}}|storeId={{storeId}}"></button>
+							</label>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="tool-box">
+							<label>
+								<view class="tool-icon iconfont icon-kefu"></view>
+								<view>联系客服</view>
+								<button style="background:#fff;border:0;padding:0;margin:0;width:100%;line-height: 1;" bindtap='openKf'></button>
+							</label>
+						</view>
+					</block>
+					<view class="tool-box" bindtap="toSetting">
+						<view class="tool-icon iconfont icon-shezhi"></view>
+						<view>设置</view>
+					</view>
+					<view class="tool-box" bindtap="shareShop" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-erweima1"></view>
+						<view>店铺码</view>
+					</view>
+					<view class="tool-box" bindtap="toSellerUploadWX" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-weixin3"></view>
+						<view>上传微信</view>
+					</view>
+					<view class="tool-box" bindtap="toMyTop" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-shangji"></view>
+						<view>我的上级</view>
+					</view>
+					<navigator class="tool-box" hover-class="none" url="/member/homePage/homePage"
+					 wx:if="{{vipLevel>0 && role!='shoper'}}">
+						<view class="tool-icon iconfont icon-wodehuiyuan1 semoll" style="font-weight: 400;background: linear-gradient(-55deg, #FE7D46, #FDAF59);color: #fff;font-size: 36rpx;"></view>
+						<view>专属导购</view>
+					</navigator>
+					<!-- <navigator hover-class="none" url="/member/pickUpOrder/pickUpOrder" wx:if="{{role=='shoper'}}" class="tool-box">
+							<view class="tool-icon iconfont icon-ziti"></view>
+							<view>自提单</view>
+						</navigator> -->
+					<!-- <navigator hover-class="none" url="/pages/vipList/vipList?can_shopkeeper={{can_shopkeeper}}" wx:if="{{role !='shoper' && vipLevel>0}}"
+					 class="tool-box">
+						<view class="tool-icon iconfont icon-qinyou"></view>
+						<view>我的会员</view>
+					</navigator> -->
+					<navigator wx:if="{{role=='user'&&can_open==1}}" bindtap="openShop" class="tool-box">
+						<view class="tool-icon iconfont icon-kaidian"></view>
+						<view>成为店长</view>
+					</navigator>
+					<!-- <navigator wx:if="{{can_open==1}}" url="/pages/storeManager/storeManager" class="tool-box">
+							<view class="tool-icon iconfont icon-chengweidianzhu" ></view>
+							<view>成为店主</view>
+						</navigator> -->
+				</view>
+			</view>
+			<!-- wx:if="{{role=='shoper'}}" -->
+			<view class="order-block" wx:if="{{vipLevel>0}}">
+				<view class="my-tool"> 经营助手</view>
+				<view class="flex ns-wrap">
+					<!-- 	<navigator url="/pages/pt/order/order?group_order_no_pay_num={{group_order_no_pay_num}}" class="tool-box">
+							<view class="tool-icon iconfont icon-pintuan- fs-40 color-fff"></view>
+							<view>跟单助手</view>
+						</navigator>
+						<navigator url="/pages/address/address" class="tool-box">
+							<view class="tool-icon iconfont icon-dizhi fs-40 color-fff"></view>
+							<view>素材中心</view>
+						</navigator> -->
+					<!-- .............. -->
+					<!-- <view class="tool-box" bindtap="toSeller">
+							<view class="tool-icon iconfont icon-gendan semoll" style="font-weight: 400;background: linear-gradient(-55deg, #578EE7, #87C9F8);color: #fff;font-size: 40rpx;"></view>
+							<view>跟单助手</view>
+						</view> -->
+					<!-- ............ -->
+
+
+					<!-- .............. -->
+					<view class="tool-box" bindtap="toSeller" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-houtai semoll" style="font-weight: 400;background: linear-gradient(-55deg, #9030C7, #E460E6);color: #fff;font-size: 40rpx;"></view>
+						<view>进入后台</view>
+					</view>
+					<navigator class="tool-box" hover-class="none" url="/pages/vipList/vipList?can_shopkeeper={{can_shopkeeper}}"
+					 wx:if="{{vipLevel>0}}">
+						<view class="tool-icon iconfont icon-wodehuiyuan1 semoll" style="font-weight: 400;background: linear-gradient(-55deg, #F4D395, #D8AC64);color: #fff;font-size: 36rpx;"></view>
+						<view>我的会员</view>
+					</navigator>
+					<view class="tool-box" bindtap="showToMch" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-dianpu semoll" style="font-weight: 400;background: linear-gradient(-55deg, #FC4C31, #FE784E);color: #fff;font-size: 36rpx;"></view>
+						<view>邀请开店</view>
+					</view>
+					<view class="tool-box" bindtap="toQinBook" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-xihuan_tianchong semoll" style="font-weight: 400;background: linear-gradient(-55deg, #FF4F63, #FF82B2);color: #fff;font-size: 40rpx;"></view>
+						<view>小亲本</view>
+					</view>
+					<!-- ............ -->
+					<!-- <view class="tool-box" bindtap="shareShop" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-dianpuma semoll" style="font-weight: 400;background: linear-gradient(-55deg, #FE7D46, #FDAF59);color: #fff;font-size: 40rpx;"></view>
+						<view>店铺码</view>
+					</view>
+					<view class="tool-box" bindtap="toSellerUploadWX" wx:if="{{role=='shoper'}}">
+						<view class="tool-icon iconfont icon-weixin {{showToast?'tool-active':''}} semoll" style="font-weight: 400;background: linear-gradient(-55deg, #2FC69D, #60E6C1);color: #fff;font-size: 40rpx;"></view>
+						<view>上传微信</view>
+					</view> -->
+
+
+				</view>
+			</view>
+			<include src="/components/copyright/copyright" />
+		</view>
+	</view>
+	<include src="/components/downLoadwx/downLoadwx" />
+	<include src="/components/open50/open50" />
+	<!-- <include src="/components/footer/footer" /> -->
+</view>

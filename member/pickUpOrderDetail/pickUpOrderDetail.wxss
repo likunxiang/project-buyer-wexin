@@ -1,0 +1,42 @@
+/* pages/pickUpOrderDetail/pickUpOrderDetail.wxss */
+page {
+	height: 100%;
+	background-color: #fff;
+}
+.page {
+	min-height: 100%;
+	padding-bottom: 150rpx;
+}
+.pick-detail {
+	padding: 25rpx 40rpx;
+}
+.order-tab {
+	padding: 10rpx 0;
+	text-align: center;
+	font-size: 30rpx;
+	margin-right: 30rpx;
+	color: #8F8F8F;
+}
+.order-tab-active {
+	font-weight: bold;
+	color: #489A19;
+	border-bottom: 4rpx solid #489A19;
+}
+.goods-list {
+	padding: 40rpx 0;
+}
+.remark {
+	padding: 30rpx 40rpx;
+}
+.footer {
+	position: absolute;
+	bottom:50rpx;
+	left: 40rpx;
+	right: 40rpx;
+	width: 670rpx;
+	height: 78rpx;
+	background-color: #489A19;
+	line-height: 78rpx;
+	text-align: center;
+	color: #FFFFFF;
+}

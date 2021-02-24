@@ -1,0 +1,222 @@
+/* pages/jdHotMenu/jdHotMenu.wxss */
+page {
+	background: #fff;
+}
+.page {
+	min-height: 100%;
+	background: #fff;
+}
+.heardBanner {
+	width: 750rpx;
+	background: linear-gradient(90deg, #F92B1A, #F91E39);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9;
+}
+
+.search {
+	width: 702rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	background: #F4F4F4;
+	border-radius: 30rpx;
+	padding: 0 24rpx;
+}
+
+.search-goods {
+	width: 702rpx;
+	height: 89rpx;
+	line-height: 89rpx;
+	background: #F4F4F4;
+	border-radius: 8rpx;
+	padding: 0 26rpx;
+	margin-top: 40rpx;
+}
+.footer-box {
+	bottom: 113rpx;
+	left: 239rpx;
+	right: 239rpx;
+}
+.footer-box-btn {
+	width: 270rpx;
+	height: 90rpx;
+	line-height: 86rpx;
+	text-align: center;
+	border-radius: 8rpx;
+	font-size: 30rpx;
+	color: #F92A1E;
+	border: 2rpx solid #F92A1E;
+}
+
+.footer-box-btn-pull {
+	width: 270rpx;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
+	border-radius: 8rpx;
+	font-size: 30rpx;
+	color: #fff;
+	background: #F92A1E;
+}
+.sell-up {
+	width: 113rpx;
+	height: 113rpx;
+	border-radius: 50%;
+	background: rgba(38, 38, 38, 0.45);
+	position: absolute;
+	left: 44rpx;
+	top: 43rpx;
+	padding: 24rpx 0;
+	text-align: center;
+	font-size: 22rpx;
+	color: #fff;
+}
+
+.line {
+	width: 67rpx;
+	height: 2rpx;
+	background: #fff;
+	margin: 4rpx auto;
+}
+
+.text-more-1 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.more1 {
+	width: 750rpx;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.more-content {
+	width: 750rpx;
+	background-color: #fff;
+	padding: 6rpx 27rpx 0rpx 27rpx;
+	/* margin-top: 286rpx; */
+	margin-top: 370rpx;
+	border-radius: 0px 0px 30rpx 30rpx;
+	min-height: 200rpx;
+	animation: open 0.3s;
+	-moz-animation: open 0.3s;
+	/* Firefox */
+	-webkit-animation: open 0.3s;
+	/* Safari 和 Chrome */
+	-o-animation: open 0.3s;
+	overflow: hidden;
+}
+
+.more-list {
+	display: inline-block;
+	height: 54rpx;
+	line-height: 54rpx;
+	padding-left: 22rpx;
+	padding-right: 22rpx;
+	font-size: 26rpx;
+	color: #999;
+	border-radius: 27rpx;
+	background-color: #f4f4f4;
+	margin-right: 32rpx;
+	margin-bottom: 32rpx;
+}
+
+.more-active {
+	color: #ffc330;
+	background-color: #fff3d6;
+}
+
+@keyframes open {
+	from {
+		transform: translateY(-200rpx);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
+/* 旋转 */
+
+.change {
+	transform: rotate(180deg);
+}
+.goods {
+	width: 340rpx;
+	border-radius: 20rpx;
+}
+
+.goods-msg {
+	padding: 18rpx 10rpx;
+	margin-top: -4rpx;
+}
+
+.goods-msg-title {
+	font-size: 28rpx;
+	color: #333;
+	margin-bottom: 8rpx;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.add-cart-icon {
+	width: 30rpx;
+	height: 30rpx;
+	line-height: 30rpx;
+	text-align: center;
+	background-color: #ffc330;
+	border-radius: 50%;
+}
+
+.screen-box-model {
+	position: fixed;
+	width: 100%;
+	top: 0rpx;
+	left: 0rpx;
+	background:rgba(0,0,0,.5);
+	z-index: 10;
+}
+.screen-box {
+	position: absolute;
+	right: 0rpx;
+	top: 0rpx;
+	width: 697rpx;
+	height: 100%;
+	background: #fff;
+	padding: 24rpx 25rpx;
+	border-radius: 30rpx 0 0 30rpx;
+}
+.screen-box-box {
+	width: 180rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	background: #EBEBEB;
+	border-radius: 30rpx;
+	font-size: 24rpx;
+	color: #999999;
+}
+.screen-box-box-active {
+	background: rgba(255,195,48,.2);
+	color: #FF8400;
+}
+.screen-box-btn-box {
+	position: absolute;
+	bottom: 24rpx;
+	right: 24rpx;
+}
+.screen-box-btn {
+	width: 262rpx;
+	height: 82rpx;
+	line-height: 78rpx;
+	text-align: center;
+	border: 2rpx solid #616161;
+	border-radius: 40rpx;
+}

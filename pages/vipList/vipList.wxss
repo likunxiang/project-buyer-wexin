@@ -1,0 +1,234 @@
+page {
+    height: 100%;
+}
+
+.VipListPage {
+    min-height: 100%;
+	padding-bottom: 200rpx;
+}
+
+.public-box {
+    border-radius: 0rpx;
+    justify-content: space-between;
+}
+
+.vipPublic {
+    font-family: PingFang SC;
+    font-size: 30rpx;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
+}
+
+.fSize {
+    font-size: 60rpx;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(153, 153, 153, 1);
+}
+
+.fansPublic {
+    font-family: PingFang SC;
+    font-size: 30rpx;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+}
+
+.fans {
+    font-size: 30rpx;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+}
+
+.fansNum {
+    font-size: 60rpx;
+    font-weight: 600;
+    color: rgba(51, 51, 51, 1);
+}
+
+.shopPub {
+    
+    width: 118rpx;
+    height: 40rpx;
+    border-radius: 6rpx;
+    font-size: 20rpx;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 40rpx;
+}
+
+.shopPub .shopOwner {
+	background: rgba(255, 195, 48, 1);
+    
+}
+.shoppers {
+	border: 1rpx solid #FFB500;
+	color: #FFB500;
+}
+
+.vipList {
+    padding: 0rpx 24rpx 32rpx;
+    background: #fff;
+    width: 100%;
+}
+
+.pic {
+    width: 106rpx;
+    height: 106rpx;
+    border-radius: 50%;
+}
+
+.txt {
+    margin-left: 16rpx;
+}
+
+.name {
+    font-size: 32rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    margin-bottom: 23rpx;
+}
+
+.date {
+    font-size: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(102, 102, 102, 1);
+}
+
+.cumulativeNum {
+    font-size: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(255, 2, 0, 1);
+    margin-bottom: 26rpx;
+}
+
+.TMembers {
+    font-size: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    border-bottom: 1px so;
+}
+
+.TMembers1 {
+	width: 110rpx;
+	height: 40rpx;
+	background: #3E3E3E;
+	border-radius: 6rpx;
+	line-height: 40rpx;
+    font-size: 20rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+	text-align: center;
+    color: #F3D9A8;
+}
+.TMembers2 {
+	width: 110rpx;
+	height: 40rpx;
+	background: #F3D9A8;
+	border-radius: 6rpx;
+	line-height: 40rpx;
+	font-size: 20rpx;
+	font-family: PingFang SC;
+	font-weight: 400;
+	text-align: center;
+	color: #2C2419;
+}
+
+.vipBtn {
+    margin: 0 24rpx 0;
+    position: absolute;
+    bottom: 72rpx;
+}
+
+.Viptxt {
+	background: linear-gradient(-90deg, rgba(255, 152, 2, 1), rgba(255, 201, 1, 1));
+	border-radius: 44rpx;
+	height: 88rpx;
+	width: 702rpx;
+    font-size: 36rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 88rpx;
+	
+}
+
+.get-card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 10000;
+}
+
+.get-card-modal-main {
+    width: 580rpx;
+    height: 659rpx;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 30rpx;
+    margin-bottom: 65rpx;
+}
+
+.vip-img {
+    width: 190rpx;
+    height: 190rpx;
+    background: rgba(255, 255, 255, 1);
+    border: 10px solid rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    position: absolute;
+    margin-top: -95rpx;
+}
+
+.get-card-modal-text {
+    font-size: 38rpx;
+    color: #B86A24;
+    margin-top: 48rpx;
+    margin-bottom: 47rpx;
+}
+
+.get-card-modal-btn {
+    width: 140rpx;
+    height: 60rpx;
+    background: linear-gradient(-90deg, rgba(255, 152, 2, 1), rgba(255, 201, 1, 1));
+    border-radius: 30rpx;
+    font-size:24rpx;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    text-align: center;
+    line-height: 60rpx;
+    position: absolute;
+    margin: 0 220rpx;
+    bottom: 48rpx;
+}
+
+.uShopper {
+    font-size: 36rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+}
+
+.sName {
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    margin-top: 16rpx;
+}
+
+.userImg {
+    width: 264rpx;
+    height: 264rpx;
+    background: rgba(255, 134, 134, 1);
+    border: 4px solid rgba(0, 0, 0, 1);
+    margin: 0 auto;
+    margin-bottom: 47rpx;
+}

@@ -1,0 +1,60 @@
+<!--pages/allowance/allowance.wxml-->
+<view class="page">
+	<!-- 邀请会有弹窗 -->
+	<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_model_vip && card_bg}}">
+		<view class="get-card-modal-main pr" style="background: url({{card_bg}}) no-repeat;background-size: 100% 100%;">
+			<view class="color-fff flex-x-center" style="font-size: 45rpx;">活动规则</view>
+			<view class="time-top-text fs-24 color-fff" style="margin-top: 75rpx;">
+				<view>免费送给好友一张三天会员卡，让好友享受到亲卡的会员价</view>
+				<view style="margin-top: 49rpx;">好友成功办理永久会员之后，您将获得10元津贴</view>
+			</view>
+			<button class="get-card-modal-btn" open-type="share">立即分享</button>
+		</view>
+		<view class="iconfont icon-guanbi color-999999" style="font-size: 60rpx;margin-top: 70rpx;" bindtap="closeModalVip"></view>
+	</view>
+	<view class="model flex-x-center flex-y-center" catchtouchmove="{{true}}" wx:if="{{is_show_model}}" bindtap="closeModal">
+		<view catchtap="stop">
+			<view class="model-box pr">
+				<image class="model-bg" src="{{tipsBg}}"></image>
+				<view class="flex-x-center fs-36" style="color: #E46340;">使用规则</view>
+				<view class="mt-24 mb-30 fs-28 color-666666" style="line-height: 48rpx;">
+					<rich-text nodes="{{tips}}"></rich-text>
+				</view>
+				<button class="model-btn" bindtap="closeModel">确定</button>
+			</view>
+			<!-- <view class="iconfont icon-guanbi color-999999 flex-x-center" style="font-size: 60rpx;" bindtap="closeModal"></view> -->
+		</view>
+	</view>
+	<view class="header">
+		<view class="total-box flex justify-between align-center">
+			<view class="fs-30">
+				<view class="fs-30 color-333333">总津贴</view>
+				<view style="font-size: 60rpx;color: #FF0200;font-weight: bold;margin-top: 10rpx;">{{subsidy}}</view>
+			</view>
+			<view class="use-rule" bindtap='showModel'>使用规则</view>
+		</view>
+	</view>
+	<scroll-view class="bg-white plr-24" scroll-y="true" style="height: calc(100vh - 238rpx);" bindscrolltolower="getMore">
+		<block wx:if="{{subsidyList.length>0}}">
+			<navigator url="/member/allowanceSource/allowanceSource?id={{item.id}}" class="flex justify-between align-center" style="padding: 32rpx 0;border-bottom: 1rpx solid #f4f4f4;" wx:for="{{subsidyList}}" wx:key="id">
+				<view>
+					<view class="fs-30 color-333333">{{item.desc}}</view>
+					<view class="fs-30 color-999999">{{item.addTimeStr}}</view>
+				</view>
+				<view class="fs-30 color-FF0200">{{item.coinType==1?'+':'-'}} ¥{{item.num}}</view>
+			</navigator>
+		</block>
+		<block wx:else>
+			<view class="flex flex-x-center">
+				<view style="padding-top: 108rpx;">
+					<view class="empty-order-icon text-center marginAuto ">
+						<view class="iconfont icon-icon color-fff" style="opacity: 0.5;font-size: 180rpx;"></view>
+					</view>
+					<view class="fs-30 color-999999" style="margin-top: 49rpx;">空空如也，这里什么也没有</view>
+					<view bindtap="showModalVip" class="to-home">分享会员赚津贴</view>
+				</view>
+			
+			</view>
+		</block>
+	</scroll-view>
+</view>

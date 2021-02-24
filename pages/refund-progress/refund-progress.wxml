@@ -1,0 +1,285 @@
+<!--pages/refund-progress/refund-progress.wxml-->
+<view class="page pr">
+	<view class="public-box mb-24">
+		<view class="mb-30">
+			<view>
+				<text class="fs-30 color-999999">退款进度：</text>
+				<text class="fs-30 color-FF0200">{{refund_progress.status_desc}}</text>
+			</view>
+			<view class="fs-24 color-FF0200" wx:if="{{refund_progress.timewarn}}">{{refund_progress.timewarn}}</view>
+		</view>
+		<view class="">
+			<text class="fs-30 color-999999">订单编号：</text>
+			<text class="fs-30 color-333333">{{refund_progress.order_no}}</text>
+		</view>
+	</view>
+	<block wx:if="{{refund_progress.status == 2}}">
+		<view class="public-box mb-24">
+			<view class="fs-36 color-333333 ns-text-bold mb-30">退款明细</view>
+			<view class="mb-30">
+				<text class="fs-30 color-999999">退款进度：</text>
+				<text class="fs-30 color-333333">¥{{refund_progress.refund_money}}</text>
+				<text class="fs-30 color-999999">（1-3个工作日到账）</text>
+			</view>
+			<view class="tips flex-y-center">{{refund_progress.warn}}</view>
+		</view>
+	</block>
+	<block wx:if="{{refund_progress.status == 1 && refund_progress.add_reason_comp==1 && supplier_id }}">
+		<view class="public-box mb-24">
+			<view class="fs-30 color-333333 flex align-center justify-between">
+				<view>退货方式</view>
+				<block wx:if="{{refund_progress.add_reason_comp==1}}">
+					<view class="ml-30">
+						{{refund_progress.now_reason_comp}}
+					</view>
+				</block>
+			</view>
+			<block wx:if="{{refund_progress.sup_agree == 1}}">
+				<block wx:if='{{refund_progress.now_reason_comp_id == 40 }}'>
+					<view class="show-back fs-24 color-999999 pr">
+						<!-- <view class="flex align-center">
+							<view style="width: 100rpx;">收件人：</view>
+							<view class="color-333333">
+								<text>{{refund_progress.address[0].name}}</text>
+								<text class="ml-24">{{refund_progress.address[0].mobile}}</text>
+							</view>
+						</view>
+						<view class="flex align-center mt-20">
+							<view style="width: 100rpx;">地址：</view>
+							<view class="color-333333">{{refund_progress.address[0].address}}</view>
+						</view> -->
+						<view class="color-333333">
+							<rich-text nodes="{{refund_progress.address}}"></rich-text>
+						</view>
+						<view class="mt-20 fs-20">
+							<view>未与卖家协商一致到情况下，请勿寄到付或平邮</view>
+							<view>请填写真实有效的物流信息</view>
+						</view>
+						<view class="copy" bindtap="copyAddress">一键复制</view>
+					</view>
+					<view class="fs-30 color-333333 mb-30">
+						<view class="flex align-center mt-30">
+							<view>物流公司</view>
+							<view class="ml-30 flex1">
+								<picker name="express" bindchange="bindExpressPickerChange" value="{{express_index}}" range="{{express_list}}"
+								 range-key="name">
+									<view class="flex flex-row">
+										<view class="flex-grow-1">
+											<view wx:if="{{express_index!=null}}">
+												{{express_list[express_index].name}}
+											</view>
+											<view wx:else style="color: #888">请选择快递公司</view>
+										</view>
+									</view>
+								</picker>
+							</view>
+						</view>
+						<view class="flex align-center mt-30">
+							<view>物流单号</view>
+							<input class="ml-30" type="text" placeholder="请填写快递单号" value="{{express_no}}" bindinput="expressInput" />
+						</view>
+						<view class="flex align-center mt-30">
+							<view>运费</view>
+							<input class="ml-30" type="text" placeholder="请填写运费" value="{{express_price}}" bindinput="expressPriceInput" />
+						</view>
+
+					</view>
+					<view class="flex justify-end">
+						<view class="send-btn  color-fff fs-24" bindtap="pickUpExpress">确认发货</view>
+					</view>
+				</block>
+				<block wx:if="{{refund_progress.now_reason_comp_id == 4}}">
+					<view class="public-box">
+						<view class="fs-24 color-333333 mb-30 flex align-center">
+							<view class="input-title">联系人：</view>
+							<input class="ns-text-bold flex1" type="text" placeholder="请填写联系人" value="{{name}}" bindblur="bindUpName" />
+						</view>
+						<view class="fs-24 color-333333 mb-30 flex align-center">
+							<view class="input-title">联系方式：</view>
+							<input type="number flex1" placeholder="请填写联系方式" value="{{mobile}}" bindblur="bindUpMobile" />
+						</view>
+						<view class="fs-24 color-333333 mb-30 flex align-center">
+							<view class="input-title">所在地：</view>
+							<view class="flex-grow-1 flex-row" bindtap="showAreaPicker">
+								<view class="flex-grow-1 ns-text-bold color-333333 align-center" style="padding-right: 24rpx ">
+									<block wx:if="{{district==null}}">请选择</block>
+									<block wx:else>{{district.province.name}} {{district.city.name}} {{district.district.name}}</block>
+								</view>
+								<view class="flex-grow-0 flex-y-center">
+									<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+								</view>
+							</view>
+						</view>
+						<view class="fs-24 color-333333 mb-30 flex align-center">
+							<view class="input-title">所在区：</view>
+							<view class="flex-grow-1 flex-row">
+								<view class="flex-grow-1 ns-text-bold color-333333" style="padding-right: 24rpx ">
+									<picker bindchange="townAreaPick" value="{{town_index}}" range="{{town_list}}" range-key="name">
+										<view class="picker">
+											<block wx:if="{{town_list[town_index].name==null}}">请选择</block>
+											<block wx:else>{{town_list[town_index].name}}</block>
+										</view>
+									</picker>
+
+								</view>
+								<view class="flex-grow-0 flex-y-center">
+									<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+								</view>
+							</view>
+						</view>
+						<view class="fs-24 color-333333 mb-30 flex align-center">
+							<view class="input-title">详细地址：</view>
+							<input class="ns-text-bold flex1" type="text" placeholder="请填写详细地址" value="{{detail}}" bindblur="bindUpDetail" />
+						</view>
+						<view class="fs-24 color-333333 flex align-center">
+							<view class="input-title">上门时间：</view>
+							<input class="flex1" type="text" placeholder="期望上门时间,如 7.21 12:00-13:00" value="{{up_time}}" bindblur="bindUpTime" />
+						</view>
+					</view>
+					<view class="flex justify-end">
+						<view class="send-btn  color-fff fs-24" bindtap="doorToTake">确认</view>
+					</view>
+				</block>
+			</block>
+
+		</view>
+	</block>
+
+	<block wx:if="{{refund_progress.status == 3}}">
+		<view class="public-box mb-24">
+			<view class="fs-36 color-333333 ns-text-bold mb-30">失败原因</view>
+			<view class="tips flex-y-center">{{refund_progress.refund_desc?refund_progress.refund_desc:'无'}}</view>
+		</view>
+	</block>
+
+	<block wx:if="{{refund_progress.status == 0 && refund_progress.is_agree == 1}}">
+		<view class="public-box mb-24">
+			<block wx:if="{{is_jd==0 && refund_progress.is_agree == 1}}">
+				<view class="fs-36 color-333333 ns-text-bold mb-30">退货方式</view>
+				<view class="show-back fs-24 color-999999 pr">
+					<!-- <view class="flex align-center">
+						<view style="width: 100rpx;">收件人：</view>
+						<view class="color-333333">
+							<text>{{refund_progress.address[0].name}}</text>
+							<text class="ml-24">{{refund_progress.address[0].mobile}}</text>
+						</view>
+					</view>
+					<view class="flex align-center mt-20">
+						<view style="width: 100rpx;">地址：</view>
+						<view class="color-333333">{{refund_progress.address[0].address}}</view>
+					</view> -->
+					<view class="color-333333" style="line-height: 40rpx;">
+						<rich-text nodes="{{refund_progress.address}}"></rich-text>
+					</view>
+					<view class="mt-20 fs-20">
+						<view>未与卖家协商一致到情况下，请勿寄到付或平邮</view>
+						<view>请填写真实有效的物流信息</view>
+					</view>
+					<view class="copy" bindtap="copyAddress">一键复制</view>
+				</view>
+				<block wx:if="{{!refund_progress.exp_no}}">
+					<view class="fs-30 color-333333 mb-30">
+						<view class="flex align-center mt-30">
+							<view>物流公司</view>
+							<view class="ml-30 flex1">
+								<picker name="express" bindchange="bindExpressPickerChange" value="{{express_index}}" range="{{express_list}}"
+								 range-key="name">
+									<view class="flex flex-row">
+										<view class="flex-grow-1">
+											<view wx:if="{{express_index!=null}}">
+												{{express_list[express_index].name}}
+											</view>
+											<view wx:else style="color: #888">请选择快递公司</view>
+										</view>
+									</view>
+								</picker>
+							</view>
+						</view>
+						<view class="flex align-center mt-30">
+							<view>物流单号</view>
+							<input class="ml-30" type="text" placeholder="请填写快递单号" value="{{express_no}}" bindinput="expressInput" />
+						</view>
+					</view>
+					<view class="flex justify-end">
+						<view class="send-btn color-fff fs-24" bindtap="sendFormSubmit">确认发货</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="fs-30 color-333333 mb-30">
+						<view class="flex align-center mt-30">
+							<view>物流公司</view>
+							<view class="ml-30 flex1">
+								{{refund_progress.exp}}
+							</view>
+						</view>
+						<view class="flex align-center mt-30">
+							<view>物流单号</view>
+							<view class="ml-30">{{refund_progress.exp_no}}</view>
+						</view>
+					</view>
+				</block>
+
+			</block>
+			<block wx:else>
+				<view class="fs-30 color-333333 flex align-center justify-between">
+					<view>退货方式</view>
+					<block wx:if="{{refund_progress.add_reason_comp==1}}">
+						<view class="ml-30">
+							{{refund_progress.now_reason_comp}}
+						</view>
+					</block>
+					<block wx:else>
+						<view class="ml-30">
+							<picker name="express" bindchange="bindreasonPickerChange" value="{{reason_index}}" range="{{reason}}" range-key="name">
+								<view class="flex flex-row">
+									<view class="flex-grow-1">
+										<view wx:if="{{reason_index!=null}}">
+											{{reason[reason_index].name}}
+										</view>
+										<view wx:else style="color: #888">请选择</view>
+									</view>
+								</view>
+							</picker>
+						</view>
+					</block>
+				</view>
+				<view class="mt-30">
+					<block wx:if="{{reason_id==40}}">
+						<view class="flex justify-end">
+							<view class="send-btn  color-fff fs-24" bindtap="sendAddress">确认</view>
+						</view>
+
+					</block>
+
+					<block wx:if="{{reason_id==4}}">
+						<view class="flex justify-end">
+							<view class="send-btn  color-fff fs-24" bindtap="sendAddress">确认</view>
+						</view>
+					</block>
+				</view>
+			</block>
+		</view>
+	</block>
+
+	<view class="public-box">
+		<view class="fs-36 color-333333 ns-text-bold mb-30">进度跟踪</view>
+		<view>
+			<view class="cu-timeline">
+				<view class="cu-item {{index==0?'text-blue':''}}" wx:for="{{progress}}" wx:key="id">
+					<view class="content">
+						<view class="fs-24 color-333333">{{item.name}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="footer flex justify-end">
+		<navigator url="/pages/index/index" hover-class="none" class="btn">回到首页</navigator>
+		<!-- <view class="btn">看相似</view> -->
+		<view class="btn btn-red-full" bindtap="cancelRefund" wx:if="{{refund_progress.status == 0 && refund_progress.is_delete == 0 }}">撤销申请</view>
+		<button class="btn btn-red" open-type="contact" session-from="refund_id={{id}}|nickName={{nickName}}|avatarUrl={{avatarUrl}}|type={{type}}|userId={{userId}}|mchId={{mchId}}|storeId={{storeId}}"
+		 bindcontact="handleContact">联系客服</button>
+	</view>
+	<include src="/components/area-picker/area-picker.wxml" />
+</view>

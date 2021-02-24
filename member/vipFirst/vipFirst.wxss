@@ -1,0 +1,136 @@
+/* pages/vipFirst/vipFirst.wxss */
+page {
+	background-color: #171717;
+	height: 2420rpx;
+}
+.page {
+	height: 2385rpx;
+	width: 100%;
+}
+
+.get-card-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, .7);
+	z-index: 10000;
+}
+
+.get-card-modal-main {
+	width: 471rpx;
+	height: 550rpx;
+	padding: 48rpx;
+	background: #0081FF;
+}
+
+.vip-img {
+	width: 132rpx;
+	height: 132rpx;
+	border: 4rpx solid #B86A24;
+	background-color: #CCCCCC;
+	border-radius: 50%;
+}
+
+.get-card-modal-text {
+	font-size: 38rpx;
+	color: #B86A24;
+	margin-top: 48rpx;
+}
+
+.get-card-modal-btn {
+	position: absolute;
+	bottom: 47rpx;
+	left: 50%;
+	margin-left: -145rpx;
+	width: 289rpx;
+	height: 68rpx;
+	background: linear-gradient(90deg, rgba(219, 197, 161, 1), rgba(211, 179, 128, 1));
+	border-radius: 34rpx;
+	text-align: center;
+	line-height: 68rpx;
+	font-size: 27rpx;
+	color: #222222;
+}
+
+.con {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	padding: 0 24rpx;
+}
+
+.title {
+	position: absolute;
+	width: 100%;
+	left: 0rpx;
+	bottom: 0rpx;
+	background: #fff;
+	border-radius: 30rpx 30rpx 0 0;
+	padding: 23rpx 0 19rpx;
+
+}
+
+.backBtn {
+	font-size: 36rpx;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	max-width: 100%;
+	color: #FFFFFF;
+	opacity: 0.5;
+}
+
+.get-btn {
+	position: absolute;
+	left: 24rpx;
+	bottom: 76rpx;
+	width: 702rpx;
+	height: 88rpx;
+	line-height: 88rpx;
+	text-align: center;
+	color: #2C2419;
+	font-size: 40rpx;
+	font-weight: bold;
+	background: linear-gradient(-90deg, rgba(245, 219, 170, 1), rgba(214, 182, 129, 1));
+	border-radius: 44rpx;
+}
+
+.qq-btn {
+	position: fixed;
+	width: 750rpx;
+	padding: 0 24rpx;
+	bottom: 0rpx;
+	height: 160rpx;
+	line-height: 88rpx;
+	text-align: center;
+	color: #2C2419;
+}
+
+.qq-btn .btn {
+	width: 336rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	border-radius: 35rpx;
+}
+
+.qq-btn .btn1 {
+	width: 336rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	border-radius: 35rpx;
+	background: linear-gradient(-90deg, rgba(245, 219, 170, 1), rgba(214, 182, 129, 1));
+	color: #2D241A;
+}
+
+.qq-btn .btn:nth-of-type(1) {
+	border: 1rpx solid #F3DAA8;
+	color: #F3D9A8;
+	background: #1C1C1C;
+}

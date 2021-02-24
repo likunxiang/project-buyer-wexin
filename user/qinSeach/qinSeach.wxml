@@ -1,0 +1,52 @@
+<!--小亲本搜索-->
+<view class="qinseach">
+	<!-- 导航开始 -->
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view class="  go-back flex1" style="font-size:30rpx;color:#FFFFFF;" bindtap="returnPage">
+				<text class="iconfont icon-zuojiantoubeifen;"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">小亲本</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+
+	<!-- 搜索框开始 -->
+	<view class="qinInput">
+		<view class="select-seach">
+			<view class="iconfont icon-sousuo icon"></view>
+			<input placeholder="搜索顾客昵称、品牌名称" bindinput="inputChange" value="{{inputValue}}" />
+		</view>
+		<!-- <view class="input-right">
+			<text class="iconfont iconqiehuan"></text>
+			<text class="icon-bottom">{{'看品牌'}}</text>
+		</view> -->
+	</view>
+	<!-- 搜索框结束 -->
+
+	<!-- 显示顾客和品牌开始 -->
+	<view class="myuser">
+		<view class="yonghu">
+			<view wx:for="{{searchList.users}}" wx:key="index" class="yonghu-item" hover-class="click" bindtap="toUser" data-id="{{item.user_id}}">
+				<text class="yonghu-icon iconfont icon-yonghu "></text>
+				<text class="yonghu-name">{{item.user_name}}</text>
+				<view class="yonghu-num">关注{{' '+ item.user_brand_sum +' '}}个品牌
+					<text class="iconfont icon-jinru"></text>
+				</view>
+			</view>
+		</view>
+		<view class="yonghu">
+			<view wx:for="{{searchList.brands}}" wx:key="{{index}}" class="yonghu-item" hover-class="click" bindtap="toPinpaiLike"
+			 data-id="{{item.brand_id}}" data-name="{{item.brand_name}}">
+				<text class="yonghu-icon iconfont icon-pinpai " style="color:#489A19;"></text>
+				<text class="yonghu-name">{{item.brand_name}}</text>
+				<view class="yonghu-num">{{item.user_brand_sum + ' '}}个顾客关注
+					<text class="iconfont icon-jinru"></text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 显示顾客和品牌结束 -->
+</view>

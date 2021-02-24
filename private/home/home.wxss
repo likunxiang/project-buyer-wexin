@@ -1,0 +1,177 @@
+/* pages//private/home/home.wxss */
+@import "/components/goods/specifications_model.wxss";
+@import "../../components/share/share.wxss";
+page {
+	height: 100%;
+	background: #fff;
+}
+.page {
+	height: 100%;
+	position: relative;
+}
+.tips {
+	height: 60rpx;
+	line-height: 60rpx;
+	background-color: #252E3E;
+}
+.zhezhao {
+	position: absolute;
+	background:rgba(0,0,0,0.35);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+.fixed {
+	position: fixed;
+	z-index: 99;
+}
+.header {
+	width: 100%;
+	background-color: #fff;
+}
+.num-box {
+	position: absolute;
+	top: 0rpx;
+	left: 52rpx;
+	width: 25rpx;
+	height: 25rpx;
+	border-radius: 50%;
+	background-color: #FFFFFF;
+	color: #FF9100;
+	font-size: 18rpx;
+	text-align: center;
+	line-height: 25rpx;
+}
+.ad-img {
+	width: 200rpx;
+	height: 200rpx;
+	margin-right: 20rpx;
+}
+.VerticalNav.nav1 {
+	width: 170rpx;
+	white-space: initial;
+	background-color: #f1f1f1;
+}
+.VerticalNav.nav1 .cu-item {
+	width: 100%;
+	text-align: center;
+	background-color: #f1f1f1;
+	margin: 0;
+	border: none;
+	padding: 20rpx 0;
+	position: relative;
+}
+.VerticalNav.nav1 .cu-item.cur {
+	background-color: #fff;
+}
+.VerticalNav.nav1 .cu-item.cur::after {
+	content: "";
+	width: 8rpx;
+	height: 30rpx;
+	border-radius: 10rpx 0 0 10rpx;
+	position: absolute;
+	background-color: currentColor;
+	top: 0;
+	right: 0rpx;
+	bottom: 0;
+	margin: auto;
+}
+.VerticalBox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+.VerticalMain {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.goods {
+	padding: 0 25rpx 0 23rpx;
+}
+.open {
+	position: absolute;
+	right: 36rpx;
+	bottom: 30rpx;
+	color: #FF9100;
+	font-size: 24rpx;
+}
+.earnings-rule-zhezhao {
+	position: fixed;
+	top: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 999;
+}
+.invite-dear {
+	width: 512rpx;
+	border-radius: 10rpx;
+	overflow: hidden;
+	margin: auto;
+	background-color: #fff;
+}
+.invite-title {
+	width: 100%;
+	height: 102rpx;
+	line-height: 102rpx;
+	text-align: center;
+	background-color: #FF9100;
+}
+.invite-body {
+	width: 100%;
+	padding: 27rpx 45rpx 0;
+	line-height: 40rpx;
+	font-size: 24rpx;
+	color: #2c2c2c;
+}
+.invite-btn {
+	height: 80rpx;
+	line-height: 80rpx;
+	background-color: #fff;
+}
+.line {
+	width: 470rpx;
+	height: 2rpx;
+	background: #D6D6D6;
+	margin: auto;
+}
+.attr-picker{
+    bottom: 0rpx;
+}
+.attr-picker .content-box{
+    bottom: 0rpx;
+}
+.edit-standard-btn {
+	width: 670rpx;
+	height: 78rpx;
+	background: #F69D3B;
+	color: #fff;
+	font-size: 24rpx;
+	line-height: 78rpx;
+	text-align: center;
+}
+.footer {
+	position: absolute;
+	bottom: 0rpx;
+	left: 45rpx;
+	right: 45rpx;
+	height: 130rpx;
+	border-radius: 45rpx 45rpx 0 0;
+	background: rgba(255,255,255,0);
+}
+.footer-content {
+	width: 100%;
+	height: 90rpx;
+	border-radius: 90rpx;
+	background: #252E3E;
+}
+.edit-btn {
+	width: 120rpx;
+	height: 45rpx;
+	line-height: 45rpx;
+	text-align: center;
+	background-color: #FF9100;
+	border-radius: 8rpx;
+}
+

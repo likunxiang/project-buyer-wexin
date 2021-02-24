@@ -1,0 +1,71 @@
+<!--pages/openshop3/openshop3.wxml-->
+<view class="page">
+	<block wx:if="{{is_reopen}}">
+		<view class="flex-x-center fs-30 color-F49E3A ns-text-bold">系统检测到你开通过一家店铺</view>
+		<view class="flex-x-center ns-align-items-flex-center" style="margin-top: 40rpx;">
+			<view class="line" style="margin-right: 30rpx;"></view>
+			<view class="fs-30" style="color: #909090;">原的店铺名称</view>
+			<view class="line" style="margin-left: 30rpx;"></view>
+		</view>
+		<view class="flex-x-center ns-text-bold" style="margin-top: 40rpx;color: #333D54;font-size: 50rpx;">{{mch_shop_name}}</view>
+		<view class="flex-x-center" style="margin-top: 66rpx;">
+			<image style="width: 527rpx;height: 22rpx;" src="image/icon-line.png" mode="aspectFit"></image>
+		</view>
+		<view class="fs-30 flex-x-center" style="color: #909090;margin-top: 40rpx;">你可以沿用原名称，或者重新修改</view>
+		
+		<view class="flex-x-center" style="padding: 0 25rpx; margin-top: 27rpx;margin-bottom: 76rpx;">
+			<view class="edit-name-box flex">
+				<view class="edit-name-title">店铺名称</view>
+				<input style="width: 410rpx;" type="text" placeholder="请输入你的店铺名称" value="{{shopName}}" bindinput="editName"/>
+				<view class="fs-28" style="{{shopName.length>11?'color: #F49E3A':'color: #B0B0B0;'}}">{{shopName.length}}/11</view>
+			</view>
+		</view>
+		
+		<view class="flex-x-center">
+			<view class="tips">
+				<view class="flex-x-center color-9B9B9B fs-30 ns-text-bold">温馨提示</view>
+				<view class="fs-28 color-9B9B9B" style="margin-top: 13rpx;line-height: 47rpx;">
+					<view>1、系统会分配一家新店铺给你</view>
+					<view>2、原直属上级仍是这家新店铺的直属上级如需继续开店，请点击确认开店</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{is_reopen==false}}">
+		<view class="img-box">
+			<image style="width: 700rpx;height: 380rpx;background-color: #ccc;" mode="aspectFit" src="{{pic}}"></image>
+		</view>
+		<view class="flex-x-center fs-40" style="margin-top: 50rpx;color: #E3A725;font-weight: 600;">恭喜你，开店成功</view>
+		<view class="flex-x-center ns-align-items-flex-center" style="margin-top: 40rpx;">
+			<view class="line" style="margin-right: 30rpx;"></view>
+			<view class="fs-30" style="color: #909090;">默认的店铺名称</view>
+			<view class="line" style="margin-left: 30rpx;"></view>
+		</view>
+		<view class="flex-x-center ns-text-bold" style="margin-top: 40rpx;color: #333D54;font-size: 50rpx;">{{mch_shop_name}}</view>
+		<view class="flex-x-center" style="margin-top: 66rpx;">
+			<image style="width: 527rpx;height: 22rpx;" src="image/icon-line.png" mode="aspectFit"></image>
+		</view>
+		<view class="fs-30 flex-x-center" style="color: #909090;margin-top: 40rpx;">你可以重新修改</view>
+		
+		<view class="flex-x-center" style="padding: 0 25rpx; margin-top: 27rpx;">
+			<view class="edit-name-box flex">
+				<view class="edit-name-title">店铺名称</view>
+				<input style="width: 410rpx;" type="text" placeholder="请输入你的店铺名称" value="{{shopName}}" bindinput="editName"/>
+				<view class="fs-28" style="{{shopName.length>11?'color: #F49E3A':'color: #B0B0B0;'}}">{{shopName.length}}/11</view>
+			</view>
+		</view>
+	</block>
+	
+	<view class="footer" style="margin:auto">
+		<view class="flex-x-center ns-align-items-flex-center" bindtap="read">
+			<view class="iconfont {{isRead?'icon-xuanzhong color-1A4C4B':'icon-weixuanzhong color-8D8D8D'}} fs-40 mr-10"></view>
+			<view class="flex fs-24 color-595959">
+				<view>我已阅读</view>
+				<view class="color-F49E3A" catchtap="toAgreementIdArticleDetail">《亲铺用户协议》</view>
+				<view>和</view>
+				<view class="color-F49E3A" catchtap="toPrivacyArticleDetail">《隐私条款》</view>
+			</view>
+		</view>
+		<view class="sure-btn" bindtap="submit">确定</view>
+	</view>
+</view>

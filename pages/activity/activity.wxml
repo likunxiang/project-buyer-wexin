@@ -1,0 +1,339 @@
+<!--pages/activity/activity.wxml-->
+<include src="/components/goods/specifications_model.wxml" />
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="activity">
+	<!-- <block wx:if="{{is_show_head}}"> -->
+	<view class='nav pr' style="height:286rpx;{{is_show_head?'opacity: 1;':'opacity: 0'}}">
+		<image style="width: 100%;height: 286rpx;position: absolute;background: #fff;z-index: -1;" mode="aspectFill" src="{{goodListMsg.background}}"></image>
+		<!-- 头部内容 -->
+		<view class="activity-header">
+			<view class='con flex  align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+				<view class="backBtn" bindtap="goBack">
+					<text class="iconfont icon-zuojiantoubeifen"></text>
+					<!-- <text style="padding-left:20rpx;color:#ffffff">{{goodListMsg.name}}</text> justify-between-->
+				</view>
+				<view style="padding-left:20rpx;">{{goodListMsg.name}}</view>
+				<view></view>
+			</view>
+			<view style="position: absolute;right: 82rpx;top: 180rpx;">
+				<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+				 class="iconfont icon-sousuo" bindtap="toSearch"></view>
+				<view class="fs-20 text-center">搜索</view>
+			</view>
+			<view style="position: absolute;right: 20rpx;top: 180rpx;">
+				<view style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+				 class="iconfont icon-fenxiang" bindtap="showShareModal"></view>
+				<view class="fs-20 text-center">分享</view>
+			</view>
+
+			<!-- <button open-type="share" data-path="/pages/activity/activity" data-image="{{background}}" class="share-box" style="width: 50rpx;height: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;" wx:else>
+			  	<view  class="iconfont icon-fenxiang"  ></view>
+			  </button> -->
+			<view>
+				<view class="fs-30 color-fff">距离{{(daojishi)?'结束':'开始'}}还剩</view>
+				<block wx:if="{{daojishi}}">
+					<block wx:if="{{ed>='00' &&eh>='00' & em>='00'}}">
+						<view class="flex ns-align-items-flex-center fs-20 color-fff mt-16">
+							<view class="time-box">{{ed}}</view>
+							<view>天</view>
+							<view class="time-box">{{eh}}</view>
+							<view>时</view>
+							<view class="time-box">{{em}}</view>
+							<view>分</view>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="flex ns-align-items-flex-center fs-20 color-fff mt-16">
+
+							<view>活动已结束</view>
+						</view>
+					</block>
+				</block>
+				<block wx:if="{{kaishishi}}">
+					<block wx:if="{{sd>='00' &&sh>='00' & sm>='00'}}">
+						<view class="flex ns-align-items-flex-center fs-20 color-fff mt-16">
+							<view class="time-box">{{sd}}</view>
+							<view>天</view>
+							<view class="time-box">{{sh}}</view>
+							<view>时</view>
+							<view class="time-box">{{sm}}</view>
+							<view>分</view>
+						</view>
+					</block>
+				</block>
+			</view>
+			<view></view>
+		</view>
+	</view>
+	<view class="pf" style="top: 0rpx;left: 0rpx;right: 0rpx;z-index: 2;{{is_show_head?'opacity: 0;':'opacity: 1'}}">
+		<view class='flex align-center bg-white' style="height:{{customBar}}px;padding-top:{{statusBar}}px;border-bottom: 1rpx solid rgba(190,190,190,0.5)">
+			<view class="backBtn iconfont icon-zuojiantoubeifen" bindtap="goBack" style="color: #333333;"></view>
+			<view>
+				<block wx:if="{{daojishi}}">
+					<block wx:if="{{ed>='00' &&eh>='00' & em>='00'}}">
+
+						<view class="flex ns-align-items-flex-center fs-20 color-fff" style="color: #FF6E09;font-size: 30rpx;">
+							<view class="fs-30 color-333333 ml-16 mr-16">剩余</view>
+							<view class="time-box" style="background-color: #FF6E09;color: #fff;">{{ed}}</view>
+							<view>天</view>
+							<view class="time-box" style="background-color: #FF6E09;color: #fff;">{{eh}}</view>
+							<view>时</view>
+							<view class="time-box" style="background-color: #FF6E09;color: #fff;">{{em}}</view>
+							<view>分</view>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="flex ns-align-items-flex-center fs-20 color-fff">
+
+							<view>活动已结束</view>
+						</view>
+					</block>
+				</block>
+				<block wx:if="{{kaishishi}}">
+					<block wx:if="{{sd>='00' &&sh>='00' & sm>='00'}}">
+						<view class="flex ns-align-items-flex-center fs-20 color-fff" style="color: #01C583;font-size: 30rpx;">
+							<view class="fs-30 color-333333 ml-16 mr-16">预告</view>
+							<view class="time-box" style="background-color: #01C583;color: #fff;">{{sd}}</view>
+							<view>天</view>
+							<view class="time-box" style="background-color: #01C583;color: #fff;">{{sh}}</view>
+							<view>时</view>
+							<view class="time-box" style="background-color: #01C583;color: #fff;">{{sm}}</view>
+							<view>分</view>
+						</view>
+					</block>
+				</block>
+			</view>
+			<view></view>
+		</view>
+
+		<view class="guang-nav-list flex" style="padding:0rpx 0rpx 0 24rpx;">
+			<view style="width: 83%;">
+				<scroll-view scroll-x="true" enable-flex="true" scroll-into-view="{{toview}}">
+					<view class="flex align-center">
+						<view style="margin-right:10rpx" class="pr nav-tab ns-flex-shrink-no {{chooseIns==0?'color-333333':''}}">
+							<view class="color-333333" catchtap="showChange1">全部品类
+								<text class="iconfont icon-xiangxia-copy  {{showChangeMore?'change':''}}" style="display:inline-block;transition:all 0.3s;"></text>
+							</view>
+							<!-- <view wx:if="{{chooseIns==0}}" class="nav-active"></view> -->
+						</view>
+						<!-- <view class="nav-tab flex-grow-0 ns-flex-shrink-no pr {{value.id==chooseIns?'color-333333':''}}" bindtap="changeNav"
+							 wx:for="{{catsArr}}" wx:for-item="value" wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}"
+							 data-text="{{value.catsName}}">
+								<view>{{value.catsName}}</view>
+								<view wx:if="{{value.id==chooseIns}}" class="nav-active"></view>
+							</view> -->
+						<scroll-view class="check-scroll" style="width:400rpx;" scroll-x>
+							<view class="more-list  {{value.checked?'more-active':''}}" bindtap="changeNav" wx:for="{{catsArr}}" wx:if="{{value.checked}}"
+							 wx:for-item="value" wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}" data-text="{{value.catsName}}"
+							 style="float:none;" enable-flex="{{true}}">{{value.catsName}}
+								<text class="iconfont icon-guanbi2 fs-20"></text>
+							</view>
+						</scroll-view>
+
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class="flex ml-20 ns-align-items-flex-center color-333333" bindtap="priceSort">
+				<view>价格</view>
+				<view class="ml-10 fs-40 color-D6D6D6">
+					<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+					<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+				</view>
+			</view>
+
+		</view>
+	</view>
+	<!-- 多选 ................................................................-->
+	<view class="guang-nav-list flex" style="padding:0rpx 0rpx 0 24rpx" wx:if="{{is_show_head}}">
+		<view style="width: 83%;">
+			<scroll-view scroll-x="true" enable-flex="true" scroll-into-view="{{toview}}">
+				<view class="flex align-center">
+					<view style="margin-right:10rpx" class="pr nav-tab ns-flex-shrink-no {{chooseIns==0?'color-333333':''}}">
+						<view class="color-333333" catchtap="showChange1">全部品类
+							<text class="iconfont icon-xiangxia-copy  {{showChangeMore?'change':''}}" style="display:inline-block;transition:all 0.3s;"></text>
+						</view>
+						<!-- <view wx:if="{{chooseIns==0}}" class="nav-active"></view> -->
+					</view>
+					<!-- <view class="nav-tab flex-grow-0 ns-flex-shrink-no pr {{value.id==chooseIns?'color-333333':''}}" bindtap="changeNav"
+					 wx:for="{{catsArr}}" wx:for-item="value" wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}"
+					 data-text="{{value.catsName}}">
+						<view>{{value.catsName}}</view>
+						<view wx:if="{{value.id==chooseIns}}" class="nav-active"></view>
+					</view> -->
+					<scroll-view class="check-scroll" style="width:400rpx;" scroll-x>
+						<view class="more-list  {{value.checked?'more-active':''}}" bindtap="changeNav" wx:for="{{catsArr}}" wx:if="{{value.checked}}"
+						 wx:for-item="value" wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}" data-text="{{value.catsName}}"
+						 style="float:none;" enable-flex="{{true}}">{{value.catsName}}
+							<text class="iconfont icon-guanbi2 fs-20"></text>
+						</view>
+					</scroll-view>
+
+				</view>
+			</scroll-view>
+		</view>
+
+		<view class="flex ml-20 ns-align-items-flex-center color-333333" bindtap="priceSort">
+			<view>价格</view>
+			<view class="ml-10 fs-40 color-D6D6D6">
+				<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+				<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+			</view>
+		</view>
+	</view>
+	<view class="more1" wx:if="{{showChangeMore}}" catchtap="closeChange" catchtouchmove="preventTouchMove">
+		<view class="more-content" style="margin-top: calc( {{customBar + 'px'}} + 80rpx );{{is_show_head?'margin-top: 370rpx':''}}"
+		 catchtap="showChange">
+			<!--  more-active -->
+			<view class="more-list {{value.checked?'more-active':''}}" bindtap="changeNav" wx:for="{{catsArr}}" wx:for-item="value"
+			 wx:key="id" wx:for-index="index" data-num="{{index}}" data-index="{{value.id}}" data-text="{{value.catsName}}">{{value.catsName}}
+			</view>
+
+		</view>
+	</view>
+
+	<!-- 多选....................................................... -->
+
+	<!-- 商品区 -->
+	<!-- <scroll-view scroll-y="true" class="goods-list flex ns-wrap ns-justify-content-space-between pr" style="height: calc(100vh - 376rpx);"
+	 bindscrolltolower='getMore' scroll-top="{{topNum}}" bindscroll="scrolltoupper" scroll-with-animation="true"> -->
+	<!-- 用于适配 -->
+	<view style="height: {{is_show_head?'':statusBar}}px"></view>
+	<view class="goods-list pr">
+
+		<include src="/components/toTop/toTop"></include>
+		<view class="flex ns-wrap justify-between ">
+			<navigator url="/pages/goods/goods?id={{item.id}}" class="goods mb-20 bg-white" wx:for="{{goodList}}" wx:key="id">
+				<view style="width: 340rpx;height: 340rpx;position: relative;">
+					<image style="width: 340rpx;height: 340rpx;background: #ccc;border-radius: 20rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+					<view wx:if="{{item.goods_num==0}}" class="nonum-tip">
+						已抢光
+					</view>
+				</view>
+
+				<view class="goods-msg">
+					<view class="goods-msg-title">{{item.name}}</view>
+					<view class="fs-28 flex justify-between align-center">
+						<view class="flex align-center">
+							<view class="fs-28 color-FF0200 ns-text-bold">￥
+								<text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text>
+								<text>{{filters.priceStr(item.price)[1]}}</text>
+							</view>
+							<!-- <view class="color-8D8D8D ns-text-through ml-16">¥ {{item.original_price}}</view> -->
+						</view>
+						<view class="add-cart-icon fs-26 iconfont color-fff icon-gouwuche_weixuanzhong" style="width: 40rpx;height: 40rpx;line-height: 40rpx;"
+						 catchtap="openCart" data-id="{{item.id}}" data-index="{{index}}"></view>
+
+					</view>
+				</view>
+			</navigator>
+		</view>
+		<view class="mt-24 p-24" wx:if="{{list.length > 0}}">
+			<view class="flex-x-center pr">
+				<view>更多活动</view>
+				<view class="under-line"></view>
+			</view>
+			<view wx:for="{{list}}" wx:for-item="acitivity" wx:key="index">
+				<view class="bg-white mb-20" style="border-radius: 20rpx;" wx:for="{{acitivity}}" wx:key="id" wx:if="{{item.banner!=null}}">
+					<!-- 单品牌内容 -->
+					<!-- 品牌名字 -->
+					<view style="padding: 25rpx 24rpx;">
+						<navigator url="/pages/activity/activity?aid={{item.id}}" class="flex ns-justify-content-space-between"
+						 hover-class="none">
+							<view class="flex" style="width: 85%;">
+								<image lazy-load="true" style="width: 100rpx;height: 100rpx;border-radius: 20rpx;box-shadow: 0rpx 3rpx 10rpx #888888;"
+								 mode="aspectFit" src="{{item.banner}}"></image>
+								<view class="ml-30 flex1">
+									<view class="fs-36 color-333333">{{item.name}}</view>
+									<view class="fs-24 color-999999 ns-text-limit flex mt-10" style="width: 400rpx;">
+										<view class="flex mr-10 align-center" wx:for="{{item.cats}}" wx:for-item="value" wx:for-index="index" wx:key="index">
+											<view>{{value}}</view>
+											<view class="ml-10" style="border-right: 1rpx solid #999999;height: 25rpx;"></view>
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="flex ">
+								<view style="margin-right: 12rpx;color:#999999;font-size:18rpx">更多
+									<text class="iconfont icon-jinru color-fff ml-10" style="border-radius: 50%;background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));;width: 20rpx;height: 20rpx;font-size: 20rpx;text-align: center;"></text>
+								</view>
+
+							</view>
+						</navigator>
+
+					</view>
+					<!-- 品牌商品 -->
+					<view class="flex " style="padding: 0rpx 24rpx 20rpx; ">
+						<scroll-view scroll-x="true">
+							<view class="flex">
+								<navigator url="/pages/goods/goods?id={{item.id}}" style="width: 200rpx;margin-right: 16rpx;" wx:for="{{item.goods}}"
+								 wx:for-index="index" wx:key="id" data-id="{{item.goods_id}}">
+									<view style="position: relative;width: 180rpx;height: 180rpx;">
+										<image lazy-load="true" mode="aspectFill" src="" style="background: #ccc;width: 180rpx;height: 180rpx;position: relative;border-radius: 20rpx;"
+										 src="{{item.first_cover_pic}}"></image>
+										<view class="sell-up " wx:if="{{item.num==0}}">
+											<view>已抢光</view>
+											<view class="line"></view>
+											<view style="font-size: 17rpx;">sold out</view>
+										</view>
+									</view>
+									<view class='text-more-1 fs-24 color-333333 mt-15'>{{item.name}}</view>
+									<view class="miaosha_price m-10 flex align-center" style="font-size:20rpx;">
+										<view class=" color-FF0200 ns-text-bold">￥
+											<text class="fs-26">{{filters.priceStr(item.price)[0]}}.</text>
+											<text>{{filters.priceStr(item.price)[1]}}</text>
+										</view>
+									</view>
+
+								</navigator>
+
+							</view>
+						</scroll-view>
+
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="flex-x-center color-8D8D8D ns-padding-bottom-sm" wx:if="{{is_no_more}}">没有更多啦~</view>
+		<!-- </scroll-view> -->
+	</view>
+
+	<view class="share-modal {{share_modal_active}}" catchtouchmove="{{true}}" bindtap="shareModalClose">
+		<view class="share-modal-body" catchtap="shop">
+			<text class="close pa iconfont icon-guanbi2" bindtap="shareModalClose"></text>
+			<!-- <view class="shareGet">分享赚 <span>¥ 65</span></view>
+	        <view class="tips">收益仅自己可见</view> -->
+			<view class="flex-row">
+				<view class="flex-grow-1 flex-x-center">
+					<button open-type="share" class="share-bottom" style='height:100%;'>
+						<text class="iconfont icon-weixin color-fff" style="font-size: 50rpx;"></text>
+						<view>分享给好友</view>
+					</button>
+				</view>
+				<view class="flex-grow-1 flex-x-center">
+					<view bindtap="showShare" class="share-bottom">
+						<text class="iconfont icon-pengyouquan color-fff" style="font-size: 50rpx;"></text>
+						<view>生成商品海报</view>
+					</view>
+				</view>
+			</view>
+			<!-- <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">关闭</view> -->
+		</view>
+	</view>
+	<view class="share pa" wx:if="{{isShowShare}}" style="height: {{y}}px;" bindtap="closeShare" catchtouchmove="{{true}}">
+
+		<view style="width: 608rpx;height: 924rpx;background: #fff;margin-bottom: 50rpx;" class="pr">
+			<view class="pa" style="left: 240rpx;top: 300rpx;" wx:if="{{!qrcode_pic}}">
+				<image style="width: 150rpx;height: 150rpx" src="{{__wxapp_img.system.loading2.url}}"></image>
+				<view style="color: #888">海报生成中</view>
+			</view>
+			<image style="height: 924rpx;width: 608rpx;" mode="widthFix" class='share_image' src='{{qrcode_pic}}' />
+			<button class="share-btn" catchtap="savePhotoThrottle">
+				<view class="fs-24 color-fff">保存到相册</view>
+			</button>
+		</view>
+
+	</view>
+	<!-- <slide-icon cartNum="{{cartNum}}"></slide-icon> -->
+	<slide-icon showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>
+</view>

@@ -1,0 +1,115 @@
+/* member/homePage/homePage.wxss *//* pages/paySucceed/paySucceed.wxss */
+page {
+	background: #F4F4F4;
+}
+.nav {
+	width: 100%;
+	color: #fff;
+}
+
+.con {
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	padding: 0 24rpx;
+}
+
+
+.backBtn {
+	font-size: 36rpx;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	max-width: 100%;
+	color: #FFFFFF;
+	opacity: 0.5;
+}
+.tutor-box {
+	position: absolute;
+	bottom: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	height: 320rpx;
+	background: #fff;
+	border-radius: 30rpx 30rpx 0 0;
+	padding: 28rpx 24rpx;
+	padding-top: 70rpx;
+}
+.tutor-pic-box {
+	width:200rpx;
+	height:200rpx;
+	background: #fff;
+	border-radius:12rpx;
+	margin: 25rpx auto 12rpx;
+}
+.wx-box {
+	width:702rpx;
+	height:80rpx;
+	line-height: 80rpx;
+	background:rgba(255,255,255,1);
+	border-radius:40rpx;
+	margin: 16rpx auto 16rpx;
+	padding: 0 32rpx;
+}
+.welfare-box {
+  position: relative;
+	padding: 0rpx 24rpx;
+	
+}
+.welfare-list {
+	background:rgba(255,195,48,.2);
+	border-radius:20rpx;
+	margin-bottom: 32rpx;
+}
+.welfare-sort {
+	width:132rpx;
+	height:132rpx;
+	line-height: 132rpx;
+	text-align: center;
+	font-weight: bold;
+	color: #FFFFFF;
+	background:rgba(255,132,0,1);
+	box-shadow:5rpx 0rpx 10rpx 0rpx rgba(215,131,41,0.32);
+	border-radius:20rpx;
+}
+
+/*保存二维码 */
+.saveCode{
+display: inline-block;
+width: 187rpx;
+height: 60rpx;
+background: #FFC430;
+border-radius: 30rpx;
+line-height: 60rpx;
+color: #343434;
+font-size: 24rpx;
+text-align: center;
+margin: 16rpx auto 16 auto;
+
+}
+.qq-flex{
+  display: flex;
+  align-items: center;
+  padding: 0 25rpx 0 25rpx
+}
+.rel{
+  position: relative;
+  
+}
+.no_img{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  opacity: 0.1;
+  
+}
+.zindex{
+  position: relative;
+  z-index: 4;
+  
+}

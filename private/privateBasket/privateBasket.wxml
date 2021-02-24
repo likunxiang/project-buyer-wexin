@@ -1,0 +1,123 @@
+<!--pages//private/privateBasket/privateBasket.wxml-->
+<view class="page" wx:if="{{cartList}}">
+	<view class="tips flex-y-center" style='width:{{x}}px;height:{{y}}px' catchtouchmove="{{true}}" wx:if="{{is_tips}}">
+		<view class="tips-content fs-28 color-2C2C2C ">
+			<view class="">
+				<view class="flex-x-center ns-text-bold">安全提示</view>
+				<view class="" style="padding: 36rpx 35rpx 37rpx;"><rich-text nodes="{{safeTips}}"></rich-text></view>
+				<view class="flex ns-align-items-flex-center mb-20 flex-x-center" catchtap="agreeInvite">
+					<view class="iconfont {{isAgreeInvite?'icon-xuanzhong color-252E3E fs-40':'icon-weixuanzhong fs-40'}}"></view>
+				
+					<view class="ml-20">我已阅读，不再提示</view>
+				</view>
+			</view>
+			<view class="line"></view>
+			<view class="invite-btn flex">
+				<view class="flex1 ns-text-center" style="border-right: 2rpx solid #D6D6D6;" catchtap="closeTips">我再想想</view>
+				<view class="flex1 ns-text-center" catchtap="agreeJoin">确定支付</view>
+			</view>
+		</view>
+	</view>
+	<view class="body">
+		<view class="express-way flex ns-align-items-flex-center justify-between mb-20">
+			<view class="fs-28 color-2C2C2C ns-text-bold">配送方式</view>
+			<view class="flex">
+				<view class="flex" style="margin-right: 40rpx;" wx:for="{{way}}" wx:key="key" bindtap="changeWay" data-index="{{index}}"
+				 data-text="{{item}}">
+					<view class="iconfont {{index==wayIns?'icon-xuanzhong color-252E3E fs-40':'icon-weixuanzhong fs-40'}}"></view>
+					<view class="fs-26 ml-10">{{item}}</view>
+				</view>
+			</view>
+		</view>
+
+		<block wx:if="{{wayText}}">
+			<view class="pick-up-address bg-white mb-20">
+				<view class="express-way fs-28 color-2C2C2C ns-text-bold border-bottom">收货地址</view>
+				<navigator url="/pages/address-picker/address-picker" class="p-20">
+					<block wx:if="{{!addressObj}}">
+						点击此处选择地址
+					</block>
+					<block wx:else>
+						<view class="flex justify-between ns-align-items-flex-center color-2C2C2C fs-28">
+							<view class="flex">
+								<view class="fs-30 ns-text-bold">{{addressObj.name}}</view>
+								<view class="ml-20">{{addressObj.mobile}}</view>
+							</view>
+							<view class="iconfont icon-jinru color-D6D6D6 fs-40"></view>
+						</view>
+						<view class="mt-10">
+							{{addressObj.province + addressObj.city + addressObj.district + addressObj.detail}}
+						</view>
+					</block>
+				</navigator>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="pick-up-address bg-white mb-20">
+				<view class="express-way fs-28 color-2C2C2C ns-text-bold border-bottom">自提地址</view>
+				<navigator class="p-20" url="/private/pickUp/pickUp">
+					<block wx:if="{{!pickUpObj}}">
+						点击此处选择自提点
+					</block>
+					<block wx:else>
+						<view class="flex justify-between ns-align-items-flex-center color-2C2C2C fs-28">
+							<view class="flex">
+								<view class="fs-30 ns-text-bold">{{pickUpObj.name}}</view>
+								<view class="ml-20">{{pickUpObj.mobile}}</view>
+							</view>
+							<view class="iconfont icon-jinru color-D6D6D6 fs-40"></view>
+						</view>
+						<view class="mt-10">
+							{{pickUpObj.district.province.name + pickUpObj.district.district.name + pickUpObj.district.city.name + pickUpObj.detail}}
+						</view>
+					</block>
+
+				</navigator>
+			</view>
+		</block>
+
+		<view class="goods-list p-20 bg-white mb-20">
+			<view class="goods flex align-center mb-20" wx:for="{{cartList}}" wx:key="id">
+				<view style="width: 200rpx;height: 200rpx;margin-right: 27rpx;">
+					<image style="width: 200rpx;height: 200rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+				</view>
+				<view class="flex1">
+					<view class="fs-24 color-595959" style="height: 90rpx;">{{item.goods_name}}</view>
+					<view class="flex justify-between align-center">
+						<view class="fs-24 color-FF9100 mr-10">¥ {{item.goods_price}}</view>
+
+						<view class="fs-20 color-9B9B9B">x {{item.cart_num}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="flex justify-between border-bottom pb-20">
+				<view>商品总额</view>
+				<view>¥ {{total_price}}</view>
+			</view>
+			<view class="pt-20 flex ns-row-reverse">
+				<view>
+					共 {{total_num}} 件商品 合计 ¥ {{total_price}}
+				</view>
+			</view>
+		</view>
+		<view class="goods-list bg-white mb-20 fs-28" wx:if="{{!wayText}}">
+			<view class="p-20 flex align-center justify-between border-bottom">
+				<text>你的名字</text>
+				<input class="ns-text-right" type="text" value="{{zt_name}}" bindblur="bindName" placeholder="请输入取货人的名字" />
+			</view>
+			<view class="p-20 flex align-center justify-between">
+				<text>联系方式</text>
+				<input class="ns-text-right" type="number" value="{{zt_mobile}}" maxlength="11" bindblur="bindTel" placeholder="请输入取货人的电话" />
+			</view>
+		</view>
+	</view>
+	
+	
+	<view class="footer flex">
+		<view class="flex1 fs-28" style="line-height: 100rpx;padding-left: 30rpx;">
+			<text class="color-595959">合计：</text>
+			<text class="color-FF9100">¥ {{total_price}}</text>
+		</view>
+		<view class="cu-btn pay-btn bg-FF9100" bindtap="preSubmit">微信支付</view>
+	</view>
+</view>

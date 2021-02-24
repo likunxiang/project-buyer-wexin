@@ -1,0 +1,87 @@
+<!--品牌偏好-->
+<view class="addLike">
+	<view class="heardBanner">
+		<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+			<view
+			 class="  go-back flex1"
+			 style="font-size:30rpx;color:#FFFFFF;"
+			 bindtap="returnPage"
+			>
+				<text class="iconfont icon-zuojiantoubeifen;"></text>
+			</view>
+			<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">品牌偏好</view>
+			<view class="flex1"></view>
+		</view>
+	</view>
+	<view style="height:{{customBar}}px;"></view>
+	<!-- 导航结束 -->
+
+	<view class="input-left">
+		<text class="iconfont icon-pinpai" style="color:#489A19;"></text>
+		品牌名称
+	</view>
+	<view class="input-box">
+
+		<input
+		 disabled="{{true}}"
+		 value="{{brandName}}"
+		 class="input-right"
+		 placeholder="请选择品牌名称"
+		/>
+	</view>
+
+	<view class="other-flex">
+
+		<view>
+			<text class="iconfont icon-yonghu" style="color:#489A19;">
+
+		</text>
+			顾客名称
+		</view>
+		<view>
+			<text bindtap="openChoose" data-type="{{1}}" class="right">添加顾客</text>
+		</view>
+
+	</view>
+
+	<!-- 开关开始 -->
+	<view class="box-like">
+		<view class="like-item" wx:for="{{userList}}" wx:key="id" wx:if="{{item.origin == 1}}">
+			<view class="text-left">{{item.user_name}}</view>
+			<view class="text-right">
+				<!-- <text class="text1">提醒</text>
+				<text class="text2 iconfont  {{item.is_remind == 0?'icon-kaiguankai color-E0E0E0':'icon-kaiguankai1 '}}" bindtap="changeRemind" data-index="{{index}}" data-id="{{item.id}}"></text> -->
+				<text class="text3 iconfont icon-shanchu" style="color:#E0E0E0;"></text>
+			</view>
+		</view>
+	</view>
+	<view class="box-like">
+		<view class="like-item" wx:for="{{userList}}" wx:key="id" wx:if="{{item.origin == 2}}">
+			<view class="text-left">{{item.user_name}}</view>
+			<view class="text-right">
+				<!-- <text class="text1">提醒</text>
+				<text class="text2 iconfont  {{item.is_remind == 0?'icon-kaiguankai color-E0E0E0':'icon-kaiguankai1'}}" bindtap="changeRemind" data-index="{{index}}" data-id="{{item.id}}"></text> -->
+				<text class="text3 iconfont icon-shanchu" bindtap="delUser" data-index="{{index}}" data-id="{{item.id}}"></text>
+			</view>
+		</view>
+
+	</view>
+
+	<!-- 开关结束 -->
+	<!-- 选择 -->
+	<Select
+	 wx:if="{{isShow}}"
+	 arrData="{{arrData}}"
+	 isShow="{{isShow}}"
+	 selectType="{{type}}"
+	 imgString="{{'image'}}"
+	 selectString="{{'name'}}"
+	 title="顾客名称"
+	 inputText="请输入顾客名称"
+	 bindquxiao="quxiao"
+	 bindbinddata="bindData"
+	 bindsearch="searchData"
+	 bindgetmore="getMore"
+	></Select>
+</view>
+

@@ -1,0 +1,184 @@
+/* pages/miaosha/miaosha.wxss */
+@import "../../components/quick-navigation/quick-navigation.wxss";
+.top-bar{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1rpx solid #eee;
+}
+
+.top-bar > scroll-view{
+    overflow: auto !important;
+}
+.start-time-list{
+    overflow-y: visible !important;
+    padding-bottom: 20rpx;
+}
+
+.start-time-item {
+    background: #888;
+    color: #fff;
+    width: 150rpx;
+    text-align: center;
+    height: 120rpx;
+}
+
+
+.start-time-item>view{
+    width: 100%;
+}
+
+.start-time-item .start-time{
+    text-align: center;
+    line-height: 1;
+}
+
+.start-time-item .start-status{
+    font-size: 9pt;
+    line-height: 1;
+    margin-top: 6rpx;
+    font-weight: normal;
+    text-align: center;
+}
+.start-time-item.active{
+    background: #c10000;
+    color: #fff;
+    position: relative;
+}
+
+.start-time-item.active .start-time-item-icon{
+    position: absolute;
+    z-index: 999;
+    bottom: -15rpx;
+    left: 50%;
+    margin-left: -12rpx;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 20rpx solid #c10000;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-bottom-width: 0;
+}
+
+.start-time-item.active .start-time{
+    font-size: 12pt;
+}
+
+.time-over-bar{
+    background: #fff;
+    margin-top: -20rpx;
+    height: 80rpx;
+    padding: 0 30rpx;
+  
+}
+
+.goods-list{
+    padding-top: 220rpx;
+}
+.goods-list .item{
+    background: #fff;
+    border-bottom: 1rpx solid #eee;
+}
+
+.goods-list .cover-pic{
+    width: 230rpx;
+    height: 230rpx;
+    display: block;
+}
+
+.goods-list .goods-name{
+   
+    overflow: hidden; 
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  display: -webkit-box;
+  display: box;
+
+}
+
+.goods-list .progress-bar{
+    background: #eee;
+    border-radius: 999rpx;
+    overflow: hidden;
+    height: 24rpx;
+    margin-bottom: 12rpx;
+    width: 260rpx;
+    margin-top: 6rpx;
+}
+
+.goods-list .progress{
+    background: #c10000;
+    border-radius: 999rpx;
+    height: 100%;
+    width: 0%;
+}
+
+.goods-list .statue-text{
+    font-size: 9pt;
+    color: #888;
+    margin-bottom: 28rpx;
+}
+
+.goods-list .miaosha-price{
+    color: #c10000;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 56rpx;
+}
+
+.goods-list .price{
+    color: #888;
+    text-decoration: line-through;
+    font-size: 14px;
+    line-height: 56rpx;
+    margin-left: 10rpx;
+}
+
+.goods-list .btn{
+    font-size: 9pt;
+    display: block;
+    padding: 10rpx 24rpx;
+    border: 1rpx solid #c10000;
+    color: #c10000;
+}
+
+.goods-list .btn.btn-buy{
+    background: #c10000;
+    color: #fff;
+}
+.goods-list .btn.tip{
+    background: #48a20f;
+    color: #fff;
+    border: 0;
+}
+
+.load-more-bar{
+    text-align: center;
+    visibility: hidden;
+}
+
+.load-more-bar.active{
+    visibility: visible;
+}
+
+.load-more-bar image{
+    width: 200rpx;
+    height: 100rpx;
+}
+.pullBottom{text-align: center;font-size: 24rpx;color: #595959;padding: 50rpx 0;position: fixed;bottom: 0;width: 750rpx;}
+.pullBottom navigator{margin-top: 6rpx;color: #C10000;border-bottom: 1px solid #C10000;display: inline-block;padding: 6rpx 0;}
+.count-tip {
+  font-size: 10px;
+  padding: 4rpx 10rpx;
+  background-color: #c10000;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 10rpx;
+  bottom: 10rpx;
+}

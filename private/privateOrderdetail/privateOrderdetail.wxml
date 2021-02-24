@@ -1,0 +1,189 @@
+<!--pages/order-detail/order-detail.wxml-->
+<view class="page">
+    <include src="/components/common/common" />
+    <include src="/components/header/header" />
+    <view wx:if="{{true}}" class="body after-navber">
+        <view style="overflow-x: hidden">
+            <!-- <view class="status-bar">
+                <view class="flex ns-align-items-flex-center">
+					<image style="width: 30rpx;height: 30rpx; margin-right: 20rpx;" mode="widthFix" src="image/icon-dfk.png"></image>
+					<view>{{order.status}}</view>
+				</view>
+				<view class="fs-22 mt-20" >{{order.status_msg}}</view>
+            </view> -->
+
+           <!-- <navigator url="express-detail/express-detail?id={{order.order_id}}&order_type={{order.order_type}}" class="block flex-row" wx:if="{{order.express_no && order.is_send==1}}">
+                <view class="flex-grow-1">
+                    <view class="mb-10">快递公司：{{order.express}}</view>
+                    <view class="">快递单号：{{order.express_no}}</view>
+                </view>
+                <view class="flex-grow-0 flex-y-center">
+                    <image src="{{__wxapp_img.store.jiantou_r.url}}" style="width: 12rpx;height: 22rpx"></image>
+                </view>
+
+                <view class="block-row flex-row" wx:if="{{false}}">
+                    <view class="flex-grow-1">快递单号：{{order.express_no}}</view>
+                    <view class="flex-grow-0">
+                        <text class="copy-text-btn" bindtap="copyText" data-text="{{order.express_no}}">复制</text>
+                    </view>
+                </view>
+            </navigator> -->
+            <view class="block bg-252E3E pr">
+                <view class="flex-row block-row fs-24">
+                    <view class="fs-24 color-fff ns-text-bold">
+                       <!-- {{order.is_offline == 0 ? "联系人：" : "收货人："}} -->{{order.addressData.name}}
+                    </view>
+                    <view class="ml-30 color-fff">
+                        {{order.addressData.mobile}}
+                    </view>
+                </view>
+                <view wx:if='{{order.addressData}}' class="color-fff fs-30">{{order.addressData.province + order.addressData.city + order.addressData.district + order.addressData.detail}}</view>
+				<view class="type-tab">
+					<view class="type fs-28 color-fff">{{order.express_set==2?'配送':'自提'}}</view>
+					<view class="fs-24 color-fff text-center" style="margin-top: 16rpx;">{{order.addressData.time}}</view>
+				</view>
+            </view>
+            <!-- <block wx:if="{{order.is_offline == 1}}">
+                <view class="block flex-row">
+                    <view class='flex-grow-1'>
+                        <view class="flex-grow-1">门店名称：{{order.shop.name}}</view>
+                        <view class="flex-grow-1">联系电话：{{order.shop.mobile}}</view>
+                        <view class="flex-grow-1">门店地址：{{order.shop.address}}</view>
+                    </view>
+                    <view class='flex-grow-0 flex-y-center' wx:if='{{order.shop.longitude}}'>
+                        <text class='copy-text-btn' bindtap='location'>导航</text>
+                    </view>
+                </view>
+            </block> -->
+
+            
+            <view class="ns-text-sm ns-text-bold ns-bg-white ns-padding-horizontal-sm ns-padding-top-sm">
+				<view class="flex ns-justify-content-space-between ns-align-items-flex-center" >
+					<view class="fs-24 color-2C2C2C ns-text-bold">商品清单</view>
+				</view>
+			</view>
+			
+            <view style='margin-bottom:0' class="block">
+                <view wx:for="{{order.mchMyOrderDetail}}" class="flex-row goods-item" wx:key="id">
+                    <view class="flex-grow-0">
+                        <navigator url="/private/privateGoods/privateGoods?id={{item.goods_id}}" style="font-size: 0">
+                            <image mode="aspectFill" style="width: 156rpx;height: 156rpx" src="{{item.pic}}"></image>
+                        </navigator>
+                    </view>
+                    <view class="flex flex1" style="padding-left: 20rpx">
+						<view class="flex1">
+							<view class="fs-24" style="margin-bottom: 10rpx">
+							    <navigator url="/private/privateGoods/privateGoods?id={{item.goods_id}}">{{item.name}}</navigator>
+							</view>
+							<!-- <view class="flex-grow-1">
+							    <view style="font-size: 20rpx;color: #888;margin-right: 20rpx;display: inline-block" wx:for="{{item.attr}}" wx:for-item="attr" wx:key="id">
+							        {{attr.attr_group_name}}：{{attr.attr_name}}
+							    </view>
+							</view> -->
+						</view>
+						<view style="width: 136rpx;">
+							<view style="text-align: right">
+								<view class="fs-24 color-595959">￥ {{item.price}}</view>
+							    <view class="fs-20" style="color:#929292">×{{item.num}}</view>
+							    
+							</view>
+							<view wx:if="{{item.order_refund_enable==1}}">
+							    <navigator wx:if="{{item.status==1}}" class="refund-btn ns-text-center" url="order-refund/order-refund?id={{item.order_detail_id}}&status=3">申请退款
+							    </navigator>
+								<navigator wx:if="{{item.status==2}}" class="refund-btn" url="order-refund/order-refund?id={{item.order_detail_id}}&status=1">申请售后
+								</navigator>
+								<navigator wx:if="{{item.status==3}}" class="refund-btn" url="order-refund/order-refund?id={{item.order_detail_id}}&status=4">申请退货
+								</navigator>
+							    
+							</view>
+							<navigator wx:if="{{item.status==4}}" class="refund-btn"  url="order-refund-detail/order-refund-detail?id={{item.order_refund_id}}">售后详情</navigator>
+						</view>
+                    </view>
+                </view>
+            </view>
+            <view class="block">
+                <view class="flex-row block-row fs-24">
+                    <view class="flex-grow-1">商品总价</view>
+                    <view class="flex-grow-0" wx:if="{{order}}">￥{{order.pay_price}}</view>
+                    <view class="flex-grow-0" wx:else>￥0.00</view>
+                </view>
+                <!-- <view class="flex-row block-row">
+                    <view class="flex-grow-1">商品数量</view>
+                    <view class="flex-grow-0">×{{order.num}}</view>
+                </view> -->
+                <view class="flex-row block-row fs-24" wx:if='{{order.user_coupon_id}}'>
+                    <view class="flex-grow-1">优惠券优惠</view>
+                    <view class="flex-grow-0">-￥{{order.coupon_sub_price}}</view>
+                </view>
+                <!-- <view class="flex-row block-row" wx:if='{{order.integral && order.integral.forehead > 0}}'>
+                    <view class="flex-grow-1">积分抵扣</view>
+                    <view class="flex-grow-0">-￥{{order.integral.forehead}}</view>
+                </view> -->
+                <!-- <view class="flex-row block-row" wx:if='{{order.discount<10 && order.discount}}'>
+                    <view class="flex-grow-1">会员折扣</view>
+                    <view class="flex-grow-0">{{order.discount}}折</view>
+                </view> -->
+                <view class="flex-row block-row fs-24" wx:if="{{order.before_update}}">
+                    <view class="flex-grow-1">{{order.before_update}}</view>
+                    <view class="flex-grow-0">￥{{order.money}}</view>
+                </view>
+                <view class="flex-row block-row fs-24" wx:if="{{order.colonel}}">
+                    <view class="flex-grow-1">团长优惠</view>
+                    <view class="flex-grow-0">￥{{order.colonel}}</view>
+                </view>
+                <view wx:if='{{order.content}}'>
+                    <view>买家留言</view>
+                    <view style='width:100%;overflow:auto;word-wrap:break-word;'>{{order.content}}</view>
+                </view>
+                <view wx:if='{{order.words}}'>
+                    <view>商家留言</view>
+                    <view class='fs-sm' style='width:100%;overflow:auto;word-wrap:break-word;'>{{order.words}}</view>
+                </view>
+                <view class='ns-flex ns-justify-content-end block-footer fs-24'>
+                  <view>共{{order.goodsNum}}件商品</view>
+                  <view class="ns-margin-left-sm">合计：
+                      <text style="color: #c10000">￥{{order.pay_price}}</text>
+                  </view>
+                </view>
+            </view>
+			
+			<view class="block fs-24 color-595959 mb-20">
+				<view class="mb-10 color-2C2C2C ns-text-bold">订单信息</view>
+				<view class="flex ns-justify-content-space-between mb-10">
+					<view>支付方式</view>
+					<view wx:if="{{order.pay_type==0}}">未支付</view>
+					<view wx:if="{{order.pay_type==1}}">微信支付</view>
+				</view>
+			    <view class="mb-10 flex ns-justify-content-space-between">
+			        <view class="flex ns-justify-content-space-between ns-align-items-flex-center">
+						<view class="">订单编号</view>
+						<view class=" ml-20 fs-24 color-F49E3A" bindtap="copyText" data-text="{{order.order_no}}">复制</view>
+						
+					</view>
+					<view>{{order.order_no}}</view>
+					
+			    </view>
+			    <view class="flex ns-justify-content-space-between">
+					<view>下单时间</view>
+					<view>{{order.addtime}}</view>
+				</view>
+			    <!-- <view class='pay-type'>{{order.pay_type_text}}</view> -->
+			</view>
+			
+			<view class="bg-white fs-24 color-595959" wx:if="{{order.express_set==1}}">
+				<view class="p-20 flex align-center justify-between border-bottom">
+					<text>提货人</text>
+					<text class="ns-text-right">{{order.ztAddressData.name}}</text>
+				</view>
+				<view class="p-20 flex align-center justify-between">
+					<text>联系方式</text>
+					<text class="ns-text-right">{{order.ztAddressData.mobile}}</text>
+				</view>
+            </view>
+
+            
+        </view>
+    </view>
+	
+    <include src="/components/footer/footer" />
+</view>

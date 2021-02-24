@@ -1,0 +1,65 @@
+/* pages/openshopStatus/openshopStatus.wxss */
+page {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.all {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+.hu {
+	position: absolute;
+	width: 140%;
+	height: 450rpx;
+	background: #489A19;
+	border-radius: 0 0 60% 60%;
+	left: -150rpx;
+
+}
+.icon-box {
+	width: 238rpx;
+	height: 238rpx;
+	border: 10rpx solid #fff;
+	border-radius: 50%;
+	margin: 104rpx auto 0;
+}
+.text-box {
+	margin-top: 510rpx;
+}
+.return-btn {
+	position: absolute;
+	left: 40rpx;
+	bottom: 50rpx;
+	width: 670rpx;
+	padding: 18rpx 0;
+	text-align: center;
+	font-size: 30rpx;
+	color: #fff;
+	background: #489A19;
+}
+.error-btn {
+	width: 325rpx;
+	height: 78rpx;
+	text-align: center;
+	line-height: 78rpx;
+	font-size: 26rpx;
+	color:#fff;
+	border-radius: 20rpx;
+	background:rgba(72,154,25,0.5);
+	margin: 79rpx auto 40rpx;
+}
+.error-btn-yellow {
+	width: 325rpx;
+	height: 78rpx;
+	text-align: center;
+	line-height: 78rpx;
+	font-size: 26rpx;
+	color:#fff;
+	border-radius: 20rpx;
+	background: #489A19;
+	margin:auto;
+	
+}

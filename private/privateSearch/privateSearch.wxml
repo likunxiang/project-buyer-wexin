@@ -1,0 +1,121 @@
+<!--pages/newSearch/newSearch.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page flex ns-column">
+	<view class="header bg-white">
+		<view class="search-box flex">
+			<view class="search-input-box flex-y-center ns-justify-content-space-between">
+				<view class="flex-y-center" style="width: 100%;margin-right: 20rpx;">
+					<view class="iconfont icon-sousuo ns-text-bold color-252E3E fs-30" style="margin-right: 26rpx;"></view>
+					<input type="text" class="fs-26 color-595959" style="width: 100%;" placeholder="请输入搜索内容" placeholder-style="color: #AAAAAA;"
+					 value="{{seachVal}}" bindconfirm="sendSeach" bindinput="seachInput" bindblur="seachBlur" />
+				</view>
+				<view class="iconfont icon-guanbi1" style="color: #AAAAAA;" bindtap="clearVal"></view>
+			</view>
+			<view class="fs-26 color-252E3E" style="padding: 10rpx 29rpx;padding-right: 0;" bindtap="sendSeach">搜索</view>
+		</view>
+	</view>
+	<block wx:if="{{processSeach}}">
+		<view class="like-box" style="height: {{y}}px;">
+			<view class="seachBlur" catchtap="seachBlur">
+				<view catchtap="nulldo">
+					<view class="seachNav" data-words="{{item.words}}" bindtap="history" wx:for="{{likeList}}" wx:key="{{index}}">{{item.words}}</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{showSeach}}">
+		<view class="flex1" style="background:#fff;padding-top: 20rpx;height: 100%;">
+			<!-- 历史搜索 -->
+			<view class="history" wx:if="{{showHistor}}">
+				<view class="historyTitle ns-flex ns-justify-content-space-between ns-align-items-flex-center">
+					<view>历史搜索</view>
+					<text class="iconfont icon-shanchu" bindtap="removeHistory"></text>
+				</view>
+				<view class="clear tabs">
+					<view data-words="{{item}}" class="pull-left" bindtap="history" wx:for="{{historyList}}" wx:key="index" wx:if="{{index<10}}">{{item}}</view>
+				</view>
+			</view>
+			<!-- 热门搜索 -->
+			<view class="hotSeach" wx:if="{{showHotsearch}}">
+				<text class="historyTitle">热门搜索</text>
+				<view class="clear hotList">
+					<view data-words="{{item.words}}" class="pull-left clear" bindtap="history" wx:for="{{hotSearchList}}" wx:key="index">
+						<text class="pull-left iconfont icon-show_renqiredu" style="margin-right: 5rpx;font-size: 14px; color: #C10000;"></text>
+						<view class="pull-left">{{item.words}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="cu-list menu-avatar flex1">
+			<scroll-view scroll-y="true" style="height: 100%;">
+				<block wx:if="{{goodsList.length<=0}}">
+					<view style="height: 80%;" class="flex-x-center flex-y-center">
+						<view>
+							<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+							<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+								<view>暂无相关订单～</view>
+								<view>去逛逛吧</view>
+								<navigator url="/private/home/home?type=1" style="text-decoration: underline;">返回首页</navigator>
+							</view>
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view style="padding-bottom: 130rpx;padding-top: 20rpx;">
+						<navigator url="/private/privateGoods/privateGoods?id={{item.id}}" hover-class="none" class="goods flex ns-align-items-flex-center mb-20"
+						 wx:for="{{goodsList}}" wx:key="id">
+							<view style="width: 160rpx;height: 160rpx;margin-right: 18rpx;">
+								<image style="width: 160rpx;height: 160rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+							</view>
+							<view class="flex1">
+								<view class="fs-30">{{item.name}}</view>
+								<view class="color-489A19 flex fs-24 mt-5">
+									<text wx:for="{{item.tags}}" wx:for-item="tag" class="mr-10">{{tag}}</text>
+								</view>
+								<view class="flex ns-align-items-flex-center justify-between">
+									<view class="flex ns-align-items-flex-center ">
+										<view class="color-FF9100 fs-28 ns-text-bold mr-10">¥ {{item.min_price}}</view>
+										<!-- <view class="color-9B9B9B fs-20">¥ 520</view> -->
+									</view>
+									<view class="flex align-center">
+										<block wx:if="{{item.cart_num>0}}">
+											<view class="iconfont icon-jianshao1 fs-40 color-2C2C2C" catchtap="reduceNum" data-index="{{index}}" data-id="{{item.id}}"
+											 data-price="{{item.min_price}}"></view>
+											<view style="width: 50rpx;text-align: center;">{{item.cart_num}}</view>
+										</block>
+										<block wx:if="{{filters.parseInt(item.cart_num)>=item.num}}">
+											<view class="iconfont icon-add-fill fs-50" style="color: #C8C7C7;" catchtap></view>
+										</block>
+										<block wx:else>
+											<view class="iconfont icon-add-fill fs-50 color-FF9100" catchtap="addNum" data-index="{{index}}" data-id="{{item.id}}"
+											 data-price="{{item.min_price}}"></view>
+										</block>
+									</view>
+								</view>
+							</view>
+						</navigator>
+					</view>
+				</block>
+			</scroll-view>
+		</view>
+		<view class="footer">
+			<view class="footer-content flex ns-align-items-flex-center color-fff fs-28">
+				<view class="flex1 flex-x-center ns-align-items-flex-center" style="border-right: 2rpx solid #FFFFFF;" bindtap="copyText">
+					<text class="iconfont icon-weixin fs-40 mr-10"></text>
+					<text>联系店主</text>
+				</view>
+				<navigator hover-class="none" url="/private/privateCart/privateCart" class="flex1 flex-x-center ns-align-items-flex-center pr">
+					<view class="iconfont icon-cailanzi- fs-36 mr-10"></view>
+					<view>我的篮子</view>
+					<view class="num-box" wx:if="{{cartNum>0}}">{{cartNum}}</view>
+				</navigator>
+				<navigator hover-class="none" url="/private/privateOrder/privateOrder" class="flex1 flex-x-center ns-align-items-flex-center">
+					<view class="iconfont icon-icon- fs-40 mr-10"></view>
+					<view>自营订单</view>
+				</navigator>
+			</view>
+		</view>
+	</block>
+</view>

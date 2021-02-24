@@ -1,0 +1,71 @@
+<!--member/recommendMaterial/recommendMaterial.wxml-->
+<include src="/components/share/share.wxml" />
+<view class="page pr">
+	<view class="footer flex justify-between">
+		<button class="footer-btn" bindtap="getGoodsQrcode">生成{{materialInfo[0].out_type == 1? '商品':'活动'}}海报</button>
+		<button class="footer-btn footer-btn-link" open-type="share">转发{{materialInfo[0].out_type == 1? '商品':'活动'}}链接</button>
+	</view>
+	<view class="act-list">
+		<view wx:for="{{materialInfo}}" wx:key="id">
+			<view class="act-main flex mb-10" wx:for="{{item.infoCircleMat}}" wx:key="id" wx:for-item="mate">
+				<view class="mr-24">
+					<image style="width: 90rpx;height: 90rpx;border-radius: 8px;" mode="aspectFit" src="{{item.brand_img}}"></image>
+				</view>
+				<view class="flex1">
+					<view class="flex justify-between">
+						<view class="fs-30 color-333333 ns-text-bold">{{item.brand_name}}</view>
+						<view class="fs-24 color-999999">活动素材</view>
+					</view>
+					<view class="mt-20 fs-30 color-333333" style="line-height: 44rpx;">
+						<rich-text nodes="{{mate.content}}"></rich-text>
+					</view>
+					<block wx:if="{{mate.type==1}}">
+						<view class="mt-20">
+							<image bindtap="previewPic" data-pics="{{mate.cover_pic}}" data-pic="{{pic}}"  style="width: 152rpx;height: 152rpx;margin-right: 20rpx;background: #0081FF;margin-bottom: 12rpx;" wx:for="{{mate.cover_pic}}" wx:key='index' wx:for-item="pic" src="{{pic}}"></image>
+						</view>
+					</block>
+					<block wx:if="{{mate.type==2}}">
+						<view class="act-video mt-20 pr">
+							<!-- <image class="act-video" mode="aspectFit"></image> -->
+							<video class="act-video" src="{{mate.sp_content}}"></video>
+							<!-- <view class="act-video-icon iconfont icon-bofang"></view> -->
+						</view>
+					</block>
+					<view class="mt-20 link-box flex" wx:if="{{mate.goods_id>0}}">
+						<view>
+							<image style="width: 128rpx;height: 128rpx;" mode="aspectFit" src="{{mate.goods_data.first_cover_pic}}"></image>
+						</view>
+						<view class="">
+							<view class="fs-26 color-333333 ns-text-bold">{{mate.goods_data.name}}</view>
+							<view class="ns-text-bold flex mt-20">
+								<view class="fs-36 color-FF0200">¥ {{mate.goods_data.price}}</view>
+								<view class="fs-26 color-999999 ml-20" style="margin-top: 13rpx;">¥ {{mate.goods_data.original_price}}</view>
+							</view>
+							<navigator hover-class="none" url="/pages/goods/goods?id={{mate.goods_data.id}}" class="fs-26 text-right mt-20" style="color: #15A3FF;">
+								<text>查看详情</text>
+								<text class="iconfont icon-gengduo fs-24 ml-10"></text>
+							</navigator>
+						</view>
+					</view>
+					<!-- <block wx:if="{{item.goods_id}}">
+						<view class="act-banner mt-20">
+							<image class="act-banner" mode="aspectFit"></image>
+						</view>
+					</block> -->
+					<!-- 按钮 -->
+					<view class="mt-24 flex justify-end">
+						<view class="act-btn text-center color-fff mr-24" bindtap="saveMaterial" data-type="{{mate.type}}" data-pic="{{mate.cover_pic}}" data-video="{{mate.sp_content}}">
+							<text class="iconfont icon-xiazai1 fs-24" style="margin-right: 8rpx;"></text>
+							<text class="fs-24">下载素材</text>
+						</view>
+						<view class="act-btn text-center color-fff" bindtap="copyText" data-text="{{mate.content}}">
+							<text class="iconfont icon-fuzhi1 fs-24" style="margin-right: 6rpx;"></text>
+							<text class="fs-24">复制文字</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+	</view>
+</view>

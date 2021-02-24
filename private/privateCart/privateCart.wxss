@@ -1,0 +1,50 @@
+/* pages//private/privateCart/privateCart.wxss */
+page {
+	height: 100%;
+	background: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+	position: relative;
+}
+.empty {
+	height: 531rpx;
+	background-color: white
+}
+
+.empty image {
+	width: 242rpx;
+	height: 162rpx;
+	margin: 168rpx 0 111rpx
+}
+
+.empty view {
+	text-align: center;
+	color: #D6D6D6;
+}
+.footer {
+	background: #fff;
+	height: 100rpx;
+	width: 100%;
+}
+.pay-btn {
+	width: 202rpx;
+	height: 100%;
+	color: #fff;
+}
+.goods {
+	padding: 20rpx;
+	background-color: #fff;
+}
+.numbox {
+	width: 35rpx;
+	height: 35rpx;
+	border: 1rpx solid #D6D6D6;
+	border-radius: 8rpx;
+	background-color: #fff;
+	color: #8D8D8D;
+}
+.numbox-no {
+	background-color: #8D8D8D;
+	color: #fff;
+}

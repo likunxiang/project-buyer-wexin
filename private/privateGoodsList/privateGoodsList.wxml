@@ -1,0 +1,71 @@
+<!--pages//private/privateGoodsList/privateGoodsList.wxml-->
+<view class="page">
+	<view class="header bg-white">
+		<view class=" ptb-20 plr-25 flex align-center">
+			<view class="search-box flex ns-align-items-flex-center plr-25">
+				<view class="cuIcon-search fs-30 color-AAAAAA"></view>
+				<input class="ml-20 mr-20 fs-26" style="width: 90%;" type="text" value="{{seachValue}}" placeholder="搜索商品名称"
+				 placeholder-class="fs-26 color-AAAAAA" bindblur="search" />
+				<view wx:if="{{is_search}}" class="iconfont icon-guanbi- fs-30" bindtap="clearSearch"></view>
+			</view>
+			<navigator hover-class="none" url="/private/privateAddGoods/privateAddGoods" class="sou-btn bg-FF9100 fs-28 color-fff border-radius-8">添加</navigator>
+		</view>
+		<view class="tab-box flex ns-justify-content-space-between bg-white">
+			<view class="tab {{tabIns==index?'tab-active ns-text-bold':''}}" wx:for="{{tabList}}" data-index="{{index}}" bindtap="changeTab">{{item}}</view>
+		</view>
+	</view>
+	<view class="body">
+		<block wx:if="{{goodsList.length == 0}}">
+			<view class="flex-x-center flex-y-center">
+				<view>
+					<view class="iconfont icon-kong ns-text-center" style="font-size: 150rpx;"></view>
+					<view style="font-size: 24rpx;color: #B0B0B0;text-align: center;margin-top: 31rpx;line-height: 53rpx;">
+						<view>暂无相关商品～</view>
+						<navigator url="/private/privateAddGoods/privateAddGoods" style="text-decoration: underline;">点这里添加</navigator>
+					</view>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<navigator hover-class="none" url="/private/privateGoods/privateGoods?id={{item.id}}" class="goods flex ns-align-items-flex-center mb-20 bg-white pr" wx:for="{{goodsList}}" wx:key='id'>
+				<view style="width: 200rpx;height: 200rpx;">
+					<image style="width: 200rpx;height: 200rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+				</view>
+				<view style="padding: 8rpx 20rpx 18rpx;width: 100%;">
+					<view class="fs-30 ns-text-limit2">{{item.name}}</view>
+					<view class="flex fs-24 mt-10 {{tabIns==1?'color-9B9B9B':'color-489A19'}}">
+						<view class="" style="width: 234rpx;">销量：{{item.order_num}}件</view>
+						<view>库存：{{item.num}}件</view>
+					</view>
+					<view class="flex ns-align-items-flex-center justify-between mt-24">
+						<view class="flex ns-align-items-flex-center ">
+							<view class="fs-28 ns-text-bold mr-10 {{tabIns==1?'color-4A4A4A':'color-FF9100'}}">¥ {{item.min_price}}</view>
+							<!-- <view class="color-9B9B9B fs-20 ns-text-through">¥ {{item.max_price}}</view> -->
+						</view>
+						<view class="iconfont icon-iconfont fs-40" style="color: #000000;" catchtap="openEdit" data-index="{{index}}"></view>
+					</view>
+				</view>
+				
+				<view class="edit flex-y-center justify-between" wx:if="{{is_edit==index}}" catchtap="closeEdit">
+					<navigator hover-class="none" url="/private/privateAddGoods/privateAddGoods?id={{item.id}}" class="edit-ball fs-24 color-4A4A4A text-center" >
+						<view class="iconfont icon-icon6 fs-50"></view>
+						<view class="mt-5">编辑</view>
+					</navigator>
+					<view wx:if="{{tabIns==1}}" class="edit-ball fs-24 color-4A4A4A text-center" catchtap="editGoodsStatus" data-type="up" data-id="{{item.id}}">
+						<view class="iconfont icon-off fs-50"></view>
+						<view class="mt-5">上架</view>
+					</view>
+					<view wx:else class="edit-ball fs-24 color-4A4A4A text-center" catchtap="editGoodsStatus" data-type="down" data-id="{{item.id}}">
+						<view class="iconfont icon-xiajia fs-50"></view>
+						<view class="mt-5">下架</view>
+					</view>
+					<view class="edit-ball fs-24 color-4A4A4A text-center" catchtap="delGoods" data-id="{{item.id}}">
+						<view class="iconfont icon-shanchu1 fs-50"></view>
+						<view class="mt-5">删除</view>
+					</view>
+				</view>
+			</navigator>
+		</block>
+		
+	</view>
+</view>

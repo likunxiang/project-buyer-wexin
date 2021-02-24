@@ -1,0 +1,26 @@
+@import "/app.wxss";
+.tohome-btn {
+	position: fixed;
+	left: 24rpx;
+	bottom: 422rpx;
+	width: 88rpx;
+	height: 88rpx;
+	background: linear-gradient(180deg, #414141 0%, #272626 100%);
+	border-radius: 50%;
+	line-height: 88rpx;
+}
+.tohome-btn-material {
+	background: #16A4FF;
+	border: 4rpx solid #FFFFFF;
+}
+.cart-num {
+	position: absolute;
+	top: 22rpx;
+	right: 14rpx;
+	width: 24rpx;
+	height: 24rpx;
+	line-height: 20rpx;
+	background: #FF0200;
+	border: 2rpx solid #3B3B3B;
+	border-radius: 50%;
+}

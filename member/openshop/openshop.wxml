@@ -1,0 +1,78 @@
+<view class="page pad38 ns-bg-white" style="height:{{y}}px">
+	<view class="store-man">
+
+		<view class="head-box">
+			<image class="head" src="{{mch_Info.user.avatar_url}}"></image>
+		</view>
+		<view class="flex flex-x-center mt-10">{{mch_Info.name}}</view>
+		<view class="flex flex-x-center mt-10">
+			<!-- <view class="lable" style="color:white;">{{mch_Info.wechat_name}}</view> -->
+			<navigator class="copy" style="{{mch_Info.wechat_name?'color: #303030;':''}}" bindtap="copyText" data-text="{{mch_Info.wechat_name}}" target="miniProgram" open-type="exit">复制微信号</navigator>
+			<!-- <view class="copy" style="{{mch_Info.wechat_name?'color: #303030;':''}}" bindtap="copyText" data-text="{{mch_Info.wechat_name}}" >复制微信号</view> -->
+		</view>
+	</view>
+	<form bindsubmit='openShop' report-submit="true">
+		<view class="ns-padding-sm ns-margin-top">
+			<view class="">
+				<view class="ns-flex mb-30">
+					<view class="lable">
+						<text>邀请码</text>
+						<text class="color-C10000"> * </text>
+					</view>
+
+					<view class="nsw80 ns-bdb-gray">
+						<input class="input-box" placeholder="联系本店店主获取邀请码" maxlength="12" value="{{invite_code}}" bindinput="changeVal"
+						 data-type="invite"></input>
+					</view>
+				</view>
+				<view class="ns-flex mb-30">
+					<view class="lable flex">
+						<view class="title flex ns-justify-content-space-between"><text>名</text><text>字</text></view>
+						<view class="color-C10000 ml-10"> * </view>
+					</view>
+					<view class="nsw80 ns-bdb-gray ">
+						<input class="input-box" maxlength="12" placeholder="请输入你的真实姓名" value="{{userName}}" bindinput="changeVal"
+						 data-type="name"></input>
+					</view>
+				</view>
+
+				<view class="ns-parent-box">
+					<view class="ns-flex mb-30">
+						<view class="lable flex">
+							<view class="title flex ns-justify-content-space-between"><text>电</text><text>话</text></view>
+							<view class="color-C10000 ml-10"> * </view>
+						</view>
+						<view class="nsw80 ns-bdb-gray">
+							<input class=" input-box" maxlength="14" type="number" placeholder="请输入你的手机号码" value="{{userPhone}}" bindinput="changeVal"
+							 data-type="phone" style="width:60%"></input>
+						</view>
+					</view>
+					<view class="code-box" bindtap="{{getCode}}">{{codeText}}</view>
+				</view>
+				<view class="ns-flex mb-30">
+					<view class="lable">
+						<text>验证码</text>
+						<text class="color-C10000"> * </text>
+					</view>
+					<view class="nsw80 ns-bdb-gray ">
+						<input class="input-box" maxlength="12" placeholder="请输入验证码" value="{{userCode}}" bindinput="changeVal" data-type="code"></input>
+					</view>
+				</view>
+				<view class="ns-flex mb-30">
+					<view class="lable">
+						<text>微信号</text>
+
+					</view>
+
+					<view class="nsw80 ns-bdb-gray">
+						<input class="input-box" placeholder="请输入微信号码" value="{{wechat}}" bindinput="changeVal" data-type="wechat"></input>
+					</view>
+				</view>
+			</view>
+
+		</view>
+		<button class="sub-btn" form-type='submit' disabled="{{isDisabled}}">下一步</button>
+
+		<!-- <image class="pa" src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/appCode.png"></image> -->
+	</form>
+</view>

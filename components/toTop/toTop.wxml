@@ -1,0 +1,4 @@
+<view class="to-top-btn ns-text-center color-fff" wx-if="{{is_top}}" bindtap="toTop">
+	<view class="iconfont icon-zhiding1"></view>
+	<view class="fs-20">顶部</view>
+</view>

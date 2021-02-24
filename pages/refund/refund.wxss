@@ -1,0 +1,77 @@
+/* pages/remind/remind.wxss */
+page{background: rgba(207,207,207,0.33);}
+.remind-top{text-align: center;background-color: #fff;position: fixed;left: 0;top: 0;right: 0;z-index: 999;}
+.remind-top .box{display: inline-block;width: 135rpx;padding: 20rpx 0;font-size: 30rpx;color: #999999;text-align: center;margin-left: 76rpx;margin-right:76rpx; }
+.remind-top .act{color: #333333;font-weight: 600;}
+.under-line {
+	position: absolute;
+	bottom: 0rpx;
+	left: 50%;
+	margin-left: -22rpx;
+	width: 44rpx;
+	height: 8rpx;
+	background: linear-gradient(-90deg, rgba(255, 152, 2, 1), rgba(255, 201, 1, 1));
+	border-radius: 4rpx;
+}
+/* 订单列表 */
+.iist-item{background-color: #fff;margin-top: 20rpx;position: relative}
+.time{font-size: 20rpx;padding: 0 0rpx 0 40rpx;height: 68rpx;line-height: 68rpx;
+color: #595959;}
+.time view{float: right;}
+.wait{color: #E05D21 }
+.over{color: #489A19 }
+.pic-list{height: 160rpx;padding-left: 40rpx;}
+.pic-list image{width: 160rpx;height: 160rpx;margin-right: 15rpx}
+.pic-left{float: left;}
+.pic-right{float: left;margin-left: 15rpx;width: 511rpx}
+.pic-title{font-size: 24rpx;
+color: #595959;padding-bottom: 10rpx}
+.pic-des{font-size: 20rpx;
+color: #D6D6D6;}
+.btn{padding-right:30rpx;width: 100%;background-color: #fff;height: 80rpx;font-size: 20rpx;
+color: #595959;border-top: 1rpx solid #D6D6D6;}
+.btn view{float: right;margin: 20rpx 0 20rpx 20rpx;width: 105rpx;height: 40rpx;line-height: 38rpx;text-align: center;border: 1rpx solid #D6D6D6;
+border-radius: 10rpx;}
+.go{border: 1rpx solid #C10000!important;color:#C10000 }
+.del{width: 28rpx;height: 28rpx;vertical-align: middle}
+.finish{position: absolute;top: 0;right: 85rpx;width: 72rpx;height: 58rpx}
+.order-list .order-item{
+    background: #fff;
+    padding:32rpx 24rpx;
+    margin-bottom: 20rpx;
+    border-bottom: 1rpx solid #e3e3e3;
+}
+.order-list .order-info{
+    font-size: 9pt;
+    color: #888;
+}
+.ns-lh-80 {
+  line-height: 80rpx;
+}
+
+/* 大鲲 */
+.refund-content {
+	padding: 16rpx 24rpx 0;
+	
+}
+	.refund-order {
+	padding:24rpx 24rpx 48rpx;
+	border-radius: 20rpx;
+	background: #fff;
+}
+.refund-order-header {
+	padding-bottom: 35rpx;
+}
+.refund-order-pic {
+	width: 200rpx;
+	height: 200rpx;
+	border-radius: 14rpx;
+}
+.refund-order-msg {
+	flex: 1;
+}
+.refund-order-footer {
+	margin-top: 32rpx;
+	background:rgba(244,244,244,1);
+  border-radius:14px;
+}

@@ -1,0 +1,99 @@
+<wxs module="filters" src="../../../utils/filters.wxs"></wxs>
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<!-- <include src="/components/quick-navigation/quick-navigation" /> -->
+	<view class="body" wx:if="{{goods.name}}">
+		<include src="/components/goods/specifications_model.wxml" />
+
+		<view class="{{(show_attr_picker||show||no_scroll)?'no-scroll':''}}">
+			<view style="padding-bottom: 120rpx;{{__device=='device_iphone_x'?'padding-bottom: 180rpx':''}}">
+				<include src="/components/goods/goods_banner.wxml" />
+				<view wx:if="{{goods_attr}}" class="miaosha-bar flex-row">
+					<!-- <image class='img_bg' src='{{__wxapp_img.miaosha.ms_activity_bg.url}}'></image> -->
+					
+					<view class="miaoshaHeader {{miaosha_end_time_over.type == 0?'over':'future'}}" style="background: url({{vip?goods.banberImg.b:(goods.is_start?goods.banberImg.a:goods.banberImg.d)}}) no-repeat;background-size: 100% 107rpx;">
+						<view class="pull-left ns-flex">
+							<view class="fs-24 ">￥<text class="ns-text-bold" style="font-size: 50rpx;">{{filters.priceStr(goods.price)[0]}}.</text><text
+								 class="ns-text-bold">{{filters.priceStr(goods.price)[1]}}</text></view>
+							<view class="ns-flex ns-align-items-flex-center">
+								<view>
+									<view class="price-tips">秒杀</view>
+									<view class="ns-text-through fs-24 color-999999" style="opacity: 0.6;">
+										<text>￥</text>
+										<text class="ns-text-bold color-999999 fs-24">{{goods.original_price}}</text>
+									</view>
+								</view>
+							</view>
+							<!-- 佣金 -->
+							<!-- <view class="flex ns-align-items-flex-center ml-10 mt-20" wx:if="{{role=='shoper' && goods.c1>0}}">
+								<view class="yongjin fs-28">赚</view>
+								<view class="fs-28 color-fff">￥{{goods.c1}}</view>
+							</view> -->
+						</view>
+						<view class="pull-right clear">
+							<view class="pull-left">
+								<view class="clear">
+									<view class="timer pull-left">
+										<text class="timer-num">{{miaosha_end_time_over.h}}</text>
+										<text class="timer-split">:</text>
+										<text class="timer-num">{{miaosha_end_time_over.m}}</text>
+										<text class="timer-split">:</text>
+										<text class="timer-num">{{miaosha_end_time_over.s}}</text>
+									</view>
+									<view class="pull-left miaoshaStatus">{{goods.is_start?'后结束':'后开始'}}</view>
+								</view>
+								<view class="pr progress">
+									<view class="pa {{miaosha_end_time_over.type == 0?'overPro':'futurePro'}}" style="width:{{goods.haveBuy + '%'}}"></view>
+									<view class="progressText color-2C2C2C" style="color: {{miaosha_end_time_over.type == 0?'#E05D21':''}}">
+
+										{{'已抢' + goods.haveBuy + '%'}}
+									</view>
+								</view>
+							</view>
+							<view class="pull-left miaoshaImg">
+								<image src="https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/lightning.png"></image>
+							</view>
+						</view>
+					</view>
+					<!-- oldCode -->
+					<!-- <view class='activity_box'>
+                        <view class="time-over-text" wx:if='{{miaosha_end_time_over.type == 0}}'>距离结束仅剩</view>
+                        <view class="time-over-text" wx:if='{{miaosha_end_time_over.type == 1}}'>距离开始仅剩</view>
+                        <view class="timer">
+                            <text class="timer-num">{{miaosha_end_time_over.h}}</text>
+                            <text class="timer-split">:</text>
+                            <text class="timer-num">{{miaosha_end_time_over.m}}</text>
+                            <text class="timer-split">:</text>
+                            <text class="timer-num">{{miaosha_end_time_over.s}}</text>
+                        </view>
+                    </view> -->
+				</view>
+				<!-- 特别提示 -->
+				<!-- <view class="especially-tip" wx:if="{{goods.refund_desc || goods.send_desc || goods.no_send}}">
+					<view class=" flex ns-align-items-flex-center flex-x-center fs-30 color-595959" style="margin-bottom: 35rpx;">
+						<view class="line" style="margin-right: 30rpx;"></view>
+						<view>特别提示</view>
+						<view class="line" style="margin-left: 30rpx;"></view>
+					</view>
+					<view class="flex mb-20" wx:if="{{goods.refund_desc}}">
+						<view class="fs-28 ns-text-bold color-2C2C2C">售后服务</view>
+						<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.refund_desc}}</view>
+					</view>
+					<view class="flex mb-20" wx:if="{{goods.send_desc}}">
+						<view class="fs-28 ns-text-bold color-2C2C2C">发货说明</view>
+						<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.send_desc}}</view>
+					</view>
+					<view class="flex mb-20" wx:if="{{goods.no_send}}">
+						<view class="fs-28 ns-text-bold color-2C2C2C">不发地区</view>
+						<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.no_send}}</view>
+					</view>
+				</view> -->
+				<include src="/components/goods/goods_info.wxml" />
+			</view>
+
+			<include src="/components/goods/goods_buy" />
+		</view>
+		<include src="/components/footer/footer" />
+	</view>
+</view>

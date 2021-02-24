@@ -1,0 +1,150 @@
+<wxs module="filters" src="../../../utils/filters.wxs"></wxs>
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<include src="/components/quick-navigation/quick-navigation" />
+	<view class="body" style="padding-bottom: 120rpx;{{__device=='device_iphone_x'?'padding-bottom: 180rpx':''}}">
+		<include src="/components/common/get-coupon.wxml" />
+		<include src="/components/goods/specifications_model.wxml" />
+		<view class="{{show_attr_picker?'no-scroll':''}} {{pt_detail?'pt-modal-bj':''}}">
+			<include src="/components/goods/goods_banner.wxml" />
+
+			<!-- 限时抢购 -->
+
+			<view wx:if="{{goods.name}}" class="ns-padding-horizontal-sm ns-padding-vertical-xs ns-text-white ns-flex ns-justify-content-space-between"
+			 style="background: url({{vip?goods.banberImg.b:(goods.start_buy==1?goods.banberImg.a:goods.banberImg.d)}}) no-repeat;background-size: 100% 107rpx;height: 107rpx;">
+				<view class="ns-flex " style="margin-top: -10rpx;">
+					<view class="flex">
+						<view style="padding-top: 56rpx;font-size: 24rpx;">￥</view>
+						<view style="font-size: 78rpx;">{{goods.price}}</view>
+					</view>
+					<!-- 佣金 -->
+					<!-- <view class="flex ns-align-items-flex-center ml-10 mt-20" wx:if="{{role=='shoper' && goods.c1>0}}">
+						<view class="yongjin fs-28">赚</view>
+						<view class="fs-28 color-fff">￥{{goods.c1}}</view>
+					</view> -->
+					<view class="ns-flex mt-20 ml-10">
+						<view>
+							<view class="pt-numbox"><text class="ptnum">拼团</text></view>
+							<view class="ns-flex ns-align-items-flex-center">
+								<!-- <text class="ns-text-through ns-text-xxxs">零售价</text> -->
+								<text class='original_price ns-text-through ns-text-xxxs mt-10'>￥{{goods.original_price}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="fs-28">
+					<view class="text-center fs-24 mb-10">{{goods.start_buy==0?'开始时间':'结束时间'}}</view>
+					<view class="activity-time fs-24">{{show_end_time}}</view>
+				</view>
+				<!-- <view class='flex-grow-0 flex-row time-info flex-y-center'>
+					<view class='flex-grow-1 time-value flex-y-center flex-x-center'>
+						{{limit_time.days}}
+					</view>
+					<view class='flex-grow-0'>
+						天
+					</view>
+					<view class='flex-grow-1 time-value flex-y-center flex-x-center'>
+						{{limit_time.hours}}
+					</view>
+					<view class='flex-grow-0'>
+						时
+					</view>
+					<view class='flex-grow-1 time-value flex-y-center flex-x-center'>
+						{{limit_time.mins}}
+					</view>
+					<view class='flex-grow-0'>
+						分
+					</view>
+					<view class='flex-grow-0'>
+						后 结束
+					</view>
+				</view> -->
+
+			</view>
+			<!-- 特别提示 -->
+			<!-- <view class="especially-tip" wx:if="{{goods.refund_desc || goods.send_desc || goods.no_send}}">
+				<view class=" flex ns-align-items-flex-center flex-x-center fs-30 color-595959" style="margin-bottom: 35rpx;">
+					<view class="line" style="margin-right: 30rpx;"></view>
+					<view>特别提示</view>
+					<view class="line" style="margin-left: 30rpx;"></view>
+				</view>
+				<view class="flex mb-20" wx:if="{{goods.refund_desc}}">
+					<view class="fs-28 ns-text-bold color-2C2C2C">售后服务</view>
+					<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.refund_desc}}</view>
+				</view>
+				<view class="flex mb-20" wx:if="{{goods.send_desc}}">
+					<view class="fs-28 ns-text-bold color-2C2C2C">发货说明</view>
+					<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.send_desc}}</view>
+				</view>
+				<view class="flex mb-20" wx:if="{{goods.no_send}}">
+					<view class="fs-28 ns-text-bold color-2C2C2C">不发地区</view>
+					<view class="fs-28 color-818181 flex1" style="margin-left: 28rpx;line-height: 40rpx;">{{goods.no_send}}</view>
+				</view>
+			</view> -->
+			<include src="/components/goods/goods_info.wxml" />
+			
+			<!-- <view class='friend-group'>
+                <view class='pt-goods-rule flex-row flex-y-center' bindtap='goArticle'>
+                    <view class='pt-rule-title flex-grow-1 flex-y-center'>
+                        支付商品开团，邀请好友参与，成功发货失败退款
+                    </view>
+                    <view class='pt-rule-right flex-grow-0 flex-y-center'>
+                        详细规则
+                    </view>
+                    <view class='pt-rule-more flex-grow-0 flex-y-center'>
+                        <image src='{{__wxapp_img.share.right.url}}'></image>
+                    </view>
+                </view>
+            </view> -->
+
+			<!-- <view class='pt-goods-content'>
+				<view class='pt-goods-content-title flex-y-center'>
+					商品详情
+				</view>
+				<view class='pt-goods-details'>
+					<import src="../../../wxParse/wxParse.wxml" />
+					<template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+				</view>
+			</view> -->
+
+			<include src="/components/goods/goods_buy" />
+		</view>
+
+		<!-- 弹窗 pt_detail-->
+		<view wx:if="{{pt_detail}}" class="model-award">
+			<view class="act-modal show">
+				<view class="act-modal-bg"></view>
+				<view class="act-modal-pic flex-y-center flex-x-center">
+					<view class="pt-modal">
+						<view class="pt-modal-1">正在拼团</view>
+						<view class="pt-modal-2">仅显示10条正在拼团信息</view>
+						<view class="pt-modal-3"></view>
+						<view class="pt-modal-4">
+							<image bindtap="end_more" src="/images/pond-details.png"></image>
+						</view>
+						<view class="pt-modal-5">
+							<scroll-view scroll-y style="height: 500rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+							 scroll-into-view="{{toView}}">
+								<view wx:for="{{group_list}}" wx:key="key" class="flex-row pt-modal-6">
+									<view class="flex-grow-0 flex-y-center flex-x-center pt-modal-7">
+										<image src="{{item.avatar_url}}" />
+									</view>
+									<view class="flex-col flex-grow-1 flex-x-center" style="text-align:left;">
+										<view style="color:#353535;">{{item.nickname}}
+											<text style="color:#ff5c5c;font-size:9pt;margin-left:20rpx">还差{{item.surplus}}人</text>
+										</view>
+										<view style="color:#707070;font-size:9pt">剩余{{item.limit_time.days}}:{{item.limit_time.hours}}:{{item.limit_time.mins}}:{{item.limit_time.secs}}</view>
+									</view>
+									<view class='flex-grow-0 go-offered flex-y-center flex-x-center' bindtap='goToGroup' data-id='{{item.id}}'
+									 style="margin-left:0rpx;font-size:11pt">去参团</view>
+								</view>
+							</scroll-view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<include src="/components/footer/footer" />
+</view>

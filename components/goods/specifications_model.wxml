@@ -1,0 +1,221 @@
+<view class="get-card-modal flex-x-center flex-y-center ns-column" wx:if="{{is_show_first}}">
+	<view class="get-card-modal-main-first pr flex-y-center" style="background: url({{first_order_img}}) no-repeat center;background-size: 750rpx 772rpx;">
+		<view class="text-center" style="width: 750rpx; height: 772rpx;">
+			<view class=" get-card-modal-text-first" style="margin-top: 275rpx;">
+				<view>送你一次</view>
+				<view>首单享会员机会</view>
+			</view>
+			<view class="small-tips-first text-center">首次下单可以享受会员价</view>
+			<view class="btn-text-first text-center" bindtap="closeModal">确定</view>
+		</view>
+	</view>
+</view>
+<view class="attr-picker" style="{{(pageType == 'group' || pageType == 'normal')?'bottom: 0rpx;':''}} {{pageType == 'addMenu'?'bottom: 90rpx':''}} {{(__device=='device_iphone_x' && pageType != 'normal')?'bottom: 175rpx':''}}"
+ wx:if="{{show_attr_picker}}" catchtouchmove="preventTouchMove" bindtap="hideAttrPicker">
+	<scroll-view class="content-box" style="{{(pageType == 'group' || pageType == 'normal')?'bottom: 0rpx;':''}} {{pageType == 'addMenu'?'bottom: 90rpx':''}} {{(__device=='device_iphone_x' && pageType != 'normal')?'bottom: 175rpx':''}}"
+	 catchtap="stop">
+		<view class="flex-row" style="padding: 24rpx">
+			<view class="flex-grow-0">
+				<view class="goods-pic-box">
+					<block wx:if="{{goods.attr_pic}}">
+						<image bindtap="previewImage" data-url='{{goods.attr_pic}}' mode="aspectFill" src="{{goods.attr_pic}}"></image>
+					</block>
+					<block wx:else>
+						<image bindtap="previewImage" data-url='{{goods.first_cover_pic}}' mode="aspectFill" src="{{goods.first_cover_pic}}"></image>
+					</block>
+				</view>
+			</view>
+			<view class="flex-grow-1" style="padding: 0 24rpx">
+				<view class="fs-30 color-333333 ns-text-limit2">{{goods.name}}</view>
+				<block wx:if="{{pageType === 'PINTUAN'}}">
+					<!-- <view style="font-size: 40rpx;" class="flex color-FF0200">
+						<view class="">¥ <text style="font-size: 60rpx;">{{filters.priceStr(goods.price)[0]}}.</text><text>{{filters.priceStr(goods.price)[1]}}</text></view>
+					</view> -->
+					<view class="fs-36 color-FF0100 ns-text-bold mt-20">{{goods.price}}</view>
+				</block>
+				<block wx:else>
+					<view style="" class="flex ns-align-items-flex-center mt-20">
+						<view class="fs-36 color-FF0100 ns-text-bold">¥ {{goods.price}}</view>
+						<view class="flex align-center" wx:if="{{goods.m_price}}">
+							<view class="iconfont icon-ziyuan101 fs-20 vip-icon" style="color: #F5DBAA;"></view>
+							<view class="fs-36 color-333333 ns-text-bold">¥ {{goods.m_price}}</view>
+						</view>
+						<!-- <view class="color-FF0200" style="font-size: 40rpx;">¥ <text style="font-size: 60rpx;">{{filters.priceStr(goods.price)[0]}}.</text><text>{{filters.priceStr(goods.price)[1]}}</text></view> -->
+						<!-- <view class="oldMoney ns-text-bold" wx:if="{{goods.price<(goods.origin_price?goods.origin_price:goods.original_price)}}">￥{{goods.origin_price?goods.origin_price:goods.original_price}}</view> -->
+						<!-- <view class="ml-10 color-595959 fs-24" wx:if="{{role=='shoper'&&goods.c1>0}}">赚￥{{goods.c1}}</view> -->
+						<!-- <text wx:if="{{goods.is_member_price === true}}" class='is_member_price'>会员价</text> -->
+					</view>
+				</block>
+				<!-- <view class="fs-24 color-333333">已选：红色 ，L码：一件</view> -->
+				<!-- <view style="font-size:9pt">
+					库存{{goods.num}}
+				</view> -->
+			</view>
+			<view class="flex-grow-0">
+				<view bindtap="hideAttrPicker" class="flex-x-center flex-y-center">
+					<view style="width: 30rpx;height: 30rpx;font-size: 30rpx;" class="iconfont icon-guanbi2"></view>
+				</view>
+			</view>
+		</view>
+		<view class="" wx:if="{{role=='shoper' && is_commission}}">
+			<view class="commission-box-cart flex align-end">
+				<view class="fs-24 color-333333 flex align-end" wx:if="{{goods.c1}}">
+					<view style="margin-bottom: 4rpx;margin-right: 4rpx;">小亲(赚)</view>
+					<view class="fs-30 color-FF0000 ns-text-bold">¥ {{goods.c1}}</view>
+				</view>
+				<view class="fs-24 color-333333 flex align-end" style="margin-left: 57rpx;" wx:if="{{goods.c19}}">
+					<view style="margin-bottom: 4rpx;margin-right: 4rpx;">大亲(赚)</view>
+					<view class="fs-30 color-FF0000 ns-text-bold">¥ {{goods.c19}}</view>
+				</view>
+			</view>
+		</view>
+		<scroll-view scroll-y="true" style="max-height: 650rpx;">
+			<!-- <view class="commission-cart flex align-center justify-between text-center">
+				<view class="flex align-end">
+					<view class="fs-24 color-333333">黄金(赚)</view>
+					<view class="fs-30 ns-text-bold" style="color: #FF0000;">¥ {{goods.c1}}</view>
+				</view>
+				<view class="flex align-end">
+					<view class="fs-24 color-333333">钻石(赚)</view>
+					<view class="fs-30 ns-text-bold" style="color: #FF0000;">¥ 10.00</view>
+				</view>
+				<view class="flex align-end">
+					<view class="fs-24 color-333333">皇冠(赚)</view>
+					<view class="fs-30 ns-text-bold" style="color: #FF0000;">¥ 10.00</view>
+				</view>
+			</view> -->
+			<view style="padding: 24rpx 28rpx">
+				<view>
+					<view class="attr-group" wx:if="{{groupNum && !oid}}">
+						<view class="attr-group-name">{{attr_group_num.attr_group_name}}</view>
+						<view class="attr-list">
+							<!--删除了 bindtap="groupCheck" -->
+							<text class="attr-item {{group_checked?'':'active'}}">{{goods.group_num}}人团</text>
+							<!-- <text class="attr-item {{item.checked?'active':''}}" wx:if="{{attr_group_num.attr_list.length>0}}" wx:for="{{attr_group_num.attr_list}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="attrNumClick">{{item.group_num}}人团
+                            </text> -->
+						</view>
+					</view>
+					<view class="attr-group" wx:for="{{attr_group_list}}" wx:for-item="attr_group" wx:for-index="groupindex" wx:key="groupindex"
+					 wx:if="{{attr_group.attr_list.length>0}}">
+						<view class="attr-group-name fs-28 color-333333 ns-text-bold">{{attr_group.attr_group_name}}</view>
+						<view class="attr-list">
+							<text class="attr-item {{item.checked?'active':''}} {{item.isHave ?'':'attr_num_0'}}" wx:for="{{attr_group.attr_list}}"
+							 wx:for-index="childindex" wx:key="childindex" data-groupindex="{{groupindex}}" data-childindex="{{childindex}}"
+							 bindtap="{{item.isHave?'storeAttrClick':''}}">{{item.attr_name}}</text>
+						</view>
+					</view>
+				</view>
+				<view style="height: 0;border-bottom: 1rpx solid #F4F4F4;margin-bottom: 23rpx"></view>
+
+				<!-- 积分商品详情隐藏购买数量 -->
+				<block wx:if="{{pageType !== 'INTEGRAL' && pageType!== 'BOOK'}}">
+					<view style="padding-bottom: 40rpx">
+						<view class="flex-row flex-y-center mb-20">
+							<view class="flex-grow-1 flex">
+								<view class="fs-28 color-333333 ns-text-bold">数量</view>
+								<view class="" wx-if="{{goods.buy_max?filters.parseInt(goods.buy_max)!=0:(goods.buy_limit?filters.parseInt(goods.buy_limit)!=0:false)}}">（限购{{goods.buy_max?goods.buy_max:goods.buy_limit}}件）</view>
+							</view>
+							<view class="flex-grow-0">
+
+								<view class="flex number-input-box ns-align-items-flex-center">
+									<!-- <view style='margin-right:0.01rem;' class="flex-grow-0 flex-x-center flex-y-center number-btn number-sub {{form.number<=1?'disabled':''}}" bindtap="numberSub">-
+                                    </view> -->
+									<view class="flex-grow-0 number-btn number-sub iconfont icon-jian {{form.number<=1?'disabled':''}}" style="margin-top: -6rpx;"
+									 bindtap="numberSub"></view>
+									<view class="">
+										<input style='padding:0;' class="flex-grow-1 number-input" value="{{form.number}}" type="number" step="1" min="1"
+										 bindblur="numberBlur" />
+									</view>
+									<view class="flex-grow-0 number-btn number-add iconfont icon-jia {{form.number>=goods.goods_num?'disabled':''}}"
+									 style="margin-top: 0rpx;" bindtap="numberAdd"></view>
+									<!-- <view class="flex-grow-0 flex-x-center flex-y-center number-btn number-add" bindtap="numberAdd">+
+                                    </view> -->
+								</view>
+							</view>
+						</view>
+					</view>
+				</block>
+				<block wx:if="{{false}}">
+					<view class="fs-28 color-333333 ns-text-bold">保障服务</view>
+					<view style="margin-top: 24rpx;">
+						<view class="flex align-center">
+							<view></view>
+							<view class="fs-24 color-333333">全面保障</view>
+						</view>
+						<view class="flex justify-between mb-20" style="padding-left: 33rpx;padding-top: 22rpx;">
+							<view class="flex">
+								<view class="iconfont icon-weixuanzhong color-FF0200 fs-30"></view>
+								<view class="fs-24 ml-10">
+									<view class="color-333333">次年电池换新</view>
+									<view class="color-999999 mt-10">容量续航问题免费换原厂电池</view>
+								</view>
+							</view>
+							<view class="fs-24 color-FF0200">¥9.90</view>
+						</view>
+						<view class="flex justify-between" style="padding-left: 33rpx;padding-top: 22rpx;">
+							<view class="flex">
+								<view class="iconfont icon-xuanzhong color-FF0200 fs-30"></view>
+								<view class="fs-24 ml-10">
+									<view class="color-333333">次年电池换新</view>
+									<view class="color-999999 mt-10">容量续航问题免费换原厂电池</view>
+								</view>
+							</view>
+							<view class="fs-24 color-FF0200">¥9.90</view>
+						</view>
+					</view>
+					<view style="margin-top: 24rpx;">
+						<view class="flex align-center">
+							<view></view>
+							<view class="fs-24 color-333333">全面保障</view>
+						</view>
+						<view class="flex justify-between mb-20" style="padding-left: 33rpx;padding-top: 22rpx;">
+							<view class="flex">
+								<view class="iconfont icon-weixuanzhong color-FF0200 fs-30"></view>
+								<view class="fs-24 ml-10">
+									<view class="color-333333">次年电池换新</view>
+									<view class="color-999999 mt-10">容量续航问题免费换原厂电池</view>
+								</view>
+							</view>
+							<view class="fs-24 color-FF0200">¥9.90</view>
+						</view>
+						<view class="flex justify-between" style="padding-left: 33rpx;padding-top: 22rpx;">
+							<view class="flex">
+								<view class="iconfont icon-weixuanzhong color-FF0200 fs-30"></view>
+								<view class="fs-24 ml-10">
+									<view class="color-333333">次年电池换新</view>
+									<view class="color-999999 mt-10">容量续航问题免费换原厂电池</view>
+								</view>
+							</view>
+							<view class="fs-24 color-FF0200">¥9.90</view>
+						</view>
+					</view>
+				</block>
+				<view class="flex flex-x-center" wx:if="{{pageType == 'cart'}}">
+					<navigator url="/pages/goods/goods?id={{goods_id}}&from={{from}}" class="edit-standard-btn mr-20">查看详情</navigator>
+					<view class="edit-standard-btn edit-standard-btn-yellow" bindtap="saveEditStandard">确认</view>
+				</view>
+				<view class="flex flex-x-center" wx:if="{{pageType == 'private'}}">
+					<view class="edit-standard-btn" bindtap="saveEditStandard">确认</view>
+				</view>
+				<view class="flex flex-x-center" wx:if="{{pageType == 'group' || !pageType || pageType == 'normal' || pageType == 'addMenu'}}">
+					<view class="edit-standard-btn edit-standard-btn-yellow" bindtap="addCart">确认</view>
+				</view>
+			</view>
+		</scroll-view>
+
+	</scroll-view>
+</view>
+<!-- 产品参数 -->
+<view class="attr-picker " style="{{__device=='device_iphone_x'?'bottom: 175rpx':''}}" wx:if="{{isParameter}}"
+ catchtouchmove="preventTouchMove" bindtap="closeParameter">
+	<view catchtap='stop' class="content-box" style="padding:32rpx 24rpx 0;border-radius:30rpx 30rpx 0px 0px;{{__device=='device_iphone_x'?'bottom: 175rpx':''}}">
+		<view class="flex-x-center fs-38 color-333333 mb-30">产品参数</view>
+		<scroll-view scroll-y="true" style="max-height: 500rpx;">
+			<view class="parameter-list flex fs-30" wx:for="{{goods.param_json}}">
+				<view class="color-999999" style="width: 246rpx;">{{item.name}}</view>
+				<view class="color-333333">{{item.value}}</view>
+			</view>
+		</scroll-view>
+		<view class="save-btn" bindtap="closeParameter">确定</view>
+	</view>
+</view>

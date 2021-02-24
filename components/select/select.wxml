@@ -1,0 +1,90 @@
+<!--components/select/select.wxml wx:if="{{isShow}}-->
+<view
+ class="selectAll"
+ catchtouchmove="stop"
+ catchtap="quxiao"
+>
+	<view class="select-content" catchtap="stop">
+		<!-- 标题开始 -->
+		<view class="select-title">{{title}}</view>
+		<!-- 标题结束 -->
+
+		<!-- 搜索框开始 -->
+		<view class="select-seach">
+			<view class="iconfont icon-sousuo icon"></view>
+			<input
+			 bindinput="inputChange"
+			 placeholder="{{inputText}}"
+			 value="{{inputValue}}"
+			/>
+		</view>
+		<!-- 搜索框结束 -->
+		<!-- 选择区域开始 -->
+		<view wx:if="{{!showNone}}" class="flex-content">
+
+			<scroll-view scroll-x="{{true}}" class="select-checked">
+				<view
+				 wx:for="{{checkArrName}}"
+				 wx:key="index"
+				 class="checked-item"
+				>{{item}}
+					<text class="iconfont icon-guanbi2" data-index="{{index}}" bindtap="del"></text>
+				</view>
+			</scroll-view>
+			<!-- 滑动区域 -->
+			<blcok wx:if="{{arrData.length == 0}}">
+				<!-- 文字提示 -->
+				<block wx:if="{{selectType == 1}}">
+					<view class="isNone" >
+						<view>抱歉，暂无用户</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="isNone" >
+						<view>抱歉，暂无该品牌 </view>
+						<view>点击确认，我们会联系供应商</view>
+						<view>尽快帮你选过来</view>
+					</view>
+				</block>
+			</blcok>
+			<block wx:else>
+				<view class="select-box">
+					<scroll-view
+					 scroll-y="{{true}}"
+					 lower-threshold="50"
+					 bindscrolltolower="more"
+					>
+						<view
+						 class="list"
+						 wx:for="{{arrData}}"
+						 wx:key="id"
+						>
+							<view class="select-left">
+								<image wx:if="{{false}}" />
+								<text class="name">{{item.nickname?item.nickname:item.name}}</text>
+							</view>
+				
+							<text data-id="{{item.id}}" data-name="{{item.nickname?item.nickname:item.name}}" class="add" catchtap = "add">添加</text>
+						</view>
+						<view class="zanwei"></view>
+					</scroll-view>
+				</view>
+			</block>
+		</view>
+		<!-- 选择区域结束 -->
+
+		<!-- 按钮开始 -->
+		<view class="bottom-box">
+			<view class="btn" catchtap="quxiao">取消</view>
+			
+			<block wx:if="{{checkArr.length > 0 || inputValue}}">
+				<view class="btn1" style="background: #616161;" catchtap="sure">确定</view>
+			</block>
+			<block wx:else>
+				<view class="btn1">确定</view>
+			</block>
+		</view>
+		<!-- 按钮结束 -->
+	</view>
+</view>
+

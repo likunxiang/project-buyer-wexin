@@ -1,0 +1,10 @@
+<navigator url="/pages/index/index" class="tohome-btn text-center align-center">
+	<view class="iconfont icon-shouye1 color-fff fs-40"></view>
+</navigator>
+<navigator url="/pages/cart/cart" class="tohome-btn text-center ns-column align-center pr" style="bottom: 304rpx;">
+	<view class="iconfont icon-gwc color-fff fs-40"></view>
+	<view class="cart-num color-fff fs-18">{{cartNum}}</view>
+</navigator>
+<navigator wx:if="{{showPic}}" url="/member/recommendMaterial/recommendMaterial?id={{showPic}}" class="tohome-btn tohome-btn-material text-center ns-column align-center pr" style="bottom: 188rpx;">
+	<view class="iconfont icon-fatusucaiku color-fff fs-50"></view>
+</navigator>

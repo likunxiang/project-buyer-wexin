@@ -1,0 +1,146 @@
+<!--pages/jdHotMenu/jdHotMenu.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page pr">
+	<!-- 筛选右侧栏 -->
+	<view class="screen-box-model" style="height: calc( 100vh - {{customBar}}px);top: {{customBar}}px;" catchtouchmove="{{true}}"
+	 wx:if="{{is_screen}}" bindtap="closeScreen">
+		<view class="screen-box" catchtap="stop">
+			<view>
+				<view class="fs-30 color-333333 ns-text-bold">价格</view>
+				<view class="flex align-center ptb-24">
+					<view class="screen-box-box">
+						<input style="height: 100%" type="text" placeholder="最低价" value="{{minPrice}}" bindblur="inputMinPrice" />
+					</view>
+					<view class=" fs-30 color-666666 ml-16 mr-16">-</view>
+					<view class="screen-box-box">
+						<input style="height: 100%" type="text" placeholder="最高价" value="{{maxPrice}}" bindblur="inputMaxPrice" />
+					</view>
+				</view>
+			</view>
+			<view class="mt-24" wx:if="{{screenList.length>0}}">
+				<view class="fs-30 color-333333 ns-text-bold">分类</view>
+				<view class="flex align-center ptb-24 ns-wrap">
+					<view class="screen-box-box mb-24 {{(index+1)%3==0?'':'mr-24'}} {{item.checked?'screen-box-box-active':''}}" style="width: 200rpx;"
+					 wx:for="{{screenList}}" wx:key='id' bindtap="changeNav" data-index="{{index}}">{{item.name}}</view>
+				</view>
+			</view>
+			<view class="screen-box-btn-box fs-30 flex">
+				<view class="screen-box-btn color-333333 mr-24" bindtap="reset">重置</view>
+				<view class="screen-box-btn color-fff" bindtap="screenBtn" style="background: linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));border: none;">确认</view>
+			</view>
+		</view>
+	</view>
+	<!-- 导航开始 -->
+	<view class="heardBanner">
+			<view class='con flex ns-justify-content-space-between ns-align-items-flex-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;padding-left:20rpx;padding-right:20rpx;">
+				<view class="  go-back flex1" style="font-size:30rpx;color:#FFFFFF;" bindtap="returnPage">
+					<text class="iconfont icon-zuojiantoubeifen;"></text>
+				</view>
+				<view class="qTitle flex1 ns-text-center " style="font-size:37rpx;color:#ffffff;">JD爆款清单</view>
+				<view class="flex1"></view>
+			</view>
+		<view class="p-24 bg-white">
+			<view class="search flex align-center ">
+				<view class="iconfont icon-sousuo flex-grow-0" style="color: #626262;opacity: 0.4;"></view>
+				<input class="fs-24 flex-grow-1" placeholder="搜索JD的爆款商品" value="{{searchValue}}" bindinput="inputSearch" style="color: #9A9A9A;margin-left: 14rpx;"></input>
+			</view>
+		</view>
+		<view wx:if="{{goodList.length > 0}}">
+			<view class="guang-nav-list flex bg-white justify-between align-center" style="padding:24rpx;border-top: 1rpx solid #E4E4E4;">
+				<view style="width: 65%;">
+					<scroll-view scroll-x="true" enable-flex="true" scroll-into-view="{{toview}}">
+						<view class="flex align-center">
+							<view style="margin-right:10rpx" class="pr ns-flex-shrink-no {{chooseIns==0?'color-333333':''}}">
+								<view class="color-333333 fs-28" catchtap="showChange1">{{moren}}
+									<text class="iconfont icon-xiangxia-copy  {{showChangeMore?'change':''}}" style="display:inline-block;transition:all 0.3s;"></text>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+				<view class="flex align-center">
+					<view class="flex ml-20 ns-align-items-flex-center color-333333" bindtap="priceSort">
+						<view>价格</view>
+						<view class="ml-10 fs-40 color-D6D6D6">
+							<text wx:if="{{priceDefault}}" class="iconfont icon-paixu"></text>
+							<text wx:else class="iconfont color-F49E3A {{priceUp?'icon-asc':'icon-shengxu'}}"></text>
+						</view>
+					</view>
+					<view class="flex ml-20 ns-align-items-flex-center color-333333" bindtap="openScreen">
+						<view style="color: #343434;">筛选</view>
+						<view class="ml-10 fs-30 color-D6D6D6">
+							<text class="iconfont icon-shaixuan"></text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="more1" wx:if="{{showChangeMore}}" catchtap="closeChange" catchtouchmove="preventTouchMove">
+		<view class="more-content" style="margin-top: calc( {{customBar }}px + 110rpx + 100rpx )" catchtap="showChange">
+			<!--  more-active -->
+			<view class="more-list {{value.checked?'more-active':''}}" bindtap="changeMoreNav" wx:for="{{catsArr}}" wx:for-item="value"
+			 wx:key="id" wx:for-index="index" data-num="{{index}}" data-id="{{value.id}}" data-index="{{index}}" data-text="{{value.name}}">{{value.name}}
+			</view>
+	
+		</view>
+	</view>
+	<block wx:if="{{goodList && goodList.length==0}}">
+		<view style="height: calc( {{customBar }}px + 110rpx );"></view>
+	</block>
+	<block wx:else>
+		<view style="height: calc( {{customBar }}px + 110rpx + 100rpx );"></view>
+	</block>
+	<!-- 导航结束 -->
+
+	<block wx:if="{{goodList && goodList.length==0}}">
+		<view class="main p-24">
+			<view style="padding-top: 48rpx;">
+				<view class="text-center">
+					<view class="fs-30" style="color: #9A9A9A;">暂时没有找到您喜欢的爆款</view>
+					<view class="mt-20 ns-text-bold" style="color: #343434;">试试以下方法找到您想要的商品</view>
+				</view>
+				<view>
+					<input class="search-goods fs-30" type="text" placeholder="填写JD的商品名称" bindblur="inputHotGoods" value="{{goodsValue}}" placeholder-style="color: #9A9A9A"></input>
+					<view class="fs-24 color-666666 text-center" style="margin-top: 18rpx;">给我36小时为您找来，并且第一时间通知您，支持比价哦～</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="main p-24" style="background: #F4F4F4;height: calc( 100vh - {{customBar }}px - 110rpx - 100rpx);">
+			<view class="flex justify-between ns-wrap">
+				<navigator url="/pages/goods/goods?id={{item.id}}" class="goods mb-20 bg-white" wx:for="{{goodList}}" wx:key="id">
+					<view style="width: 340rpx;height: 340rpx;position: relative;">
+						<image style="width: 340rpx;height: 340rpx;background: #ccc;border-radius: 20rpx;" mode="aspectFill" src="{{item.cover_pic}}"></image>
+						<view wx:if="{{item.goods_num==0}}" class="nonum-tip">
+							已抢光
+						</view>
+					</view>
+				
+					<view class="goods-msg">
+						<view class="goods-msg-title">{{item.name}}</view>
+						<view class="fs-28 flex justify-between align-center">
+							<view class="flex align-center">
+								<view class="fs-28 color-FF0200 ns-text-bold">￥
+									<text class="fs-36">{{filters.priceStr(item.price)[0]}}.</text>
+									<text>{{filters.priceStr(item.price)[1]}}</text>
+								</view>
+							</view>
+							<view class="add-cart-icon fs-26 iconfont color-fff icon-gouwuche_weixuanzhong" style="width: 40rpx;height: 40rpx;line-height: 40rpx;"
+							 catchtap="openCart" data-id="{{item.id}}" data-index="{{index}}"></view>
+				
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</view>
+	</block>
+
+	<view class="footer-box pa" wx:if="{{goodList && goodList.length==0}}">
+		<view class="footer-box-btn-pull" bindtap="recond">添加您的爆款</view>
+		<navigator open-type="navigateBack" class="footer-box-btn mt-20">返回上一级</navigator>
+	</view>
+	<slide-icon wx:if="{{goodList.length > 0}}" showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>
+</view>
+

@@ -1,0 +1,38 @@
+<!--pages//private/privateGoodsClassify/privateGoodsClassify.wxml-->
+<view class="page pr">
+	<view class="pl-20 bg-white">
+		<view class="classify flex justify-between align-center fs-28 color-2C2C2C pr-20 {{classifyList.length-1>index?'border-bottom':''}}"
+		 wx:for="{{classifyList}}" wx:key="key">
+			<view class="flex flex1" bindtap="editClassify" data-id="{{item.id}}" data-index="{{index}}">
+				<view style="width: 50rpx;">{{index + 1}}</view>
+				<view>{{item.name}}</view>
+			</view>
+			<view class="fs-20 color-9B9B9B flex" bindtap="setTop" data-id="{{item.id}}">
+				<view class="iconfont icon-zhiding1 fs-26 mr-10"></view>
+				<view class="">移至最前</view>
+			</view>
+		</view>
+	</view>
+	<!-- 商品分类 -->
+	<view class="goods-classify-model" bindtap="closeClassify" wx:if="{{is_classify}}" wx:key="id">
+		<view class="goods-classify-content" catchtap="stop">
+			<view class="flex-x-center fs-30 color-595959 ns-text-bold">添加分类</view>
+			<view class="" style="margin-top: 38rpx;height: 280rpx;">
+				<view class="border-bottom p-20">
+					<input type="text" bindblur="getCatName" value="{{catName}}" placeholder="请输入分类名称,最长10个字" maxlength="10" />
+				</view>
+			</view>
+			<view class="flex justify-between p-20" style="margin-top: 40rpx;">
+				<view wx:if="{{!showDel}}" class="btn-box btn-box-white" bindtap="closeClassify">取消</view>
+				<view wx:else class="btn-box btn-box-white" bindtap="delClassify">删除</view>
+				<view class="btn-box" bindtap="saveCat">确定</view>
+			</view>
+		</view>
+	</view>
+	<view class="footer">
+		<view class="fs-28 color-9B9B9B" style="line-height: 40rpx;margin-bottom: 40rpx;">添加商品分类，比如：生鲜、服饰、今日特卖…
+			把商品放到对应的分类下面，方便顾客购物下单哦～
+			同一款商品最多可以放在3个不同的分类下面</view>
+		<view class="footer-btn" bindtap="openClassify">添加分类</view>
+	</view>
+</view>

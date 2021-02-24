@@ -1,0 +1,55 @@
+/* pages//private/privateDistribution/privateDistribution.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	min-height: 100%;
+	padding: 20rpx;
+}
+.footer {
+	position: absolute;
+	bottom: 50rpx;
+	left: 40rpx;
+	right: 40rpx;
+	height: 78rpx;
+}
+.btn-box {
+	width: 325rpx;
+	height: 78rpx;
+	background: #F49E3A;
+	line-height: 78rpx;
+	color: #fff;
+	text-align: center;
+	border: 2rpx solid #F49E3A;
+}
+.btn-box-white {
+	background: #fff;
+	border: 2rpx solid #FF9100;
+	color: #FF9100;
+}
+.goods-classify-model {
+	position: absolute;
+	bottom: 0rpx;
+	left: 0rpx;
+	right: 0rpx;
+	top: 0rpx;
+	z-index: 9;
+	background-color: rgba(0,0,0,.35);
+}
+.goods-classify-content {
+	background-color: #fff;
+	width: 508rpx;
+	height: 252rpx;
+	border-radius: 8rpx;
+	padding: 0 8rpx;
+	box-shadow:0px 0px 10rpx 0px rgba(0,0,0,0.5);
+}
+.goods-classify-content-top {
+	padding: 54rpx 34rpx;
+	text-align: center;
+}
+.goods-classify-content-btn {
+	padding: 30rpx 0;
+	text-align: center;
+}

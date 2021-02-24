@@ -1,0 +1,36 @@
+<!--pages/openshop2/openshop2.wxml-->
+<view class="page pr">
+	<view class="fs-28 color-595959 nowrap" style="padding-bottom: 20rpx;border-bottom: 1rpx solid #D6D6D6;line-height: 47rpx;">
+		<rich-text nodes="{{q_desc}}"></rich-text>
+	</view>
+	<view style="padding-top: 28rpx;" wx:for="{{q_list}}" wx:key="id" wx:for-item="question" wx:for-index="qIndex">
+		<view class="fs-28 ns-text-bold color-595959 mb-20">{{qIndex + 1}}.{{question.title}}</view>
+		<view class="fs-26" wx:for="{{question.op_list}}" wx:key="key" wx:for-item="questionList">
+			<view class="mb-20 ns ns-text-bold" wx:if="{{questionList.name}}">{{questionList.name}}</view>
+			<view class="flex fs-26 ns-wrap" wx:if="{{questionList.input_type==1}}">
+				<view wx:for="{{questionList.txt_list}}" wx:for-item="value1" wx:key="key" class="mt-20 mb-20">
+					<view wx:for="{{value1}}" wx:for-item="value" wx:for-index="key" data-oid="{{questionList.oid}}"
+					 data-qid="{{question.qid}}"
+					 data-radioIndex="{{qIndex}}" bindtap="changeExp" data-text="{{key}}" data-index="{{key}}" class="checkbox mr-10 mb-10 flex ns-align-items-flex-center">
+						<view style="width: 40rpx;height: 40rpx;margin-right: 12rpx;color: #252E3E;" class="iconfont fs-40 {{question.ins==key?'icon-xuanzhong':'icon-weixuanzhong'}}"></view>
+						<view >{{value}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="flex fs-26" wx:if="{{questionList.input_type==2}}">
+				<checkbox-group class="flex ns-align-content-center ns-wrap" bindchange="checkboxChange" data-oid="{{questionList.oid}}"
+				 data-qid="{{question.qid}}" >
+				  <label class="checkbox mr-10 mb-10 flex ns-align-items-flex-center" wx:for="{{questionList.txt_list}}" wx:for-item="value" wx:key="key" >
+				    <checkbox class="cb " wx:for="{{value}}" wx:for-index="key" value="{{key}}" wx:key="key" />
+					<view wx:for="{{value}}" >{{item}}</view>
+				  </label>
+				</checkbox-group>
+			</view>
+			<view wx:if="{{questionList.input_type==3}}" class="textarea-box pr">
+				<textarea style="width: 100%;height: 100%;" value="{{expValue}}" bindinput="expText" placeholder="之前有过哪些和开店、销售相关的经验？" maxlength="60"></textarea>
+				<view class="fs-24 color-B0B0B0 pa" style="right: 20rpx;bottom: 15rpx;">{{expValue.length || 0}}/{{questionList.max_input}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="next-btn" bindtap="savaData">下一步</view>
+</view>

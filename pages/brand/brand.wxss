@@ -1,0 +1,232 @@
+@import "/components/goods/specifications_model.wxss";
+@import "/components/share/share.wxss";
+@import "../../components/toTop/toTop.wxss";
+page{color: #595959;background: #F4F4F4;}
+.page {
+	min-height: 100%;
+}
+/* 头部 */
+.nav {
+	color: #fff;
+	position: relative;
+}
+.activity-header {
+	width: 100%;
+	padding: 0 24rpx 45rpx;
+}
+
+.con {
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	z-index: 999;
+}
+
+
+
+.backBtn {
+	font-size: 36rpx;
+	height: 100%;
+	color: #FFFFFF;
+	
+}
+.icon-box {
+	background: rgba(0,0,0,.5);
+	border-radius: 50%;
+	height: 100%;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+.tuijian-box {
+	padding: 32rpx 24rpx;
+	padding-right: 0;
+	border-radius: 30rpx 30rpx 0 0;
+	background: #fff;
+	overflow: hidden;
+
+}
+.ms-price-tips {
+	width: 64rpx;
+	height: 25rpx;
+	line-height: 25rpx;
+	text-align: center;
+	border-radius: 0 12rpx 0 12rpx;
+	font-size: 16rpx;
+	color: #fff;
+	background:linear-gradient(-90deg,rgba(255,55,80,1),rgba(255,112,6,1));
+	margin-right: 16rpx;
+}
+.miaosha-goods image {
+	width: 200rpx;
+	height: 200rpx;
+	display: block;
+	margin-bottom: 20rpx;
+}
+
+.miaosha-goods .text-more-1 {
+	color: #595959;
+	font-size: 12px;
+	height: 1.4em;
+	line-height: 1.4;
+	margin-bottom: 12rpx;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+.miaosha-goods .text-more-2 {
+	height: 2.8em;
+	line-height: 1.4;
+	margin-bottom: 18rpx;
+}
+.guang-nav-list {
+	width: 100%;
+	overflow: hidden;
+	color: #999999;
+	background: #fff;
+	font-size: 30rpx;
+}
+.nav-tab {
+	padding: 25rpx 0rpx;
+	font-size: 30rpx;
+	margin-right: 47rpx;
+}
+
+.nav-active {
+	width:44rpx;
+	height:8rpx;
+	position: absolute;
+	bottom: 0rpx;
+	left: 50%;
+	margin-left: -22rpx;
+	background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));
+	border-radius:4rpx;
+}
+.shopTab {
+	padding: 4rpx 8rpx;
+	text-align: center;
+	color: #fff;
+	left: 15rpx;
+	bottom: 15rpx;
+	background: #C10000;
+	font-size: 20rpx;
+	border-radius: 4rpx;
+}
+
+.add-cart-icon {
+	width: 30rpx;
+	height: 30rpx;
+	line-height: 30rpx;
+	text-align: center;
+	background-color: #FFC330;
+	border-radius: 50%;
+}
+.header{width: 750rpx;height: 277rpx;background: url('https://qinpu-1258528632.cos.ap-chengdu.myqcloud.com/qinpuImage/shopBg.png') no-repeat;background-size: 100% 100%;font-size: 19px;font-weight: 600;color: #fff;letter-spacing:12rpx;position: relative;}
+.header .title{position: relative;z-index: 2;transform: translateY(-10rpx)}
+.header .line{width: 203rpx;height: 25rpx;background: rgba(193,0,0,0.7);position: absolute;top: 143rpx;transform: translateX(-4rpx)}
+.header .share{width: 50rpx;height: 50rpx;right: 25rpx;top: 25rpx;opacity: 0.4}
+/* 内容 */
+.content{padding: 0 25rpx;padding-bottom: 60rpx;}
+.content image{width: 200rpx;height: 200rpx;display: block}
+.content .shop{background: #fff;margin-top: 25rpx;}
+.shop .tips{padding:4rpx 8rpx;font-size: 10px;background: #c10000;border-radius: 3rpx;left: 15rpx;bottom: 15rpx;color: #fff;display: inline-block;position: absolute;}
+.rightContent{padding: 20rpx 22rpx 15rpx 31rpx;height: 200rpx;font-size: 13px;width: 500rpx;}
+.rightContent .shopTitle{color: #595959;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 447rpx;}
+.rightContent .prize{color: #d6d6d6;margin-top: 12rpx;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 447rpx;}
+.rightContent .red{color: #C10000;margin-right: 30rpx;}
+.bottom{position: absolute;bottom: 16rpx;right: 25rpx;letter-spacing:4rpx;text-align: center;}
+.bottom > view{display: inline-block;}
+.bottom .shareBtn{padding:8rpx 30rpx;border: 1px solid #c10000;font-size: 11px;font-weight: 600;color: #c10000;margin-right: 20rpx;}
+.bottom .buyBtn{padding:8rpx 30rpx;border: 1px solid #c10000;font-size: 11px;background: #c10000;color: #fff;}
+/*下拉触底*/
+.pullBottom{text-align: center;font-size: 24rpx;color: #595959;padding: 50rpx 0;}
+.pullBottom navigator{margin-top: 6rpx;color: #C10000;border-bottom: 1px solid #C10000;display: inline-block;padding: 6rpx 0;}
+.nav-item {
+  display: inline-block;
+  padding: 6rpx 20rpx;
+  font-size: 14px;
+  border-radius: 28rpx;
+}
+.nav-item.active {
+  background-color: #c10000;
+  color: #fff;
+}
+.banner {
+  width: 100%;
+  height: 276rpx;
+}
+.scroll-view {
+  width: 100%;
+  height:100rpx;
+  white-space: nowrap
+}
+.brand-box {
+  width: 115rpx;
+  height: 110rpx;
+  position: absolute;
+  bottom: 40rpx;
+  left: 15rpx;
+  padding: 10rpx;
+}
+.brand-tip {
+  width: 95rpx;
+  height: 90rpx;
+}
+.share-box {
+  position: absolute;
+  top: 25rpx;
+  right: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+}
+.share-box::after {
+  border: 0;
+}
+.share-img {
+  width: 50rpx;
+  height: 50rpx;
+}
+button {
+  padding: 0;
+  line-height: 1;
+  font-size: 11px;
+  color: #c10000;
+  display: inline-block;
+}
+button::after {
+  border: 0;
+  
+
+}
+.button-hover {
+  background-color: #fff;
+}
+
+.goods-list {
+	padding: 20rpx 28rpx 0;
+}
+.goods {
+	width: 340rpx;
+	background: #fff;
+	border-radius: 20rpx;
+	overflow: hidden;
+}
+.goods-msg {
+	padding: 18rpx 10rpx;
+	margin-top: -4rpx;
+}
+.goods-msg-title {
+	font-size: 24rpx;
+	color: #595959;
+	margin-bottom: 8rpx;
+	overflow: hidden;text-overflow:ellipsis;white-space:nowrap;
+}

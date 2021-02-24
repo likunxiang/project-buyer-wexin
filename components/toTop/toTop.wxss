@@ -1,0 +1,11 @@
+.to-top-btn {
+	position: fixed;
+	bottom: 200rpx;
+	right: 40rpx;
+	border-radius: 50%;
+	width: 70rpx;
+	height: 70rpx;
+	background: rgba(61, 61, 61, 0.5);
+	z-index: 10;
+	padding: 6rpx 0;
+}

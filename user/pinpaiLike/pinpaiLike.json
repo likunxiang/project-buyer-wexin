@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "Select": "../../components/select/select"
+    },
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+}

@@ -1,0 +1,309 @@
+<!--order.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page">
+	<include src="/components/common/common" />
+	<include src="/components/header/header" />
+	<!-- 导航栏开始 -->
+	<!-- <view class="myheader" style="padding-top:{{statusBar + 'px'}}">
+		<view class="header-content">
+			<view class="goback">5</view>
+			<view class="header-input">
+				<text class="input-before"></text>
+				<input/>
+				<text class="input-after"></text>
+			</view>
+		</view>
+	</view> -->
+	<!-- 导航栏结束 -->
+	<view class="body after-navber">
+		<view class="myheader" style="height:calc( 77rpx + {{customBar + 'px'}})">
+			<view class="guding">
+				<view style="height:{{ customBar + 'px'}};padding-top:{{statusBar + 'px'}}" class="header-content">
+					<view bindtap="goback" class="goback iconfont icon-zuojiantoubeifen"></view>
+					<view class="header-input" style="height:{{ custom.height + 'px' }};border-radius:{{ custom.height/2 + 'px'}};">
+						<text class="input-before iconfont icon-sousuo"></text>
+						<input placeholder="搜索我的订单" value="{{keyword}}" bindinput="inputChange" bindblur="inputBlur" />
+						<text bindtap="deleteInput" wx:if="{{ keyword!='' }}" class="input-after iconfont icon-guanbi"></text>
+					</view>
+				</view>
+
+				<!-- <navigator class="return-index-btn" open-type="redirect" wx:if="{{show_index}}" url="/pages/index/index">
+            <image src="{{__wxapp_img.nav.index.url}}" style="width: 50rpx;height: 50rpx"></image>
+        </navigator> -->
+
+				<view class="flex-row tab-bar justify-between ">
+
+					<view bindtap='changeNav' data-status="-1" class="nav-item pr {{status==-1?'active':''}}">
+						<view>全部订单</view>
+						<view class="under-line" wx:if="{{status==-1?'active':''}}"></view>
+					</view>
+
+					<view bindtap='changeNav' data-status="0" class="nav-item pr {{status==0?'active':''}}">
+						<view>待付款</view>
+						<view class="under-line" wx:if="{{status==0?'active':''}}"></view>
+						<view class="num-box" wx:if="{{orderAll.statistics.is_pay>0}}">{{orderAll.statistics.is_pay}}</view>
+					</view>
+
+					<view bindtap='changeNav' data-status="1" class="nav-item pr {{status==1?'active':''}}">
+						<view>待发货</view>
+						<view class="under-line" wx:if="{{status==1?'active':''}}"></view>
+						<view class="num-box" wx:if="{{orderAll.statistics.is_send>0}}">{{orderAll.statistics.is_send}}</view>
+					</view>
+
+					<view bindtap='changeNav' data-status="2" class="nav-item pr {{status==2?'active':''}}">
+						<view>待收货</view>
+						<view class="under-line" wx:if="{{status==2?'active':''}}"></view>
+						<view class="num-box" wx:if="{{orderAll.statistics.to_be_received>0}}">{{orderAll.statistics.to_be_received}}</view>
+					</view>
+
+					<view bindtap='changeNav' data-status="3" class="nav-item pr {{status==3?'active':''}}">
+						<view>已完成</view>
+						<view class="under-line" wx:if="{{status==3?'active':''}}"></view>
+						<view class="num-box" wx:if="{{orderAll.statistics.is_confirm>0}}">{{orderAll.statistics.is_confirm}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="order-list pr plr-24">
+			<!-- 取消遮罩层 -->
+			<view class="cancel-zhezhao" style="height: {{y}}px;" catchtouchmove="{{true}}" wx:if="{{isCancelOrder}}">
+				<view class="cancel-content">
+					<view class="mb-10 flex-x-center">取消订单</view>
+					<view class="mt-30 fs-28 color-595959">
+						<view class="mb-20">请选择取消订单的原因（必填）：</view>
+						<view class="flex ns-align-items-flex-center mb-20" wx:for="{{cancelCauseList}}" wx:key="key" wx:for-index="key"
+						 data-index="{{key}}" data-text="{{value}}" wx:for-item="value" bindtap="chooseCause">
+							<image style="width: 27rpx;height: 27rpx;" mode="widthFix" src="{{key==cancelIns?'image/icon-choose.png':'image/icon-choose-no.png'}}"></image>
+							<view class="ml-20">{{value}}</view>
+						</view>
+					</view>
+					<view class="fs-28 color-8D8D8D" style="padding-top: 16rpx;">注：订单一旦取消，无法恢复</view>
+					<view class="cancel-btn-content flex ns-justify-content-space-between">
+						<view class="cancel-btn bg-FACD9D" bindtap="cancelCancelOrder">再想想</view>
+						<view class="cancel-btn" bindtap="cancelOrder">确认取消</view>
+					</view>
+				</view>
+			</view>
+			<!-- 提醒发货 遮罩层-->
+			<view class="cancel-zhezhao flex-x-center flex-y-center color-2C2C2C" style="height: {{y}}px;" catchtouchmove="{{true}}"
+			 wx:if="{{isRemind}}" bindtap="closeRemind">
+				<view class="remind-content fs-28">
+					<view class="flex-x-center ns-text-bold">正在为您加急发货</view>
+					<view class="mt-20 ">
+						<view class="flex-x-center">开启发货提醒</view>
+						<view class="flex-x-center">第一时间收到物流发货消息</view>
+					</view>
+					<view class="remind-btn" bindtap="remindBtn">开启发货提醒</view>
+				</view>
+			</view>
+			<!-- 提货码 遮罩层-->
+			<view class="cancel-zhezhao flex-x-center flex-y-center color-2C2C2C " style="height: {{y}}px;" catchtouchmove="{{true}}"
+			 wx:if="{{is_code}}">
+				<view class="pick-code-content fs-28 pr">
+					<view class="pick-header">
+						<view>提货码</view>
+						<view style="margin-top: 12rpx;">{{pickName}}</view>
+					</view>
+					<view class="pick-main ">
+						<view class="flex-x-center fs-40 color-4A4A4A">编号-{{codeNo}}</view>
+						<view class="code-box">
+							<image style="width: 300rpx;height: 300rpx;" src="{{qrcode_pic}}"></image>
+						</view>
+						<view class="fs-30 color-9B9B9B mt-10 flex-x-center">请出示提货码后提货</view>
+					</view>
+					<view class="pick-close flex-x-center">
+						<view class="iconfont icon-guanbi fs-50 color-fff" bindtap="closePickCode"></view>
+					</view>
+				</view>
+
+			</view>
+			<!-- 订单部分 -->
+			<view wx:if="{{order_list.length>0}}" wx:for="{{order_list}}" wx:for-item="order" wx:for-index="orderIndex" wx:key="key">
+				<!-- 待付款 样式-->
+				<view class="order-list-no-pay" wx:if="{{order.is_pay=='0'}}">
+					<view class="order-list-no-pay-header flex ns-justify-content-space-between">
+						<view class="fs-24 color-595959">{{order.addtime}}</view>
+						<view class="fs-24 color-FF3F19" wx:if="{{order.is_pay=='0' && order.is_cancel=='0'}}">等待付款</view>
+						<view class="fs-24 color-FF3F19" wx:if="{{order.is_cancel=='1'}}">已取消</view>
+					</view>
+					<navigator url="/pages/order-detail/order-detail?order_id={{order.order_id}}&status=1" class="order-list-no-pay-body"
+					 wx:for="{{order.pack_list}}" wx:for-item="packList" wx:key="order_id">
+						<view class="flex mb-20" wx:for="{{packList.list}}" wx:for-item="goodsList" wx:key="goods_id">
+							<image class="ns-flex-shrink-no" style="width: 200rpx;height: 200rpx;border-radius: 14rpx;" mode="aspectFill"
+							 src="{{goodsList.goods_pic}}"></image>
+							<view style="padding-left: 19rpx;">
+								<view class="flex1 flex ns-justify-content-space-between" >
+									<view style="width: 300rpx;">
+										<view class="ns-text-limit2 fs-30 color-333333">{{goodsList.goods_name}}</view>
+										<view class="fs-24 color-999999 flex ns-wrap " style="margin-top: 16rpx;">
+											<view class="mr-10 ns-text-limit" wx:for="{{goodsList.attr_list}}" wx:for-item="attr" wx:key="key">
+												{{attr.attr_group_name}}: {{attr.attr_name}}
+											</view>
+										</view>
+									</view>
+									<view class="ns-text-right">
+										<view class="price fs-20 color-333333 text-bold">¥
+											<text class="fs-30">{{filters.priceStr(goodsList.price)[0]}}.</text>
+											<text>{{filters.priceStr(goodsList.price)[1]}}</text>
+										</view>
+										<view style="font-size: 24rpx;color: #999999;margin-top: 5rpx;">x {{goodsList.num}}</view>
+										<!-- <block wx:if='{{goodsList.zt_status}}'>
+								 			<view class="fs-24 color-489A19" wx:if="{{goodsList.zt_status && goodsList.zt_status==1}}">进行中</view>
+								 			<view class="fs-24 color-F49E3A" wx:else>团购失败</view>
+								 		</block> -->
+										<!-- <block wx:else>
+								 			<view class="fs-24 {{goodsList.status==7?'color-489A19':'color-F49E3A'}}">{{goodsList.status_text}}</view>
+								 		</block> -->
+									</view>
+								</view>
+							</view>
+						</view>
+					</navigator>
+					<!-- <view class="order-list-no-pay-footer flex ns-justify-content-space-between">
+						<view></view>
+						<view>
+							<view class="fs-24 color-333333">共 {{order.detail_count}} 款商品 应付总额
+								<text class="fs-24">¥ <text>{{filters.priceStr(order.total_price)[0]}}.</text>
+									<text>{{filters.priceStr(order.total_price)[1]}}</text>
+								</text>
+							</view>
+						</view>
+					</view> -->
+					<view class="fs-24 color-333333 flex justify-end plr-24" style="padding-bottom: 33rpx;">
+						<view>
+							<text>总额：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.all_price)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.all_price)[1]}}</text></text>
+						</view>
+						<view style="margin-left: 46rpx;">
+							<text>优惠：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.ysb)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.ysb)[1]}}</text></text>
+						</view>
+						<view style="margin-left: 47rpx;">
+							<text>实付：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.total_price)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.total_price)[1]}}</text></text>
+						</view>
+					</view>
+					<view class="order-list-no-pay-btn flex ns-row-reverse">
+						<view class="order-list-btn order-list-btn-yellow" bindtap="orderPay" wx:if="{{order.is_pay=='0' && order.is_cancel=='0'}}"
+						 data-id="{{order.order_id}}" data-index='{{orderIndex}}'>去支付
+						</view>
+						<view class="order-list-btn" wx:if="{{order.is_pay=='0' && order.is_cancel=='0'}}" data-id="{{order.order_id}}"
+						 bindtap="orderRevoke">取消订单
+						</view>
+						<!-- <view class="pt-20 fs-28 color-489A19" wx:if="{{true}}">团购失败，等待退款</view> -->
+					</view>
+				</view>
+
+				<!-- 已付款 样式 -->
+				<view class="order-list-pay" wx:if="{{order.is_pay=='1'}}">
+					<view class="order-list-no-pay-header">
+						<view class="fs-24 color-595959">{{order.addtime}}</view>
+					</view>
+
+					<view class="order-list-pay-body" wx:for="{{order.pack_list}}" wx:for-item="packList" wx:key="order_id">
+						<!-- <view class="flex ns-justify-content-space-between" style="margin-bottom: 15rpx;" wx:if="{{packList.express && packList.express != 'zt_order'}}">
+							<view class="fs-24 color-595959 ns-text-bold" wx:if="{{!packList.express}}">出库中</view>
+							<view class="fs-24 color-595959 ns-text-bold ns-text-limit" style="width: 600rpx;">物流单号：{{packList.express_no}}</view>
+							<view class="fs-24 color-F49E3A">{{packList.status_text}}</view>
+						</view> -->
+						<navigator url="{{status==4?'/pages/order-refund-detail/order-refund-detail?id='+goodsList.order_refund_id:'/pages/order-detail/order-detail?order_id='+order.order_id+'&status='+pack_list.status}}"
+						 class="flex mb-20 " wx:for="{{packList.list}}" wx:for-item="goodsList" wx:key="goods_id">
+							<image class="ns-flex-shrink-no" style="width: 200rpx;height: 200rpx;border-radius: 14rpx;" mode="aspectFill"
+							 src="{{goodsList.goods_pic}}"></image>
+							<view class="flex1 flex ns-justify-content-space-between" style="margin-left: 20rpx;">
+								<view style="width: 300rpx;">
+									<view class="ns-text-limit2 fs-30 color-333333">{{goodsList.goods_name}}</view>
+									<view class="fs-24 color-999999 flex ns-wrap " style="margin-top: 10rpx;">
+										<view class="mr-10 ns-text-limit" wx:for="{{goodsList.attr_list}}" wx:for-item="attr" wx:key="key">
+											{{attr.attr_group_name}}: {{attr.attr_name}}
+										</view>
+									</view>
+								</view>
+								<view class="ns-text-right">
+									<view class="price fs-20 color-333333 text-bold">¥
+										<text class="fs-30">{{filters.priceStr(goodsList.total_price)[0]}}.</text>
+										<text>{{filters.priceStr(goodsList.total_price)[1]}}</text>
+									</view>
+									<view style="font-size: 24rpx;color: #999999;margin-top: 5rpx;">x {{goodsList.num}}</view>
+									<!-- <block wx:if='{{goodsList.zt_status}}'>
+										<view class="fs-24 color-489A19" wx:if="{{goodsList.zt_status && goodsList.zt_status==1}}">进行中</view>
+										<view class="fs-24 color-F49E3A" wx:else>团购失败</view>
+									</block>
+									<block wx:else>
+										<view class="fs-24 {{goodsList.status==7?'color-489A19':'color-F49E3A'}}">{{goodsList.status_text}}</view>
+									</block> -->
+
+									<!-- <navigator class="order-list-btn" style="margin-left: 0;" wx:if="{{goodsList.status==1}}" url="/pages/order-refund/order-refund?id={{goodsList.order_detail_id}}&status=3">申请退款
+									</navigator>
+									<navigator class="order-list-btn" style="margin-left: 0;" wx:if="{{goodsList.status==2}}" url="/pages/order-refund/order-refund?id={{goodsList.order_detail_id}}&status=1">申请售后
+									</navigator>
+									<navigator class="order-list-btn" style="margin-left: 0;" wx:if="{{goodsList.status==3}}" url="/pages/order-refund/order-refund?id={{goodsList.order_detail_id}}&status=4">申请退货
+									</navigator> -->
+								</view>
+							</view>
+						</navigator>
+						
+						<view class="flex ns-row-reverse">
+							<view class="order-list-btn" wx:if="{{!packList.express && packList.status==1}}" bindtap="openRemind" data-id="{{order.order_no}}"
+							 data-index='{{orderIndex}}'>提醒发货
+							</view>
+							<view wx:if="{{packList.express && (packList.status==2 || packList.status==3) && packList.express != 'zt_order'}}">
+								<navigator class="order-list-btn" url="/pages/express-detail/express-detail?id={{packList.order_detail_id}}">查看物流</navigator>
+							</view>
+							<view class="order-list-btn" wx:if="{{packList.express && packList.status==2}}" bindtap="orderConfirm" data-id="{{packList.order_detail_id}}">确认收货
+							</view>
+							<view class="order-list-btn order-list-btn-yellow" wx:if="{{packList.express && packList.is_send==1 && packList.express == 'zt_order'}}"
+							 bindtap="openPickCode" data-id="{{packList.order_id}}">
+								<view>提货码</view>
+							</view>
+							<view class="order-list-btn" wx:if="{{packList.status==3}}">
+								<navigator url="/pages/guanyiguan/guanyiguan">逛一逛</navigator>
+							</view>
+						</view>
+					</view>
+					<!-- <view class="order-list-pay-footer flex ns-justify-content-space-between">
+						<view></view>
+						<view>
+							<view class="fs-20">共 {{order.detail_count}} 款商品 应付总额
+								<text class="color-C10000">¥ {{order.total_price}}</text>
+							</view>
+						</view>
+					</view> -->
+					<view class="fs-24 color-333333 flex justify-end plr-24" style="padding-bottom: 33rpx;">
+						<view>
+							<text>总额：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.all_price)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.all_price)[1]}}</text></text>
+						</view>
+						<view style="margin-left: 46rpx;">
+							<text>优惠：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.ysb)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.ysb)[1]}}</text></text>
+						</view>
+						<view style="margin-left: 47rpx;">
+							<text>实付：</text>
+							<text class="fs-20">¥ <text class="fs-30 ns-text-bold">{{filters.priceStr(order.total_price)[0]}}.</text>
+									<text class="ns-text-bold">{{filters.priceStr(order.total_price)[1]}}</text></text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{order_list==0}}" class="flex flex-x-center">
+				<view style="padding-top: 108rpx;">
+					<view class="empty-order-icon text-center marginAuto ">
+						<view class="iconfont icon-icon color-fff" style="opacity: 0.5;font-size: 180rpx;"></view>
+					</view>
+					<view class="fs-30 color-999999" style="margin-top: 49rpx;">空空如也，这里什么也没有</view>
+					<navigator url="/pages/index/index" open-type="redirect" class="to-home">马上去购物
+					</navigator>
+				</view>
+
+			</view>
+		</view>
+
+	</view>
+	<include src="/components/footer/footer" />
+</view>

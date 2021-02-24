@@ -1,0 +1,133 @@
+.managerBox {
+	width: 750rpx;
+	height: 2355rpx;
+	background-size: 750rpx 2355rpx;
+	background-repeat: no-repeat;
+}
+
+.privilege {
+	position: absolute;
+	bottom: 795rpx;
+	height: 454rpx;
+	width: 100%;
+	padding: 0 24rpx;
+	padding-left: 157rpx;
+}
+
+.privilege-main {
+	width: 569rpx;
+	height: 122rpx;
+	box-shadow: 0px 8rpx 16rpx 0px rgba(151, 137, 116, 0.39);
+	border-radius: 12rpx;
+	padding: 21rpx 24rpx 0rpx;
+}
+
+.con {
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	padding: 0 24rpx;
+	position: fixed;
+}
+
+.progress-box {
+	position: absolute;
+	bottom: 870rpx;
+	padding: 0 56rpx;
+	width: 100%;
+}
+
+.backBtn {
+	font-size: 36rpx;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	max-width: 100%;
+	color: #FFFFFF;
+	opacity: 0.5;
+}
+
+.tutor-pic-box {
+	width: 270rpx;
+	height: 270rpx;
+	background: #fff;
+	border-radius: 12rpx;
+}
+
+.wx-box {
+	width: 434rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	background: #C51F29;
+	border-radius: 40rpx;
+	padding: 0 32rpx;
+	color: #FBE7C9;
+	font-size: 30rpx;
+}
+
+/*保存二维码 */
+.saveCode {
+	display: inline-block;
+	width: 241rpx;
+	height: 70rpx;
+	background: #FE5B2A;
+	border-radius: 35px;
+	line-height: 70rpx;
+	color: #FCE8C9;
+	font-size: 30rpx;
+	text-align: center;
+	margin: auto;
+
+}
+
+.qq-flex {
+	display: flex;
+	align-items: center;
+	padding: 0 58rpx
+}
+
+.rel {
+	position: relative;
+
+}
+
+.no_img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200rpx;
+	height: 200rpx;
+	border-radius: 12rpx;
+	opacity: 0.1;
+
+}
+
+.zindex {
+	position: relative;
+	z-index: 4;
+}
+.user-msg-box {
+	position: absolute;
+	bottom: 128rpx;
+	width: 100%;
+}
+.btn-box {
+	position: fixed;
+	bottom: 0rpx;
+	width: 750rpx;
+	height: 140rpx;
+	background: #CB292F;
+	box-shadow: -1rpx -6rpx 12rpx 0px rgba(94, 35, 37, 0.38);
+	z-index: 10;
+}
+.shopBtn-empty {
+	width: 702rpx;
+	height: 80rpx;
+	background: #FD5B29;
+	border-radius: 40rpx;
+	font-size: 34rpx;
+	color: #FBE7C9;
+	font-weight: bold;
+}

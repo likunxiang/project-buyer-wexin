@@ -1,0 +1,76 @@
+<!--pages/paySucceed/paySucceed.wxml-->
+<!--pages/paySucceed/paySucceed.wxml-->
+<view class="pr">
+	<image style="width: 750rpx;height: 1334rpx;position: absolute;top: 0;left: 0;z-index: -1;" mode="aspectFill" src="{{bg_img}}"></image>
+	<view class='nav pr'>
+		<!-- 头部内容 -->
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack" style="position: fixed;">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view></view>
+			<view></view>
+		</view>
+		<view class="user-msg-box" style="margin-top: 40rpx;">
+			<view class="user-msg-box flex-x-center mt-30">
+				<view class="iconfont icon-xuanzhong color-fff" style="font-size: 60rpx;"></view>
+				<view style="font-size: 50rpx;font-weight: bold;margin-left: 16rpx;">支付成功</view>
+			</view>
+			<view class="flex-x-center" style="font-size: 30rpx;font-weight: bold; margin-top:47rpx;">您的专属导购【{{nickname}}】</view>
+			<view class="tutor-pic-box">
+				<image wx:if="{{wechat_qr_pic}}" style="width: 200rpx;height: 200rpx;border-radius: 12rpx;" mode="aspectFill" src="{{wechat_qr_pic}}"></image>
+				<view wx:else class="fs-30 rel" wx:else style="color:#333; line-height:200rpx; text-align:center;">
+					<view class="zindex">【暂无二维码】</view>
+					<image class="no_img" src="{{code_img}}"></image>
+				</view>
+			</view>
+			<!-- <view class="fs-30 color-000000 ns-text-bold text-center">您的专属导购【{{nickname}}】</view> -->
+			<view wx:if="{{wechat_qr_pic}}" style="width:100%; text-align:center; margin-bottom:30rpx;" bindtap="saveImg">
+				<view class="saveCode">保存二维码</view>
+			</view>
+			<view wx:else style="width:100%; text-align:center; margin-bottom:30rpx; ">
+				<view class="saveCode" style="color:#999; background-color:#f4f4f4;">保存二维码</view>
+			</view>
+			<view class="qq-flex">
+
+				<view class="tutor-pic-box" style="width:94rpx;height:94rpx;border-radius: 50%;align-items: center; margin:0; margin-right:23rpx;">
+					<image style="width: 94rpx;height: 94rpx;border-radius: 50%;border: 4rpx solid #FFFFFF;  " mode="aspectFill" src="{{avatar_url}}"></image>
+				</view>
+				<view class="wx-box flex justify-between align-center align-items: center;">
+					<text class="fs-24 color-000000" style="color:##9A9A9A;">微信号：<text class="ns-text-bold">{{wechat_name}}</text></text>
+					<text class="fs-24 color-999999" bindtap='copy' data-text="{{wechat_name}}">复制</text>
+				</view>
+
+			</view>
+
+		</view>
+
+	</view>
+	<view class="text-center fs-24 color-fff" style="padding:0 0 30rpx 0;line-height:35rpx;width: 521rpx;margin: auto;margin-top:20rpx;">
+		<view>“请添加您的成长导师微信，以便进入小亲训练营，为您在店铺经营的路上提供帮助，协助您成长，往更高的方向发展”</view>
+	</view>
+	<!-- <view class="welfare-box">
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">选货</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">自己找货太麻烦？</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">帮你找货，想要啥呢，专属导购为你服务</view>
+			</view>
+		</view>
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">比价</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">买贵了真难受呀！</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">帮你比价，货比三家，专属导购为你服务</view>
+			</view>
+		</view>
+		<view class="welfare-list flex align-center">
+			<view class="welfare-sort fs-36">盯单</view>
+			<view class="ml-24">
+				<view class="fs-30 ns-text-bold" style="color: #FF8400;">东西太多忘了验收？</view>
+				<view class="fs-24 mt-15" style="color: #FF8400;">帮你跟进订单状态，专属导购为你服务</view>
+			</view>
+		</view>
+	</view> -->
+	<!-- <view class="fs-30 color-333333 text-center" style="height:20rpx;"></view> -->
+</view>

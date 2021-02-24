@@ -1,0 +1,10 @@
+@import '/components/goods/goods_refund.wxss';
+page {
+	height: 100%;
+}
+.page {
+	height: 100%;
+}
+.body {
+	height: 100%;
+}

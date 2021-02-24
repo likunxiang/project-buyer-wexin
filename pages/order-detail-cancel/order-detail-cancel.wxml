@@ -1,0 +1,23 @@
+<!--pages/order-detail-cancel/order-detail-cancel.wxml-->
+<view class="order-detail-cancel">
+	<view class="cancel-content">
+		<view class="mt-30 fs-28 color-595959">
+			<view class="mb-20">请选择取消订单的原因（必填）：</view>
+			<view class="flex ns-align-items-flex-center mb-20" wx:for="{{cancelCauseList}}" wx:key="id" wx:for-index="index" data-index="{{index}}" bindtap="chooseCause">
+				<image style="width: 27rpx;height: 27rpx;" mode="widthFix" src="{{index==cancelIns?'image/icon-choose.png':'image/icon-choose-no.png'}}"></image>
+				<view class="ml-20">{{item.cause}}</view>
+			</view>
+		</view>
+		<view class="fs-28 color-8D8D8D" style="padding-top: 16rpx;">注：订单一旦取消，无法恢复</view>
+		
+	</view>
+	<view class="tips-box fs-28 color-8D8D8D">
+		<view>·  提交申请后，系统会在48小时内审核完毕</view>
+		<view>·  若审核通过，已支付金额将会在1~3个工作日自动退 回原支付账号</view>
+		<view>·  因商品分拣等原因，可能导致取消失败</view>
+	</view>
+	<view class="cancel-btn-content flex ns-justify-content-space-between">
+		
+		<view class="cancel-btn" bindtap="cancelOrder">提交取消申请</view>
+	</view>
+</view>

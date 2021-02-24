@@ -1,0 +1,55 @@
+<!--pages/submitMaterial/submitMaterial.wxml-->
+<view class="page pr">
+	<view class="p-24 flex align-center bg-F7F7F7">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">上传身份证</view>
+	</view>
+	<view class="bg-white flex justify-between" style="padding: 30rpx 40rpx">
+		<view class="text-center">
+			<block wx:if="{{!frontPic}}">
+				<view class="no-pic bg-F7F7F7 text-center flex-y-center flex-x-center" bindtap="upfront">
+					<view class="iconfont icon-add-fill ns-text-bold" style="color: #CDCDCD;font-size: 60rpx;"></view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="no-pic">
+					<image  class="no-pic" mode="aspectFill" src="{{frontPic}}" bindtap="upfront"></image>
+				</view>
+			</block>
+			<view class="mt-20 fs-30 color-9B9B9B">正面(有头像)</view>
+		</view>
+		<view class="text-center">
+			<block wx:if="{{!reversePic}}">
+				<view class="no-pic bg-F7F7F7 text-center flex-y-center flex-x-center" bindtap="upReverse">
+					<view class="iconfont icon-add-fill ns-text-bold" style="color: #CDCDCD;font-size: 60rpx;"></view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="no-pic">
+					<image  class="no-pic" mode="aspectFill" src="{{reversePic}}" bindtap="upReverse"></image>
+				</view>
+			</block>
+			<view class="mt-20 fs-30 color-9B9B9B">反面(有国徽)</view>
+		</view>
+	</view>
+	<view class="p-24 flex align-center bg-F7F7F7">
+		<view class="black-block"></view>
+		<view class="fs-30 color-2C2C2C ns-text-bold">上传营业执照</view>
+	</view>
+	<view class="bg-white" style="padding: 30rpx 215rpx">
+		<view class="text-center">
+			<block wx:if="{{!businessPic}}">
+				<view class="no-pic bg-F7F7F7 text-center flex-y-center flex-x-center" style="height: 422rpx;" bindtap="upBusinessLicense">
+					<view class="iconfont icon-add-fill ns-text-bold" style="color: #CDCDCD;font-size: 60rpx;"></view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="no-pic" style="height: 422rpx;">
+					<image  class="no-pic" style="height: 422rpx;" mode="aspectFill" src="{{businessPic}}" bindtap="upBusinessLicense"></image>
+				</view>
+			</block>
+			<view class="mt-20 fs-30 color-9B9B9B">营业执照原件</view>
+		</view>
+	</view>
+	<view class="footer" bindtap="editShop">申请开通</view>
+</view>

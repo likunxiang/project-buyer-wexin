@@ -1,0 +1,6 @@
+<!--member/memberQrcode/memberQrcode.wxml-->
+<view class="page">
+	<view class="pr" style="width: 100%;height: 1206rpx;background: url({{pic_url}}) no-repeat;background-size: 100% 1206rpx;">
+		<view class="save-btn fs-36" bindtap="saveMaterial">保存海报</view>
+	</view>
+</view>

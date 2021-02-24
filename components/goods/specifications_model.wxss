@@ -1,0 +1,185 @@
+/* 恭喜你遮罩层 */
+.get-card-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, .7);
+	z-index: 10000;
+}
+.get-card-modal-first {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.7);
+	z-index: 10000;
+}
+.get-card-modal-main-first {
+	width: 750rpx;
+	height: 1334rpx;
+}
+.vip-icon {
+	width: 34rpx;
+	height: 34rpx;
+	border-radius: 50%;
+	background: #000000;
+	margin-left: 29rpx;
+	margin-right: 12rpx;
+	line-height: 34rpx;
+	text-align: center;
+}
+.commission-box-cart {
+	padding: 30rpx 24rpx;
+	background: #F3F3F3;
+}
+.vip-img-first {
+	width: 132rpx;
+	height: 132rpx;
+	border: 4rpx solid #B86A24;
+	background-color: #CCCCCC;
+	border-radius: 50%;
+}
+.get-card-modal-text-first {
+	font-size: 34rpx;
+	color: #B18035;
+	font-weight: bold;
+}
+.small-tips-first {
+	font-size: 20rpx;
+	color: #B18035;
+	margin-top: 96rpx;
+}
+.btn-text-first {
+	font-size:30rpx;
+	color: #995C18;
+	font-weight: bold;
+	margin: auto;
+	margin-top: 80rpx;
+	width:347rpx;
+	height:72rpx;
+	line-height: 72rpx;
+}
+.attr-picker{
+    position: fixed;
+    bottom: 110rpx;
+    left: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.commission-cart {
+	width: 100%;
+	height: 80rpx;
+	background-color: rgba(255,195,48,.2);
+	border-radius: 40rpx;
+	padding: 0 25rpx;
+}
+.save-btn {
+	margin: 40rpx auto 45rpx;
+	width: 702rpx;
+	height: 88rpx;
+	background:linear-gradient(-90deg,rgba(255,152,2,1),rgba(255,201,1,1));
+	text-align: center;
+	line-height: 88rpx;
+	color: #fff;
+	font-size: 38rpx;
+	border-radius: 44rpx;
+}
+
+.parameter-list {
+	padding: 20rpx 11rpx;
+	border-bottom: 1rpx solid #F4F4F4;
+}
+.attr-picker .content-box{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 110rpx;
+	border-radius: 30rpx 30rpx 0 0;
+}
+
+.attr-picker .attr-group{
+    margin-bottom: 6rpx;
+}
+.attr-picker .attr-group-name{
+    margin-bottom: 20rpx;
+}
+.attr-picker .attr-item{
+    display: inline-block;
+    margin: 0 25rpx 17rpx 0;
+    background: #F7F4F8;
+    padding: 0rpx 12rpx;
+	height: 65rpx;
+	text-align: center;
+	line-height: 61rpx;
+	font-size: 24rpx;
+	color: #333333;
+	border-radius:8rpx;
+	border: 2rpx solid #F7F4F8;
+}
+
+.attr-picker .attr-item.active{
+    color: #FF401A;
+    background: #FFF7F6;
+    border: 2rpx solid #FF401A;
+}
+
+.attr-picker .goods-pic-box{
+    position: relative;
+    width: 150rpx;
+}
+
+.attr-picker .goods-pic-box image{
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 20rpx;
+    background: #fff;
+}
+
+.attr-picker .attr_num_0 {
+    color: #CDCDCD !important;
+	background: #F1F1F1 !important;
+	border: 2rpx solid #DADADA !important;
+}
+
+.attr-picker .number-input-box {
+  
+}
+input {
+  min-height: 1rem;
+}
+.attr-picker .number-input-box .number-input {
+    height: 38rpx !important;
+    border: none;
+    text-align: center;
+    line-height: 38rpx;
+    width: 50rpx;
+    background: #eee;
+    margin: 0 4rpx !important;
+}
+
+.attr-picker .number-input-box .number-btn {
+    width: 44rpx;
+    height: 44rpx;
+	font-size: 44rpx;
+  line-height: 44rpx
+}
+
+.attr-picker .number-input-box .number-btn.disabled {
+   
+    color: #aaa;
+}
+
+.attr-picker .is_member_price {
+    font-size: 7pt;
+}
+.oldMoney{
+  color: #d6d6d6;
+  text-decoration:line-through;
+  font-weight: 400;
+  margin-left: 20rpx;
+}

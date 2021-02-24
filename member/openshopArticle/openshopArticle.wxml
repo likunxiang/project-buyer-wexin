@@ -1,0 +1,7 @@
+<!--pages/openshopArticle/openshopArticle.wxml-->
+<view class="open-shop-article">
+    <view class="">
+      <image src="{{listData.content}}" mode="widthFix" style="width:100%"   />
+    </view>
+    <view class="open-btn" wx:if='{{detailShow}}' bindtap="toOpenShop">申请开店</view>
+ </view>

@@ -1,0 +1,40 @@
+/* pages//private/privateSetting/privateSetting.wxss */
+page {
+	height: 100%;
+	background-color: #F7F7F7;
+}
+.page {
+	
+}
+.black-block {
+	width: 13rpx;
+	height: 37rpx;
+	background-color: #2C2C2C;
+	margin-right: 20rpx;
+}
+.content-list {
+	height: 102rpx;
+	line-height: 102rpx;
+	
+}
+.footer {
+	position: absolute;
+	bottom: 50rpx;
+	left: 40rpx;
+	right: 40rpx;
+	height: 78rpx;
+}
+.btn-box {
+	width: 325rpx;
+	height: 78rpx;
+	background: #F49E3A;
+	line-height: 78rpx;
+	color: #fff;
+	text-align: center;
+	border: 2rpx solid #F49E3A;
+}
+.btn-box-white {
+	background: #fff;
+	border: 2rpx solid #FF9100;
+	color: #FF9100;
+}

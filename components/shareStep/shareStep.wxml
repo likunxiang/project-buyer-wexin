@@ -1,0 +1,45 @@
+
+
+<block wx:if="{{pageUrl == 'vipList'}}">
+	<view class="flow-box" style="margin: 71rpx auto 0;color: #F0D0A5;padding: 0;">
+		<view class="fs-30 color-333333">1.分享好友步骤</view>
+		<view class="flex align-center justify-between" style="padding: 48rpx 53rpx 73rpx 56rpx;">
+			<view class="text-center color-999999">
+				<view class="flow-step step-bg-gray iconfont icon-lianjieiconx marginAuto" style="font-size: 60rpx;"></view>
+				<view class="fs-24 mt-16">分享链接</view>
+			</view>
+			<!-- <view class="iconfont icon-danjiantou-you" style="font-size: 80rpx;color: #F4F4F4;"></view> -->
+			<view class="text-center color-999999">
+				<view class="flow-step step-bg-gray iconfont icon-dagou1 marginAuto" style="font-size: 50rpx;"></view>
+				<view class="fs-24 mt-16">好友领取成功</view>
+			</view>
+			<!-- <view class="iconfont icon-danjiantou-you" style="font-size: 80rpx;color: #F4F4F4;"></view> -->
+			<view class="text-center color-999999">
+				<view class="flow-step step-bg-gray iconfont icon-fensi marginAuto" style="font-size: 55rpx;"></view>
+				<view class="fs-24 mt-16" >好友成为你的粉丝</view>
+			</view>
+		</view>
+		<view class="fs-30 color-333333">2.邀请好友的好处</view>
+		<view class="fs-24 color-999999" style="padding: 21rpx 60rpx;">
+			当有好友领取了会员卡即可成为您的粉丝，当好友购买了永久会员，您可获得10元津贴
+		</view>
+	</view>
+</block>
+<block wx:else>
+	<view class="flow-box flex align-center justify-between" style="margin: 71rpx auto 0;color: #F0D0A5;">
+		<view class="text-center">
+			<view class="flow-step iconfont icon-lianjieiconx" style="font-size: 60rpx;"></view>
+			<view class="fs-24 mt-16">分享链接</view>
+		</view>
+		<view class="iconfont icon-danjiantou-you" style="font-size: 80rpx;color: #3E3E3E;"></view>
+		<view class="text-center">
+			<view class="flow-step iconfont icon-dagou1" style="font-size: 50rpx;"></view>
+			<view class="fs-24 mt-16" style="color: #F0D0A5;">好友领取成功</view>
+		</view>
+		<view class="iconfont icon-danjiantou-you" style="font-size: 80rpx;color: #3E3E3E;"></view>
+		<view class="text-center">
+			<view class="flow-step ns-text-bold" style="font-size: 55rpx;"> +3</view>
+			<view class="fs-24 mt-16" style="color: #F0D0A5;">获得3天亲卡</view>
+		</view>
+	</view>
+</block>

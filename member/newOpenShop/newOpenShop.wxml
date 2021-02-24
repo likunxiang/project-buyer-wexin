@@ -1,0 +1,60 @@
+<!--pages/newOpenShop/newOpenShop.wxml-->
+<view class="page pr">
+	<view class="header">
+		<image style="width: 100%;height: 100%;" mode="aspectFill" src="{{pickBackground}}"></image>
+	</view>
+	<view class="main pt-20">
+		<view class="bg-white mb-20" style="padding-left: 32rpx;">
+			<view class="border-bottom fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">邀请码</view>
+				<input class="flex1" type="text" placeholder="请输入邀请码" value="{{inviteCode}}" bindblur="inviteInput" placeholder-class="color-D6D6D6" />
+			</view>
+			<view class="border-bottom fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">你的姓名</view>
+				<input class="flex1" type="text" placeholder="请输入你的真实姓名" value="{{nameValue}}" bindblur="nameInput" placeholder-class="color-D6D6D6" />
+			</view>
+			<view class="border-bottom fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">手机号码</view>
+				<input class="flex1" type="text" maxlength="11" placeholder="请输入联系人手机号码" value="{{mobileValue}}" bindblur="mobileInput" placeholder-class="color-D6D6D6" />
+				<!-- <view class="mobile-btn fs-24 color-4A4A4A">使用微信手机号</view> -->
+			</view>
+			<view class="fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">验证码</view>
+				<input class="flex1" type="text" placeholder="请输入验证码" value="{{codeValue}}" bindblur="codeInput" placeholder-class="color-D6D6D6" />
+				<view class="yanzheng-btn fs-24 color-4A4A4A" bindtap="{{getCode}}">{{codeText}}</view>
+			</view>
+		</view>
+		<view class="bg-white" style="padding-left: 32rpx;">
+			<view class="border-bottom fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">社区名称</view>
+				<input class="flex1" type="text" placeholder="请输入社区名称" value="{{communityValue}}" bindblur="communityInput" placeholder-class="color-D6D6D6" />
+			</view>
+			<view class="border-bottom fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">所在位置</view>
+				<block wx:if="{{!address}}">
+					<view class="flex1" bindtap="editPickUp">选择地区</view>
+				</block>
+				<block wx:else>
+					<view class="flex1" bindtap="editPickUp">{{address}}</view>
+				</block>
+				<text class="iconfont icon-jinru color-8D8D8D fs-40"></text>
+			</view>
+			<view class="fs-28 flex align-center" style="padding: 30rpx;padding-left: 8rpx;">
+				<view class="color-2C2C2C" style="width: 162rpx">详细地址</view>
+				<input class="flex1" type="text" placeholder="请输入到门牌号的详细地址" value="{{detailValue}}" bindblur="detailInput" placeholder-class="color-D6D6D6" />
+			</view>
+		</view>
+	</view>
+	<view class="footer">
+		<view class="flex-x-center align-center mb-30">
+			<view class="iconfont {{is_ready?'icon-xuanzhong color-252E3E':'icon-weixuanzhong'}} fs-40" bindtap="ready"></view>
+			<view class="fs-24 color-595959 ml-20 flex">
+				<text>我已阅读</text>
+				<navigator url="/pages/article-detail/article-detail?id={{fwxy_id}}" class="color-F49E3A">{{fwxy_title}}</navigator>
+				<!-- <text>和</text>
+				<navigator url="/pages/article-detail/article-detail?id={{ystk_id}}" class="color-F49E3A">《隐私条款》</navigator> -->
+			</view>
+		</view>
+		<view class="footer-btn" bindtap="submitMsg">提交申请</view>
+	</view>
+</view>

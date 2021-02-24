@@ -1,0 +1,64 @@
+<!--pages/acitivityPage/acitivityPage.wxml-->
+<include src="/components/goods/specifications_model.wxml" />
+<include src="/components/share/share.wxml" />
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<view class="page ns-column">
+	<view class="header pr">
+		<image src="{{bg}}" style="height: 100%;width: 100%;"></image>
+		<view class='con flex justify-between align-center' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+			<view class="backBtn" bindtap="goBack">
+				<text class="iconfont icon-zuojiantoubeifen"></text>
+			</view>
+			<view ></view>
+			<view></view>
+		</view>
+		<view class="text-center" style="width: 50rpx;height: 50rpx;position: absolute;right: 20rpx;bottom: 50rpx;border-radius: 50%;background: rgba(0,0,0,0.4);text-align: center;line-height: 50rpx;color: #fff;"
+		 bindtap="showShareModal">
+			<view class="iconfont icon-fenxiang"></view>
+			<view class="fs-20 color-fff" style="margin-top: -10rpx;">分享</view>
+		</view>
+		<!-- <view class="roll-tips flex-x-center align-center">
+			<swiper autoplay="true" interval="5000" duration="300" vertical="true" circular="true" style="width: 268rpx;height: 52rpx;">
+				<swiper-item wx:for="{{scrollList}}" wx:key="key">
+					<view class="flex-x-center align-center" style="width: 268rpx;height: 52rpx;">
+						<view class="roll-tips-img">
+							<image class="roll-tips-img bg-blue" mode="aspectFill" src="{{item.avatar_url}}"></image>
+						</view>
+						<view class="ml-10 fs-20 color-fff">
+							{{item.name}} {{item.msg}}
+						</view>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view> -->
+	</view>
+	<scroll-view scroll-y="true" style="height: calc(100vh - 286rpx);background-color: #F4F4F4;padding: 24rpx 24rpx 0;">
+		<view class="">
+			<navigator url="/pages/goods/goods?id={{item.id}}" class=" mb-24 flex" style="background: #fff;border-radius: 20rpx;padding: 16rpx;width: 100%;" wx:for="{{goodsList}}" wx:key="id">
+				<view class="pr ns-flex ns-justify-content-center">
+					<image lazy-load="true" style="width: 248rpx;height: 248rpx;border-radius: 12rpx;" mode="aspectFill" src="{{item.first_cover_pic}}"></image>
+					<view wx:if="{{item.goods_num==0}}" class="nonum-tip">已抢光</view>
+				</view>
+				<view class="bg-white ml-24 flex1 flex ns-column justify-between" style="width: 397rpx">
+					<view>
+						<view class='ns-text-limit fs-28 color-333333'>{{item.name}}</view>
+						<view class="goods-desc color-FFA102 fs-22 ns-flex-shrink-no mt-16">{{item.desc}}</view>
+					</view>
+					
+					<view class="flex justify-between align-center" style="font-size:36rpx;width: 100%;">
+						<view class="flex align-center">
+							<view class="color-FF0200" style="font-weight:600">
+								<text class="fs-28">￥</text><text>{{filters.priceStr(item.price)[0]}}</text>.<text class="fs-28">{{filters.priceStr(item.price)[1]}}</text>
+							</view>
+							<!-- <view class="fs-28 color-999999 ml-16 ns-text-through">¥ 104.00</view> -->
+						</view>
+						<view class="cart-box iconfont icon-gouwuche_weixuanzhong color-fff" catchtap="openCart" data-id="{{item.id}}"
+					 data-index="{{index}}"></view>
+					</view>
+				</view>
+			
+			</navigator>
+		</view>
+	</scroll-view>
+	<slide-icon showPic="{{mrtj_sc}}" cartNum="{{cartNum}}"></slide-icon>
+</view>

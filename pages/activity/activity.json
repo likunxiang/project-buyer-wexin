@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+  	"slide-icon": "/components/slideIcon/slideIcon"
+  },
+  "navigationBarTitleText":"活动",
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom"
+}
